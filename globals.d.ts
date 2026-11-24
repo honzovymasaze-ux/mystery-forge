@@ -393,3 +393,16 @@ interface MysteryForgeCompanionLogicApi {
 }
 
 declare var MysteryForgeCompanionLogic: MysteryForgeCompanionLogicApi;
+
+/** The speech engine that the TV app (tv-app/) gives the companion page. */
+interface MysteryForgeNativeSpeech {
+  available(): boolean;
+  speak(id: string, text: string, language: string, pitch: number, rate: number): void;
+  stop(): void;
+}
+
+interface Window {
+  MysteryForgeTts?: MysteryForgeNativeSpeech;
+  /** The TV app calls this when it finishes speaking the entry with this id. */
+  MysteryForgeTtsDone?: (id: string) => void;
+}

@@ -12,3 +12,7 @@ generator/.claude/agents/pskill-*.md
 # Generated from contracts/game-config.schema.json by `npm run generate:schema`
 configurator/gameConfigSchema.js
 _site/
+tv-app/build/
+tv-app/app/build/
+tv-app/.gradle/
+tv-app/app/src/main/assets/

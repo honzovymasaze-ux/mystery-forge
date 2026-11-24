@@ -1,0 +1,27 @@
+// The TV app: a full-screen WebView that shows the game companion page from the APK's assets.
+// scripts/build-tv-apk.sh copies the companion page in and passes the game title and an id per game.
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "cz.detektivka.tv"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId project.findProperty("gameId") ?: "cz.detektivka.tv"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        // The title comes from a UTF-8 file: a command-line property would lose the Czech letters.
+        def titleFile = project.findProperty("gameTitleFile")
+        def title = titleFile ? new File(titleFile.toString()).getText("UTF-8").trim() : "Detektivka"
+        resValue "string", "app_name", title.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}

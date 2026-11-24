@@ -375,13 +375,24 @@
     audio: null,
   };
 
-  function canSpeak() {
+  // The TV app (tv-app/) gives the page the device's own speech engine: Android's WebView has no speechSynthesis.
+  function nativeSpeech() {
+    const bridge = window.MysteryForgeTts;
+    return bridge !== undefined && bridge.available() ? bridge : null;
+  }
+
+  function browserSpeech() {
     return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function';
+  }
+
+  function canSpeak() {
+    return nativeSpeech() !== null || browserSpeech();
   }
 
   function stopPlayback() {
     playback.audio?.pause();
-    if (canSpeak()) {
+    nativeSpeech()?.stop();
+    if (browserSpeech()) {
       window.speechSynthesis.cancel();
     }
     playback.id = null;
@@ -423,7 +434,16 @@
         playback.id = entry.id;
         playback.audio = audio;
         audio.play().catch(done);
-      } else if (canSpeak()) {
+      } else if (nativeSpeech() !== null) {
+        const settings = logic.speechSettings(entry.voice ?? 'male');
+        playback.id = entry.id;
+        window.MysteryForgeTtsDone = (id) => {
+          if (id === entry.id) {
+            done();
+          }
+        };
+        nativeSpeech()?.speak(entry.id, entry.text, data.language, settings.pitch, settings.rate);
+      } else if (browserSpeech()) {
         const voice = entry.voice ?? 'male';
         const utterance = new window.SpeechSynthesisUtterance(entry.text);
         utterance.lang = data.language;
