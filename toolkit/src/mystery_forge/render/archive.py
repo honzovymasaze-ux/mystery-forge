@@ -1,5 +1,8 @@
 """The evidence archive of the player companion: every document that players print, to read on a TV or a phone.
 
+The archive also lists the suspects and the victim with their portraits, for the top row of the evidence board.
+Character files print the same people, so the list reveals nothing; it never says who the culprit is.
+
 The archive groups the documents by envelope. A document keeps its printed look: the archive holds the HTML of its
 sheets, cut from the rendered materials, plus the theme CSS once. Four digital kinds (chat log, phone records, email,
 camera still) also get the data of a device screen, which the page draws like a phone or a camera player.
@@ -13,9 +16,10 @@ import re
 from html.parser import HTMLParser
 from typing import Any, Final
 
+from mystery_forge.checks.images import portrait_image_id
 from mystery_forge.game import AssembledDocument, Game
 from mystery_forge.i18n import text
-from mystery_forge.render.document_body import insert_artifacts, insert_images, speaker_lines
+from mystery_forge.render.document_body import clean_svg, insert_artifacts, insert_images, speaker_lines
 from mystery_forge.render.html import render_output_html
 from mystery_forge.render.materials import DocumentPage, document_sort_key, materials_sheets
 from mystery_forge.render.sheets import OutputPlan, Sheet, number_sheets_by_stage
@@ -148,6 +152,17 @@ def build_archive(game: Game, settings: StyleSettings) -> dict[str, Any]:
     style: re.Match[str] | None = STYLE_PATTERN.search(html)
     body_class: re.Match[str] | None = BODY_CLASS_PATTERN.search(html)
     return {
+        "people": [
+            {
+                "id": character.id,
+                "name": character.name,
+                "role": character.role,
+                "portrait": clean_svg(game.images.get(portrait_image_id(character.id), "")),
+                "victim": character.is_victim,
+            }
+            for character in game.story.characters
+            if character.is_suspect or character.is_victim
+        ],
         "css": style.group(1) if style else "",
         "body_class": body_class.group(1) if body_class else "",
         "stages": stages,

@@ -299,12 +299,30 @@ interface MysteryForgeCompanionData {
   ending_lock: MysteryForgeLock | null;
 }
 
+/** The evidence board that the group lays out: only the group's own work, the page never judges it. */
+interface MysteryForgeBoard {
+  /** The pinned document ids, in board order. */
+  pinned: string[];
+  /** Quick labels per card or person id, such as "motive" or "conflict". */
+  labels: Record<string, string[]>;
+  /** What the group thinks of each person: suspect, unsure, cleared, or witness. */
+  people: Record<string, string>;
+  /** The people that each piece of evidence is linked to. */
+  links: Record<string, string[]>;
+  /** Sticky notes per card or person id. */
+  notes: Record<string, { id: string; text: string }[]>;
+  /** When the board last changed, in epoch ms: the newest board wins between devices. */
+  updated: number;
+}
+
 /** The documents of every envelope (toolkit/src/mystery_forge/render/archive.py). */
 interface MysteryForgeArchive {
   /** The fonts and the theme of the printed materials, for the printed look of a document. */
   css: string;
   body_class: string;
   stages: MysteryForgeArchiveStage[];
+  /** The suspects and the victim, with a portrait (SVG or a photo in an SVG), for the top row of the board. */
+  people: { id: string; name: string; role: string; portrait: string; victim: boolean }[];
 }
 
 interface MysteryForgeArchiveStage {
@@ -375,6 +393,8 @@ interface MysteryForgeCompanionState {
   seen?: string[];
   /** The normalized answer of each solved puzzle, by code. It opens the sealed envelopes of the archive. */
   answers?: Record<string, string>;
+  /** The evidence board that the group lays out on the TV. */
+  board?: MysteryForgeBoard;
 }
 
 interface MysteryForgeAnswerCheck {
@@ -454,7 +474,44 @@ interface MysteryForgeCompanionLogicApi {
     solved: string[];
     answers: Record<string, string>;
     accusation: Record<string, string> | null;
+    board: MysteryForgeBoard;
   };
+  boardOf(state: MysteryForgeCompanionState): MysteryForgeBoard;
+  withPinned(state: MysteryForgeCompanionState, ids: string[], nowMs: number): MysteryForgeCompanionState;
+  withUnpinned(state: MysteryForgeCompanionState, id: string, nowMs: number): MysteryForgeCompanionState;
+  withLabel(
+    state: MysteryForgeCompanionState,
+    target: string,
+    label: string,
+    nowMs: number,
+  ): MysteryForgeCompanionState;
+  withPersonStatus(
+    state: MysteryForgeCompanionState,
+    person: string,
+    status: string,
+    nowMs: number,
+  ): MysteryForgeCompanionState;
+  withLink(
+    state: MysteryForgeCompanionState,
+    documentId: string,
+    person: string,
+    nowMs: number,
+  ): MysteryForgeCompanionState;
+  withNote(
+    state: MysteryForgeCompanionState,
+    target: string,
+    noteId: string | null,
+    text: string,
+    nowMs: number,
+  ): MysteryForgeCompanionState;
+  linkedDocuments(board: MysteryForgeBoard, person: string): string[];
+  withMoved(
+    state: MysteryForgeCompanionState,
+    id: string,
+    group: string[],
+    step: -1 | 1,
+    nowMs: number,
+  ): MysteryForgeCompanionState;
 }
 
 declare var MysteryForgeCompanionLogic: MysteryForgeCompanionLogicApi;

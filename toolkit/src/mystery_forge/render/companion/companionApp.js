@@ -10,7 +10,7 @@
   const appElement = /** @type {HTMLElement} */ (document.getElementById('app'));
   const key = logic.storageKey(data.salt);
 
-  /** @typedef {'start' | 'case' | 'evidence' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
+  /** @typedef {'start' | 'case' | 'evidence' | 'board' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
   /** @typedef {{message: string, yes: string, strong: boolean, onYes: () => void}} ConfirmRequest */
 
   let storageWorks = true;
@@ -168,6 +168,7 @@
     }
     if (data.archive !== null) {
       list.push(['evidence', ui('tab_evidence'), 'M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7']);
+      list.push(['board', ui('tab_board'), 'M3 5h18v13H3zM7 9h4v4H7zM14 9h4M14 12h3M8 18l-2 3M16 18l2 3']);
     }
     list.push(
       ['check', ui('tab_check'), 'M5 12l4 4 10-10'],
@@ -887,6 +888,492 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     ]);
   }
 
+  // ---------- Evidence board ----------
+
+  // The board is the group's own work, like cards and notes on a real wall. The page never checks it.
+  const PERSON_STATUSES = ['suspect', 'unsure', 'cleared', 'witness'];
+  const QUICK_LABELS = ['motive', 'alibi_ok', 'alibi_weak', 'lies', 'conflict'];
+  const PICTURE_KINDS = ['person-photo', 'cctv-still', 'photo'];
+  const LONG_PRESS_MS = 550;
+  const NOTES_ON_CARD = 2;
+  const boardSession = {
+    /** @type {{type: 'card' | 'person', id: string, page: 'main' | 'assign' | 'labels'} | null} */
+    menu: null,
+    /** @type {{target: string, noteId: string | null, draft: string} | null} */
+    note: null,
+    /** @type {{target: string, at: number, handled: boolean} | null} */
+    press: null,
+  };
+
+  /** @returns {{stage: MysteryForgeArchiveStage, content: MysteryForgeArchiveContent}[]} */
+  function openEnvelopes() {
+    const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+    /** @type {{stage: MysteryForgeArchiveStage, content: MysteryForgeArchiveContent}[]} */
+    const open = [];
+    for (const stage of archive.stages) {
+      const content = archiveContent(stage);
+      if (content !== null) {
+        open.push({ stage, content });
+      }
+    }
+    return open;
+  }
+
+  /** @returns {Map<string, MysteryForgeArchiveDocument>} */
+  function documentsById() {
+    const byId = new Map();
+    for (const { content } of openEnvelopes()) {
+      for (const documentEntry of content.documents) {
+        byId.set(documentEntry.id, documentEntry);
+      }
+    }
+    return byId;
+  }
+
+  /** @param {string} id */
+  function personById(id) {
+    return /** @type {MysteryForgeArchive} */ (data.archive).people.find((person) => person.id === id);
+  }
+
+  /**
+   * The first drawing or photo of a document, for the card of a photo or a camera still.
+   * @param {MysteryForgeArchiveDocument} documentEntry
+   * @returns {string}
+   */
+  function cardPicture(documentEntry) {
+    if (!PICTURE_KINDS.includes(documentEntry.kind)) {
+      return '';
+    }
+    const match = /<svg[\s\S]*?<\/svg>/.exec(documentEntry.sheets.join(''));
+    return match ? match[0] : '';
+  }
+
+  /** @param {(next: MysteryForgeCompanionState) => MysteryForgeCompanionState} change */
+  function changeBoard(change) {
+    saveState(change(state));
+    pushShared();
+    render();
+  }
+
+  /**
+   * The quick labels and the first sticky notes of a card or a person.
+   * @param {string} target
+   * @returns {(HTMLElement | null)[]}
+   */
+  function boardMarks(target) {
+    const board = logic.boardOf(state);
+    const labels = board.labels[target] ?? [];
+    const notes = board.notes[target] ?? [];
+    return [
+      labels.length > 0
+        ? el(
+            'span',
+            { className: 'card-labels' },
+            labels.map((label) =>
+              el('span', { className: `card-label label-${label}`, text: ui(`board_label_${label}`) }),
+            ),
+          )
+        : null,
+      ...notes.slice(0, NOTES_ON_CARD).map((note) => el('span', { className: 'sticky', text: note.text })),
+      notes.length > NOTES_ON_CARD
+        ? el('span', { className: 'sticky sticky-more', text: `+${notes.length - NOTES_ON_CARD}` })
+        : null,
+    ];
+  }
+
+  /**
+   * @param {HTMLElement} element
+   * @param {'card' | 'person'} type
+   * @param {string} id
+   */
+  function wirePress(element, type, id) {
+    element.addEventListener('click', () => {
+      if (boardSession.press === null) {
+        if (type === 'card') {
+          openCard(id);
+        } else {
+          openBoardMenu('person', id);
+        }
+      }
+    });
+    element.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      openBoardMenu(type, id);
+    });
+  }
+
+  /**
+   * @param {MysteryForgeArchiveDocument} documentEntry
+   * @param {boolean} pinned
+   * @returns {HTMLElement}
+   */
+  function boardCard(documentEntry, pinned) {
+    const board = logic.boardOf(state);
+    const picture = cardPicture(documentEntry);
+    const linked = (board.links[documentEntry.id] ?? []).map((id) => personById(id)?.name ?? id);
+    const card = el(
+      'button',
+      {
+        className: `board-card${pinned ? ' is-pinned' : ''}`,
+        attrs: { type: 'button', 'data-card': documentEntry.id, 'data-kind': documentEntry.kind },
+      },
+      [
+        pinned ? el('span', { className: 'pin', attrs: { 'aria-hidden': 'true' } }) : null,
+        picture
+          ? htmlBlock(picture, 'card-picture')
+          : el('span', {
+              className: 'card-glyph',
+              text: documentEntry.screen ? '▯' : '▤',
+              attrs: { 'aria-hidden': 'true' },
+            }),
+        el('span', { className: 'card-title', text: documentEntry.title }),
+        linked.length > 0 ? el('span', { className: 'card-links', text: `→ ${linked.join(', ')}` }) : null,
+        ...boardMarks(documentEntry.id),
+      ],
+    );
+    wirePress(card, 'card', documentEntry.id);
+    return card;
+  }
+
+  /**
+   * @param {{id: string, name: string, role: string, portrait: string, victim: boolean}} person
+   * @returns {HTMLElement}
+   */
+  function personCard(person) {
+    const board = logic.boardOf(state);
+    const status = board.people[person.id] ?? '';
+    const linked = logic.linkedDocuments(board, person.id).length;
+    const card = el(
+      'button',
+      {
+        className: `board-person${person.victim ? ' is-victim' : ''}${status ? ` status-${status}` : ''}`,
+        attrs: { type: 'button', 'data-person': person.id },
+      },
+      [
+        person.portrait
+          ? htmlBlock(person.portrait, 'person-picture')
+          : el('span', { className: 'person-picture is-empty' }),
+        status === 'cleared' ? el('span', { className: 'person-stamp', text: ui('board_status_cleared') }) : null,
+        el('span', { className: 'person-name', text: person.name }),
+        el('span', {
+          className: 'person-role',
+          text: person.victim ? ui('board_victim') : status ? ui(`board_status_${status}`) : person.role,
+        }),
+        linked > 0 ? el('span', { className: 'person-links', text: ui('board_linked', { count: linked }) }) : null,
+        ...boardMarks(person.id),
+      ],
+    );
+    wirePress(card, 'person', person.id);
+    return card;
+  }
+
+  /** @param {string} id */
+  function openCard(id) {
+    const byId = documentsById();
+    const pinned = logic
+      .boardOf(state)
+      .pinned.map((pinnedId) => byId.get(pinnedId))
+      .filter((entry) => entry !== undefined);
+    const list = pinned.some((entry) => entry.id === id) ? pinned : Array.from(byId.values());
+    openViewer(
+      list,
+      Math.max(
+        0,
+        list.findIndex((entry) => entry.id === id),
+      ),
+    );
+  }
+
+  /**
+   * @param {'card' | 'person'} type
+   * @param {string} id
+   * @param {'main' | 'assign' | 'labels'} [page]
+   */
+  function openBoardMenu(type, id, page = 'main') {
+    boardSession.menu = { type, id, page };
+    boardSession.note = null;
+    render();
+    /** @type {HTMLElement | null} */ (document.querySelector('#board-menu button'))?.focus();
+  }
+
+  function closeBoardMenu() {
+    const menu = boardSession.menu;
+    boardSession.menu = null;
+    boardSession.note = null;
+    render();
+    if (menu !== null) {
+      const selector = menu.type === 'card' ? `[data-card="${menu.id}"]` : `[data-person="${menu.id}"]`;
+      /** @type {HTMLElement | null} */ (document.querySelector(selector))?.focus();
+    }
+  }
+
+  /**
+   * @param {string} target
+   * @param {string | null} noteId
+   * @param {string} draft
+   */
+  function editNote(target, noteId, draft) {
+    boardSession.note = { target, noteId, draft };
+    render();
+    const field = document.getElementById('note-input');
+    if (field instanceof HTMLTextAreaElement) {
+      field.focus();
+    }
+  }
+
+  function renderNoteEditor() {
+    const note = /** @type {{target: string, noteId: string | null, draft: string}} */ (boardSession.note);
+    const field = el('textarea', {
+      className: 'note-input',
+      attrs: { id: 'note-input', rows: '4', maxlength: '240', placeholder: ui('board_note_placeholder') },
+    });
+    /** @type {HTMLTextAreaElement} */ (field).value = note.draft;
+    field.addEventListener('input', () => {
+      note.draft = /** @type {HTMLTextAreaElement} */ (field).value;
+    });
+    /** @param {string} text */
+    const save = (text) => {
+      changeBoard((next) => logic.withNote(next, note.target, note.noteId, text, Date.now()));
+      boardSession.note = null;
+      render();
+      /** @type {HTMLElement | null} */ (document.querySelector('#board-menu button'))?.focus();
+    };
+    return el('div', { className: 'note-editor' }, [
+      field,
+      el('div', { className: 'board-menu-actions' }, [
+        button(ui('board_note_save'), 'button button-primary', () => save(note.draft), { id: 'note-save' }),
+        note.noteId !== null ? button(ui('board_note_delete'), 'button button-danger-quiet', () => save('')) : null,
+        button(ui('board_back'), 'button button-quiet', () => {
+          boardSession.note = null;
+          render();
+        }),
+      ]),
+    ]);
+  }
+
+  function renderBoardMenu() {
+    const menu = boardSession.menu;
+    if (menu === null) {
+      return null;
+    }
+    const board = logic.boardOf(state);
+    const documentEntry = menu.type === 'card' ? documentsById().get(menu.id) : undefined;
+    const person = menu.type === 'person' ? personById(menu.id) : undefined;
+    if (documentEntry === undefined && person === undefined) {
+      return null;
+    }
+    const id = menu.id;
+    /**
+     * @param {string} label
+     * @param {(next: MysteryForgeCompanionState) => MysteryForgeCompanionState} change
+     * @param {boolean} [active]
+     */
+    const toggle = (label, change, active = false) =>
+      button(`${active ? '✓ ' : ''}${label}`, `button ${active ? 'button-primary' : 'button-quiet'}`, () =>
+        changeBoard(change),
+      );
+    /** @param {'main' | 'assign' | 'labels'} page */
+    const goTo = (page) => openBoardMenu(menu.type, id, page);
+    /** @type {(HTMLElement | null)[]} */
+    let actions = [];
+    if (boardSession.note !== null) {
+      actions = [renderNoteEditor()];
+    } else if (menu.page === 'assign') {
+      const linked = board.links[id] ?? [];
+      actions = [
+        .../** @type {MysteryForgeArchive} */ (data.archive).people.map((candidate) =>
+          toggle(
+            candidate.name,
+            (next) => logic.withLink(next, id, candidate.id, Date.now()),
+            linked.includes(candidate.id),
+          ),
+        ),
+        button(ui('board_back'), 'button button-quiet', () => goTo('main')),
+      ];
+    } else if (menu.page === 'labels') {
+      const labels = board.labels[id] ?? [];
+      actions = [
+        ...QUICK_LABELS.map((label) =>
+          toggle(
+            ui(`board_label_${label}`),
+            (next) => logic.withLabel(next, id, label, Date.now()),
+            labels.includes(label),
+          ),
+        ),
+        button(ui('board_back'), 'button button-quiet', () => goTo('main')),
+      ];
+    } else {
+      const notes = board.notes[id] ?? [];
+      const noteButtons = notes.map((note) =>
+        button(`✎ ${note.text}`, 'button button-quiet sticky-button', () => editNote(id, note.id, note.text)),
+      );
+      if (documentEntry !== undefined) {
+        const pinned = board.pinned.includes(id);
+        const group = openEnvelopes()
+          .filter(({ content }) => content.documents.some((entry) => entry.id === id))
+          .flatMap(({ content }) => content.documents.map((entry) => entry.id));
+        actions = [
+          button(ui('board_open'), 'button button-primary', () => {
+            boardSession.menu = null;
+            openCard(id);
+          }),
+          pinned
+            ? toggle(ui('board_unpin'), (next) => logic.withUnpinned(next, id, Date.now()))
+            : toggle(ui('board_pin'), (next) => logic.withPinned(next, [id], Date.now())),
+          pinned ? toggle(ui('board_move_earlier'), (next) => logic.withMoved(next, id, group, -1, Date.now())) : null,
+          pinned ? toggle(ui('board_move_later'), (next) => logic.withMoved(next, id, group, 1, Date.now())) : null,
+          button(ui('board_assign'), 'button button-quiet', () => goTo('assign')),
+          button(ui('board_labels'), 'button button-quiet', () => goTo('labels')),
+          button(ui('board_note_add'), 'button button-quiet', () => editNote(id, null, '')),
+          ...noteButtons,
+        ];
+      } else {
+        const status = board.people[id] ?? '';
+        const byId = documentsById();
+        actions = [
+          ...PERSON_STATUSES.map((option) =>
+            toggle(
+              ui(`board_status_${option}`),
+              (next) => logic.withPersonStatus(next, id, status === option ? '' : option, Date.now()),
+              status === option,
+            ),
+          ),
+          button(ui('board_labels'), 'button button-quiet', () => goTo('labels')),
+          button(ui('board_note_add'), 'button button-quiet', () => editNote(id, null, '')),
+          ...noteButtons,
+          ...logic.linkedDocuments(board, id).map((documentId) => {
+            const linkedEntry = byId.get(documentId);
+            return linkedEntry === undefined
+              ? null
+              : button(`▤ ${linkedEntry.title}`, 'button button-quiet', () => {
+                  boardSession.menu = null;
+                  openViewer([linkedEntry], 0);
+                });
+          }),
+        ];
+      }
+      actions.push(button(ui('close'), 'button button-quiet', closeBoardMenu));
+    }
+    const title = documentEntry !== undefined ? documentEntry.title : /** @type {{name: string}} */ (person).name;
+    const dialog = el(
+      'div',
+      { className: 'dialog paper board-menu', attrs: { role: 'dialog', 'aria-modal': 'true', id: 'board-menu' } },
+      [el('p', { className: 'dialog-message', text: title }), el('div', { className: 'board-menu-actions' }, actions)],
+    );
+    const overlay = el('div', { className: 'overlay' }, [dialog]);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        closeBoardMenu();
+      }
+    });
+    return overlay;
+  }
+
+  function renderBoard() {
+    const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+    const board = logic.boardOf(state);
+    const people = el('div', { className: 'board-people' }, archive.people.map(personCard));
+    const columns = el('div', { className: 'board-columns' });
+    /** @type {MysteryForgeArchiveDocument[]} */
+    const unpinned = [];
+    for (const { stage, content } of openEnvelopes()) {
+      const byId = new Map(content.documents.map((entry) => [entry.id, entry]));
+      const cards = el('div', { className: 'board-cards' });
+      for (const id of board.pinned) {
+        const documentEntry = byId.get(id);
+        if (documentEntry !== undefined) {
+          cards.append(boardCard(documentEntry, true));
+        }
+      }
+      unpinned.push(...content.documents.filter((entry) => !board.pinned.includes(entry.id)));
+      columns.append(
+        el('section', { className: 'board-column', attrs: { 'data-stage': stage.id } }, [
+          el('h3', {
+            className: 'board-heading',
+            text: content.label ? `${stage.envelope} · ${content.label}` : stage.envelope,
+          }),
+          cards.childElementCount > 0 ? cards : el('p', { className: 'board-empty', text: ui('board_empty') }),
+        ]),
+      );
+    }
+    return el('div', { className: 'view view-board' }, [
+      el('div', { className: 'board' }, [
+        people,
+        columns,
+        unpinned.length > 0
+          ? el('section', { className: 'board-tray' }, [
+              el('div', { className: 'board-tray-head' }, [
+                el('h3', { className: 'board-heading', text: ui('board_tray') }),
+                button(
+                  ui('board_pin_all'),
+                  'button button-primary',
+                  () =>
+                    changeBoard((next) =>
+                      logic.withPinned(
+                        next,
+                        unpinned.map((entry) => entry.id),
+                        Date.now(),
+                      ),
+                    ),
+                  { id: 'pin-all' },
+                ),
+              ]),
+              el(
+                'div',
+                { className: 'board-cards board-tray-cards' },
+                unpinned.map((entry) => boardCard(entry, false)),
+              ),
+            ])
+          : null,
+        el('p', { className: 'board-help', text: ui('board_help') }),
+      ]),
+    ]);
+  }
+
+  /**
+   * OK on a card opens it, on a person opens its menu; a long press of OK (the remote repeats the key while it is
+   * held) or the menu key opens the menu of a card.
+   * @param {KeyboardEvent} event
+   * @returns {boolean}
+   */
+  function boardKey(event) {
+    const focused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const target = focused?.closest('[data-card], [data-person]');
+    if (!(target instanceof HTMLElement) || boardSession.menu !== null || viewerOpen()) {
+      return false;
+    }
+    const type = target.dataset.card !== undefined ? 'card' : 'person';
+    const id = /** @type {string} */ (target.dataset.card ?? target.dataset.person);
+    if (event.key === 'ContextMenu' || event.key === 'm') {
+      if (event.type === 'keydown') {
+        openBoardMenu(type, id);
+      }
+      return true;
+    }
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return false;
+    }
+    if (event.type === 'keydown') {
+      if (boardSession.press === null) {
+        boardSession.press = { target: id, at: Date.now(), handled: false };
+      } else if (!boardSession.press.handled && Date.now() - boardSession.press.at >= LONG_PRESS_MS) {
+        boardSession.press.handled = true;
+        openBoardMenu(type, id);
+      }
+      return true;
+    }
+    const press = boardSession.press;
+    boardSession.press = null;
+    if (press !== null && !press.handled) {
+      if (type === 'card') {
+        openCard(press.target);
+      } else {
+        openBoardMenu('person', press.target);
+      }
+    }
+    return true;
+  }
+
   // ---------- The TV and the phones share one game ----------
 
   // The TV app serves this page over the local network. Every device then keeps the solved puzzles of the group.
@@ -1002,6 +1489,10 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
 
   // The TV app asks the page first when the Back button is pressed: it closes the viewer or a dialog.
   window.MysteryForgeBack = () => {
+    if (boardSession.menu !== null) {
+      closeBoardMenu();
+      return true;
+    }
     if (viewerOpen()) {
       closeViewer();
       return true;
@@ -1451,6 +1942,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     start: renderStart,
     case: renderCase,
     evidence: renderEvidence,
+    board: renderBoard,
     check: renderCheck,
     hints: renderHints,
     accuse: renderAccuse,
@@ -1476,6 +1968,10 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     if (shown !== null) {
       appElement.append(shown);
     }
+    const menu = renderBoardMenu();
+    if (menu !== null) {
+      appElement.append(menu);
+    }
     document.body.classList.toggle('has-viewer', shown !== null);
     const overlay = renderConfirm();
     if (overlay !== null) {
@@ -1486,7 +1982,26 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     updateTimers();
   }
 
+  document.addEventListener('keyup', (event) => {
+    if (boardSession.press === null) {
+      return;
+    }
+    if (boardKey(event)) {
+      event.preventDefault();
+    } else {
+      // The long press opened a menu: its release must not count as a new press.
+      boardSession.press = null;
+    }
+  });
   document.addEventListener('keydown', (event) => {
+    if (boardKey(event)) {
+      event.preventDefault();
+      return;
+    }
+    if (event.key === 'Escape' && boardSession.menu !== null) {
+      closeBoardMenu();
+      return;
+    }
     if (event.key === 'Escape' && session.confirm !== null) {
       closeConfirm(false);
       return;
@@ -1513,7 +2028,8 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       return;
     }
     const arrow = /** @type {'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight'} */ (event.key);
-    const typing = document.activeElement instanceof HTMLInputElement;
+    const typing =
+      document.activeElement instanceof HTMLInputElement || document.activeElement instanceof HTMLTextAreaElement;
     if (tvMode && !typing && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(arrow)) {
       event.preventDefault();
       moveFocus(arrow);

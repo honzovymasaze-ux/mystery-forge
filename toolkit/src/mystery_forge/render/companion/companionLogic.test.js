@@ -412,6 +412,7 @@ function playerData() {
     archive: {
       css: '',
       body_class: '',
+      people: [],
       stages: [
         { id: 'A', envelope: 'Envelope A', label: 'Desk', documents: [], lock: null },
         { id: 'B', envelope: 'Envelope B', label: '', documents: null, lock: sealedStage.lock },
@@ -501,7 +502,12 @@ test('the shared state of the TV merges into a device without losing anything lo
   assert.equal(odd.accusation, null);
   local = logic.withAccusation(local, { who: 'ana' });
   assert.deepEqual(logic.mergeSharedState(local, { accusation: { who: 'felix' } }).accusation, { who: 'ana' });
-  assert.deepEqual(logic.sharedState(logic.freshState()), { solved: [], answers: {}, accusation: null });
+  assert.deepEqual(logic.sharedState(logic.freshState()), {
+    solved: [],
+    answers: {},
+    accusation: null,
+    board: { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 },
+  });
 });
 
 test('stored answers must be texts for a saved state to load', () => {
@@ -509,4 +515,78 @@ test('stored answers must be texts for a saved state to load', () => {
   assert.deepEqual(seen, []);
   assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 'x' } })).answers, { A1: 'x' });
   assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 2 } })), logic.freshState());
+});
+
+test('the board pins, labels, moves, and unpins cards, and remembers when it changed', () => {
+  let state = logic.freshState();
+  assert.deepEqual(logic.boardOf(state), { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 });
+  state = logic.withPinned(state, ['D1', 'D2', 'D3'], 10);
+  assert.equal(logic.withPinned(state, ['D2'], 11), state);
+  state = logic.withLabel(state, 'D2', 'conflict', 12);
+  state = logic.withLabel(state, 'D2', 'motive', 12);
+  assert.deepEqual(logic.boardOf(state).labels, { D2: ['conflict', 'motive'] });
+  state = logic.withLabel(state, 'D2', 'conflict', 13);
+  state = logic.withLabel(state, 'D2', 'motive', 13);
+  assert.deepEqual(logic.boardOf(state).labels, {});
+  state = logic.withMoved(state, 'D3', ['D1', 'D3'], -1, 14);
+  assert.deepEqual(logic.boardOf(state).pinned, ['D3', 'D2', 'D1']);
+  assert.equal(logic.withMoved(state, 'D3', ['D1', 'D3'], -1, 15), state);
+  assert.equal(logic.withMoved(state, 'D9', ['D1'], 1, 15), state);
+  assert.equal(logic.withMoved(state, 'D1', ['D1', 'D3'], 1, 15), state);
+  state = logic.withUnpinned(state, 'D1', 17);
+  assert.deepEqual(logic.boardOf(state).pinned, ['D3', 'D2']);
+  assert.equal(logic.boardOf(state).updated, 17);
+});
+
+test('people get a status, linked evidence, and sticky notes', () => {
+  let state = logic.freshState();
+  state = logic.withPersonStatus(state, 'ana', 'cleared', 1);
+  assert.deepEqual(logic.boardOf(state).people, { ana: 'cleared' });
+  state = logic.withPersonStatus(state, 'ana', '', 2);
+  assert.deepEqual(logic.boardOf(state).people, {});
+  state = logic.withLink(state, 'D4', 'ana', 3);
+  state = logic.withLink(state, 'D4', 'felix', 3);
+  state = logic.withLink(state, 'D5', 'felix', 3);
+  assert.deepEqual(logic.linkedDocuments(logic.boardOf(state), 'felix'), ['D4', 'D5']);
+  state = logic.withLink(state, 'D5', 'felix', 4);
+  state = logic.withLink(state, 'D4', 'ana', 4);
+  state = logic.withLink(state, 'D4', 'felix', 4);
+  assert.deepEqual(logic.boardOf(state).links, {});
+  state = logic.withNote(state, 'ana', null, '  lies about the boat  ', 5);
+  state = logic.withNote(state, 'ana', null, '   ', 6);
+  state = logic.withNote(state, 'ana', null, 'second', 7);
+  assert.deepEqual(logic.boardOf(state).notes, {
+    ana: [
+      { id: 'n5', text: 'lies about the boat' },
+      { id: 'n7', text: 'second' },
+    ],
+  });
+  state = logic.withNote(state, 'ana', 'n5', 'checked', 8);
+  state = logic.withNote(state, 'ana', 'n7', '', 9);
+  assert.deepEqual(logic.boardOf(state).notes, { ana: [{ id: 'n5', text: 'checked' }] });
+  state = logic.withNote(state, 'ana', 'n5', '', 10);
+  assert.deepEqual(logic.boardOf(state).notes, {});
+});
+
+test('the newest board wins when the TV and a phone share the game', () => {
+  const local = logic.withPinned(logic.freshState(), ['D1'], 100);
+  const newer = {
+    pinned: ['D2'],
+    labels: { D2: ['conflict'] },
+    people: { ana: 'suspect' },
+    links: { D2: ['ana'] },
+    notes: { ana: [{ id: 'n1', text: 'x' }] },
+    updated: 200,
+  };
+  assert.deepEqual(logic.mergeSharedState(local, { board: newer }).board, newer);
+  assert.deepEqual(logic.mergeSharedState(local, { board: { ...newer, updated: 50 } }).board, logic.boardOf(local));
+  assert.deepEqual(
+    logic.mergeSharedState(local, { board: { pinned: [1], tags: {}, updated: 300 } }).board,
+    logic.boardOf(local),
+  );
+  assert.equal(logic.mergeSharedState(logic.freshState(), {}).board, undefined);
+  const { seen, ...old } = logic.freshState();
+  assert.deepEqual(seen, []);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: newer })).board, newer);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: { pinned: 'x' } })), logic.freshState());
 });

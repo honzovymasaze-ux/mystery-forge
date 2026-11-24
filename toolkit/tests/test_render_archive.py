@@ -1,6 +1,7 @@
 """The evidence archive and the player companion: printed sheets, device screens, sealed envelopes, no solutions."""
 
 import json
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -10,6 +11,7 @@ from mystery_forge.answers import normalize_answer
 from mystery_forge.game import Game
 from mystery_forge.render.archive import build_archive, screen_view, sheet_sections, table_rows
 from mystery_forge.render.companion_data import (
+    board_art_css,
     build_companion_data,
     build_player_companion_data,
     build_player_companion_html,
@@ -145,3 +147,26 @@ def test_the_player_page_holds_the_archive_and_no_answer_in_clear_text() -> None
     answer = normalize_answer(game.puzzles[-1].source.answer, game.config.language)
     assert f'"answer": "{game.puzzles[-1].source.answer}"' not in html
     assert answer
+
+
+def test_the_board_people_are_the_suspects_and_the_victim_without_the_culprit_flag() -> None:
+    game = golden_game()
+    people = archive_of(game)["people"]
+    expected = [character.id for character in game.story.characters if character.is_suspect or character.is_victim]
+    assert [person["id"] for person in people] == expected
+    assert all(set(person) == {"id", "name", "role", "portrait", "victim"} for person in people)
+
+
+def test_board_art_fills_the_css_properties_with_the_files_that_exist(tmp_path: Path) -> None:
+    assert board_art_css(tmp_path / "missing") == ""
+    assert board_art_css(tmp_path) == ""
+    (tmp_path / "pin.png").write_bytes(b"png")
+    (tmp_path / "sticky.svg").write_bytes(b"<svg/>")
+    (tmp_path / "notes.txt").write_text("ignored", encoding="utf-8")
+    css = board_art_css(tmp_path)
+    assert (
+        css
+        == ":root{--board-pin:url(data:image/png;base64,cG5n);--board-sticky:url(data:image/svg+xml;base64,PHN2Zy8+)}"
+    )
+    html = build_player_companion_html(golden_game(), tmp_path)
+    assert "--board-pin:url(data:image/png" in html

@@ -347,6 +347,7 @@
         (isRecord(value.accusation) && Object.values(value.accusation).every((id) => typeof id === 'string'))) &&
       (value.answers === undefined ||
         (isRecord(value.answers) && Object.values(value.answers).every((answer) => typeof answer === 'string'))) &&
+      (value.board === undefined || isBoard(value.board)) &&
       // A state from before the case tab has no `seen` list; it stays valid.
       (value.seen === undefined || (Array.isArray(value.seen) && value.seen.every((id) => typeof id === 'string')))
     );
@@ -544,16 +545,226 @@
       isRecord(remote.accusation) && Object.values(remote.accusation).every((id) => typeof id === 'string')
         ? /** @type {Record<string, string>} */ (remote.accusation)
         : null;
-    return { ...local, solved, answers, accusation: local.accusation ?? remoteAccusation };
+    // The board has one layout for the whole group: the newest change wins.
+    const board = isBoard(remote.board) && remote.board.updated > boardOf(local).updated ? remote.board : local.board;
+    return { ...local, solved, answers, accusation: local.accusation ?? remoteAccusation, ...(board ? { board } : {}) };
   }
 
   /**
    * The part of the state that the TV shares with every device.
    * @param {MysteryForgeCompanionState} state
-   * @returns {{solved: string[], answers: Record<string, string>, accusation: Record<string, string> | null}}
+   * @returns {{solved: string[], answers: Record<string, string>, accusation: Record<string, string> | null, board: MysteryForgeBoard}}
    */
   function sharedState(state) {
-    return { solved: state.solved, answers: state.answers ?? {}, accusation: state.accusation };
+    return { solved: state.solved, answers: state.answers ?? {}, accusation: state.accusation, board: boardOf(state) };
+  }
+
+  /** @returns {MysteryForgeBoard} */
+  function emptyBoard() {
+    return { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 };
+  }
+
+  /**
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeBoard}
+   */
+  function boardOf(state) {
+    return state.board ?? emptyBoard();
+  }
+
+  /**
+   * @param {MysteryForgeCompanionState} state
+   * @param {Partial<MysteryForgeBoard>} change
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withBoard(state, change, nowMs) {
+    return { ...state, board: { ...boardOf(state), ...change, updated: nowMs } };
+  }
+
+  /**
+   * Pin documents to the evidence board, after the ones already there.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string[]} ids
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withPinned(state, ids, nowMs) {
+    const board = boardOf(state);
+    const added = ids.filter((id) => !board.pinned.includes(id));
+    return added.length === 0 ? state : withBoard(state, { pinned: [...board.pinned, ...added] }, nowMs);
+  }
+
+  /**
+   * Take a card off the board. Its labels, links, and notes stay, so pinning it again brings them back.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} id
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withUnpinned(state, id, nowMs) {
+    return withBoard(state, { pinned: boardOf(state).pinned.filter((pinned) => pinned !== id) }, nowMs);
+  }
+
+  /**
+   * Add a quick label (such as "has a motive" or "conflict") to a card or a person, or take it off again.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} target
+   * @param {string} label
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withLabel(state, target, label, nowMs) {
+    const labels = { ...boardOf(state).labels };
+    const current = labels[target] ?? [];
+    const next = current.includes(label) ? current.filter((item) => item !== label) : [...current, label];
+    if (next.length === 0) {
+      delete labels[target];
+    } else {
+      labels[target] = next;
+    }
+    return withBoard(state, { labels }, nowMs);
+  }
+
+  /**
+   * Set what the group thinks of a person (suspect, unsure, cleared, witness), or clear it with an empty status.
+   * The page never checks it: the board is the group's own work.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} person
+   * @param {string} status
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withPersonStatus(state, person, status, nowMs) {
+    const people = { ...boardOf(state).people };
+    if (status === '') {
+      delete people[person];
+    } else {
+      people[person] = status;
+    }
+    return withBoard(state, { people }, nowMs);
+  }
+
+  /**
+   * Link a piece of evidence to a person, or unlink it.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} documentId
+   * @param {string} person
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withLink(state, documentId, person, nowMs) {
+    const links = { ...boardOf(state).links };
+    const current = links[documentId] ?? [];
+    const next = current.includes(person) ? current.filter((item) => item !== person) : [...current, person];
+    if (next.length === 0) {
+      delete links[documentId];
+    } else {
+      links[documentId] = next;
+    }
+    return withBoard(state, { links }, nowMs);
+  }
+
+  /**
+   * Add, change, or remove a sticky note on a card or a person. A null note id adds a note; an empty text removes it.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} target
+   * @param {string | null} noteId
+   * @param {string} text
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withNote(state, target, noteId, text, nowMs) {
+    const notes = { ...boardOf(state).notes };
+    const current = notes[target] ?? [];
+    const clean = text.trim();
+    /** @type {{id: string, text: string}[]} */
+    let next;
+    if (noteId === null) {
+      next = clean === '' ? current : [...current, { id: `n${nowMs}`, text: clean }];
+    } else if (clean === '') {
+      next = current.filter((note) => note.id !== noteId);
+    } else {
+      next = current.map((note) => (note.id === noteId ? { ...note, text: clean } : note));
+    }
+    if (next.length === 0) {
+      delete notes[target];
+    } else {
+      notes[target] = next;
+    }
+    return withBoard(state, { notes }, nowMs);
+  }
+
+  /**
+   * The documents that the group linked to a person, in board order.
+   * @param {MysteryForgeBoard} board
+   * @param {string} person
+   * @returns {string[]}
+   */
+  function linkedDocuments(board, person) {
+    return Object.entries(board.links)
+      .filter(([, people]) => people.includes(person))
+      .map(([documentId]) => documentId);
+  }
+
+  /**
+   * Move a pinned card one place earlier (-1) or later (+1) among the pinned cards of its group.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} id
+   * @param {string[]} group
+   * @param {-1 | 1} step
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withMoved(state, id, group, step, nowMs) {
+    const board = boardOf(state);
+    const order = board.pinned.filter((pinned) => group.includes(pinned));
+    const position = order.indexOf(id);
+    const target = position + step;
+    if (position < 0 || target < 0 || target >= order.length) {
+      return state;
+    }
+    const other = /** @type {string} */ (order[target]);
+    const pinned = board.pinned.map((pinnedId) => (pinnedId === id ? other : pinnedId === other ? id : pinnedId));
+    return withBoard(state, { pinned }, nowMs);
+  }
+
+  /**
+   * @param {unknown} value
+   * @param {(item: unknown) => boolean} check
+   * @returns {boolean}
+   */
+  function isRecordOf(value, check) {
+    return isRecord(value) && Object.values(value).every(check);
+  }
+
+  /**
+   * @param {unknown} value
+   * @returns {boolean}
+   */
+  function isTextList(value) {
+    return Array.isArray(value) && value.every((item) => typeof item === 'string');
+  }
+
+  /**
+   * @param {unknown} value
+   * @returns {value is MysteryForgeBoard}
+   */
+  function isBoard(value) {
+    return (
+      isRecord(value) &&
+      isTextList(value.pinned) &&
+      isRecordOf(value.labels, isTextList) &&
+      isRecordOf(value.people, (status) => typeof status === 'string') &&
+      isRecordOf(value.links, isTextList) &&
+      isRecordOf(
+        value.notes,
+        (list) =>
+          Array.isArray(list) &&
+          list.every((note) => isRecord(note) && typeof note.id === 'string' && typeof note.text === 'string'),
+      ) &&
+      isCount(value.updated)
+    );
   }
 
   globalThis.MysteryForgeCompanionLogic = {
@@ -593,5 +804,14 @@
     withOpenedEndings,
     mergeSharedState,
     sharedState,
+    boardOf,
+    withPinned,
+    withUnpinned,
+    withLabel,
+    withPersonStatus,
+    withLink,
+    withNote,
+    linkedDocuments,
+    withMoved,
   };
 })();

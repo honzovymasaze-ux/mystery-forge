@@ -1913,3 +1913,288 @@ body.has-viewer {
     outline-offset: 3px;
   }
 }
+
+/* ---------- Evidence board ----------
+   The look is plain on purpose: the board art (background, pin, sticky note, stamp) comes as image files in
+   board-art/, and companion_data.py fills these properties with them. Without art, the fallbacks below apply. */
+
+:root {
+  --board-background: none;
+  --board-pin: none;
+  --board-sticky: none;
+  --board-stamp-cleared: none;
+}
+
+.view-board {
+  max-width: none;
+}
+
+.main-board {
+  max-width: none;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 8px;
+  background:
+    var(--board-background) center / cover,
+    #3a2f22;
+  min-height: 70vh;
+}
+
+.board-people {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.board-person {
+  position: relative;
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 8px 12px;
+  border: 3px solid transparent;
+  border-radius: 6px;
+  background: #f4ecd9;
+  color: var(--ink);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.person-picture {
+  width: 96px;
+  height: 120px;
+  overflow: hidden;
+  background: #d9d2c3;
+  color: #7d7466;
+}
+
+.person-picture svg {
+  width: 100%;
+  height: 100%;
+}
+
+.person-name {
+  font-weight: 700;
+}
+
+.person-role,
+.person-links {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.board-person.status-suspect {
+  border-color: #b33a2b;
+}
+
+.board-person.status-unsure {
+  border-color: #d9a441;
+}
+
+.board-person.status-witness {
+  border-color: #2f6fb5;
+}
+
+.board-person.status-cleared {
+  opacity: 0.7;
+}
+
+.person-stamp {
+  position: absolute;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-14deg);
+  padding: 2px 8px;
+  border: 3px solid #b33a2b;
+  background: var(--board-stamp-cleared) center / contain no-repeat;
+  color: #b33a2b;
+  font-family: var(--font-type);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.board-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.board-column,
+.board-tray {
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.board-heading {
+  margin: 0 0 10px;
+  font-family: var(--font-type);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #f4ecd9;
+}
+
+.board-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.board-tray-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.board-card {
+  position: relative;
+  width: 190px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 10px 10px;
+  border: 3px solid transparent;
+  border-radius: 3px;
+  background: #fbf8f1;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.board-card:not(.is-pinned) {
+  opacity: 0.85;
+}
+
+.board-card .pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+  background:
+    var(--board-pin) center / contain no-repeat,
+    #b33a2b;
+}
+
+.card-picture {
+  height: 90px;
+  overflow: hidden;
+  background: #222;
+}
+
+.card-picture svg {
+  width: 100%;
+  height: 100%;
+}
+
+.card-glyph {
+  font-size: 26px;
+  color: var(--ink-muted);
+}
+
+.card-title {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.card-links {
+  font-size: 13px;
+  color: #8e2a1e;
+}
+
+.card-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.card-label {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #2a2018;
+  color: #f4ecd9;
+  font-size: 12px;
+}
+
+.sticky {
+  display: block;
+  padding: 6px 8px;
+  background:
+    var(--board-sticky) center / cover,
+    #fbe58a;
+  color: #2a2018;
+  font-size: 13px;
+  line-height: 1.3;
+  transform: rotate(-1.5deg);
+}
+
+.board-card:focus-visible,
+.board-person:focus-visible,
+.board-card:hover,
+.board-person:hover {
+  border-color: var(--brass-bright);
+  outline: 4px solid var(--brass-bright);
+  outline-offset: 3px;
+  transform: scale(1.04);
+}
+
+.board-empty,
+.board-help {
+  margin: 0;
+  color: #e6dac0;
+  font-style: italic;
+}
+
+.board-menu {
+  max-width: 520px;
+  max-height: 86vh;
+  overflow-y: auto;
+}
+
+.board-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board-menu-actions .button {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.sticky-button {
+  background: #fbe58a;
+  color: #2a2018;
+}
+
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--paper-line);
+  border-radius: 6px;
+  background: #fffbe6;
+  color: var(--ink);
+  font: inherit;
+}

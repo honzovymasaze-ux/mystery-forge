@@ -23,7 +23,8 @@ import java.util.Locale;
 /**
  * A small web server on the local network. It serves the player companion page to the TV itself and to the phones
  * that scan the QR code, and it keeps the shared state of the group: the solved puzzles, their answers, and the
- * accusation. Every device merges that state into its own (companionLogic.js, mergeSharedState).
+ * accusation, and the evidence board. Every device merges that state into its own (companionLogic.js,
+ * mergeSharedState).
  *
  * It serves three paths only: the page, api/state (GET and POST), api/reset (POST), and api/info (the address for
  * the QR code). Nothing leaves the local network.
@@ -202,6 +203,12 @@ final class GameServer {
             }
             state.put("solved", solved);
             state.put("answers", answers);
+            // The evidence board has one layout for the whole group: the newest change wins.
+            JSONObject board = incoming.optJSONObject("board");
+            JSONObject current = state.optJSONObject("board");
+            if (board != null && (current == null || board.optLong("updated") > current.optLong("updated"))) {
+                state.put("board", board);
+            }
             if (state.optJSONObject("accusation") == null && incoming.optJSONObject("accusation") != null) {
                 state.put("accusation", incoming.optJSONObject("accusation"));
             }

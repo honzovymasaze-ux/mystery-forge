@@ -397,6 +397,37 @@ CS_COMPANION_STRINGS: Final[dict[str, str]] = {
     ),
     "companion_mail_from": "Od",
     "companion_mail_to": "Komu",
+    "companion_tab_board": "Nástěnka",
+    "companion_board_tray": "Nepřipnuté důkazy",
+    "companion_board_pin_all": "Připnout vše",
+    "companion_board_empty": "Zatím nic připnutého.",
+    "companion_board_help": (
+        "Šipky přecházejí mezi kartami. OK kartu otevře. Dlouhý stisk OK (nebo tlačítko menu) ji připne, "
+        "přesune nebo označí štítkem."
+    ),
+    "companion_board_open": "Otevřít",
+    "companion_board_pin": "Připnout na nástěnku",
+    "companion_board_unpin": "Odepnout",
+    "companion_board_move_earlier": "Posunout dříve",
+    "companion_board_move_later": "Posunout později",
+    "companion_board_victim": "Oběť",
+    "companion_board_status_suspect": "Podezřelý",
+    "companion_board_status_unsure": "Nejistý",
+    "companion_board_status_cleared": "Vyloučen",
+    "companion_board_status_witness": "Svědek",
+    "companion_board_label_motive": "Má motiv",
+    "companion_board_label_alibi_ok": "Alibi ověřeno",
+    "companion_board_label_alibi_weak": "Alibi děravé",
+    "companion_board_label_lies": "Lže",
+    "companion_board_label_conflict": "Rozpor",
+    "companion_board_assign": "Přiřadit k osobě…",
+    "companion_board_labels": "Rychlé štítky…",
+    "companion_board_note_add": "Přidat poznámku",
+    "companion_board_note_save": "Uložit poznámku",
+    "companion_board_note_delete": "Smazat poznámku",
+    "companion_board_note_placeholder": "Napište poznámku…",
+    "companion_board_linked": "Přiřazené důkazy: {count}",
+    "companion_board_back": "Zpět",
 }
 
 # Czech dates use the genitive month: "24. listopadu 2026".
