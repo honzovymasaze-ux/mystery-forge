@@ -4,7 +4,7 @@ from mystery_forge.render.package_files import package_file
 
 def test_the_kind_ids_include_every_kind_of_the_golden_game() -> None:
     assert {"letter", "notebook", "receipt", "police-report", "generic"} <= document_kind_ids()
-    assert len(document_kind_ids()) == 17
+    assert len(document_kind_ids()) == 24
 
 
 def test_every_kind_has_a_template_file() -> None:

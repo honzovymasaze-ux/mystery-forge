@@ -1,0 +1,13 @@
+{% from "macros.html.j2" import page_label %}
+<article class="prop person-photo">
+  <div class="person-photo-picture doc-body">{{ page.html }}{% if not page.html|trim %}<svg class="mf-silhouette" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="36" r="19"/><path d="M12 100c0-24 17-38 38-38s38 14 38 38z"/></svg>{% endif %}</div>
+  <div class="person-photo-card">
+    <p class="person-photo-name">{{ f.get("name") or page.title }}</p>
+    {% if f.get("role") %}<p class="person-photo-role">{{ f.get("role") }}</p>{% endif %}
+    <p class="person-photo-meta">
+      {% if f.get("case_number") %}<span>{{ t("field_case_number") }} {{ f.get("case_number") }}</span>{% endif %}
+      {% if f.get("date") %}<span>{{ f.get("date") }}</span>{% endif %}
+    </p>
+  </div>
+</article>
+{{ page_label(t, page) }}

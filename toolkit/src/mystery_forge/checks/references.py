@@ -43,6 +43,7 @@ FREE_TEXT_PATTERNS: Final[dict[str, tuple[FreeTextPattern, ...]]] = {
     "de": free_text_patterns("umschlag", "seite", "dokument"),
     "it": free_text_patterns("busta", "pagina", "documento"),
     "pt": free_text_patterns("envelope", "página", "documento"),
+    "cs": free_text_patterns("obálk[aueyo]|obálce", "stran[aěuy]?|straně", "dokument[uye]?"),
 }
 
 INTERNAL_ID_PATTERN: Final[re.Pattern[str]] = re.compile(r"\b[PD]\d{1,3}\b")

@@ -10,7 +10,7 @@
   const appElement = /** @type {HTMLElement} */ (document.getElementById('app'));
   const key = logic.storageKey(data.salt);
 
-  /** @typedef {'start' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
+  /** @typedef {'start' | 'case' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
   /** @typedef {{message: string, yes: string, strong: boolean, onYes: () => void}} ConfirmRequest */
 
   let storageWorks = true;
@@ -140,6 +140,14 @@
     return openStages().length < data.stages.length;
   }
 
+  function metEntries() {
+    return logic.caseEntries(data, openStages(), solvedCodes());
+  }
+
+  function unseenCount() {
+    return logic.unseenEntries(metEntries(), state).length;
+  }
+
   // ---------- Header, navigation, and the confirm dialog ----------
 
   function renderTopBar() {
@@ -154,15 +162,18 @@
   /** @returns {[TabId, string, string][]} */
   function tabs() {
     /** @type {[TabId, string, string][]} */
-    const list = [
-      ['start', ui('tab_start'), 'M4 5h16v14H4zM4 9h16'],
+    const list = [['start', ui('tab_start'), 'M4 5h16v14H4zM4 9h16']];
+    if (data.investigation !== null) {
+      list.push(['case', ui('tab_case'), 'M4 7h6l2 2h8v10H4zM8 13h8M8 16h5']);
+    }
+    list.push(
       ['check', ui('tab_check'), 'M5 12l4 4 10-10'],
       [
         'hints',
         ui('tab_hints'),
         'M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z',
       ],
-    ];
+    );
     if (data.deduction !== null) {
       list.push(['accuse', ui('tab_accuse'), 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM16 16l5 5']);
     }
@@ -185,6 +196,10 @@
       path.setAttribute('d', iconPath);
       icon.append(path);
       tabButton.append(icon, el('span', { className: 'tab-label', text: label }));
+      const unseen = id === 'case' && session.tab !== 'case' ? unseenCount() : 0;
+      if (unseen > 0) {
+        tabButton.append(el('span', { className: 'tab-badge', text: String(unseen), attrs: { id: 'case-badge' } }));
+      }
       nav.append(tabButton);
     }
     return nav;
@@ -325,6 +340,7 @@
         yes: ui('reset'),
         strong: true,
         onYes: () => {
+          stopPlayback();
           saveState(logic.freshState());
           session.lastCheck = null;
           session.draftChoices = {};
@@ -346,6 +362,206 @@
       renderEnvelopes(),
       renderHelp(),
       el('p', { className: 'reset-row' }, [reset]),
+    ]);
+  }
+
+  // ---------- Case: the investigator's story and the voice messages ----------
+
+  /** The entry that plays now, with its recording when it has one. The speech voice needs no element. */
+  const playback = {
+    /** @type {string | null} */
+    id: null,
+    /** @type {HTMLAudioElement | null} */
+    audio: null,
+  };
+
+  function canSpeak() {
+    return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function';
+  }
+
+  function stopPlayback() {
+    playback.audio?.pause();
+    if (canSpeak()) {
+      window.speechSynthesis.cancel();
+    }
+    playback.id = null;
+    playback.audio = null;
+  }
+
+  // Name hints of common system voices. A voice that matches none of them still speaks, with a lower or higher pitch.
+  const FEMALE_VOICE = /female|woman|žena|zuzana|iveta|vlasta|eliška|hana|laura|samantha|victoria|google/i;
+  const MALE_VOICE = /\bmale\b|\bman\b|muž|jakub|antonín|antonin|tomáš|ondřej|daniel|alex/i;
+
+  /**
+   * @param {'male' | 'female'} voice
+   * @returns {SpeechSynthesisVoice | null}
+   */
+  function pickVoice(voice) {
+    const language = data.language.toLowerCase();
+    const voices = window.speechSynthesis
+      .getVoices()
+      .filter((candidate) => candidate.lang.toLowerCase().startsWith(language));
+    const hint = voice === 'female' ? FEMALE_VOICE : MALE_VOICE;
+    return voices.find((candidate) => hint.test(candidate.name)) ?? voices[0] ?? null;
+  }
+
+  /** @param {MysteryForgeCompanionCaseEntry} entry */
+  function togglePlayback(entry) {
+    const wasPlaying = playback.id === entry.id;
+    stopPlayback();
+    if (!wasPlaying) {
+      const done = () => {
+        if (playback.id === entry.id) {
+          playback.id = null;
+          playback.audio = null;
+          render();
+        }
+      };
+      if (entry.audio) {
+        const audio = new Audio(entry.audio);
+        audio.addEventListener('ended', done);
+        playback.id = entry.id;
+        playback.audio = audio;
+        audio.play().catch(done);
+      } else if (canSpeak()) {
+        const voice = entry.voice ?? 'male';
+        const utterance = new window.SpeechSynthesisUtterance(entry.text);
+        utterance.lang = data.language;
+        const chosen = pickVoice(voice);
+        if (chosen !== null) {
+          utterance.voice = chosen;
+        }
+        const settings = logic.speechSettings(voice);
+        utterance.pitch = settings.pitch;
+        utterance.rate = settings.rate;
+        utterance.addEventListener('end', done);
+        utterance.addEventListener('error', done);
+        playback.id = entry.id;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+    render();
+  }
+
+  /**
+   * @param {MysteryForgeCompanionCaseEntry} entry
+   * @param {string} label
+   * @returns {HTMLElement}
+   */
+  function playButton(entry, label) {
+    const playing = playback.id === entry.id;
+    return button(
+      playing ? `■ ${ui('voice_stop')}` : `▶ ${label}`,
+      `button ${playing ? 'button-quiet' : 'button-primary'} play-button${playing ? ' is-playing' : ''}`,
+      () => togglePlayback(entry),
+      { 'data-play': entry.id, 'aria-pressed': playing ? 'true' : 'false' },
+    );
+  }
+
+  /**
+   * @param {MysteryForgeCompanionCaseEntry} entry
+   * @param {boolean} isNew
+   * @returns {HTMLElement}
+   */
+  function renderChapter(entry, isNew) {
+    const stage = data.stages.find((candidate) => candidate.id === entry.stage);
+    const text = el('div', { className: 'chapter-text' });
+    for (const paragraph of logic.paragraphs(entry.text)) {
+      text.append(el('p', { text: paragraph }));
+    }
+    return el('article', { className: 'paper chapter reveal-in', attrs: { 'data-entry': entry.id } }, [
+      el('p', { className: 'paper-kicker' }, [
+        el('span', { text: `${ui('chapter_kicker')} · ${stage ? stage.envelope : entry.stage}` }),
+        isNew ? el('span', { className: 'chip chip-new', text: ui('entry_new') }) : null,
+      ]),
+      el('h3', { className: 'paper-title', text: entry.title ?? '' }),
+      el('p', { className: 'chapter-read-aloud', text: ui('read_aloud') }),
+      text,
+      canSpeak() ? playButton(entry, ui('read_for_me')) : null,
+    ]);
+  }
+
+  /**
+   * @param {MysteryForgeCompanionCaseEntry} entry
+   * @param {boolean} isNew
+   * @returns {HTMLElement}
+   */
+  function renderVoice(entry, isNew) {
+    const sender = entry.sender ?? '';
+    const initials = sender
+      .split(/\s+/)
+      .filter((part) => part !== '')
+      .slice(-2)
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase();
+    const playable = Boolean(entry.audio) || canSpeak();
+    const bars = el('span', { className: 'voice-bars', attrs: { 'aria-hidden': 'true' } });
+    for (let index = 0; index < 18; index += 1) {
+      bars.append(el('span'));
+    }
+    return el(
+      'article',
+      {
+        className: `voice${playback.id === entry.id ? ' is-playing' : ''} reveal-in`,
+        attrs: { 'data-entry': entry.id },
+      },
+      [
+        el('span', { className: `voice-avatar voice-${entry.voice ?? 'male'}`, text: initials }),
+        el('div', { className: 'voice-bubble' }, [
+          el('p', { className: 'voice-head' }, [
+            el('span', { className: 'voice-sender', text: sender }),
+            entry.role ? el('span', { className: 'voice-role', text: entry.role }) : null,
+            isNew ? el('span', { className: 'chip chip-new', text: ui('entry_new') }) : null,
+          ]),
+          el('p', { className: 'voice-kicker', text: ui('voice_kicker') }),
+          el('div', { className: 'voice-player' }, [playable ? playButton(entry, ui('voice_play')) : null, bars]),
+          playable ? null : el('p', { className: 'notice', text: ui('no_speech') }),
+          el('details', { className: 'voice-transcript', attrs: { open: playable ? '' : 'open' } }, [
+            el('summary', { text: ui('voice_transcript') }),
+            el('p', { text: entry.text }),
+          ]),
+        ]),
+      ],
+    );
+  }
+
+  function renderCase() {
+    const investigation = data.investigation;
+    const entries = metEntries();
+    const unseen = logic.unseenEntries(entries, state).map((entry) => entry.id);
+    const view = el('div', { className: 'view view-case' }, [
+      el('h2', { className: 'view-title', text: ui('case_heading') }),
+      investigation
+        ? el('p', {
+            className: 'view-intro case-narrator',
+            text: `${investigation.narrator.name} · ${investigation.narrator.role}`,
+          })
+        : null,
+    ]);
+    if (entries.length === 0) {
+      view.append(el('p', { className: 'empty', text: ui('case_empty') }));
+    }
+    for (const entry of entries) {
+      const isNew = unseen.includes(entry.id);
+      view.append(entry.type === 'chapter' ? renderChapter(entry, isNew) : renderVoice(entry, isNew));
+    }
+    // The "new" chips show on this visit only: the group has now seen these entries.
+    if (unseen.length > 0) {
+      saveState(logic.withSeen(state, unseen));
+    }
+    return view;
+  }
+
+  /** After a correct answer: say that the case has new chapters or voice messages, and offer the case tab. */
+  function renderCaseNotice() {
+    const count = data.investigation === null ? 0 : unseenCount();
+    if (count === 0) {
+      return null;
+    }
+    return el('div', { className: 'case-notice', attrs: { id: 'case-notice' } }, [
+      el('p', { className: 'case-notice-text', text: ui('new_entries', { count }) }),
+      button(ui('new_entries_open'), 'button button-primary', () => showTab('case')),
     ]);
   }
 
@@ -414,6 +630,7 @@
             stage.opening_text ? el('p', { className: 'unlock-text', text: stage.opening_text }) : null,
           ])
         : null,
+      renderCaseNotice(),
       finished && data.deduction !== null
         ? button(ui('accuse_heading'), 'button button-primary', () => showTab('accuse'))
         : null,
@@ -779,6 +996,7 @@
   /** @type {Record<TabId, () => HTMLElement>} */
   const VIEWS = {
     start: renderStart,
+    case: renderCase,
     check: renderCheck,
     hints: renderHints,
     accuse: renderAccuse,

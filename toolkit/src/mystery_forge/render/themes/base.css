@@ -2678,3 +2678,388 @@ body.mode-low-ink .step-number {
 .manual-credit {
   margin-top: auto;
 }
+
+/* ---------- Case file kinds: autopsy, lab, phone records, invoice, CCTV, person photo, note ---------- */
+
+/* Autopsy report */
+.autopsy-stamp {
+  margin: 0 0 0 auto;
+  padding: 1mm 3mm;
+  border: 0.6mm solid var(--stamp);
+  color: var(--stamp);
+  font: 700 9pt var(--font-heading);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+}
+.autopsy-top {
+  display: flex;
+  gap: 4mm;
+  align-items: flex-start;
+}
+.autopsy-boxes {
+  flex: 1;
+}
+.body-outline {
+  width: 38mm;
+  flex: none;
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.2;
+}
+.autopsy-body {
+  font-family: var(--font-type);
+  font-size: 10pt;
+  line-height: 1.5;
+}
+.autopsy-body p {
+  margin: 0 0 2.5mm;
+}
+
+/* Lab report */
+.lab-report {
+  padding: 12mm 14mm;
+  background-color: var(--paper-alt);
+}
+.lab-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 5mm;
+  padding-bottom: 3mm;
+  border-bottom: 0.8mm solid var(--accent);
+  margin-bottom: 4mm;
+}
+.lab-issuer {
+  font: 8pt var(--font-heading);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1mm;
+}
+.lab-title {
+  font-size: 16pt;
+  margin: 0;
+}
+.lab-number {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+}
+.lab-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1mm 6mm;
+  margin-bottom: 4mm;
+  font-size: 9.5pt;
+}
+.lab-body {
+  font-size: 10pt;
+}
+.lab-body table:not([class*='mf-']) td,
+.lab-body table:not([class*='mf-']) th {
+  font-family: var(--font-mono);
+  font-size: 9pt;
+}
+.lab-body table:not([class*='mf-']) th {
+  background: var(--accent-soft);
+}
+.lab-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 4mm;
+}
+.lab-stamp {
+  padding: 1.5mm 4mm;
+  border: 0.7mm double var(--stamp);
+  color: var(--stamp);
+  font: 700 10pt var(--font-heading);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+}
+.lab-sign {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Phone records */
+.phone-records {
+  padding: 11mm 12mm;
+  background-color: var(--paper-alt);
+}
+.records-head {
+  border-bottom: 0.5mm solid var(--ink);
+  padding-bottom: 2mm;
+  margin-bottom: 3mm;
+}
+.records-issuer {
+  font: 700 9pt var(--font-mono);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 0 0 1mm;
+}
+.records-title {
+  font-size: 14pt;
+  margin: 0;
+}
+.records-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5mm 6mm;
+  margin-bottom: 3mm;
+  font-family: var(--font-mono);
+  font-size: 9pt;
+}
+.records-body {
+  font-family: var(--font-mono);
+  font-size: 8.6pt;
+  line-height: 1.35;
+}
+.records-body table:not([class*='mf-']) th,
+.records-body table:not([class*='mf-']) td {
+  padding: 0.6mm 1.5mm;
+  border: 0;
+  border-bottom: 0.2mm dotted var(--rule);
+  white-space: nowrap;
+}
+.records-body table:not([class*='mf-']) th {
+  border-bottom: 0.4mm solid var(--ink);
+  text-transform: uppercase;
+  font-size: 7.8pt;
+}
+.records-body table:not([class*='mf-']) tr:nth-child(even) td {
+  background: var(--accent-soft);
+}
+
+/* Invoice */
+.invoice {
+  padding: 14mm 16mm;
+  background-color: var(--paper-alt);
+}
+.invoice-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+  margin-bottom: 6mm;
+}
+.invoice-issuer {
+  font: 700 14pt var(--font-heading);
+  margin: 0 0 1mm;
+}
+.invoice-address {
+  font-size: 9pt;
+  color: var(--ink-soft);
+  margin: 0;
+  white-space: pre-line;
+}
+.invoice-word {
+  text-align: right;
+}
+.invoice-kind {
+  font: 700 20pt var(--font-heading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+}
+.invoice-number {
+  font-family: var(--font-mono);
+  margin: 1mm 0 0;
+}
+.invoice-fields {
+  border-top: 0.3mm solid var(--rule);
+  border-bottom: 0.3mm solid var(--rule);
+  padding: 2mm 0;
+  margin-bottom: 4mm;
+}
+.invoice-body {
+  font-size: 10pt;
+}
+.invoice-body table:not([class*='mf-']) th {
+  background: var(--accent-soft);
+}
+.invoice-total {
+  display: flex;
+  justify-content: space-between;
+  border-top: 0.8mm double var(--ink);
+  padding-top: 2mm;
+  margin: 3mm 0 0 auto;
+  width: 60%;
+  font-weight: 700;
+  font-size: 12pt;
+}
+
+/* CCTV still */
+.kind-cctv-still,
+.kind-person-photo,
+.kind-note {
+  justify-content: flex-start;
+  padding-top: 8mm;
+}
+.cctv {
+  width: 170mm;
+  padding: 5mm;
+  background: var(--paper-alt);
+}
+.cctv-screen {
+  position: relative;
+  background: #1b1d1c;
+  color: #e8f2ea;
+  padding: 9mm 4mm;
+  min-height: 110mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-mono);
+}
+body.mode-low-ink .cctv-screen {
+  background: #ffffff;
+  color: var(--ink);
+  border: 0.4mm solid var(--ink);
+}
+.cctv-picture {
+  filter: grayscale(1) contrast(1.1);
+  font-size: 10pt;
+  text-align: center;
+}
+.cctv-picture .mf-figure {
+  margin: 0;
+}
+.cctv-overlay {
+  position: absolute;
+  left: 4mm;
+  right: 4mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cctv-top {
+  top: 2.5mm;
+}
+.cctv-bottom {
+  bottom: 2.5mm;
+}
+.cctv-rec {
+  color: #e0483b;
+  font-weight: 700;
+}
+.cctv-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  margin: 3mm 0 0;
+  font-size: 9.5pt;
+}
+.cctv-title {
+  font-weight: 700;
+}
+.cctv-evidence {
+  font-family: var(--font-mono);
+  color: var(--stamp);
+}
+
+/* Person photo: a portrait print with a name card under it */
+.person-photo {
+  width: 110mm;
+  padding: 5mm 5mm 4mm;
+  background: var(--paper-alt);
+  transform: rotate(1deg);
+}
+.person-photo-picture {
+  min-height: 110mm;
+  background: repeating-linear-gradient(to bottom, #e4e2dc 0 9.5mm, #cfccc4 9.5mm 10mm);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+body.mode-low-ink .person-photo-picture {
+  background: none;
+  border: 0.25mm solid #999;
+}
+.person-photo-picture .mf-figure {
+  margin: 0;
+  width: 100%;
+}
+.person-photo-picture .mf-silhouette {
+  width: 70%;
+  fill: #9b978f;
+}
+.person-photo-card {
+  margin-top: 3mm;
+  padding: 2mm 3mm;
+  background: #1f1f1f;
+  color: #f4f4f4;
+  font-family: var(--font-mono);
+  text-align: center;
+}
+body.mode-low-ink .person-photo-card {
+  background: none;
+  color: var(--ink);
+  border: 0.3mm solid var(--ink);
+}
+.person-photo-name {
+  font-size: 13pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.person-photo-role {
+  font-size: 9pt;
+  margin: 0.5mm 0 0;
+}
+.person-photo-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8pt;
+  margin: 1mm 0 0;
+}
+
+/* Handwritten note */
+.sticky-note {
+  width: 110mm;
+  min-height: 90mm;
+  padding: 12mm 9mm 8mm;
+  background: var(--note-paper);
+  transform: rotate(-2deg);
+  font-family: var(--font-hand);
+  font-size: 18pt;
+  line-height: 1.3;
+  color: var(--hand-ink);
+}
+body.readable-font .sticky-note {
+  font-family: var(--font-body);
+  font-size: 12pt;
+}
+.note-body p {
+  margin: 0 0 3mm;
+}
+.note-sign {
+  text-align: right;
+  margin: 3mm 0 0;
+}
+
+/* ---------- The investigator's chapters ---------- */
+.chapters {
+  font-family: var(--font-body);
+  font-size: 12.5pt;
+  line-height: 1.55;
+}
+.chapter-title {
+  font: 700 15pt var(--font-heading);
+  color: var(--accent);
+  margin: 2mm 0 3mm;
+}
+.chapter-paragraph {
+  margin: 0 0 3.5mm;
+  text-align: justify;
+  hyphens: auto;
+}

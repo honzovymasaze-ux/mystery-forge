@@ -42,6 +42,25 @@ DOCUMENT_KINDS: Final[dict[str, DocumentKind]] = {
         DocumentKind(
             "case-briefing", "Case briefing", ("agency", "case_number", "classification", "recipient", "date")
         ),
+        DocumentKind(
+            "autopsy-report",
+            "Autopsy report",
+            ("issuer", "case_number", "date", "examiner", "deceased", "time_of_death", "cause_of_death"),
+        ),
+        DocumentKind(
+            "lab-report",
+            "Forensic lab report",
+            ("issuer", "number", "case_number", "sample", "test", "requested_by", "date", "analyst"),
+        ),
+        DocumentKind(
+            "phone-records",
+            "Phone records",
+            ("issuer", "subscriber", "phone_number", "period", "case_number", "number"),
+        ),
+        DocumentKind("invoice", "Invoice", ("issuer", "address", "number", "recipient", "date", "due_date", "total")),
+        DocumentKind("cctv-still", "CCTV still", ("camera", "location", "date", "time", "evidence_number")),
+        DocumentKind("person-photo", "Person photo", ("name", "role", "case_number", "date")),
+        DocumentKind("note", "Handwritten note", ("signature", "date")),
         DocumentKind("generic", "Generic document", ()),
     )
 }

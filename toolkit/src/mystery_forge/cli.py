@@ -41,7 +41,7 @@ from mystery_forge.paths import (
 from mystery_forge.render.pdf import BrowserNotFoundError, launch_first_available
 from mystery_forge.spec.documents import ALL_DIRECTIVES
 from mystery_forge.spec.loader import SOURCE_FOLDER
-from mystery_forge.spec.models import DocumentMeta, Flow, Music, Puzzle, Story
+from mystery_forge.spec.models import DocumentMeta, Flow, Investigation, Music, Puzzle, Story
 
 type VerbHandler = Callable[[argparse.Namespace, TextIO], int]
 
@@ -54,6 +54,7 @@ SCHEMAS: dict[str, type[BaseModel]] = {
     "puzzle": Puzzle,
     "document": DocumentMeta,
     "music": Music,
+    "investigation": Investigation,
 }
 REFERENCE_FORMS: dict[str, str] = {
     "{{char:<id>}}": "The character's name. Also .role, .age, .description.",

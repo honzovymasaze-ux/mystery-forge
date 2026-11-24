@@ -8,6 +8,7 @@ not name the culprit.
 """
 
 import re
+from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Final
 
@@ -24,8 +25,8 @@ from mystery_forge.checks.game_index import (
 )
 from mystery_forge.findings import Finding
 from mystery_forge.game import AssembledPuzzle, Game
-from mystery_forge.spec.loader import MUSIC_FILE
-from mystery_forge.spec.models import Character, MusicSuggestion
+from mystery_forge.spec.loader import INVESTIGATION_FILE, MUSIC_FILE
+from mystery_forge.spec.models import Chapter, Character, MusicSuggestion, VoiceMessage
 
 # Replaces an allowlisted passage. A non-alphanumeric mark keeps the text on both sides from joining into a new match.
 CUT_MARK: Final[str] = "|"
@@ -87,10 +88,36 @@ def visible_texts(game: Game, puzzle: AssembledPuzzle, position: int) -> list[Vi
             for key, value in document.meta.fields.items()
         )
     texts.append(VisibleText(puzzle.source.title, f"the title of {puzzle.source.id}", puzzle.file, "title", in_title))
+    texts.extend(investigation_texts(game, puzzle, position))
     texts.extend(
         VisibleText(value, f"the music suggestions ({field_path})", MUSIC_FILE, field_path, MUSIC_LEAK_RULE)
         for field_path, value in music_fields(game)
     )
+    return texts
+
+
+def investigation_texts(game: Game, puzzle: AssembledPuzzle, position: int) -> list[VisibleText]:
+    """The chapters and voice messages that players can meet before they solve the puzzle.
+
+    An entry that waits for this puzzle comes after its answer. An entry that waits for another puzzle counts, because
+    players can solve the puzzles of one stage in any order.
+    """
+    if game.investigation is None:
+        return []
+    positions: dict[str, int] = stage_positions(game)
+    texts: list[VisibleText] = []
+    groups: tuple[tuple[str, Sequence[Chapter | VoiceMessage]], ...] = (
+        ("chapters", game.investigation.chapters),
+        ("voice_messages", game.investigation.voice_messages),
+    )
+    for group, entries in groups:
+        for index, entry in enumerate(entries):
+            if positions.get(entry.stage, position + 1) > position or entry.after == puzzle.source.id:
+                continue
+            texts.append(
+                VisibleText(entry.text, f"the text of {entry.id}", INVESTIGATION_FILE, f"{group}.{index}.text",
+                            "leaks.answer_in_text")
+            )  # fmt: skip
     return texts
 
 

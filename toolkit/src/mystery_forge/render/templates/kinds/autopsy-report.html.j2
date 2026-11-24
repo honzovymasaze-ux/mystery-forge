@@ -1,0 +1,30 @@
+{% from "macros.html.j2" import page_label %}
+<article class="prop prop-full report autopsy">
+  <header class="report-head">
+    <div class="report-seal" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><path d="M20 8v24M8 20h24"/><circle cx="20" cy="20" r="7"/></svg></div>
+    <div class="report-titles">
+      <p class="report-station">{{ f.get("issuer") or t("word_autopsy") }}</p>
+      <h1 class="report-title">{{ page.title }}</h1>
+    </div>
+    <p class="autopsy-stamp">{{ t("word_confidential") }}</p>
+  </header>
+  {% if page.page_number == 1 %}
+  <div class="autopsy-top">
+    <div class="form-boxes autopsy-boxes">
+      <div class="form-box"><span class="field-label">{{ t("field_case_number") }}</span><span class="field-value">{{ f.get("case_number", "") }}</span></div>
+      <div class="form-box"><span class="field-label">{{ t("field_date") }}</span><span class="field-value">{{ f.get("date", "") }}</span></div>
+      <div class="form-box"><span class="field-label">{{ t("field_examiner") }}</span><span class="field-value">{{ f.get("examiner", "") }}</span></div>
+      <div class="form-box form-box-wide"><span class="field-label">{{ t("field_deceased") }}</span><span class="field-value">{{ f.get("deceased", "") }}</span></div>
+      {% if f.get("time_of_death") %}<div class="form-box form-box-wide"><span class="field-label">{{ t("field_time_of_death") }}</span><span class="field-value">{{ f.get("time_of_death") }}</span></div>{% endif %}
+      {% if f.get("cause_of_death") %}<div class="form-box form-box-wide"><span class="field-label">{{ t("field_cause_of_death") }}</span><span class="field-value">{{ f.get("cause_of_death") }}</span></div>{% endif %}
+    </div>
+    <svg class="body-outline" viewBox="0 0 120 150" aria-hidden="true">
+      <g><circle cx="30" cy="14" r="8"/><path d="M30 22v4M18 30h24l4 40-6 2-3-30v30l4 50h-8l-5-44-5 44h-8l4-50V42l-3 30-6-2 4-40z"/></g>
+      <g transform="translate(60 0)"><circle cx="30" cy="14" r="8"/><path d="M30 22v4M18 30h24l4 40-6 2-3-30v30l4 50h-8l-5-44-5 44h-8l4-50V42l-3 30-6-2 4-40z"/></g>
+    </svg>
+  </div>
+  {% endif %}
+  <div class="doc-body autopsy-body">{{ page.html }}</div>
+  <footer class="report-foot"><span class="sign-line"></span><span class="field-label">{{ t("field_examiner") }}</span></footer>
+  {{ page_label(t, page) }}
+</article>

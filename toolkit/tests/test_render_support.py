@@ -89,6 +89,60 @@ SHOWCASE: dict[str, tuple[dict[str, str], str]] = {
         {"agency": "Coast Service", "case_number": "31/114", "classification": "Secret", "recipient": "You"},
         "Read every paper.\n\n::: redacted\nhidden words\n:::\n\n::: pagebreak\n:::\n\nSecond page.",
     ),
+    "autopsy-report": (
+        {
+            "issuer": "Port Wren Coroner",
+            "case_number": "31/114",
+            "date": "16 March 1931",
+            "examiner": "Dr. Vane",
+            "deceased": "Tom Bell",
+            "time_of_death": "22:00 to 00:30",
+            "cause_of_death": "Blow to the head",
+        },
+        "External examination: a bruise above the left ear.\n\n| Organ | Finding |\n|---|---|\n| Lungs | Water |",
+    ),
+    "lab-report": (
+        {
+            "issuer": "County Forensic Laboratory",
+            "number": "L-208",
+            "case_number": "31/114",
+            "sample": "E-4, glass",
+            "test": "Toxicology",
+            "requested_by": "Sgt. Hale",
+            "date": "17 March 1931",
+            "analyst": "M. Ortiz",
+        },
+        "| Substance | Result |\n|---|---|\n| Alcohol | 0.4 per mille |\n| Sedative | Positive |",
+    ),
+    "phone-records": (
+        {
+            "issuer": "Wren Telephone Company",
+            "subscriber": "Ana Ruiz",
+            "phone_number": "+44 555 0142",
+            "period": "14 to 15 March",
+            "case_number": "31/114",
+            "number": "R-9",
+        },
+        "| Time | Called | Seconds | Cell |\n|---|---|---|---|\n| 21:14 | 555 0177 | 64 | WREN-3 |",
+    ),
+    "invoice": (
+        {
+            "issuer": "Ward Supplies",
+            "address": "Quay Street 4",
+            "number": "2031-17",
+            "recipient": "Gull Rock Light",
+            "date": "1 March 1931",
+            "due_date": "15 March 1931",
+            "total": "£4",
+        },
+        "| Item | Price |\n|---|---|\n| Lamp oil | £4 |",
+    ),
+    "cctv-still": (
+        {"camera": "CAM 02", "location": "Quay gate", "date": "14.03.1931", "time": "23:41", "evidence_number": "E-7"},
+        "{{image:lamp|}}",
+    ),
+    "person-photo": ({"name": "Ana Ruiz", "role": "Cook", "case_number": "31/114", "date": "15.3.31"}, ""),
+    "note": ({"signature": "E.", "date": "Friday"}, "Meet me at the boathouse at eleven."),
     "generic": ({}, "::: center\nCentered\n:::\n\n::: small\nSmall print\n:::\n\n::: typewriter\nTyped\n:::"),
 }
 

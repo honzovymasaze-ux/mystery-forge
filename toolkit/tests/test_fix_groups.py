@@ -108,6 +108,12 @@ def test_music_findings_go_to_their_own_group_and_never_to_the_documents(game_di
     assert "music.yaml" not in groups["documents"].files
 
 
+def test_investigation_findings_go_to_their_own_group(game_dir: Path) -> None:
+    groups = {group.name: group for group in group_findings([finding("investigation.yaml")], game_dir)}
+    assert sorted(groups) == ["investigation"]
+    assert groups["investigation"].files == ["investigation.yaml"]
+
+
 def test_a_missing_printed_question_goes_to_the_writer_of_its_puzzle(game_dir: Path) -> None:
     game: Game = edit_puzzle(golden_game(), "P2", question="")
     findings: list[Finding] = only_rule(check_ledger(game, golden_mechanics()), "ledger.question_missing")

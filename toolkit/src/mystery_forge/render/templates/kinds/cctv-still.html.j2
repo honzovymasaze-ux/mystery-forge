@@ -1,0 +1,19 @@
+{% from "macros.html.j2" import page_label %}
+<article class="prop cctv">
+  <div class="cctv-screen">
+    <div class="cctv-overlay cctv-top">
+      <span class="cctv-rec">&#9679; REC</span>
+      <span>{{ f.get("camera") or t("word_cctv") }}</span>
+    </div>
+    <div class="cctv-picture doc-body">{{ page.html }}</div>
+    <div class="cctv-overlay cctv-bottom">
+      <span>{{ f.get("location", "") }}</span>
+      <span>{{ f.get("date", "") }} {{ f.get("time", "") }}</span>
+    </div>
+  </div>
+  <p class="cctv-caption">
+    <span class="cctv-title">{{ page.title }}</span>
+    {% if f.get("evidence_number") %}<span class="cctv-evidence">{{ t("field_evidence_number") }} {{ f.get("evidence_number") }}</span>{% endif %}
+  </p>
+</article>
+{{ page_label(t, page) }}

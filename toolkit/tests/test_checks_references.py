@@ -40,6 +40,7 @@ def test_the_exact_text_of_a_stage_directive_is_not_reported() -> None:
         ("de", "Öffnet Umschlag C und lest Seite 3 im Dokument 1.", 3),
         ("it", "Aprite la busta C a pagina 3.", 2),
         ("pt", "Abram o envelope C na página 3.", 2),
+        ("cs", "Otevřete obálku C a podívejte se na stranu 3.", 2),
     ],
 )
 def test_each_language_has_its_own_words(language: str, text: str, count: int) -> None:
@@ -47,7 +48,7 @@ def test_each_language_has_its_own_words(language: str, text: str, count: int) -
 
 
 def test_every_language_with_a_checked_table_has_patterns() -> None:
-    assert set(FREE_TEXT_PATTERNS) == {"en", "es", "ca", "fr", "de", "it", "pt"}
+    assert set(FREE_TEXT_PATTERNS) == {"en", "es", "ca", "fr", "de", "it", "pt", "cs"}
 
 
 def test_a_language_without_patterns_reports_no_free_text() -> None:

@@ -1,0 +1,28 @@
+{% from "macros.html.j2" import page_label, field_row %}
+<article class="prop prop-full lab-report">
+  <header class="lab-head">
+    <div>
+      <p class="lab-issuer">{{ f.get("issuer") or t("word_lab_report") }}</p>
+      <h1 class="lab-title">{{ page.title }}</h1>
+    </div>
+    <div class="lab-number">
+      <span class="field-label">{{ t("field_number") }}</span>
+      <span class="field-value">{{ f.get("number", "") }}</span>
+    </div>
+  </header>
+  {% if page.page_number == 1 %}
+  <div class="lab-fields">
+    {{ field_row(t, f, "case_number") }}
+    {{ field_row(t, f, "sample") }}
+    {{ field_row(t, f, "test") }}
+    {{ field_row(t, f, "requested_by") }}
+    {{ field_row(t, f, "date") }}
+  </div>
+  {% endif %}
+  <div class="doc-body lab-body">{{ page.html }}</div>
+  <footer class="lab-foot">
+    <span class="lab-stamp">{{ t("word_verified") }}</span>
+    <span class="lab-sign"><span class="sign-line"></span><span class="field-label">{{ t("field_analyst") }}{% if f.get("analyst") %}: {{ f.get("analyst") }}{% endif %}</span></span>
+  </footer>
+  {{ page_label(t, page) }}
+</article>

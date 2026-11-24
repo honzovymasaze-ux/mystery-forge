@@ -16,6 +16,7 @@
       hintSteps: {},
       timer: { elapsedMs: 0, startedAt: null },
       accusation: null,
+      seen: [],
     };
   }
 
@@ -336,7 +337,9 @@
       Object.values(value.hintSteps).every(isCount) &&
       isTimer(value.timer) &&
       (value.accusation === null ||
-        (isRecord(value.accusation) && Object.values(value.accusation).every((id) => typeof id === 'string')))
+        (isRecord(value.accusation) && Object.values(value.accusation).every((id) => typeof id === 'string'))) &&
+      // A state from before the case tab has no `seen` list; it stays valid.
+      (value.seen === undefined || (Array.isArray(value.seen) && value.seen.every((id) => typeof id === 'string')))
     );
   }
 
@@ -384,6 +387,65 @@
     return intro.length > LONG_INTRO_CHARACTERS;
   }
 
+  /**
+   * The chapters and voice messages that players have met: the entries of the open envelopes, minus the ones that
+   * still wait for an unsolved puzzle. The data holds them in the order that players meet them.
+   * @param {MysteryForgeCompanionData} data
+   * @param {string[]} unlockedStageIds
+   * @param {string[]} solvedCodes
+   * @returns {MysteryForgeCompanionCaseEntry[]}
+   */
+  function caseEntries(data, unlockedStageIds, solvedCodes) {
+    if (data.investigation === null) {
+      return [];
+    }
+    return data.investigation.entries.filter(
+      (entry) => unlockedStageIds.includes(entry.stage) && (entry.after === null || solvedCodes.includes(entry.after)),
+    );
+  }
+
+  /**
+   * @param {MysteryForgeCompanionCaseEntry[]} entries
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeCompanionCaseEntry[]}
+   */
+  function unseenEntries(entries, state) {
+    const seen = state.seen ?? [];
+    return entries.filter((entry) => !seen.includes(entry.id));
+  }
+
+  /**
+   * @param {MysteryForgeCompanionState} state
+   * @param {string[]} ids
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withSeen(state, ids) {
+    const seen = state.seen ?? [];
+    const added = ids.filter((id) => !seen.includes(id));
+    return added.length === 0 ? state : { ...state, seen: [...seen, ...added] };
+  }
+
+  /**
+   * The speech voice settings of a message: a lower voice for a man, a higher one for a woman.
+   * @param {'male' | 'female'} voice
+   * @returns {{pitch: number, rate: number}}
+   */
+  function speechSettings(voice) {
+    return voice === 'female' ? { pitch: 1.15, rate: 1 } : { pitch: 0.85, rate: 0.95 };
+  }
+
+  /**
+   * Split a story text into its paragraphs at the blank lines.
+   * @param {string} text
+   * @returns {string[]}
+   */
+  function paragraphs(text) {
+    return text
+      .split(/\n\s*\n/)
+      .map((part) => part.trim())
+      .filter((part) => part !== '');
+  }
+
   globalThis.MysteryForgeCompanionLogic = {
     freshState,
     storageKey,
@@ -410,5 +472,10 @@
     stateToStorage,
     fillText,
     isLongIntro,
+    caseEntries,
+    unseenEntries,
+    withSeen,
+    speechSettings,
+    paragraphs,
   };
 })();

@@ -1,0 +1,18 @@
+{% from "macros.html.j2" import page_label, field_row %}
+<article class="prop prop-full phone-records">
+  <header class="records-head">
+    <p class="records-issuer">{{ f.get("issuer") or t("word_phone_records") }}</p>
+    <h1 class="records-title">{{ page.title }}</h1>
+  </header>
+  {% if page.page_number == 1 %}
+  <div class="records-fields">
+    {{ field_row(t, f, "subscriber") }}
+    {{ field_row(t, f, "phone_number") }}
+    {{ field_row(t, f, "period") }}
+    {{ field_row(t, f, "case_number") }}
+    {{ field_row(t, f, "number") }}
+  </div>
+  {% endif %}
+  <div class="doc-body records-body">{{ page.html }}</div>
+  {{ page_label(t, page) }}
+</article>

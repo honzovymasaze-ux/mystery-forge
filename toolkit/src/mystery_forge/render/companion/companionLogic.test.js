@@ -107,6 +107,7 @@ function sampleData() {
       { min_score_percent: 10, title: 'Dark', text: 'Unsolved.' },
     ],
     reveal: ['By boat.'],
+    investigation: null,
   };
 }
 
@@ -322,4 +323,70 @@ test('isLongIntro is true only for an intro too long to read in a glance on a ph
   assert.equal(logic.isLongIntro('Read me aloud.'), false);
   assert.equal(logic.isLongIntro('x'.repeat(240)), false);
   assert.equal(logic.isLongIntro('x'.repeat(241)), true);
+});
+
+/** @returns {MysteryForgeCompanionData} */
+function caseData() {
+  return {
+    ...sampleData(),
+    investigation: {
+      narrator: { name: 'Insp. Price', role: 'Lead investigator' },
+      entries: [
+        { type: 'chapter', id: 'ch-a', stage: 'A', after: null, title: 'The rock', text: 'One.\n\n  Two.  \n \n' },
+        {
+          type: 'voice',
+          id: 'vm-a',
+          stage: 'A',
+          after: null,
+          sender: 'Hale',
+          voice: 'male',
+          text: 'Call me.',
+          audio: '',
+        },
+        {
+          type: 'voice',
+          id: 'vm-a2',
+          stage: 'A',
+          after: 'A2',
+          sender: 'Ruiz',
+          voice: 'female',
+          text: 'Lab.',
+          audio: '',
+        },
+        { type: 'chapter', id: 'ch-b', stage: 'B', after: null, title: 'The box', text: 'Three.' },
+      ],
+    },
+  };
+}
+
+test('case entries follow the open envelopes and the solved puzzles', () => {
+  assert.deepEqual(logic.caseEntries(sampleData(), ['A'], []), []);
+  const ids = (/** @type {MysteryForgeCompanionCaseEntry[]} */ entries) => entries.map((entry) => entry.id);
+  assert.deepEqual(ids(logic.caseEntries(caseData(), ['A'], [])), ['ch-a', 'vm-a']);
+  assert.deepEqual(ids(logic.caseEntries(caseData(), ['A', 'B'], ['A1', 'A2'])), ['ch-a', 'vm-a', 'vm-a2', 'ch-b']);
+});
+
+test('seen entries are remembered once, and an old state without them still loads', () => {
+  const entries = logic.caseEntries(caseData(), ['A'], []);
+  let state = logic.freshState();
+  assert.equal(logic.unseenEntries(entries, state).length, 2);
+  state = logic.withSeen(state, ['ch-a', 'vm-a']);
+  assert.equal(logic.unseenEntries(entries, state).length, 0);
+  assert.equal(logic.withSeen(state, ['ch-a']), state);
+  const { seen, ...old } = logic.freshState();
+  assert.deepEqual(seen, []);
+  const loaded = logic.stateFromStorage(JSON.stringify(old));
+  assert.equal(loaded.seen, undefined);
+  assert.equal(logic.unseenEntries(entries, loaded).length, 2);
+  assert.deepEqual(logic.withSeen(loaded, ['vm-a']).seen, ['vm-a']);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, seen: [1] })), logic.freshState());
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, seen: 'x' })), logic.freshState());
+});
+
+test('a female voice speaks higher than a male voice', () => {
+  assert.ok(logic.speechSettings('female').pitch > logic.speechSettings('male').pitch);
+});
+
+test('a story text splits into its paragraphs', () => {
+  assert.deepEqual(logic.paragraphs('One.\n\n  Two.  \n \n'), ['One.', 'Two.']);
 });

@@ -16,7 +16,7 @@ from jinja2 import Environment, StrictUndefined
 from mystery_forge.answers import answer_hash, normalize_answer
 from mystery_forge.game import AssembledPuzzle, Game
 from mystery_forge.i18n import STRINGS, known_language, text, text_direction
-from mystery_forge.spec.models import AccusationQuestion, Deduction
+from mystery_forge.spec.models import AccusationQuestion, Deduction, Investigation
 
 COMPANION_FOLDER: Final[str] = "companion"
 TEMPLATE_FILE: Final[str] = "companion.html.j2"
@@ -65,7 +65,55 @@ def build_companion_data(game: Game) -> dict[str, Any]:
             for epilogue in sorted(game.story.epilogues, key=lambda epilogue: -epilogue.min_score_percent)
         ],
         "reveal": [step.text for step in game.story.reveal],
+        "investigation": investigation_data(game, codes),
     }
+
+
+def investigation_data(game: Game, codes: dict[str, str]) -> dict[str, Any] | None:
+    """The investigator's story and the voice messages, in the order that players meet them.
+
+    Each entry comes with its envelope. Within an envelope, the entries that need no puzzle come first, then the ones
+    that wait for a puzzle, by puzzle code. A voice message carries its recording as a data URI, or an empty text when
+    the page must read it with the speech voice.
+    """
+    investigation: Investigation | None = game.investigation
+    if investigation is None:
+        return None
+    stage_order: dict[str, int] = {stage.id: index for index, stage in enumerate(game.flow.stages)}
+    entries: list[tuple[tuple[int, int, int, int], dict[str, Any]]] = []
+    for index, chapter in enumerate(investigation.chapters):
+        entry: dict[str, Any] = {
+            "type": "chapter",
+            "id": chapter.id,
+            "stage": chapter.stage,
+            "after": codes.get(chapter.after) if chapter.after is not None else None,
+            "title": chapter.title,
+            "text": chapter.text,
+        }
+        entries.append((entry_order(entry, stage_order, 0, index), entry))
+    for index, message in enumerate(investigation.voice_messages):
+        entry = {
+            "type": "voice",
+            "id": message.id,
+            "stage": message.stage,
+            "after": codes.get(message.after) if message.after is not None else None,
+            "sender": message.sender,
+            "role": message.role,
+            "voice": message.voice,
+            "text": message.text,
+            "audio": game.audio.get(message.id, ""),
+        }
+        entries.append((entry_order(entry, stage_order, 1, index), entry))
+    return {
+        "narrator": {"name": investigation.narrator.name, "role": investigation.narrator.role},
+        "entries": [entry for _, entry in sorted(entries, key=lambda pair: pair[0])],
+    }
+
+
+def entry_order(entry: dict[str, Any], stage_order: dict[str, int], kind: int, index: int) -> tuple[int, int, int, int]:
+    after: str | None = entry["after"]
+    puzzle_number: int = int(after[1:]) if after is not None else 0
+    return (stage_order.get(entry["stage"], len(stage_order)), puzzle_number, kind, index)
 
 
 def companion_texts(language: str) -> dict[str, str]:

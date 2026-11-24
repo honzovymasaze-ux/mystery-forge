@@ -4,16 +4,18 @@ The loader never raises for a problem in the game files. It loads what it can an
 round can repair every broken file at once.
 """
 
+import base64
 import re
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, ValidationError
 
 from mystery_forge.findings import Finding
-from mystery_forge.spec.models import DocumentMeta, Flow, Music, Puzzle, Story
+from mystery_forge.spec.models import DocumentMeta, Flow, Investigation, Music, Puzzle, Story
+from mystery_forge.spec.photos import PHOTO_MEDIA_TYPES, photo_size, photo_svg, photo_title
 from mystery_forge.yaml_loading import (
     YamlDocument,
     YamlLoadError,
@@ -24,6 +26,14 @@ from mystery_forge.yaml_loading import (
 
 SOURCE_FOLDER: str = "source"
 MUSIC_FILE: str = "music.yaml"
+INVESTIGATION_FILE: str = "investigation.yaml"
+AUDIO_FOLDER: str = "audio"
+AUDIO_MEDIA_TYPES: dict[str, str] = {
+    ".mp3": "audio/mpeg",
+    ".m4a": "audio/mp4",
+    ".ogg": "audio/ogg",
+    ".wav": "audio/wav",
+}
 NUMBERED_FILE: re.Pattern[str] = re.compile(r"^([A-Z])(\d+)")
 
 
@@ -49,6 +59,10 @@ class GameSource:
     images: dict[str, str]
     # None when the optional music.yaml does not exist or failed to load.
     music: Music | None = None
+    # None when the optional investigation.yaml does not exist or failed to load.
+    investigation: Investigation | None = None
+    # The recorded voice messages, by message id: one data URI each, from `source/audio/`.
+    audio: dict[str, str] = field(default_factory=dict)
 
 
 def load_game_source(game_dir: Path) -> tuple[GameSource, list[Finding]]:
@@ -74,7 +88,12 @@ def load_game_source(game_dir: Path) -> tuple[GameSource, list[Finding]]:
     report_duplicate_ids([document.meta.id for document in documents], "document", findings)
     images: dict[str, str] = load_images(root, findings)
     music: Music | None = load_optional_model(root, MUSIC_FILE, Music, findings)
-    return GameSource(root, story, flow, tuple(puzzles), tuple(documents), images, music), findings
+    investigation: Investigation | None = load_optional_model(root, INVESTIGATION_FILE, Investigation, findings)
+    audio: dict[str, str] = load_audio(root)
+    return (
+        GameSource(root, story, flow, tuple(puzzles), tuple(documents), images, music, investigation, audio),
+        findings,
+    )
 
 
 def load_required_model[ModelType: BaseModel](
@@ -273,4 +292,45 @@ def load_images(root: Path, findings: list[Finding]) -> dict[str, str]:
         text: str | None = read_source_file(path, f"images/{path.name}", findings)
         if text is not None:
             images[path.stem] = text
+    for path in sorted(folder.iterdir()):
+        media_type: str | None = PHOTO_MEDIA_TYPES.get(path.suffix.lower())
+        if media_type is not None:
+            photo: str | None = load_photo(path, media_type, findings)
+            if photo is not None:
+                images[path.stem] = photo
     return images
+
+
+def load_photo(path: Path, media_type: str, findings: list[Finding]) -> str | None:
+    """Read a JPEG or PNG photo as an SVG image, with the text of `<id>.txt` as its title (`spec/photos.py`)."""
+    data: bytes = path.read_bytes()
+    size: tuple[int, int] | None = photo_size(data)
+    if size is None:
+        findings.append(
+            Finding(
+                severity="error",
+                rule="images.invalid_photo",
+                message="The photo is not a readable JPEG or PNG picture.",
+                file=f"images/{path.name}",
+                fix_hint="Save the picture again as JPEG or PNG, or delete the file.",
+            )
+        )
+        return None
+    description: Path = path.with_suffix(".txt")
+    title: str = photo_title(path.stem)
+    if description.is_file():
+        title = read_source_file(description, f"images/{description.name}", findings) or title
+    return photo_svg(data, media_type, title, size)
+
+
+def load_audio(root: Path) -> dict[str, str]:
+    """Read each recording of `source/audio/` as a data URI, by its file name without the extension."""
+    folder: Path = root / AUDIO_FOLDER
+    if not folder.is_dir():
+        return {}
+    audio: dict[str, str] = {}
+    for path in sorted(folder.iterdir()):
+        media_type: str | None = AUDIO_MEDIA_TYPES.get(path.suffix.lower())
+        if media_type is not None:
+            audio[path.stem] = f"data:{media_type};base64,{base64.b64encode(path.read_bytes()).decode('ascii')}"
+    return audio

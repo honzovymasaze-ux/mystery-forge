@@ -174,6 +174,7 @@ def test_harmless_words_do_not_trip_the_death_filter(game_dir: Path, language: s
         ("de", "Der Wärter war tot."),
         ("it", "Il guardiano era morto."),
         ("pt", "O guarda estava morto."),
+        ("cs", "Strážce byl mrtvý."),
     ],
 )
 def test_the_death_filter_uses_the_words_of_the_game_language(game_dir: Path, language: str, sentence: str) -> None:

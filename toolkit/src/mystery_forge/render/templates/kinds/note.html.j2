@@ -1,0 +1,7 @@
+{% from "macros.html.j2" import page_label %}
+<article class="prop sticky-note">
+  <div class="tape" aria-hidden="true"></div>
+  <div class="doc-body note-body">{{ page.html }}</div>
+  {% if f.get("signature") or f.get("date") %}<p class="note-sign">{{ f.get("signature", "") }}{% if f.get("signature") and f.get("date") %}, {% endif %}{{ f.get("date", "") }}</p>{% endif %}
+</article>
+{{ page_label(t, page) }}

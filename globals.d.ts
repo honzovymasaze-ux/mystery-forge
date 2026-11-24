@@ -290,6 +290,24 @@ interface MysteryForgeCompanionData {
   /** Sorted from the highest min_score_percent down. */
   epilogues: MysteryForgeCompanionEpilogue[];
   reveal: string[];
+  /** The investigator's story and the voice messages, or null for a game without investigation.yaml. */
+  investigation: { narrator: { name: string; role: string }; entries: MysteryForgeCompanionCaseEntry[] } | null;
+}
+
+/** One chapter of the investigator's story, or one voice message of the team. */
+interface MysteryForgeCompanionCaseEntry {
+  type: 'chapter' | 'voice';
+  id: string;
+  stage: string;
+  /** The code of the puzzle that the entry waits for, or null when it comes with its envelope. */
+  after: string | null;
+  text: string;
+  title?: string;
+  sender?: string;
+  role?: string;
+  voice?: 'male' | 'female';
+  /** A data URI of the recording, or an empty text when the page reads the text with the speech voice. */
+  audio?: string;
 }
 
 interface MysteryForgeCompanionTimer {
@@ -307,6 +325,8 @@ interface MysteryForgeCompanionState {
   timer: MysteryForgeCompanionTimer;
   /** The locked-in accusation: option id per question id, or null before the group locks it in. */
   accusation: Record<string, string> | null;
+  /** The ids of the chapters and voice messages that the group has seen on the case tab. */
+  seen?: string[];
 }
 
 interface MysteryForgeAnswerCheck {
@@ -358,6 +378,18 @@ interface MysteryForgeCompanionLogicApi {
   stateToStorage(state: MysteryForgeCompanionState): string;
   fillText(template: string, values: Record<string, string | number>): string;
   isLongIntro(intro: string): boolean;
+  caseEntries(
+    data: MysteryForgeCompanionData,
+    unlockedStageIds: string[],
+    solvedCodes: string[],
+  ): MysteryForgeCompanionCaseEntry[];
+  unseenEntries(
+    entries: MysteryForgeCompanionCaseEntry[],
+    state: MysteryForgeCompanionState,
+  ): MysteryForgeCompanionCaseEntry[];
+  withSeen(state: MysteryForgeCompanionState, ids: string[]): MysteryForgeCompanionState;
+  speechSettings(voice: 'male' | 'female'): { pitch: number; rate: number };
+  paragraphs(text: string): string[];
 }
 
 declare var MysteryForgeCompanionLogic: MysteryForgeCompanionLogicApi;

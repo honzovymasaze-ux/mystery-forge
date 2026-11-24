@@ -5,7 +5,7 @@ from pydantic import BaseModel, ConfigDict
 from mystery_forge.brief import Brief
 from mystery_forge.config import GameConfig
 from mystery_forge.mechanics.base import Artifact
-from mystery_forge.spec.models import DocumentMeta, Flow, Music, Puzzle, Story
+from mystery_forge.spec.models import DocumentMeta, Flow, Investigation, Music, Puzzle, Story
 
 
 class AssembledPuzzle(BaseModel):
@@ -46,3 +46,7 @@ class Game(BaseModel):
     salt: str
     # None for a game without music.yaml: the manual then has no music section.
     music: Music | None = None
+    # None for a game without investigation.yaml: the companion then has no case tab and no voice messages.
+    investigation: Investigation | None = None
+    # The recorded voice messages by message id, as data URIs. A message without a recording uses the speech voice.
+    audio: dict[str, str] = {}

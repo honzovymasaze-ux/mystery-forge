@@ -47,6 +47,7 @@ def test_text_rejects_an_unknown_key() -> None:
         ("de", "14. März 1931"),
         ("it", "14 marzo 1931"),
         ("pt", "14 de março de 1931"),
+        ("cs", "14. března 1931"),
         ("xx", "14 March 1931"),
     ],
 )

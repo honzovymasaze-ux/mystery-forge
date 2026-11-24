@@ -11,8 +11,11 @@ from xml.etree import ElementTree
 
 from mystery_forge.findings import Finding
 from mystery_forge.game import Game
+from mystery_forge.spec.photos import PHOTO_DATA_PREFIXES
 
 MAX_IMAGE_BYTES: Final[int] = 150_000
+# A photo (`spec/photos.py`) holds its picture as a data URI, so it may be much larger than a drawing.
+MAX_PHOTO_BYTES: Final[int] = 6_000_000
 FORBIDDEN_TAGS: Final[frozenset[str]] = frozenset({"script", "foreignobject", "iframe", "object", "embed"})
 LINK_ATTRIBUTES: Final[frozenset[str]] = frozenset({"href", "src"})
 IMAGE_MARK: Final[re.Pattern[str]] = re.compile(r"⟦image:([^|⟧]+)\|")
@@ -71,12 +74,13 @@ def title_finding(file: str, in_puzzle: bool) -> Finding:
 
 
 def image_problem(svg: str, file: str) -> Finding | None:
-    if len(svg.encode()) > MAX_IMAGE_BYTES:
+    limit: int = MAX_PHOTO_BYTES if any(prefix in svg for prefix in PHOTO_DATA_PREFIXES) else MAX_IMAGE_BYTES
+    if len(svg.encode()) > limit:
         return image_finding(
             "images.too_large",
-            f"The image is larger than {MAX_IMAGE_BYTES // 1000} KB.",
+            f"The image is larger than {limit // 1000} KB.",
             file,
-            "Draw it with fewer, simpler shapes.",
+            "Draw it with fewer, simpler shapes, or save the photo smaller.",
         )
     if "<!DOCTYPE" in svg or "<!ENTITY" in svg:
         return invalid(file, "it declares a document type")
@@ -102,7 +106,7 @@ def unsafe_attribute(element: ElementTree.Element) -> bool:
         attribute: str = local_name(name).lower()
         if attribute.startswith("on"):
             return True
-        if attribute in LINK_ATTRIBUTES and not value.startswith("#"):
+        if attribute in LINK_ATTRIBUTES and not value.startswith(("#", *PHOTO_DATA_PREFIXES)):
             return True
     return False
 

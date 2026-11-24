@@ -53,6 +53,13 @@ KNOWN_DOCUMENT_KINDS: tuple[str, ...] = (
     "poster",
     "form",
     "case-briefing",
+    "autopsy-report",
+    "lab-report",
+    "phone-records",
+    "invoice",
+    "cctv-still",
+    "person-photo",
+    "note",
     "generic",
 )
 KIND_DESCRIPTION: str = f"The document kind, which picks the printed look. One of: {', '.join(KNOWN_DOCUMENT_KINDS)}."
@@ -416,3 +423,63 @@ class Music(SourceModel):
 
     format_version: FormatVersion
     suggestions: list[MusicSuggestion] = Field(min_length=3, max_length=6)
+
+
+class Narrator(SourceModel):
+    """The lead investigator who tells the story of the case, chapter by chapter."""
+
+    name: ShortText
+    role: ShortText
+
+
+class Chapter(SourceModel):
+    """One chapter of the investigator's story. Players read it aloud when its envelope opens, or after a puzzle.
+
+    Like a puzzle's reveal text, a chapter may add no fact that the accusation needs: the documents carry the case.
+    """
+
+    id: RegistryId
+    stage: StageId
+    after: PuzzleId | None = Field(
+        default=None,
+        description="A puzzle of this stage. The chapter appears when players solve it, not when the envelope opens.",
+    )
+    title: ShortText
+    text: Text
+
+
+class VoiceMessage(SourceModel):
+    """A voice message from a colleague of the investigation team, played on the companion page.
+
+    The page plays `source/audio/<id>.mp3` (or .m4a, .ogg, .wav) when the owner recorded one, and reads the text with
+    the phone's speech voice otherwise. The text is also the transcript that the page shows.
+    """
+
+    id: RegistryId
+    stage: StageId
+    after: PuzzleId | None = Field(
+        default=None,
+        description="A puzzle of this stage. The message arrives when players solve it, not when the envelope opens.",
+    )
+    sender: ShortText
+    role: str = ""
+    voice: Literal["male", "female"] = "male"
+    text: Text
+
+
+class Investigation(SourceModel):
+    """The content of the optional `investigation.yaml`: the investigator's story and the team's voice messages."""
+
+    format_version: FormatVersion
+    narrator: Narrator
+    chapters: list[Chapter] = []
+    voice_messages: list[VoiceMessage] = []
+
+    @model_validator(mode="after")
+    def check_ids(self) -> Self:
+        duplicates: list[str] = find_duplicates(
+            [*(chapter.id for chapter in self.chapters), *(message.id for message in self.voice_messages)]
+        )
+        if duplicates:
+            raise ValueError(f"the chapter and voice message ids {duplicates} appear twice")
+        return self

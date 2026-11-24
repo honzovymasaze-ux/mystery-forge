@@ -2,6 +2,7 @@ import shutil
 from pathlib import Path
 
 import pytest
+from test_spec_photos import jpeg_bytes, png_bytes
 
 from mystery_forge.findings import Finding
 from mystery_forge.spec.loader import GameSource, load_game_source
@@ -147,6 +148,30 @@ def test_svg_images_are_read_and_other_files_are_ignored(game_dir: Path) -> None
     source, findings = load_game_source(game_dir)
     assert findings == []
     assert source.images == {"lamp": "<svg></svg>"}
+
+
+def test_photos_load_as_svg_images_and_replace_a_drawing_with_the_same_id(game_dir: Path) -> None:
+    images = game_dir / "source" / "images"
+    images.mkdir(exist_ok=True)
+    (images / "portrait-ana.svg").write_text("<svg></svg>", encoding="utf-8")
+    (images / "portrait-ana.JPG").write_bytes(jpeg_bytes(300, 400))
+    (images / "camera-2.png").write_bytes(png_bytes(8, 6))
+    (images / "camera-2.txt").write_text("A man in a long coat at the gate", encoding="utf-8")
+    source, findings = load_game_source(game_dir)
+    assert findings == []
+    assert 'viewBox="0 0 300 400"' in source.images["portrait-ana"]
+    assert "<title>portrait ana</title>" in source.images["portrait-ana"]
+    assert "<title>A man in a long coat at the gate</title>" in source.images["camera-2"]
+    assert "data:image/png;base64," in source.images["camera-2"]
+
+
+def test_an_unreadable_photo_is_reported(game_dir: Path) -> None:
+    images = game_dir / "source" / "images"
+    images.mkdir(exist_ok=True)
+    (images / "broken.png").write_bytes(b"not a picture")
+    source, findings = load_game_source(game_dir)
+    assert rules(findings) == ["images.invalid_photo"]
+    assert "broken" not in source.images
 
 
 def test_a_game_without_image_puzzle_or_document_folders_loads(game_dir: Path) -> None:

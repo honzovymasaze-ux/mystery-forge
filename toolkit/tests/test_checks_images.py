@@ -1,8 +1,9 @@
 import pytest
 from test_checks_support import golden_game, rules
 
-from mystery_forge.checks.images import MAX_IMAGE_BYTES, check_images
+from mystery_forge.checks.images import MAX_IMAGE_BYTES, MAX_PHOTO_BYTES, check_images
 from mystery_forge.game import Game
+from mystery_forge.spec.photos import photo_svg
 
 SAFE_SVG: str = (
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><title>A round lamp</title>'
@@ -22,6 +23,16 @@ def with_images(images: dict[str, str], referenced: tuple[str, ...] = ("lamp",),
 
 def test_a_safe_referenced_svg_passes() -> None:
     assert check_images(with_images({"lamp": SAFE_SVG})) == []
+
+
+def test_a_photo_with_a_data_uri_passes_and_may_be_larger_than_a_drawing() -> None:
+    photo = photo_svg(b"x" * (MAX_IMAGE_BYTES * 2), "image/jpeg", "A man at the gate", (4, 3))
+    assert check_images(with_images({"lamp": photo})) == []
+
+
+def test_a_photo_beyond_the_photo_limit_is_too_large() -> None:
+    photo = photo_svg(b"x" * MAX_PHOTO_BYTES, "image/jpeg", "A man at the gate", (4, 3))
+    assert rules(check_images(with_images({"lamp": photo}))) == ["images.too_large"]
 
 
 def test_the_golden_game_has_no_images_and_no_findings() -> None:

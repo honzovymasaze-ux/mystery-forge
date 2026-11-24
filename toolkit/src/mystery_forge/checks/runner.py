@@ -16,6 +16,7 @@ from mystery_forge.checks.fact_registry import check_fact_registry
 from mystery_forge.checks.graph import check_graph
 from mystery_forge.checks.hints import check_hints
 from mystery_forge.checks.images import check_images
+from mystery_forge.checks.investigation import check_investigation
 from mystery_forge.checks.kinds import check_document_kinds
 from mystery_forge.checks.leaks import check_leaks
 from mystery_forge.checks.ledger import check_ledger
@@ -48,6 +49,7 @@ CHECK_FAMILIES: Final[tuple[CheckFamily, ...]] = (
     CheckFamily("documents", lambda game, _: check_document_kinds(game)),
     CheckFamily("images", lambda game, _: check_images(game)),
     CheckFamily("dates", lambda game, _: check_calendar(game)),
+    CheckFamily("investigation", lambda game, _: check_investigation(game)),
 )
 CHECK_PREFIXES: Final[tuple[str, ...]] = tuple(family.prefix for family in CHECK_FAMILIES)
 

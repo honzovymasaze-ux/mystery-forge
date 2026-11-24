@@ -44,6 +44,7 @@ DEATH_WORDS: Final[dict[str, tuple[str, ...]]] = {
     "de": ("mord", "mordes", "mörder*", "ermord*", "tot", "tote", "toten", "töt*", "leiche*", "blut*"),
     "it": ("omicid*", "uccid*", "uccis*", "morto", "morta", "morti", "morte", "sangue*", "cadavere*", "assassin*"),
     "pt": ("assassin*", "morto", "morta", "mortos", "morte", "matar*", "sangue*", "cadáver*"),
+    "cs": ("vražd*", "vrah*", "zabi*", "zabít", "mrtv*", "smrt*", "krev", "krv*", "zavražd*"),
 }
 
 

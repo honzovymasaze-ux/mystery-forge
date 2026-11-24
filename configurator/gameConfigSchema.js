@@ -92,7 +92,7 @@ globalThis.MysteryForgeGameConfigSchema = {
       "default": "medium"
     },
     "language": {
-      "description": "The language of every printed text, as a two-letter code. The first seven have checked tables of the fixed texts; for the others, the generator translates those tables once per game.",
+      "description": "The language of every printed text, as a two-letter code. The first seven and Czech (cs) have checked tables of the fixed texts; for the others, the generator translates those tables once per game.",
       "type": "string",
       "enum": [
         "en",

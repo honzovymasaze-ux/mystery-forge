@@ -6,6 +6,7 @@ accusation form closes the last stage, so it travels in the last envelope.
 """
 
 import math
+import re
 from collections.abc import Mapping
 from dataclasses import dataclass, replace
 from typing import Final
@@ -40,6 +41,7 @@ NOTES_GROUP: Final[str] = "notes"
 ACCUSATION_GROUP: Final[str] = "accusation"
 LABELS_GROUP: Final[str] = "labels"
 STORY_CARDS_GROUP: Final[str] = "story-cards"
+CHAPTERS_GROUP: Final[str] = "chapters"
 # The sheet header (kicker and title) plus the intro paragraph under it.
 HEADER_MM: Final[float] = 46
 REGISTER_COLUMNS: Final[int] = 3
@@ -70,6 +72,12 @@ LABEL_ROW_MM: Final[float] = 60
 STORY_CARD_FRAME_MM: Final[float] = 18
 STORY_CARD_CHARS_PER_LINE: Final[int] = 88
 STORY_CARD_LINE_MM: Final[float] = 5.2
+# The investigator's chapters: a heading per chapter, then its paragraphs in a large serif for reading aloud.
+CHAPTER_HEADING_MM: Final[float] = 14
+CHAPTER_CHARS_PER_LINE: Final[int] = 78
+CHAPTER_LINE_MM: Final[float] = 6.4
+CHAPTER_PARAGRAPH_GAP_MM: Final[float] = 3.5
+CHAPTER_PARAGRAPH_BREAK: Final[re.Pattern[str]] = re.compile(r"\n\s*\n")
 # Two character files fit one page with room for a portrait and enough lines to write on.
 CHARACTERS_PER_PAGE: Final[int] = 2
 # A plain head and shoulders for a character that has no drawn portrait (no images, or the illustrator skipped one).
@@ -155,6 +163,23 @@ class EnvelopeLabelsContent:
 class StoryCard:
     number: int
     text: str
+
+
+@dataclass(frozen=True)
+class ChapterBlock:
+    """A chapter title, or one paragraph of a chapter."""
+
+    text: str
+    heading: bool
+
+
+@dataclass(frozen=True)
+class ChaptersPage:
+    """The investigator's chapters of one envelope, which a player reads aloud when the group opens it."""
+
+    narrator: str
+    blocks: list[ChapterBlock]
+    first: bool
 
 
 @dataclass(frozen=True)
@@ -287,6 +312,60 @@ def stage_sheets(game: Game, stage: Stage) -> list[Sheet]:
     for document in documents:
         sheets.extend(document_sheets(game, document))
     return sheets
+
+
+def chapter_blocks(game: Game, stage: Stage) -> list[ChapterBlock]:
+    """The chapters that open with the envelope. A chapter that waits for a puzzle shows on the companion page only."""
+    if game.investigation is None:
+        return []
+    blocks: list[ChapterBlock] = []
+    for chapter in game.investigation.chapters:
+        if chapter.stage != stage.id or chapter.after is not None:
+            continue
+        blocks.append(ChapterBlock(text=chapter.title, heading=True))
+        blocks.extend(
+            ChapterBlock(text=part.strip(), heading=False)
+            for part in CHAPTER_PARAGRAPH_BREAK.split(chapter.text)
+            if part.strip()
+        )
+    return blocks
+
+
+def chapter_block_height(block: ChapterBlock) -> float:
+    if block.heading:
+        return CHAPTER_HEADING_MM
+    return text_height(block.text, CHAPTER_CHARS_PER_LINE, CHAPTER_LINE_MM) + CHAPTER_PARAGRAPH_GAP_MM
+
+
+def split_chapter_block(block: ChapterBlock, budget: float) -> list[ChapterBlock]:
+    """Split a paragraph taller than one page into pieces that each fit."""
+    if chapter_block_height(block) <= budget:
+        return [block]
+    lines: int = max(1, int((budget - CHAPTER_PARAGRAPH_GAP_MM) / CHAPTER_LINE_MM) - 1)
+    return [ChapterBlock(text=piece, heading=False) for piece in split_text(block.text, lines * CHAPTER_CHARS_PER_LINE)]
+
+
+def chapter_sheets(game: Game, stage: Stage, levels: Tightness) -> list[Sheet]:
+    blocks: list[ChapterBlock] = chapter_blocks(game, stage)
+    if game.investigation is None or not blocks:
+        return []
+    narrator = game.investigation.narrator
+    budget: float = page_budget(game.config.equipment.paper, HEADER_MM, tightness(levels, CHAPTERS_GROUP))
+    pieces: list[ChapterBlock] = [piece for block in blocks for piece in split_chapter_block(block, budget)]
+    return [
+        Sheet(
+            role="chapters",
+            template="chapters.html.j2",
+            content=ChaptersPage(
+                narrator=text(game.config.language, "chapters_by", name=narrator.name, role=narrator.role),
+                blocks=items,
+                first=index == 0,
+            ),
+            stage=stage.id,
+            group=CHAPTERS_GROUP,
+        )
+        for index, items in enumerate(paginate(pieces, chapter_block_height, budget))
+    ]
 
 
 def result_height(paragraph: ResultParagraph) -> float:
@@ -507,7 +586,9 @@ def materials_sheets(game: Game, levels: Tightness | None = None) -> list[Sheet]
         sheets.extend(detective_notes_sheets(game, tight))
     sheets.extend(character_sheets(game))
     for stage in game.flow.stages:
-        sheets.extend(stage_sheets(game, stage))
+        # The investigator's chapters come right behind the STOP sheet, so the group reads them before the papers.
+        cover, *documents = stage_sheets(game, stage)
+        sheets.extend([cover, *chapter_sheets(game, stage, tight), *documents])
         sheets.extend(story_cards_sheets(game, stage, tight))
     if game.story.deduction is not None:
         sheets.extend(accusation_sheets(game, game.story.deduction.questions, game.flow.stages[-1].id, tight))

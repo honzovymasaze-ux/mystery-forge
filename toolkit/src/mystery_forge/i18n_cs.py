@@ -1,0 +1,391 @@
+"""The checked Czech table of the fixed output texts. `i18n.py` adds it to its tables, next to the other languages.
+
+The keys and the {fields} match the English table; a test in `tests/test_i18n.py` checks that every language has every
+key. Czech counts need plural forms that one text cannot give, so a count stands after a colon ("Bodů: 5").
+"""
+
+from typing import Final
+
+CS_STRINGS: Final[dict[str, str]] = {
+    "envelope_label": "Obálka {stage}",
+    "continued": "pokračování",
+    "materials_title": "Herní materiály",
+    "file_manual": "1 - ZAČNĚTE TADY (návod)",
+    "file_materials": "2 - VYTISKNĚTE (herní materiály)",
+    "file_hints": "3 - Nápovědy",
+    "file_solutions": "4 - Řešení",
+    "file_companion": "Průvodce hrou",
+    "folder_spoilers": "JEN PRO VEDOUCÍHO HRY - řešení",
+    "file_export_warnings": "0 - PŘEČTĚTE NEJDŘÍV (upozornění)",
+    "export_warnings_title": "Přečtěte si to před hrou",
+    "export_warnings_intro": (
+        "Mystery Forge každou hru ověřuje automatickými kontrolami a testovacími hráči s umělou inteligencí. Některé "
+        "testy této hry neprošly. Hra je nejspíš hratelná, ale části níže mohou být nejasné, příliš těžké nebo "
+        "chybné."
+    ),
+    "export_warnings_fix": (
+        "Opravíte je takto: dvakrát klikněte na Start Mystery Forge, napište 4 a požádejte AI, ať opraví upozornění "
+        "této hry."
+    ),
+    "export_warning_puzzle": "Úkol {code}: {problems}",
+    "export_warning_accusation": "Formulář obvinění: {problems}",
+    "export_warning_music": "Doporučená hudba: {problems}",
+    "export_warning_checks_failing": "některé automatické kontroly neprošly.",
+    "export_warning_checks_stale": "automatické kontroly po poslední změně neproběhly.",
+    "export_warning_panel_stale": "testovací hráči ho po poslední změně nezkoušeli.",
+    "export_warning_ambiguous": "testovací hráči našli víc odpovědí, které sedí.",
+    "export_warning_gold_suspect": "testovací hráči si myslí, že očekávaná odpověď může být chybná.",
+    "export_warning_too_hard": "testovací hráči ho nevyřešili.",
+    "export_warning_guessable": "testovací hráči uhodli odpověď i bez stop.",
+    "export_warning_incomplete": "testovací hráči si myslí, že něco potřebného chybí.",
+    "export_warning_trivial": "testovacím hráčům připadal příliš snadný.",
+    "export_warning_insufficient_solvers": "test dokončilo příliš málo testovacích hráčů.",
+    "export_warning_puzzles_not_needed": "testovací hráči odpověděli i bez vyřešení úkolů.",
+    "made_with": "Vytvořeno v Mystery Forge",
+    "page_label": "Strana {number} z {count}",
+    "copy_label": "Kopie {number} z {count}",
+    "puzzle_badge": "Úkol",
+    "print_cut": "Ustřihněte podél přerušované čáry.",
+    "print_fold": "Přeložte podél čerchované čáry.",
+    "cover_kicker": "Detektivní případ k vytištění",
+    "cover_players": "Počet hráčů: {count}",
+    "cover_players_solo": "1 hráč",
+    "accusation_intro_solo": (
+        "Odpovězte na každou otázku. U každé zaškrtněte jedno políčko a napište dokument, který odpověď dokazuje. "
+        "Pak sečtěte body."
+    ),
+    "manual_play_accusation_solo": "Na konci vyplňte formulář obvinění.",
+    "cover_duration": "Asi {minutes} minut",
+    "cover_detectives": "Vyšetřovatelé: {names}",
+    "cover_do_not_read": "Nečtěte dopředu. Každou obálku otevřete, až když vám to hra řekne.",
+    "stop": "STOP",
+    "stage_open_at_start": "Tuto obálku otevřete na začátku hry.",
+    "stage_open_when": (
+        "Tuto obálku zatím neotevírejte. Otevřete ji, až vám to řekne kontrola odpovědí po vyřešení úkolu {code}."
+    ),
+    "stage_turn_page": "Po otevření obálky tuto stránku otočte a přečtěte text nahlas.",
+    "stage_read_aloud": "Čtěte nahlas",
+    "register_title": "Rejstřík odpovědí",
+    "register_answer": "Odpověď",
+    "register_paragraph": "Odstavec",
+    "results_title": "Odstavce s výsledky",
+    "results_intro": "Čtěte jen odstavec, na který vás pošle rejstřík odpovědí.",
+    "register_wrong": "Nic se nestane. Zkuste to znovu.",
+    "register_intro": (
+        "Napište odpověď velkými písmeny, bez mezer a bez diakritiky, a najděte ji v tomto seznamu. Nejdřív jsou "
+        "čísla, pak slova od A do Z. Přečtěte odstavec s číslem vedle ní. Když vaše odpověď v seznamu není, není "
+        "správná."
+    ),
+    "register_correct_open": "Správně! Teď otevřete {envelope}.",
+    "register_correct_keep": "Správně! Odpověď si zapište: bude potřeba v pozdějším úkolu.",
+    "register_correct_accusation": "Správně! Byl to poslední úkol: přejděte k obvinění.",
+    "register_correct_notes": "Správně! Zapište si ji do poznámek.",
+    "register_story_card": "Než budete pokračovat, přečtěte kartu příběhu {number} na konci: {envelope}.",
+    "story_cards_title": "Karty příběhu",
+    "chapters_title": "Příběh vyšetřovatele",
+    "chapters_intro": "Tyto kapitoly přečtěte nahlas, když otevřete tuto obálku.",
+    "chapters_by": "{name}, {role}",
+    "story_cards_intro": "Kartu čtěte, jen když vás na ni pošle rejstřík odpovědí. Ke čtení stránku otočte.",
+    "print_cut_strips": "Po otevření obálky rozstříhejte proužky podél přerušovaných čar.",
+    "manual_need_label_tape": "Lepicí páska nebo lepidlo na štítky obálek (nebo napište písmeno na každou obálku)",
+    "manual_print_box_title": "Tiskněte na 100 %",
+    "manual_print_box_chrome": "Chrome: Další nastavení > Měřítko > Výchozí",
+    "manual_print_box_edge": "Edge: Další nastavení > Měřítko > Skutečná velikost",
+    "manual_print_box_acrobat": "Adobe Acrobat Reader: Velikost a zpracování stránky > Skutečná velikost",
+    "citation_revealed_by": "Odhalí úkol {code}",
+    "accusation_title": "Formulář obvinění",
+    "accusation_intro": (
+        "Odpovězte společně na každou otázku. U každé zaškrtněte jedno políčko a napište dokument, který odpověď "
+        "dokazuje. Pak sečtěte body."
+    ),
+    "accusation_proof": "Který dokument to dokazuje?",
+    "accusation_points": "Bodů: {points}",
+    "accusation_detectives": "Vyšetřovatelé",
+    "accusation_total": "Vaše body: ______ z {total}",
+    "labels_title": "Štítky obálek",
+    "labels_intro": "Vystřihněte každý štítek a nalepte ho na jeho obálku.",
+    "label_open_start": "Otevřete na začátku",
+    "label_open_after": "Otevřete až po úkolu {code}",
+    "notes_title": "Poznámky vyšetřovatele",
+    "notes_intro": "Zapisujte si, co zjistíte. Pište tužkou.",
+    "notes_suspect": "Podezřelý",
+    "notes_motive": "Motiv",
+    "notes_opportunity": "Příležitost",
+    "notes_alibi": "Alibi",
+    "notes_where": "Kdo byl kde?",
+    "notes_free": "Poznámky",
+    "characters_title": "Karty osob",
+    "characters_intro": "Jedna karta na osobu: kdy přišla, kde byla a co bylo zvláštní.",
+    "character_time": "Čas",
+    "character_places": "Místa",
+    "character_notes": "Poznámky",
+    "character_victim": "Oběť",
+    "warning_title": "Pozor, prozrazuje řešení",
+    "hints_title": "Karty s nápovědou",
+    "hints_warning_text": (
+        "Tyto karty pomáhají, když se zaseknete. Čtěte vždy jen jednu kartu a vždy začněte Nápovědou 1."
+    ),
+    "hints_how_to": (
+        "Vystřihněte každou kartu podél přerušovaných čar. Přeložte ji podél čerchované čáry, potiskem ven. Text na "
+        "rubu zůstane skrytý, dokud kartu neotočíte."
+    ),
+    "hints_companion": "Máte telefon nebo počítač? Stránka Průvodce hrou dává stejné nápovědy, jednu po druhé.",
+    "hint_label": "Nápověda {level}",
+    "answer_label": "Odpověď",
+    "hint_turn": "Ke čtení otočte",
+    "solutions_title": "Řešení",
+    "solutions_warning_text": (
+        "Tento soubor obsahuje všechny odpovědi a celý příběh. Čtěte ho až na konci hry, nebo když chcete ověřit "
+        "jednu odpověď."
+    ),
+    "solution_answer": "Odpověď",
+    "solution_accepted": "Uznává se také",
+    "solution_steps": "Jak na to",
+    "deduction_title": "Obvinění",
+    "exclusions_title": "Proč ne ostatní?",
+    "truth_title": "Celá pravda",
+    "reveal_title": "Jak jste to mohli poznat",
+    "epilogues_title": "Konce",
+    "epilogue_threshold": "{percent} % bodů a víc",
+    "field_from": "Od",
+    "field_to": "Komu",
+    "field_cc": "Kopie",
+    "field_date": "Datum",
+    "field_time": "Čas",
+    "field_subject": "Věc",
+    "field_case_number": "Č. j.",
+    "field_officer": "Policista",
+    "field_station": "Útvar",
+    "field_seat": "Místo",
+    "field_passenger": "Cestující",
+    "field_price": "Cena",
+    "field_number": "Č.",
+    "field_name": "Jméno",
+    "field_role": "Povolání",
+    "field_birth_date": "Narozen(a)",
+    "field_expires": "Platí do",
+    "field_total": "Celkem",
+    "field_reward": "Odměna",
+    "field_scale": "Měřítko",
+    "field_legend": "Legenda",
+    "field_interviewer": "Vyslýchající",
+    "field_place": "Místo",
+    "field_issuer": "Vydal",
+    "field_form_number": "Formulář",
+    "word_telegram": "Telegram",
+    "word_transcript": "Protokol o výslechu",
+    "word_report": "Úřední záznam",
+    "word_confidential": "Neveřejné",
+    "word_ticket": "Jízdenka",
+    "word_identity": "Průkaz totožnosti",
+    "word_receipt": "Účtenka",
+    "word_thanks": "Děkujeme",
+    "field_examiner": "Soudní lékař",
+    "field_deceased": "Zemřelý/á",
+    "field_time_of_death": "Doba smrti",
+    "field_cause_of_death": "Příčina smrti",
+    "field_sample": "Vzorek",
+    "field_test": "Vyšetření",
+    "field_requested_by": "Zadal",
+    "field_analyst": "Analytik",
+    "field_subscriber": "Účastník",
+    "field_phone_number": "Telefonní číslo",
+    "field_period": "Období",
+    "field_recipient": "Odběratel",
+    "field_due_date": "Splatnost",
+    "field_evidence_number": "Stopa č.",
+    "word_autopsy": "Pitevní protokol",
+    "word_lab_report": "Laboratorní protokol",
+    "word_phone_records": "Výpis telekomunikačního provozu",
+    "word_invoice": "Faktura",
+    "word_cctv": "Kamera",
+    "word_verified": "Ověřeno",
+    "manual_title": "Začněte tady",
+    "manual_checklist_title": "Co vytisknout",
+    "manual_file": "Soubor",
+    "manual_pages": "Strany",
+    "manual_print_column": "Tisknout?",
+    "manual_print_yes": "Ano",
+    "manual_print_optional": "Jen když hrajete bez telefonu nebo počítače",
+    "manual_print_companion_file": "Ne: otevřete ho v telefonu nebo počítači",
+    "manual_print_actual_size": (
+        "Tiskněte na 100 % (skutečná velikost), jednostranně, na papír {paper}. Nepoužívejte „přizpůsobit stránce“."
+    ),
+    "manual_print_actual_size_double": (
+        "Tiskněte na 100 % (skutečná velikost), na papír {paper}. Herní materiály tiskněte oboustranně (otáčení "
+        "podle delší strany): prázdné strany jsou tam schválně. Zbytek tiskněte jednostranně. Nepoužívejte "
+        "„přizpůsobit stránce“."
+    ),
+    "blank_page": "Tato strana je schválně prázdná.",
+    "manual_print_bw": "Tato hra je připravená pro černobílou tiskárnu.",
+    "manual_print_color": "Barevně vypadá nejlépe, ale stačí i černobílá tiskárna.",
+    "manual_print_skip_spoilers": (
+        "Když máte u stolu telefon nebo počítač, nápovědy a řešení netiskněte: použijte stránku Průvodce hrou."
+    ),
+    "manual_need_title": "Co budete potřebovat",
+    "manual_need_envelopes": "Obálky: {count}",
+    "manual_need_folders": "Desky nebo sponky, jedny na každou část: {count}",
+    "manual_need_pencils": "Tužky a gumu",
+    "manual_need_paper": "Pár papírů na poznámky",
+    "manual_need_scissors": "Nůžky",
+    "manual_need_tape": "Lepicí pásku nebo lepidlo",
+    "manual_need_mirror": "Malé zrcátko (nebo světlé okno: přiložte k němu stránku a čtěte ji zezadu)",
+    "manual_need_light": "Světlé okno nebo lampu, abyste mohli stránky prosvítit",
+    "manual_setup_title": "Příprava",
+    "manual_setup_split": "Herní materiály nečtěte. Rozdělte stoh u každé stránky s nápisem STOP.",
+    "manual_setup_outside": "Stránky před první stránkou STOP zůstanou mimo obálky: {pages}.",
+    "manual_setup_outside_piles": "Stránky před první stránkou STOP zůstanou na stole: {pages}.",
+    "manual_outside_cover": "titulní strana",
+    "manual_outside_labels": "štítky obálek",
+    "manual_outside_register": "rejstřík odpovědí",
+    "manual_outside_notes": "poznámky vyšetřovatele",
+    "manual_outside_characters": "karty osob",
+    "list_separator": ", ",
+    "list_two": "{first} a {last}",
+    "list_many": "{items} a {last}",
+    "manual_setup_envelopes": (
+        "Každou část dejte do vlastní obálky, stránkou STOP navrch. Na každou obálku nalepte odpovídající štítek a "
+        "zalepte ji."
+    ),
+    "manual_setup_piles": "Každou část položte lícem dolů na vlastní hromádku, stránkou STOP navrch.",
+    "manual_setup_spoilers": "Nápovědy a řešení mějte z dohledu, dokud je nebudete potřebovat.",
+    "manual_play_title": "Jak hrát",
+    "manual_play_open_first": "Otevřete obálku A. Přečtěte nahlas tento úvod:",
+    "manual_play_solve": (
+        "Čtěte dokumenty a řešte úkoly. Kód v rohu stránky (třeba A1) říká, ke kterému úkolu stránka patří."
+    ),
+    "manual_play_check_register": (
+        "Když máte odpověď, najděte ji v rejstříku odpovědí a přečtěte odstavec, na který vás pošle."
+    ),
+    "manual_play_check_companion": "Nebo odpověď napište na stránce Průvodce hrou.",
+    "manual_play_next": "Správná odpověď vám řekne, kdy otevřít další obálku. Nikdy ji neotevírejte dřív.",
+    "manual_play_accusation": "Na konci společně vyplňte formulář obvinění.",
+    "manual_hints_title": "Nápovědy a řešení",
+    "manual_hints_text": (
+        "Zasekli jste se? Vezměte karty s nápovědou s kódem vašeho úkolu a přečtěte nejdřív Nápovědu 1. Další kartu "
+        "čtěte, jen když ji pořád potřebujete. Poslední karta prozradí odpověď."
+    ),
+    "manual_hints_companion": "Stránka Průvodce hrou ukazuje stejné nápovědy, jednu po druhé.",
+    "manual_solutions_text": "Řešení vysvětluje každý úkol i celý příběh. Čtěte ho na konci.",
+    "manual_scoring_title": "Obvinění a body",
+    "manual_scoring_text": (
+        "Každá otázka formuláře obvinění dává body, dohromady {total}. Sečtěte body a najděte svůj konec v řešení:"
+    ),
+    "manual_rank_points": "Body",
+    "manual_rank_ending": "Konec",
+    "manual_rank_range": "{low} až {high}",
+    "manual_host_title": "Průvodce pro vedoucího hry",
+    "manual_host_intro": (
+        "Hru vedete a nehrajete. Před začátkem si můžete přečíst všechno. Čas si naplánujte podle této tabulky "
+        "(minuty od začátku):"
+    ),
+    "manual_host_stage": "Obálka",
+    "manual_host_puzzles": "Úkoly",
+    "manual_host_minutes": "Minuty",
+    "manual_host_by": "Hotovo do minuty",
+    "manual_host_stuck": "Když skupina 10 minut nepostoupí, dejte jí další nápovědu.",
+    "manual_host_answers": (
+        "Každou odpověď ověřte v rejstříku odpovědí nebo na stránce Průvodce hrou, než vydáte další obálku."
+    ),
+    "manual_personal_title": "K této hře",
+    "manual_host_name": "Vedoucí hry: {name}",
+    "manual_player_names": "Vyšetřovatelé: {names}",
+    "manual_music_title": "Doporučená hudba",
+    "manual_music_intro": (
+        "Pusťte ji potichu na pozadí. Nejlépe funguje instrumentální hudba, aby nikoho nerušila při čtení."
+    ),
+    "manual_music_title_column": "Název",
+    "manual_music_artist": "Interpret nebo soundtrack",
+}
+
+CS_COMPANION_STRINGS: Final[dict[str, str]] = {
+    "companion_page_label": "Průvodce hrou",
+    "companion_tab_start": "Začátek",
+    "companion_tab_check": "Odpověď",
+    "companion_tab_hints": "Nápovědy",
+    "companion_tab_accuse": "Obvinění",
+    "companion_tab_solutions": "Řešení",
+    "companion_tab_help": "Jak hrát",
+    "companion_read_aloud": "Přečtěte nahlas",
+    "companion_intro_more": "Přečíst celý úvod",
+    "companion_game_length": "Asi {minutes} minut",
+    "companion_timer_label": "Zbývá",
+    "companion_timer_overtime": "Čas navíc",
+    "companion_timer_start": "Spustit čas",
+    "companion_timer_pause": "Pozastavit",
+    "companion_timer_resume": "Pokračovat",
+    "companion_envelopes_heading": "Obálky",
+    "companion_envelope_open": "Otevřená",
+    "companion_envelope_sealed": "Zalepená",
+    "companion_check_heading": "Ověřit odpověď",
+    "companion_check_puzzle_label": "Kód úkolu",
+    "companion_check_answer_label": "Vaše odpověď",
+    "companion_check_submit": "Ověřit",
+    "companion_result_correct": "Správně!",
+    "companion_result_near": "Skoro",
+    "companion_result_wrong": "Tak to není. Zkuste to znovu.",
+    "companion_result_solved": "Vyřešeno",
+    "companion_unlock_call": "Teď otevřete: {envelope}",
+    "companion_hints_heading": "Nápovědy",
+    "companion_hints_intro": "Nejdřív to zkuste sami. Každá nápověda ukáže jeden malý krok.",
+    "companion_hint_show": "Ukázat nápovědu {level}",
+    "companion_hint_label": "Nápověda {level}",
+    "companion_hint_confirm": "Ukázat nápovědu {level} k úkolu {code}?",
+    "companion_answer_show": "Ukázat odpověď",
+    "companion_answer_confirm": "Ukázat celou odpověď na úkol {code}? Celé skupině tím úkol prozradíte.",
+    "companion_confirm_yes": "Ano, ukázat",
+    "companion_confirm_no": "Ještě ne",
+    "companion_solutions_warning_title": "Pozor, řešení",
+    "companion_solutions_warning_text": (
+        "Tato stránka ukazuje celá řešení. Otevřete je, jen když s tím souhlasí celá skupina."
+    ),
+    "companion_solutions_enter": "Rozumím. Ukázat seznam.",
+    "companion_solution_show": "Ukázat řešení {code}",
+    "companion_solution_answer": "Odpověď: {answer}",
+    "companion_accuse_heading": "Obvinění",
+    "companion_accuse_intro": "Shodněte se na odpovědi ke každé otázce a pak obvinění uzamkněte.",
+    "companion_accuse_early": "Většina skupin obviňuje až po vyřešení posledního úkolu.",
+    "companion_accuse_submit": "Uzamknout obvinění",
+    "companion_accuse_confirm": "Uzamknout tyto odpovědi? Později už je nezměníte.",
+    "companion_accuse_incomplete": "Nejdřív odpovězte na všechny otázky.",
+    "companion_score": "{points} z {max} bodů",
+    "companion_question_right": "Správně",
+    "companion_question_wrong": "Špatně",
+    "companion_reveal_heading": "Jak jste to mohli poznat",
+    "companion_ending_heading": "Konec",
+    "companion_final_solved": "Vyřešili jste poslední úkol!",
+    "companion_no_puzzles": "Zatím není otevřený žádný úkol.",
+    "companion_locked_note": "Další úkoly se tu objeví, až otevřete další obálku.",
+    "companion_reset": "Začít znovu",
+    "companion_reset_confirm": "Smazat veškerý postup na tomto zařízení a začít znovu?",
+    "companion_storage_off": "Tento prohlížeč postup neukládá. Nechte stránku otevřenou.",
+    "companion_help_1": "Přečtěte nahlas úvod a spusťte čas.",
+    "companion_help_2": "Obálku otevřete, až když vám to hra řekne.",
+    "companion_help_3": (
+        "Když máte odpověď, napište ji pod Odpověď. Na mezerách, diakritice a velkých písmenech nezáleží."
+    ),
+    "companion_help_4": "Zasekli jste se? Nápovědy ukazují vždy jeden malý krok. Odpověď je až poslední.",
+    "companion_help_5": "Řešení ukáže všechno. Použijte ho na konci, nebo když s tím souhlasí celá skupina.",
+    "companion_close": "Zavřít",
+    "companion_tab_case": "Vyšetřování",
+    "companion_case_heading": "Vyšetřování",
+    "companion_case_empty": "Zatím nic. Případ začne, až otevřete první obálku.",
+    "companion_chapter_kicker": "Kapitola",
+    "companion_voice_kicker": "Hlasová zpráva",
+    "companion_voice_play": "Přehrát",
+    "companion_voice_stop": "Zastavit",
+    "companion_voice_transcript": "Přepis",
+    "companion_entry_new": "Nové",
+    "companion_read_for_me": "Přečti nám to",
+    "companion_no_speech": "Tento prohlížeč neumí číst nahlas. Text přečte někdo z vás.",
+    "companion_new_entries": "Nové ve vyšetřování: {count}",
+    "companion_new_entries_open": "Otevřít vyšetřování",
+}
+
+# Czech dates use the genitive month: "24. listopadu 2026".
+CS_MONTHS: Final[tuple[str, ...]] = (
+    "ledna", "února", "března", "dubna", "května", "června",
+    "července", "srpna", "září", "října", "listopadu", "prosince",
+)  # fmt: skip
+CS_WEEKDAYS: Final[tuple[str, ...]] = ("pondělí", "úterý", "středa", "čtvrtek", "pátek", "sobota", "neděle")
+CS_DATE_PATTERN: Final[str] = "{day}. {month} {year}"
