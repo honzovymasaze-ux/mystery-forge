@@ -11,4 +11,12 @@ For each planned story document, write `source/documents/<id>.md` with the Write
 - Every document needs a story reason to be in the players' hands (the intro or another document says how they got it).
 - You may add simple SVG illustrations in `source/images/<id>.svg` (stamps, maps, logos, diagrams) and place them with `{{ '{{image:<id>|caption}}' }}`. Use `currentColor` and plain shapes; no scripts, no external links, no raster images.
 
-Then run `uv run --project ../toolkit forge assemble --game {{ steps.setup.json.game_dir }}` and fix every error in your files (errors in puzzle files that do not exist yet are expected). Your answer lists the files that you wrote, with a spoiler-free summary.
+- When the config format is `case_file` or `both`, make the papers look like a real police file: follow section 15 of `uv run --project ../toolkit forge catalog rules` (autopsy and lab reports, phone records, invoices, interview transcripts, a `person-photo` for each suspect and key witness, camera stills).
+
+Then write `source/investigation.yaml` with the Write tool (fields: `uv run --project ../toolkit forge schema investigation`; rules: section 15 of the catalog rules):
+- `narrator`: the lead investigator, with a name and a rank or role that fit the setting. Players are the investigator's team.
+- `chapters`: the investigator's story in the first person, in the game language. At least one chapter without `after` per envelope (it prints behind the STOP sheet), plus up to one chapter per envelope that waits for a puzzle of that envelope (`after: P<n>`, from `plan.yaml`).
+- `voice_messages`: 1 to 3 per envelope from colleagues of the team (`sender`, `role`, `voice: male` or `female`). Give some of them `after` a puzzle, so new messages arrive as the group progresses.
+- Never put a puzzle answer, a hidden clue, or a fact that only this file gives into a chapter or a message. Point to the documents instead.
+
+Then run `uv run --project ../toolkit forge assemble --game {{ steps.setup.json.game_dir }}` and fix every error in your files (errors in puzzle files that do not exist yet are expected). Your answer lists the files that you wrote (the documents and `investigation.yaml`), with a spoiler-free summary.

@@ -367,7 +367,7 @@ CS_COMPANION_STRINGS: Final[dict[str, str]] = {
     "companion_help_4": "Zasekli jste se? Nápovědy ukazují vždy jeden malý krok. Odpověď je až poslední.",
     "companion_help_5": "Řešení ukáže všechno. Použijte ho na konci, nebo když s tím souhlasí celá skupina.",
     "companion_close": "Zavřít",
-    "companion_tab_case": "Vyšetřování",
+    "companion_tab_case": "Případ",
     "companion_case_heading": "Vyšetřování",
     "companion_case_empty": "Zatím nic. Případ začne, až otevřete první obálku.",
     "companion_chapter_kicker": "Kapitola",

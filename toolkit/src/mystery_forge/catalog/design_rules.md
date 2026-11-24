@@ -179,7 +179,7 @@ Every puzzle has 3 hints and a separate answer card.
 - **Low vision:** small text and spot-the-difference puzzles get a large print version.
 - **Motor:** every puzzle that needs scissors has a no-cut fallback.
 - **Language:** sound-based puzzles (rebus, sound-alike words) work only in English.
-- **No audio:** write every sound clue as a transcript.
+- **No audio clue:** write every sound clue as a transcript. A voice message (section 15) may point players to a document, but never carries a fact that only it gives.
 
 ## 14. Print rules
 
@@ -189,3 +189,24 @@ Every puzzle has 3 hints and a separate answer card.
 - **Cut and fold marks:** dashed cut lines with a scissors icon, valley folds as dashes, mountain folds as dash-dot lines.
 - **Alignment puzzles** (masks, overlays, fold-ins) need registration marks and a "print at 100%" note.
 - **Separate files for spoilers.** Hints and solutions never share a page with the game material.
+
+## 15. Police case files, the investigator's story, and voice messages
+
+A case file game feels like a real police file on the table. Build it from the kinds that `forge schema document` lists:
+
+- **Autopsy report** (`autopsy-report`): the time-of-death window, the cause, and the findings. Keep it clinical, never graphic.
+- **Lab report** (`lab-report`): blood tests, toxicology, fingerprints, fibers, DNA. Write the results as a Markdown table with sample ids that other documents reuse.
+- **Phone records** (`phone-records`): a table of calls and messages with time, other number, duration, and the cell tower. Mix the key lines with ordinary ones, and give each tower a place that a map or a statement names.
+- **Invoice** and **receipt** (`invoice`, `receipt`): presence at a place and time, purchases, and money trouble.
+- **Interview transcript** (`transcript`), **police report** (`police-report`), **email**, **chat log**, **letter**, **note** (`note`, a short handwritten message), and **newspaper**.
+- **Person photo** (`person-photo`): one per suspect and key witness, with the name and role in the fields. Leave the body empty or place `{{image:portrait-<character id>|...}}`. The owner can later drop a real photo `images/portrait-<character id>.jpg` (with a description in `images/portrait-<character id>.txt`) that replaces the drawing.
+- **Camera still** (`cctv-still`): a frame from a security camera, with the camera, the place, the date, and the time in the fields. A still shows clothing, positions, and times, never a face that names the culprit by itself.
+
+Prefer deduction over codes in a case file: players compare times, places, and statements across documents. Use a cipher or a lock only where the story has a real reason for one.
+
+The optional `investigation.yaml` (`forge schema investigation`) adds two layers on top of the papers:
+
+- **The investigator's story** (`chapters`): the lead investigator tells the case in the first person, one or two chapters per envelope, 120 to 250 words each. A chapter sets the scene, the mood, and the next step ("We went through Ana's phone records that night."). A chapter with `after` appears on the companion page when players solve that puzzle; one without `after` also prints behind the STOP sheet of its envelope.
+- **Voice messages** (`voice_messages`): short messages (20 to 70 words) from colleagues of the team: the coroner, the lab, a patrol officer, the phone analyst. Each one sounds like a person talking: informal, with a name and a role. A message points players to a document ("the toxicology is in, look at sample E-4"), or adds atmosphere and pressure.
+
+Neither layer may carry a fact that the accusation needs, a puzzle answer, or the culprit's name as the answer: the documents carry the case, and the checks scan these texts for leaks. A group without a phone reads only the printed chapters, so a chapter without `after` carries the main story of its envelope.
