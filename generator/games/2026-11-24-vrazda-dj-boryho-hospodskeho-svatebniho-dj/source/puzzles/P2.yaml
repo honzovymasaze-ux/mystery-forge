@@ -1,0 +1,56 @@
+format_version: 1
+id: P2
+title: Co vypil
+stage: B
+mechanic: recontextualized-document
+difficulty: hard
+depends_on:
+- P1
+in_world_reason: Laboratoř označuje vzorky jen čísly, popis předmětů je v soupisu stop.
+reveals: Somnaxin byl ve slivovici z láhve, kterou Bořek dostal darem do kanceláře.
+reveal_text: 'Somnaxin byl v pálence z láhve s cedulkou „Pro Boryho“. Bořek ji nepřinesl ze svatby: našel ji v kanceláři jako dárek. Kdo mu ji tam nechal?'
+answer: slivovice
+accepted:
+- svestkovice
+- palenka
+- slivovici
+- svestkova palenka
+answer_format:
+  kind: word
+  label: jedno slovo
+question: V čem měl Bořek ty prášky? Jedno slovo, žádné značky.
+params: {}
+clues:
+- id: p2-lab
+  document: D13
+  quote: E-3  pozitivní  ano  Bořek Vítek, další otisk nepoužitelný
+- id: p2-soupis
+  document: D11
+  quote: láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři
+solution:
+- text: Laboratoř našla somnaxin v krvi, ve sklence E-2 a v láhvi E-3. Plechovka E-5 je čistá.
+  uses:
+  - p2-lab
+- text: 'Podle soupisu stop je E-3 litrová láhev čiré kapaliny s vůní švestek: švestková pálenka, slivovice.'
+  uses:
+  - p2-soupis
+hints:
+- level: 1
+  text: Laboratoř píše jen čísla vzorků. Kde jste viděli, co která čísla znamenají?
+  points_to:
+  - p2-soupis
+- level: 2
+  text: Soupis zajištěných stop z obálky A. Hledejte vzorek s pozitivním somnaxinem, který není krev ani sklo na pití.
+  points_to:
+  - p2-lab
+  - p2-soupis
+- level: 3
+  text: E-3 je láhev čiré kapaliny s vůní švestek. Jak se takové pálence říká?
+  points_to:
+  - p2-soupis
+canary: canary-bory-p2-svestka
+near_misses:
+- answer: sklenka
+  message: Ve sklence byly prášky taky, ale odkud se tam nalily?
+- answer: láhev
+  message: Ano, láhev. Ale co v ní bylo? Jedno slovo pro ten nápoj.

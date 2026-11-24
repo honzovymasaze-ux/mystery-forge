@@ -1,0 +1,287 @@
+format_version: 1
+motif: 'Hudba a noc: Bořkův playlist, časy písniček a výpisů hovorů. Každý důkaz je otisk času, jako stopy na mixážním pultu. Závěr se uzavírá tím, co Bořek sám vyčetl z čísel v deníku.'
+puzzles:
+- id: P1
+  stage: A
+  title: Číslo bez jména
+  mechanic: observation
+  difficulty: easy
+  answer: pokladna
+  in_world_reason: Neznámé číslo ve výpisu Bořkova telefonu nemá v jeho kontaktech jméno.
+  hidden_from: policie, která číslo zatím neprověřila
+  reveals: SMS ve 23:52 přišla ze služebního mobilu pokladny lesního koupaliště v Rudce.
+  documents:
+  - D8
+  - D14
+  relies_on:
+  - D4
+  must_contain:
+  - Odkud přesně v Rudce přišla ta zpráva ve 23:52? Napište mi jedno slovo, které u čísla stojí.
+  notes: Hráči musí najít číslo ve výpisu a stejné číslo na ceníku koupaliště v Rudce.
+- id: P2
+  stage: B
+  title: Co vypil
+  mechanic: recontextualized-document
+  difficulty: hard
+  depends_on:
+  - P1
+  answer: slivovice
+  in_world_reason: Laboratoř označuje vzorky jen čísly, popis předmětů je v soupisu stop.
+  hidden_from: veřejnost a novináři
+  reveals: Somnaxin byl ve slivovici z láhve, kterou Bořek dostal darem do kanceláře.
+  documents:
+  - D15
+  relies_on:
+  - D11
+  - D13
+  must_contain:
+  - V čem měl Bořek ty prášky? Jedno slovo, žádné značky.
+  notes: Laboratoř uvádí pozitivní vzorek jen číslem, soupis stop z obálky A říká, co to je.
+- id: P3
+  stage: B
+  title: Do posledního tance
+  mechanic: deduction
+  difficulty: medium
+  depends_on:
+  - P1
+  answer: '0231'
+  in_world_reason: Fotograf posílá jen seznam souborů s časy, fotky samotné jsou u nevěsty.
+  hidden_from: Monika, která tvrdí, že si nepamatuje, kdy odešla
+  reveals: Monika byla na statku Na Výsluní ještě ve 02:31.
+  documents:
+  - D18
+  relies_on:
+  - D6
+  must_contain:
+  - Do kolika hodin Monika na svatbě opravdu byla? Napište čas poslední fotky, na které je, čtyřmi číslicemi.
+  notes: Popisky fotek jmenují lidi jen tak, jak je zná fotograf. Moniku poznají podle popisu ze svědecké výpovědi.
+- id: P4
+  stage: C
+  title: Auto u benzinky
+  mechanic: observation
+  difficulty: medium
+  depends_on:
+  - P2
+  answer: 2BE4185
+  in_world_reason: Kamera zachytila jen část značky, celou SPZ zná jen evidence parkovacích karet.
+  hidden_from: majitel auta, který doufá, že ho kamera nepoznala
+  reveals: Auto, které ve 02:43 zachytila kamera čerpací stanice, je Radimova Octavia s SPZ 2BE 4185.
+  documents:
+  - D22
+  - D23
+  relies_on:
+  - D21
+  must_contain:
+  - Jaká je celá SPZ toho auta? Napište ji bez mezer.
+  notes: Z kamery je vidět typ auta, střešní box a začátek a konec značky. Seznam parkovacích karet doplní zbytek.
+- id: P5
+  stage: D
+  title: Chlor, který nepřišel
+  mechanic: anachronism-hunt
+  difficulty: hard
+  depends_on:
+  - P4
+  answer: '48600'
+  in_world_reason: Podvod je vidět jen tehdy, když vedle sebe položíte faktury a provozní deník.
+  hidden_from: účetní, která vidí jen faktury
+  reveals: Bořek zaplatil 48 600 Kč za dvě dodávky chloru do Rudky, které nikdy nepřišly.
+  documents:
+  - D24
+  - D27
+  relies_on:
+  - D25
+  must_contain:
+  - Kolik korun celkem zaplatil Bořek za chlor, který do Rudky nikdy nedorazil? Napište jen číslo bez mezer.
+  notes: Tři faktury, ale v provozním deníku jen jedna dodávka.
+- id: P6
+  stage: A
+  title: Kód od trezoru
+  mechanic: arithmetic-lock
+  difficulty: medium
+  answer: '4032'
+  in_world_reason: Bořek nechával kód od trezoru v kanceláři jako počty z věcí, které zná jen personál.
+  hidden_from: brigádníci a návštěvníci, kteří chodí kolem nástěnky v kanceláři
+  reveals: V trezoru v kanceláři ležela obálka s kopiemi faktur z Rudky a s poznámkou o pondělní schůzce s účetní.
+  documents:
+  - D29
+  relies_on:
+  - D1
+  - D2
+  - D3
+  must_contain:
+  - Jaký je kód od trezoru? Čtyři číslice.
+  notes: Každé slovo vzorce odkazuje na fakt z jiného dokumentu obálky A.
+- id: P7
+  stage: D
+  title: Chybějící tablety
+  mechanic: arithmetic-lock
+  difficulty: medium
+  answer: '40'
+  in_world_reason: Lékárna i domovní prohlídka uvádějí jen počty, rozdíl musí spočítat vyšetřovatel.
+  hidden_from: majitelé léků, kteří tvrdí, že jim nic nechybí
+  reveals: Z balení somnaxinu Ivety Kočové chybějí čtyři tablety, které nikdo neužil, tedy přesně dávka z Bořkovy krve.
+  documents:
+  - D35
+  relies_on:
+  - D26
+  - D13
+  must_contain:
+  - Kolik miligramů somnaxinu z Ivetina balení chybí? Dvě číslice.
+  notes: Rozdíl vydaných, nalezených a užitých tablet.
+story_documents:
+- id: D30
+  kind: person-photo
+  stage: A
+  title: Monika Vítková
+  purpose: Fotka podezřelé.
+- id: D32
+  kind: person-photo
+  stage: A
+  title: Radim Kočí
+  purpose: Fotka podezřelého.
+- id: D33
+  kind: person-photo
+  stage: A
+  title: Lenka Šimková
+  purpose: Fotka podezřelé.
+- id: D34
+  kind: person-photo
+  stage: A
+  title: Tomáš Pešek
+  purpose: Fotka podezřelého.
+- id: D31
+  kind: transcript
+  stage: C
+  title: Výslech Ivety Kočové
+  purpose: Potvrzuje manželovo alibi.
+- id: D1
+  kind: case-briefing
+  stage: A
+  title: Spis KRPB-2318/TČ-2026
+  purpose: Úvod a zadání.
+- id: D2
+  kind: police-report
+  stage: A
+  title: Úřední záznam o nálezu těla
+  purpose: Popis nálezu a místa.
+- id: D3
+  kind: transcript
+  stage: A
+  title: Výslech Lenky Šimkové
+  purpose: Nálezkyně těla, její verze noci.
+- id: D4
+  kind: phone-records
+  stage: A
+  title: Výpis telefonu Bořka Vítka
+  purpose: Časy hovorů a zpráv té noci.
+  must_contain:
+  - 23:52  SMS příchozí  734 552 019
+  - 02:12  hovor odchozí  603 418 227 (Monika)
+- id: D5
+  kind: chat-log
+  stage: A
+  title: Zprávy Bořek – Radim
+  purpose: Dar slivovice.
+  must_contain:
+  - 'Radim: Nechal jsem ti v kanclu na koupáku flašku domácí švestkové. Na usmířenou, ať se zase můžeme normálně bavit.'
+- id: D6
+  kind: transcript
+  stage: A
+  title: Výpověď svědka ze svatby
+  purpose: Hádka Moniky a Bořka, popis Moniky.
+  must_contain:
+  - Kolem půl jedenácté se Bory s Monikou u baru hrozně pohádali, ona na něj křičela, že ho zabije.
+- id: D7
+  kind: receipt
+  stage: A
+  title: Účtenka z lékárny v Monice kabelce
+  purpose: Falešná stopa, Monika má somnaxin.
+  must_contain:
+  - 'Somnaxin 10 mg, 30 tbl. – na předpis – pacient: Vítková Monika'
+- id: D9
+  kind: chat-log
+  stage: A
+  title: Zprávy Bořek – Lenka
+  purpose: Poměr a výhrůžka.
+  must_contain:
+  - 'Lenka: Jestli to Monice do konce prázdnin neřekneš ty, řeknu jí to já.'
+- id: D10
+  kind: chat-log
+  stage: A
+  title: Zprávy Bořek – Tommy
+  purpose: Konkurent.
+  must_contain:
+  - 'Tommy: Tohle ti nedaruju, Bory. Třetí svatba, co mi přebereš.'
+- id: D11
+  kind: police-report
+  stage: A
+  title: Soupis zajištěných stop
+  purpose: Seznam předmětů s čísly stop.
+  must_contain:
+  - láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři
+- id: D12
+  kind: autopsy-report
+  stage: B
+  title: Pitevní protokol – Bořek Vítek
+  purpose: Příčina a doba smrti.
+  must_contain:
+  - Na temeni hlavy vlevo podlitina s tržnou ranou 3 cm, vzniklá úderem tupým předmětem podlouhlého tvaru před vniknutím do vody.
+- id: D13
+  kind: lab-report
+  stage: B
+  title: Toxikologie a stopy
+  purpose: Somnaxin v krvi a ve vzorcích.
+- id: D16
+  kind: police-report
+  stage: B
+  title: Lokalizace telefonů podezřelých
+  purpose: Lenka doma, Radimův telefon doma.
+  must_contain:
+  - Mobilní telefon Lenky Šimkové byl od 21:30 do 07:05 přihlášen výhradně v buňce RUDKA-OBEC.
+- id: D17
+  kind: receipt
+  stage: B
+  title: Účtenka z klubu Sklep
+  purpose: Alibi Tommyho.
+  must_contain:
+  - '23.08.2026 02:20 obsluha: Tommy (DJ)'
+- id: D19
+  kind: form
+  stage: C
+  title: Kniha výdeje klíčů – koupaliště Rudka
+  purpose: Kdo si vzal služební mobil.
+  must_contain:
+  - 19:40  služební mobil + klíče od pokladny  R. K.
+- id: D20
+  kind: transcript
+  stage: C
+  title: Výslech Radima Kočího
+  purpose: Jeho alibi.
+  must_contain:
+  - 'KOČÍ: Byl jsem doma od jedenácti, spal jsem. Telefon jsem měl na nočním stolku, můžete se podívat.'
+- id: D21
+  kind: phone-records
+  stage: C
+  title: Výpis služebního mobilu 734 552 019
+  purpose: Kde byl služební mobil.
+  must_contain:
+  - 01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH
+- id: D25
+  kind: note
+  stage: D
+  title: Bořkova poznámka na šanonu
+  purpose: Bořkovo podezření.
+  must_contain:
+  - Rudka – chlor. Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!
+- id: D26
+  kind: form
+  stage: D
+  title: Výpis z lékárny – vydané léky
+  purpose: Ivetin předpis.
+  must_contain:
+  - 'Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.'
+- id: D28
+  kind: email
+  stage: D
+  title: E-mail účetní
+  purpose: Pondělní schůzka.

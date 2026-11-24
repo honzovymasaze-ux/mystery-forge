@@ -1,0 +1,61 @@
+format_version: 1
+id: P3
+title: Do posledního tance
+stage: B
+mechanic: deduction
+difficulty: medium
+depends_on:
+- P1
+in_world_reason: Fotograf posílá jen seznam souborů s časy, fotky samotné jsou u nevěsty.
+reveals: Monika byla na statku Na Výsluní ještě ve 02:31.
+reveal_text: Monika tančila s nevěstou kolečko ještě dlouho po druhé hodině, devět kilometrů od koupaliště. Hovor od manžela ve 02:12 neslyšela.
+answer: '0231'
+accepted:
+- '231'
+answer_format:
+  kind: digits
+  label: čas, čtyři číslice
+  length: 4
+question: Do kolika hodin Monika na svatbě opravdu byla? Napište čas poslední fotky, na které je, čtyřmi číslicemi.
+params: {}
+clues:
+- id: p3-saty
+  document: D6
+  quote: Byla v tmavě zelených šatech a s červenou mašlí ve vlasech
+- id: p3-foto
+  document: D18
+  quote: nevěsta a paní v zelených šatech s červenou mašlí tančí kolečko
+- id: p3-past
+  document: D18
+  quote: paní v zelených šatech bez mašle odjíždí taxíkem
+solution:
+- text: 'Ženich popsal Moniku: tmavě zelené šaty a červená mašle ve vlasech.'
+  uses:
+  - p3-saty
+- text: Poslední fotka s paní v zelených šatech s červenou mašlí je MS_4179 ve 02:31.
+  uses:
+  - p3-foto
+- text: Paní na fotce ve 02:38 mašli nemá, takže to není Monika.
+  uses:
+  - p3-past
+hints:
+- level: 1
+  text: Fotograf Moniku nezná jménem. Jak ji popsal někdo, kdo ji zná?
+  points_to:
+  - p3-saty
+- level: 2
+  text: Ženich ve výpovědi zmínil šaty i jednu výraznou věc ve vlasech.
+  points_to:
+  - p3-saty
+- level: 3
+  text: Hledejte poslední řádek, kde má paní v zelených šatech i červenou mašli. Pozor na řádek ve 02:38.
+  points_to:
+  - p3-foto
+  - p3-past
+leak_allowlist:
+- text: MS_4179  02:31
+  reason: Seznam fotek je materiál úkolu, hráči v něm čas hledají.
+canary: canary-bory-p3-masle
+near_misses:
+- answer: 0238
+  message: Podívejte se pořádně na paní na té fotce. Je to opravdu Monika?

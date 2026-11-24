@@ -1,0 +1,357 @@
+format_version: 1
+title: Poslední song DJ Boryho
+tagline: Hrál celou noc pro svatebčany. Ráno ho našli v bazénu jeho vlastního koupaliště.
+premise: >-
+  V neděli 23. srpna 2026 ráno našla plavčice v bazénu koupaliště Pod Hradem v Kunštátě mrtvého Bořka Vítka,
+  hospodského, svatebního DJ a provozovatele dvou koupališť. Noc předtím hrál na svatbě. Vypadá to na opilce,
+  který spadl do vody. Soudní lékařka si tím ale jistá není.
+setting: Kunštát a Rudka na Boskovicku, hospoda, dvě koupaliště a svatební statek
+era: '2026'
+tone: dramatický, realistický
+truth: >-
+  Radim Kočí provozoval s Bořkem Vítkem lesní koupaliště v Rudce. Od jara si nechával proplácet faktury za chlor od
+  firmy svého bratra Tomáše Kočího, ale do Rudky přišla jen jedna dodávka ze tří. Bořek na podvod přišel, když
+  porovnal faktury s provozním deníkem, a na pondělí 24. srpna domluvil schůzku s účetní. Radim si v sobotu 22. srpna
+  v 19:40 vzal na pokladně v Rudce služební mobil. Ve 23:52 z něj Bořkovi napsal, ať po svatbě přijede sám na
+  koupaliště v Kunštátě. Svůj vlastní telefon nechal doma, aby to vypadalo, že spal. Do láhve slivovice, kterou
+  Bořkovi předtím daroval „na usmířenou“, přimíchal prášky na spaní somnaxin, předepsané své ženě Ivetě. Bořek odjel
+  ze svatby v 01:10 a v kanceláři koupaliště se s Radimem setkal kolem půl druhé. Napil se slivovice. Ve 02:12 už
+  omámený zkusil zavolat manželce Monice, ale ta na svatbě tančila a telefon neslyšela. Radim ho pak udeřil tyčí na
+  sběr listí, a když upadl, svezl ho do bazénu, kde se utopil. Ve 02:43 projel Radim autem kolem kamery čerpací
+  stanice na výjezdu z Kunštátu a ve 03:05 byl služební mobil zpátky v Rudce. Monika zůstala na svatbě do půl třetí,
+  Lenka Šimková spala doma v Rudce a Tomáš Pešek hrál do tří v klubu v Boskovicích.
+visual_style: noir
+characters:
+  - id: borek-vitek
+    name: Bořek Vítek
+    role: hospodský, DJ a provozovatel koupališť
+    description: Říkali mu DJ Bory. Vede hospodu Na Hrázi, hraje na svatbách a akcích pro děti a provozuje dvě koupaliště.
+    age: 47
+    is_victim: true
+  - id: monika-vitkova
+    name: Monika Vítková
+    role: manželka, vede kuchyni hospody
+    description: Bořkova žena. Na svatbě se s ním hlasitě pohádala.
+    age: 44
+    is_suspect: true
+    secret: Ví o Bořkově poměru s plavčicí a zvažovala rozvod.
+  - id: radim-koci
+    name: Radim Kočí
+    role: společník, provozuje koupaliště v Rudce
+    description: Bořkův společník a kamarád z mládí. Stará se o lesní koupaliště v Rudce.
+    age: 41
+    is_suspect: true
+    is_culprit: true
+    secret: Proplácí fiktivní faktury za chlor firmě svého bratra.
+  - id: lenka-simkova
+    name: Lenka Šimková
+    role: plavčice a vedoucí koupaliště v Kunštátě
+    description: Mladá plavčice, která ráno našla tělo. Měla s Bořkem poměr.
+    age: 28
+    is_suspect: true
+    secret: Chtěla, aby Bořek o poměru řekl manželce.
+  - id: tomas-pesek
+    name: Tomáš Pešek
+    role: DJ Tommy, konkurent
+    description: Mladší DJ z Boskovic. Bořek mu přebral tři svatby a Tomáš mu to dával veřejně najevo.
+    age: 34
+    is_suspect: true
+  - id: iveta-kocova
+    name: Iveta Kočová
+    role: Radimova manželka
+    description: Zdravotní sestra z Rudky. Tvrdí, že manžel byl celou noc doma.
+    age: 39
+  - id: marek-sedlak
+    name: Marek Sedlák
+    role: svatební fotograf
+    description: Fotil svatbu na statku Na Výsluní celou noc.
+    age: 36
+  - id: dana-krejci
+    name: Dana Krejčí
+    role: účetní
+    description: Vede účetnictví obou koupališť.
+    age: 55
+  - id: petr-hala
+    name: Petr Hála
+    role: nadstrážmistr, obvodní oddělení Kunštát
+    description: Policista, který přijel ráno na koupaliště jako první.
+    age: 31
+locations:
+  - id: koupaliste-kunstat
+    name: koupaliště Pod Hradem
+    description: Koupaliště v Kunštátě s pětadvacetimetrovým bazénem a kanceláří u pokladny.
+  - id: koupaliste-rudka
+    name: lesní koupaliště Rudka
+    description: Menší koupaliště v lese u Rudky.
+  - id: statek
+    name: statek Na Výsluní
+    description: Svatební statek asi devět kilometrů od Kunštátu.
+  - id: hospoda
+    name: hospoda Na Hrázi
+    description: Vítkovic hospoda v Kunštátě.
+  - id: klub-sklep
+    name: klub Sklep v Boskovicích
+    description: Hudební klub, kde hraje DJ Tommy.
+  - id: dum-kocich
+    name: dům Kočích v Rudce
+    description: Rodinný dům Radima a Ivety Kočích.
+  - id: dum-simkove
+    name: byt Lenky Šimkové v Rudce
+    description: Podkrovní byt v Rudce.
+  - id: cerpaci-stanice
+    name: čerpací stanice na výjezdu z Kunštátu
+    description: Benzinka u silnice na Rudku s kamerou nad výjezdem.
+objects:
+  - id: slivovice
+    name: láhev s ručně psanou cedulkou
+    description: Domácí pálenka v litrové láhvi s ručně psanou cedulkou.
+  - id: sluzebni-mobil
+    name: služební mobil koupaliště Rudka
+    description: Telefon, který si personál bere na pokladně.
+  - id: tyc
+    name: tyč na sběr listí
+    description: Hliníková tyč se síťkou, opřená u bazénu.
+timeline:
+  - id: svatba
+    start: 2026-08-22 17:00
+    end: 2026-08-23 02:40
+    location: statek
+    participants: [monika-vitkova, marek-sedlak]
+    description: Svatba na statku Na Výsluní. Monika na ní zůstala do konce.
+    known_to_players: true
+  - id: bory-hraje
+    start: 2026-08-22 18:00
+    end: 2026-08-23 01:00
+    location: statek
+    participants: [borek-vitek]
+    description: Bořek hraje na svatbě jako DJ.
+    known_to_players: true
+  - id: hadka
+    start: 2026-08-22 22:30
+    end: 2026-08-22 22:40
+    location: statek
+    participants: [borek-vitek, monika-vitkova]
+    description: Monika a Bořek se hlasitě pohádají u baru.
+    known_to_players: true
+  - id: vydej-mobilu
+    start: 2026-08-22 19:40
+    location: koupaliste-rudka
+    participants: [radim-koci]
+    description: Radim si na pokladně v Rudce vezme služební mobil.
+  - id: tommy-hraje
+    start: 2026-08-22 21:00
+    end: 2026-08-23 03:00
+    location: klub-sklep
+    participants: [tomas-pesek]
+    description: Tomáš hraje v klubu Sklep.
+  - id: lenka-doma
+    start: 2026-08-22 21:30
+    end: 2026-08-23 07:00
+    location: dum-simkove
+    participants: [lenka-simkova]
+    description: Lenka je doma v Rudce.
+  - id: sms
+    start: 2026-08-22 23:52
+    location: dum-kocich
+    participants: [radim-koci]
+    description: Radim pošle ze služebního mobilu Bořkovi SMS se schůzkou.
+  - id: bory-odjezd
+    start: 2026-08-23 01:10
+    location: statek
+    participants: [borek-vitek]
+    description: Bořek odjede ze svatby dodávkou.
+    known_to_players: true
+  - id: vrazda
+    start: 2026-08-23 01:30
+    end: 2026-08-23 02:35
+    location: koupaliste-kunstat
+    participants: [borek-vitek, radim-koci]
+    description: Schůzka v kanceláři, slivovice se somnaxinem, úder tyčí a svržení do bazénu.
+  - id: kamera
+    start: 2026-08-23 02:43
+    location: cerpaci-stanice
+    participants: [radim-koci]
+    description: Radimovo auto projede kolem kamery čerpací stanice.
+  - id: nalez
+    start: 2026-08-23 07:35
+    location: koupaliste-kunstat
+    participants: [lenka-simkova]
+    description: Lenka najde tělo v bazénu.
+    known_to_players: true
+  - id: schuzka-ucetni
+    start: 2026-08-24 09:00
+    location: hospoda
+    participants: [dana-krejci]
+    description: Plánovaná pondělní schůzka Bořka s účetní, na kterou už nedošlo.
+clues:
+  - id: sms-2352
+    document: D4
+    quote: '23:52  SMS příchozí  734 552 019'
+  - id: hovor-0212
+    document: D4
+    quote: '02:12  hovor odchozí  603 418 227 (Monika)'
+  - id: monika-prasky
+    document: D7
+    quote: 'Somnaxin 10 mg, 30 tbl. – na předpis – pacient: Vítková Monika'
+  - id: hadka-u-baru
+    document: D6
+    quote: Kolem půl jedenácté se Bory s Monikou u baru hrozně pohádali, ona na něj křičela, že ho zabije.
+  - id: radim-flaska
+    document: D5
+    quote: 'Radim: Nechal jsem ti v kanclu na koupáku flašku domácí švestkové. Na usmířenou, ať se zase můžeme normálně bavit.'
+  - id: lenka-vyhruzka
+    document: D9
+    quote: 'Lenka: Jestli to Monice do konce prázdnin neřekneš ty, řeknu jí to já.'
+  - id: tommy-vyhruzka
+    document: D10
+    quote: 'Tommy: Tohle ti nedaruju, Bory. Třetí svatba, co mi přebereš.'
+  - id: rana-do-hlavy
+    document: D12
+    quote: Na temeni hlavy vlevo podlitina s tržnou ranou 3 cm, vzniklá úderem tupým předmětem podlouhlého tvaru před vniknutím do vody.
+  - id: stopa-e3
+    document: D11
+    quote: 'láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři'
+  - id: lenka-bunky
+    document: D16
+    quote: Mobilní telefon Lenky Šimkové byl od 21:30 do 07:05 přihlášen výhradně v buňce RUDKA-OBEC.
+  - id: tommy-uctenka
+    document: D17
+    quote: '23.08.2026 02:20 obsluha: Tommy (DJ)'
+  - id: kniha-vydeje
+    document: D19
+    quote: '19:40  služební mobil + klíče od pokladny  R. K.'
+  - id: radim-alibi
+    document: D20
+    quote: 'KOČÍ: Byl jsem doma od jedenácti, spal jsem. Telefon jsem měl na nočním stolku, můžete se podívat.'
+  - id: bunky-sluzebni
+    document: D21
+    quote: '01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH'
+  - id: iveta-recept
+    document: D26
+    quote: 'Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.'
+  - id: bory-poznamka
+    document: D25
+    quote: Rudka – chlor. Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!
+  - id: monika-do-konce
+    hidden: true
+    revealed_by: P3
+    quote: Monika byla na statku Na Výsluní ještě ve 02:31, tedy v době, kdy byl Bořek na koupališti v Kunštátě už omámený.
+  - id: sms-z-pokladny
+    hidden: true
+    revealed_by: P1
+    quote: SMS ve 23:52 přišla ze služebního mobilu pokladny lesního koupaliště v Rudce.
+  - id: jed-ve-slivovici
+    hidden: true
+    revealed_by: P2
+    quote: Somnaxin byl ve slivovici z láhve, kterou Bořek dostal darem do kanceláře.
+  - id: auto-radima
+    hidden: true
+    revealed_by: P4
+    quote: Auto, které ve 02:43 zachytila kamera čerpací stanice, je Radimova Octavia s SPZ 2BE 4185.
+  - id: obalka-v-trezoru
+    hidden: true
+    revealed_by: P6
+    quote: V trezoru v kanceláři ležela obálka s kopiemi faktur z Rudky a s poznámkou o pondělní schůzce s účetní.
+  - id: chybi-tablety
+    hidden: true
+    revealed_by: P7
+    quote: Z balení somnaxinu Ivety Kočové chybějí čtyři tablety, které nikdo neužil, tedy přesně dávka z Bořkovy krve.
+  - id: zpronevera
+    hidden: true
+    revealed_by: P5
+    quote: Bořek zaplatil 48 600 Kč za dvě dodávky chloru do Rudky, které nikdy nepřišly.
+intro: >-
+  Neděle 23. srpna 2026, devět hodin ráno. Jste vyšetřovací tým krajského ředitelství a právě jste dostali na stůl
+  spis z Kunštátu. V bazénu koupaliště Pod Hradem našli mrtvého Bořka Vítka, kterému celý kraj říkal DJ Bory.
+  Ještě v noci hrál na svatbě a ráno ho plavčice našla ve vodě. Místní policie by případ nejradši uzavřela jako
+  nešťastnou náhodu opilého muže. Vedoucí vyšetřování kapitánka Horáková tomu nevěří. Projděte všechny dokumenty,
+  porovnávejte časy, výpovědi a výpisy. Zjistěte, kdo Bořka zabil, jak to udělal a proč. Než bude spis uzavřen,
+  musíte mít jasno.
+deduction:
+  culprit: radim-koci
+  questions:
+    - id: kdo
+      prompt: Kdo zabil Bořka Vítka?
+      options:
+        - { id: monika, text: 'Monika Vítková, manželka' }
+        - { id: radim, text: 'Radim Kočí, společník' }
+        - { id: lenka, text: 'Lenka Šimková, plavčice' }
+        - { id: tomas, text: 'Tomáš Pešek, DJ Tommy' }
+      correct: radim
+      points: 45
+      proven_by: [kniha-vydeje, bunky-sluzebni, auto-radima, sms-z-pokladny]
+    - id: jak
+      prompt: Jak vrah Bořka omámil?
+      options:
+        - { id: slivovice, text: 'Prášky ve slivovici, kterou Bořek dostal darem' }
+        - { id: koktejl, text: 'Prášky v drinku na svatbě' }
+        - { id: injekce, text: 'Injekcí' }
+      correct: slivovice
+      points: 15
+      proven_by: [jed-ve-slivovici, radim-flaska, stopa-e3]
+    - id: proc
+      prompt: Proč musel Bořek zemřít?
+      options:
+        - { id: zprone, text: 'Přišel na podvod s fakturami za chlor v Rudce' }
+        - { id: pomer, text: 'Kvůli poměru s plavčicí' }
+        - { id: svatby, text: 'Přebíral konkurenci svatby' }
+        - { id: pojistka, text: 'Kvůli životní pojistce' }
+      correct: zprone
+      points: 25
+      proven_by: [zpronevera, bory-poznamka, obalka-v-trezoru]
+    - id: prasky
+      prompt: Odkud pocházely prášky somnaxin, kterými byl Bořek omámen?
+      options:
+        - { id: monika, text: 'Z předpisu Moniky Vítkové' }
+        - { id: iveta, text: 'Z předpisu Ivety Kočové' }
+        - { id: lekarna, text: 'Koupené bez předpisu' }
+      correct: iveta
+      points: 15
+      proven_by: [iveta-recept, chybi-tablety, jed-ve-slivovici]
+  exclusions:
+    - suspect: monika-vitkova
+      clues: [monika-do-konce, hovor-0212]
+      explanation: >-
+        Ve 02:12 Bořek z koupaliště volal Monice a ta to nebrala. Fotky z fotoaparátu svatebního fotografa ji ale
+        ukazují na statku, devět kilometrů daleko, ještě ve 02:31. Na koupališti v době činu být nemohla.
+    - suspect: lenka-simkova
+      clues: [lenka-bunky, kniha-vydeje]
+      explanation: >-
+        Lenčin telefon byl celou noc v Rudce a služební mobil, ze kterého přišla SMS, si v sobotu večer nevzala ona,
+        ale R. K.
+    - suspect: tomas-pesek
+      clues: [tommy-uctenka]
+      explanation: Tomáš ve 02:20 sám namarkoval útratu na baru klubu Sklep v Boskovicích, víc než dvacet kilometrů od Kunštátu.
+epilogues:
+  - id: vyreseno
+    min_score_percent: 75
+    title: Případ uzavřen
+    text: >-
+      Radim Kočí se při konfrontaci s kamerovým záznamem a výpisem ze služebního mobilu zhroutil. Účetní Dana Krejčí
+      dohledala všechny fiktivní faktury. Monika Vítková hospodu Na Hrázi nezavřela: v září na Bořkovu počest uspořádala
+      dětský den, jaký by si přál. Hrálo se jeho playlistem.
+  - id: napul
+    min_score_percent: 40
+    title: Napůl
+    text: >-
+      Správné jméno jste měli, ale obžaloba se rozpadá na detailech. Obhájce zpochybní motiv i původ prášků a
+      vyšetřování se táhne ještě půl roku. Na koupaliště v Kunštátě se letos už nikdo nevrátí.
+  - id: nevyreseno
+    min_score_percent: 0
+    title: Nehoda
+    text: >-
+      Spis se uzavírá jako nešťastná náhoda opilého muže. Vrah dál chodí do hospody Na Hrázi na pivo a při každé
+      svatbě v kraji si někdo vzpomene na DJ Boryho a na to, že tahle smrt nikdy nedávala smysl.
+reveal:
+  - text: SMS se schůzkou přišla ze služebního mobilu koupaliště v Rudce, který si v sobotu večer vzal R. K.
+    clues: [sms-2352, sms-z-pokladny, kniha-vydeje]
+  - text: >-
+      Služební mobil byl mezi 01:22 a 02:41 v buňce u koupaliště v Kunštátě, zatímco Radimův vlastní telefon ležel
+      doma. Ve 02:43 kamera zachytila Radimovu Octavii.
+    clues: [bunky-sluzebni, radim-alibi, auto-radima]
+  - text: Somnaxin byl ve slivovici, kterou Radim Bořkovi daroval. Na prášky měla předpis jeho žena Iveta.
+    clues: [jed-ve-slivovici, radim-flaska, iveta-recept]
+  - text: Bořek přišel na to, že dvě dodávky chloru do Rudky nikdy nepřišly, a na pondělí si objednal účetní.
+    clues: [bory-poznamka, zpronevera]
+  - text: Monika byla v době činu na svatbě, Lenka doma v Rudce a Tomáš v klubu v Boskovicích.
+    clues: [monika-do-konce, lenka-bunky, tommy-uctenka]

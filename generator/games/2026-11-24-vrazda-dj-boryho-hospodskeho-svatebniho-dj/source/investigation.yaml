@@ -1,0 +1,130 @@
+format_version: 1
+narrator:
+  name: kpt. Jana Horáková
+  role: vedoucí vyšetřování, SKPV Brno
+chapters:
+  - id: kap-a1
+    stage: A
+    title: Ticho po poslední písničce
+    text: |
+      Telefon zazvonil v osm ráno. Na svatbách Bořka Vítka jsem nikdy netančila, ale znala jsem ho, jako ho znal
+      celý kraj. DJ Bory, chlap, který na dětském dni pouštěl Kačera Donalda a o půlnoci na svatbě Olympic.
+
+      Koupaliště Pod Hradem bylo ráno tiché tím zvláštním tichem, které mají jen prázdné bazény. Voda se ještě
+      leskla, na dlažbě ležela tyč na sběr listí a v kanceláři svítila žárovka, jako by si tam někdo jen na chvíli
+      odskočil.
+
+      Kolegové z obvodu už měli verzi hotovou. Opilý muž po akci, kluzká dlažba, nešťastná náhoda. Jenže Bory
+      podle všech celou noc pil kofolu. A v kanceláři stály dvě sklenky.
+
+      Sedněte si, rozložte papíry a nevěřte ničemu, co nejde ověřit. Já začnu tím číslem, které nemá v telefonu jméno.
+  - id: kap-a2
+    stage: A
+    after: P6
+    title: Co si schovával
+    text: |
+      Trezor v kanceláři neobsahoval jen tržby. Bořek si v něm něco schovával a nechtěl to mít v hospodě, kde
+      se pohybuje Monika, ani v Rudce. Přemýšlela jsem, komu na koupališti věřil. A komu přestal.
+  - id: kap-b1
+    stage: B
+    title: Soudní lékařka mluví
+    text: |
+      Věra Kalinová dělá pitvy dvacet let a nikdy nespěchá. Tentokrát poslala protokol ještě ten večer. To dělá,
+      jen když si je jistá, že jde o něco víc.
+
+      Úder do hlavy ho nezabil. Utopil se. Ale do vody nepadl sám a nebránil se. Někdo ho nejdřív uspal a pak mu
+      pomohl. Na zádech má oděrky, jako by ho někdo táhl po dlažbě.
+
+      Teď je to vražda. A já mám na stole čtyři lidi, kteří mají důvod se Bořkovi mstít. Žena, kterou podváděl.
+      Milenka, které lhal. Konkurent, kterému bral práci. A kamarád, se kterým se hádal o peníze.
+  - id: kap-b2
+    stage: B
+    after: P3
+    title: Zelené šaty
+    text: |
+      Monika na nás při výslechu křičela, že si nic nepamatuje. Fotky ale nelžou. Kdo chce zabít manžela na
+      koupališti devět kilometrů od svatby, netančí ve stejnou chvíli kolečko s nevěstou.
+  - id: kap-c1
+    stage: C
+    title: Telefon, který jezdil
+    text: |
+      Kdo chce mít alibi, nechá telefon doma. To vědí i děti z detektivek. Jenže v Rudce nebyl jen jeden telefon.
+
+      Operátor nám vydal výpis služebního mobilu a benzinka na výjezdu z Kunštátu poslala záběry z noci. Kamera
+      tam visí kvůli zlodějům nafty. Tentokrát chytila něco jiného.
+
+      Projděte, kdo si ten mobil vzal, kudy jezdil a kdo projížděl kolem pumpy. A vzpomeňte si, co nám kdo
+      tvrdil u výslechu.
+  - id: kap-d1
+    stage: D
+    title: Šanon s fakturami
+    text: |
+      V hospodě Na Hrázi jsme v kuchyni našli šanon nadepsaný „Rudka 2026“. Monika řekla, že ho Bory poslední
+      týden nosil všude s sebou, i na záchod. Na deskách byla jeho poznámka.
+
+      Peníze jsou nejstarší motiv na světě. Pokud chceme vědět proč, musíme spočítat, kolik.
+
+      Až budete mít jasno, vyplňte obvinění. Kdo, jak, proč a čím. Chci to mít tak pevné, aby to u soudu
+      neshodil žádný advokát.
+voice_messages:
+  - id: hz-hala-a
+    stage: A
+    sender: nprap. Petr Hála
+    role: obvodní oddělení Kunštát
+    voice: male
+    text: >-
+      Paní kapitánko, Hála. Jsem pořád na koupáku. Ta plavčice se třese, nechal jsem ji v kanceláři s čajem.
+      V dodávce jsem našel ještě jeden jeho telefon, starší, ten funguje. Zprávy z něj jste dostala. A v kanceláři
+      je zamčenej trezor, kód nikdo neví.
+  - id: hz-dostal-a
+    stage: A
+    after: P1
+    sender: por. Karel Dostál
+    role: technik výjezdové skupiny
+    voice: male
+    text: >-
+      Šéfová, Dostál. To číslo z Rudky nikomu osobně nepatří, je to firemní karta. Zjistím od operátora, kde se
+      v noci pohyboval. A ještě něco: na dlažbě u bazénu jsou šmouhy, jako by tam někdo něco táhl. Nafotil jsem to.
+  - id: hz-kalinova-b
+    stage: B
+    sender: MUDr. Věra Kalinová
+    role: soudní lékařka
+    voice: female
+    text: >-
+      Jano, Kalinová. Protokol máš v poště. Ten člověk byl v hlubokém útlumu, když šel pod vodu. Somnaxin, a ne
+      málo. Na svatbě by takovou dávku nevydržel stát za pultem, takže to dostal až potom. Hledej, co pil po jedné hodině.
+  - id: hz-ortova-b
+    stage: B
+    after: P2
+    sender: Mgr. Tereza Ortová
+    role: laboratoř
+    voice: female
+    text: >-
+      Dobrý den, tady Ortová z laborky. Doplním jednu věc, co se do tabulky nevešla. Prášky byly v láhvi
+      rozpuštěné dopředu, ne nasypané do sklenky. Kdo to připravil, věděl, že Bořek z té láhve bude pít.
+  - id: hz-kratochvil-c
+    stage: C
+    sender: npor. Filip Kratochvíl
+    role: analytik telefonů
+    voice: male
+    text: >-
+      Kratochvíl, analytika. Ten služební mobil z Rudky v noci cestoval. Pošlu vám přesný výpis. Upozorňuju,
+      že osobní telefony podezřelých stály celou noc na místě. Telefon ale není člověk.
+  - id: hz-hala-c
+    stage: C
+    after: P4
+    sender: nprap. Petr Hála
+    role: obvodní oddělení Kunštát
+    voice: male
+    text: >-
+      Šéfová, ještě Hála. Byl jsem se podívat v Rudce, jak jste chtěla. Ráno pár lidí vidělo auto, jak stojí
+      u domu mokré. A soused tvrdí, že slyšel ve tři ráno bouchnout dveře od auta. Prý se divil, kdo jezdí v takovou dobu.
+  - id: hz-krejci-d
+    stage: D
+    sender: Ing. Dana Krejčí
+    role: účetní
+    voice: female
+    text: >-
+      Dobrý den, tady Krejčí, účetní. Pan Vítek mi v pátek volal, byl rozrušený. Říkal, že to v Rudce nesedí
+      s chlorem a že v pondělí přinese provozní deník. Faktury jsem kontrolovala, formálně byly v pořádku.
+      Jestli zboží přišlo, jsem neviděla.
