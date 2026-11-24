@@ -170,3 +170,23 @@ def test_board_art_fills_the_css_properties_with_the_files_that_exist(tmp_path: 
     )
     html = build_player_companion_html(golden_game(), tmp_path)
     assert "--board-pin:url(data:image/png" in html
+
+
+def test_a_document_that_waits_for_a_puzzle_is_sealed_inside_its_envelope() -> None:
+    game = golden_game()
+    first = game.puzzles[0]
+    waiting = game.documents[0].meta.model_copy(update={"after": first.source.id})
+    unknown = game.documents[1].meta.model_copy(update={"after": "P9"})
+    documents = [
+        game.documents[0].model_copy(update={"meta": waiting}),
+        game.documents[1].model_copy(update={"meta": unknown}),
+        *game.documents[2:],
+    ]
+    stage = archive_of(game.model_copy(update={"documents": documents}))["stages"][0]
+    sealed = next(entry for entry in stage["documents"] if entry["id"] == waiting.id)
+    assert set(sealed) == {"id", "after", "lock"}
+    assert sealed["after"] == first.code
+    lock = sealed["lock"]
+    key = xor_hex(lock["wraps"][0], answer_key(game.salt, lock["label"], first.accepted_normalized[0]))
+    assert json.loads(open_text(lock["payload"], key))["title"] == waiting.title
+    assert "sheets" in next(entry for entry in stage["documents"] if entry["id"] == unknown.id)

@@ -299,6 +299,12 @@ interface MysteryForgeCompanionData {
   ending_lock: MysteryForgeLock | null;
 }
 
+/** One finished game of this case: when the group finished it, and its score. */
+interface MysteryForgeFinishedGame {
+  at: number;
+  percent: number;
+}
+
 /** The evidence board that the group lays out: only the group's own work, the page never judges it. */
 interface MysteryForgeBoard {
   /** The pinned document ids, in board order. */
@@ -330,13 +336,27 @@ interface MysteryForgeArchiveStage {
   envelope: string;
   label: string;
   /** The documents of an envelope that opens at the start; null when the envelope is sealed. */
-  documents: MysteryForgeArchiveDocument[] | null;
+  documents: (MysteryForgeArchiveDocument | MysteryForgeWaitingDocument)[] | null;
   lock: MysteryForgeLock | null;
 }
 
 interface MysteryForgeArchiveContent {
   label: string;
+  documents: (MysteryForgeArchiveDocument | MysteryForgeWaitingDocument)[];
+}
+
+/** A document that joins the archive when players solve the puzzle `after` (its code); sealed until then. */
+interface MysteryForgeWaitingDocument {
+  id: string;
+  after: string;
+  lock: MysteryForgeLock;
+}
+
+/** An open envelope of the archive: its documents so far, and the codes of the puzzles that the rest wait for. */
+interface MysteryForgeOpenStage {
+  label: string;
   documents: MysteryForgeArchiveDocument[];
+  waiting: string[];
 }
 
 interface MysteryForgeArchiveDocument {
@@ -395,6 +415,12 @@ interface MysteryForgeCompanionState {
   answers?: Record<string, string>;
   /** The evidence board that the group lays out on the TV. */
   board?: MysteryForgeBoard;
+}
+
+/** One finished game of this case: when the group finished it, and its score. */
+interface MysteryForgeFinishedGame {
+  at: number;
+  percent: number;
 }
 
 interface MysteryForgeAnswerCheck {
@@ -463,7 +489,7 @@ interface MysteryForgeCompanionLogicApi {
     data: MysteryForgeCompanionData,
     stage: MysteryForgeArchiveStage,
     state: MysteryForgeCompanionState,
-  ): MysteryForgeArchiveContent | null;
+  ): MysteryForgeOpenStage | null;
   openEndings(
     data: MysteryForgeCompanionData,
     state: MysteryForgeCompanionState,
@@ -505,6 +531,9 @@ interface MysteryForgeCompanionLogicApi {
     nowMs: number,
   ): MysteryForgeCompanionState;
   linkedDocuments(board: MysteryForgeBoard, person: string): string[];
+  historyKey(salt: string): string;
+  readHistory(value: unknown): MysteryForgeFinishedGame[];
+  finishedPercent(data: MysteryForgeCompanionData, state: MysteryForgeCompanionState): number | null;
   withMoved(
     state: MysteryForgeCompanionState,
     id: string,

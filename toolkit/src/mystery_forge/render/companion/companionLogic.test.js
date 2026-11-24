@@ -442,6 +442,7 @@ test('an archive envelope opens only with an answer that the group found', () =>
     {
       label: 'Desk',
       documents: [],
+      waiting: [],
     },
   );
   assert.equal(logic.openArchiveStage(data, sealed, logic.freshState()), null);
@@ -450,7 +451,7 @@ test('an archive envelope opens only with an answer that the group found', () =>
   // The vector seals a plain text, so a JSON stage of its own checks the parse.
   assert.throws(() => logic.openArchiveStage(data, sealed, state));
   const noDocuments = { ...sealed, lock: null, documents: null, label: 'X' };
-  assert.deepEqual(logic.openArchiveStage(data, noDocuments, state), { label: 'X', documents: [] });
+  assert.deepEqual(logic.openArchiveStage(data, noDocuments, state), { label: 'X', documents: [], waiting: [] });
 });
 
 test('sealed endings open with the right accusation and join the readable ones', () => {
@@ -589,4 +590,60 @@ test('the newest board wins when the TV and a phone share the game', () => {
   assert.deepEqual(seen, []);
   assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: newer })).board, newer);
   assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: { pinned: 'x' } })), logic.freshState());
+});
+
+test('a document that waits for a puzzle joins its open envelope when the puzzle is solved', () => {
+  const data = playerData();
+  const sealingApi = globalThis.MysteryForgeSealing;
+  const original = sealingApi.openLock;
+  const document = { id: 'D9', kind: 'letter', title: 'Late letter', sheets: [], screen: null };
+  sealingApi.openLock = (lock, salt, answers) => (answers.includes('boathouse') ? JSON.stringify(document) : null);
+  try {
+    /** @type {MysteryForgeArchiveStage} */
+    const stage = {
+      id: 'A',
+      envelope: 'Envelope A',
+      label: 'Desk',
+      documents: [
+        { id: 'D1', kind: 'letter', title: 'Open', sheets: [], screen: null },
+        { id: 'D9', after: 'A1', lock: sealedStage.lock },
+      ],
+      lock: null,
+    };
+    const before = logic.openArchiveStage(data, stage, logic.freshState());
+    assert.deepEqual(
+      before?.documents.map((entry) => entry.id),
+      ['D1'],
+    );
+    assert.deepEqual(before?.waiting, ['A1']);
+    const after = logic.openArchiveStage(data, stage, logic.withAnswer(logic.freshState(), 'A1', 'boathouse'));
+    assert.deepEqual(
+      after?.documents.map((entry) => entry.id),
+      ['D1', 'D9'],
+    );
+    assert.deepEqual(after?.waiting, []);
+  } finally {
+    sealingApi.openLock = original;
+  }
+});
+
+test('the record of finished games keeps valid entries only', () => {
+  assert.equal(logic.historyKey('s'), 'mystery-forge-history:s');
+  assert.deepEqual(logic.readHistory(null), []);
+  assert.deepEqual(logic.readHistory('{broken'), []);
+  assert.deepEqual(logic.readHistory('{"at": 1}'), []);
+  assert.deepEqual(logic.readHistory([{ at: 5, percent: 80 }, { at: 'x', percent: 1 }, 3]), [{ at: 5, percent: 80 }]);
+  assert.deepEqual(logic.readHistory('[{"at": 7, "percent": 100}]'), [{ at: 7, percent: 100 }]);
+});
+
+test('a game is finished after the accusation, or after the final puzzle without one', () => {
+  const data = sampleData();
+  assert.equal(logic.finishedPercent(data, logic.freshState()), null);
+  assert.equal(
+    logic.finishedPercent(data, logic.withAccusation(logic.freshState(), { who: 'felix', why: 'debt' })),
+    100,
+  );
+  const plain = { ...data, deduction: null };
+  assert.equal(logic.finishedPercent(plain, logic.freshState()), null);
+  assert.equal(logic.finishedPercent(plain, logic.withSolved(logic.freshState(), 'B1')), 100);
 });

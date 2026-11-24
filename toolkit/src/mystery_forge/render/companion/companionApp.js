@@ -346,17 +346,7 @@
         message: ui('reset_confirm'),
         yes: ui('reset'),
         strong: true,
-        onYes: () => {
-          stopPlayback();
-          saveState(logic.freshState());
-          if (sharedGame) {
-            fetch('api/reset', { method: 'POST' }).catch(() => undefined);
-          }
-          session.lastCheck = null;
-          session.draftChoices = {};
-          session.shownSolutions = [];
-          session.solutionsOpen = false;
-        },
+        onYes: startOver,
       }),
     );
     return el('div', { className: 'view' }, [
@@ -366,7 +356,9 @@
         data.tagline ? el('p', { className: 'hero-tagline', text: data.tagline }) : null,
       ]),
       storageWorks ? null : el('p', { className: 'notice', text: ui('storage_off'), attrs: { id: 'storage-off' } }),
+      renderHistory(),
       renderEnding(),
+      renderFinish(),
       renderConnect(),
       renderIntro(),
       renderTimerCard(),
@@ -598,14 +590,14 @@
 
   // ---------- Evidence: the archive of every printed document ----------
 
-  /** @type {Map<string, MysteryForgeArchiveContent | null>} */
+  /** @type {Map<string, MysteryForgeOpenStage | null>} */
   const openedStages = new Map();
 
   /**
    * The content of an envelope of the archive, or null while it stays sealed. Opening costs many hashes, so the page
    * keeps each result until the group finds a new answer.
    * @param {MysteryForgeArchiveStage} stage
-   * @returns {MysteryForgeArchiveContent | null}
+   * @returns {MysteryForgeOpenStage | null}
    */
   function archiveContent(stage) {
     const key = `${stage.id}:${Object.keys(state.answers ?? {}).join(',')}`;
@@ -674,6 +666,16 @@
     }
   }
 
+  /**
+   * @param {MysteryForgeOpenStage} content
+   * @returns {HTMLElement | null}
+   */
+  function waitingNote(content) {
+    return content.waiting.length > 0
+      ? el('p', { className: 'locked-note', text: ui('evidence_waiting', { count: content.waiting.length }) })
+      : null;
+  }
+
   function renderEvidence() {
     const archive = /** @type {MysteryForgeArchive} */ (data.archive);
     const view = el('div', { className: 'view view-evidence' }, [
@@ -714,6 +716,7 @@
             text: content.label ? `${stage.envelope} · ${content.label}` : stage.envelope,
           }),
           list,
+          waitingNote(content),
         ]),
       );
     }
@@ -905,10 +908,10 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     press: null,
   };
 
-  /** @returns {{stage: MysteryForgeArchiveStage, content: MysteryForgeArchiveContent}[]} */
+  /** @returns {{stage: MysteryForgeArchiveStage, content: MysteryForgeOpenStage}[]} */
   function openEnvelopes() {
     const archive = /** @type {MysteryForgeArchive} */ (data.archive);
-    /** @type {{stage: MysteryForgeArchiveStage, content: MysteryForgeArchiveContent}[]} */
+    /** @type {{stage: MysteryForgeArchiveStage, content: MysteryForgeOpenStage}[]} */
     const open = [];
     for (const stage of archive.stages) {
       const content = archiveContent(stage);
@@ -1293,6 +1296,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
             text: content.label ? `${stage.envelope} · ${content.label}` : stage.envelope,
           }),
           cards.childElementCount > 0 ? cards : el('p', { className: 'board-empty', text: ui('board_empty') }),
+          waitingNote(content),
         ]),
       );
     }
@@ -1503,6 +1507,103 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     }
     return false;
   };
+
+  // ---------- A finished game: record it and start again ----------
+
+  const history = {
+    /** @type {MysteryForgeFinishedGame[]} */
+    games: [],
+  };
+
+  function loadLocalHistory() {
+    try {
+      history.games = logic.readHistory(window.localStorage.getItem(logic.historyKey(data.salt)));
+    } catch {
+      history.games = [];
+    }
+  }
+
+  async function loadSharedHistory() {
+    try {
+      const response = await fetch('api/history', { cache: 'no-store' });
+      if (response.ok) {
+        history.games = logic.readHistory(await response.json());
+        render();
+      }
+    } catch {
+      // The TV is out of reach: the local record stays.
+    }
+  }
+
+  /** @param {number} percent */
+  function recordFinishedGame(percent) {
+    const entry = { at: Date.now(), percent };
+    history.games = [...history.games, entry];
+    try {
+      window.localStorage.setItem(logic.historyKey(data.salt), JSON.stringify(history.games));
+    } catch {
+      storageWorks = false;
+    }
+    if (sharedGame) {
+      fetch('api/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry),
+      }).catch(() => undefined);
+    }
+  }
+
+  function startOver() {
+    stopPlayback();
+    saveState(logic.freshState());
+    session.lastCheck = null;
+    session.draftChoices = {};
+    session.shownSolutions = [];
+    session.solutionsOpen = false;
+    openedStages.clear();
+    if (sharedGame) {
+      fetch('api/reset', { method: 'POST' }).catch(() => undefined);
+    }
+  }
+
+  function renderHistory() {
+    const last = history.games[history.games.length - 1];
+    if (last === undefined) {
+      return null;
+    }
+    const date = new Date(last.at).toLocaleDateString(data.language);
+    return el('p', {
+      className: 'notice done-summary',
+      text: `✓ ${ui('done_summary', { count: history.games.length, date, percent: last.percent })}`,
+      attrs: { id: 'done-summary' },
+    });
+  }
+
+  function renderFinish() {
+    const percent = logic.finishedPercent(data, state);
+    if (percent === null) {
+      return null;
+    }
+    return el('section', { className: 'paper done-card', attrs: { id: 'done-card' } }, [
+      el('h2', { className: 'paper-title', text: ui('done_heading') }),
+      button(
+        ui('done_button'),
+        'button button-primary',
+        () =>
+          askConfirm({
+            message: ui('done_confirm'),
+            yes: ui('done_button'),
+            strong: false,
+            onYes: () => {
+              recordFinishedGame(percent);
+              startOver();
+              showTab('start');
+            },
+          }),
+        { id: 'done-button' },
+      ),
+    ]);
+  }
 
   // ---------- Check an answer ----------
 
@@ -1799,6 +1900,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
             reveal,
           ])
         : null,
+      renderFinish(),
     ]);
   }
 
@@ -2046,9 +2148,11 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
   });
   if (sharedGame) {
     void loadConnection();
+    void loadSharedHistory();
     void pullShared();
     window.setInterval(() => void pullShared(), 4000);
   }
   window.setInterval(updateTimers, 1000);
+  loadLocalHistory();
   render();
 })();

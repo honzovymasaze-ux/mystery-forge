@@ -428,6 +428,13 @@ CS_COMPANION_STRINGS: Final[dict[str, str]] = {
     "companion_board_note_placeholder": "Napište poznámku…",
     "companion_board_linked": "Přiřazené důkazy: {count}",
     "companion_board_back": "Zpět",
+    "companion_evidence_waiting": "Další důkazy z této obálky přibudou, jak budete řešit její úkoly: {count}.",
+    "companion_done_heading": "Případ uzavřen",
+    "companion_done_button": "Zapsat jako dohráno a začít znovu",
+    "companion_done_confirm": (
+        "Zapsat případ jako dohraný a začít znovu od začátku? Postup i nástěnka se smažou, záznam o dohrání zůstane."
+    ),
+    "companion_done_summary": "Dohráno {count}x · naposledy {date} · {percent} %",
 }
 
 # Czech dates use the genitive month: "24. listopadu 2026".

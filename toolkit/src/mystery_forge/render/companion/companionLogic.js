@@ -469,17 +469,43 @@
 
   /**
    * Open one envelope of the archive with the answers that the group found, or return null while it stays sealed.
+   * A document that waits for a puzzle joins only when that puzzle is solved; `waiting` lists the puzzle codes.
    * @param {MysteryForgeCompanionData} data
    * @param {MysteryForgeArchiveStage} stage
    * @param {MysteryForgeCompanionState} state
-   * @returns {MysteryForgeArchiveContent | null}
+   * @returns {MysteryForgeOpenStage | null}
    */
   function openArchiveStage(data, stage, state) {
+    const sealing = globalThis.MysteryForgeSealing;
+    const answers = Object.values(state.answers ?? {});
+    /** @type {MysteryForgeArchiveContent} */
+    let content;
     if (stage.lock === null) {
-      return { label: stage.label, documents: stage.documents ?? [] };
+      content = { label: stage.label, documents: stage.documents ?? [] };
+    } else {
+      const text = sealing.openLock(stage.lock, data.salt, answers);
+      if (text === null) {
+        return null;
+      }
+      content = JSON.parse(text);
     }
-    const text = globalThis.MysteryForgeSealing.openLock(stage.lock, data.salt, Object.values(state.answers ?? {}));
-    return text === null ? null : JSON.parse(text);
+    /** @type {MysteryForgeArchiveDocument[]} */
+    const documents = [];
+    /** @type {string[]} */
+    const waiting = [];
+    for (const entry of content.documents) {
+      if (!('lock' in entry)) {
+        documents.push(entry);
+        continue;
+      }
+      const text = sealing.openLock(entry.lock, data.salt, answers);
+      if (text === null) {
+        waiting.push(entry.after);
+      } else {
+        documents.push(JSON.parse(text));
+      }
+    }
+    return { label: content.label, documents, waiting };
   }
 
   /**
@@ -767,6 +793,46 @@
     );
   }
 
+  /**
+   * @param {string} salt
+   * @returns {string}
+   */
+  function historyKey(salt) {
+    return `mystery-forge-history:${salt}`;
+  }
+
+  /**
+   * Read the record of finished games. Broken text gives an empty record.
+   * @param {unknown} value
+   * @returns {MysteryForgeFinishedGame[]}
+   */
+  function readHistory(value) {
+    let parsed = value;
+    if (typeof value === 'string') {
+      try {
+        parsed = JSON.parse(value);
+      } catch {
+        return [];
+      }
+    }
+    return Array.isArray(parsed)
+      ? parsed.filter((entry) => isRecord(entry) && isCount(entry.at) && isCount(entry.percent))
+      : [];
+  }
+
+  /**
+   * The score of a finished game: the accusation percent, or 100 for a game without one.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {number | null} null while the game is not finished
+   */
+  function finishedPercent(data, state) {
+    if (data.deduction !== null) {
+      return state.accusation === null ? null : scoreAccusation(data, state.accusation).percent;
+    }
+    return isGameFinished(data, state.solved) ? 100 : null;
+  }
+
   globalThis.MysteryForgeCompanionLogic = {
     freshState,
     storageKey,
@@ -813,5 +879,8 @@
     withNote,
     linkedDocuments,
     withMoved,
+    historyKey,
+    readHistory,
+    finishedPercent,
   };
 })();

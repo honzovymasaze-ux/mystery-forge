@@ -2314,6 +2314,14 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Write a note…",
         "companion_board_linked": "Linked evidence: {count}",
         "companion_board_back": "Back",
+        "companion_evidence_waiting": "More evidence of this envelope appears as you solve its puzzles: {count}.",
+        "companion_done_heading": "Case closed",
+        "companion_done_button": "Record as finished and start again",
+        "companion_done_confirm": (
+            "Record this case as finished and start again from the beginning? The progress and the board are "
+            "erased; the record stays."
+        ),
+        "companion_done_summary": "Finished {count}x · last on {date} · {percent}%",
     },
     "es": {
         "companion_page_label": "Compañero de juego",
@@ -2447,6 +2455,14 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Escribid una nota…",
         "companion_board_linked": "Pruebas vinculadas: {count}",
         "companion_board_back": "Volver",
+        "companion_evidence_waiting": "Más pruebas de este sobre aparecen al resolver sus enigmas: {count}.",
+        "companion_done_heading": "Caso cerrado",
+        "companion_done_button": "Marcar como terminado y empezar de nuevo",
+        "companion_done_confirm": (
+            "¿Marcar este caso como terminado y empezar desde el principio? Se borran el progreso y el tablero; "
+            "el registro se queda."
+        ),
+        "companion_done_summary": "Terminado {count}x · la última vez el {date} · {percent} %",
     },
     "ca": {
         "companion_page_label": "Company de joc",
@@ -2579,6 +2595,14 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Escriviu una nota…",
         "companion_board_linked": "Proves vinculades: {count}",
         "companion_board_back": "Enrere",
+        "companion_evidence_waiting": "Més proves d'aquest sobre apareixen quan en resoleu els enigmes: {count}.",
+        "companion_done_heading": "Cas tancat",
+        "companion_done_button": "Marca com a acabat i torna a començar",
+        "companion_done_confirm": (
+            "Voleu marcar aquest cas com a acabat i tornar a començar? S'esborren el progrés i el tauler; el "
+            "registre es queda."
+        ),
+        "companion_done_summary": "Acabat {count}x · l'última vegada el {date} · {percent} %",
     },
     "fr": {
         "companion_page_label": "Compagnon de jeu",
@@ -2712,6 +2736,16 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Écrivez une note…",
         "companion_board_linked": "Preuves reliées : {count}",
         "companion_board_back": "Retour",
+        "companion_evidence_waiting": (
+            "D'autres preuves de cette enveloppe apparaissent quand vous résolvez ses énigmes : {count}."
+        ),
+        "companion_done_heading": "Affaire classée",
+        "companion_done_button": "Noter comme terminée et recommencer",
+        "companion_done_confirm": (
+            "Noter cette affaire comme terminée et recommencer depuis le début ? La progression et le tableau "
+            "sont effacés ; le registre reste."
+        ),
+        "companion_done_summary": "Terminée {count}x · dernière fois le {date} · {percent} %",
     },
     "de": {
         "companion_page_label": "Spielbegleiter",
@@ -2847,6 +2881,16 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Notiz schreiben…",
         "companion_board_linked": "Zugeordnete Beweise: {count}",
         "companion_board_back": "Zurück",
+        "companion_evidence_waiting": (
+            "Weitere Beweise dieses Umschlags erscheinen, wenn ihr seine Rätsel löst: {count}."
+        ),
+        "companion_done_heading": "Fall abgeschlossen",
+        "companion_done_button": "Als gelöst eintragen und neu beginnen",
+        "companion_done_confirm": (
+            "Diesen Fall als gelöst eintragen und von vorn beginnen? Fortschritt und Pinnwand werden gelöscht; "
+            "der Eintrag bleibt."
+        ),
+        "companion_done_summary": "Gelöst {count}x · zuletzt am {date} · {percent} %",
     },
     "it": {
         "companion_page_label": "Compagno di gioco",
@@ -2979,6 +3023,14 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Scrivete una nota…",
         "companion_board_linked": "Prove collegate: {count}",
         "companion_board_back": "Indietro",
+        "companion_evidence_waiting": "Altre prove di questa busta compaiono quando risolvete i suoi enigmi: {count}.",
+        "companion_done_heading": "Caso chiuso",
+        "companion_done_button": "Segna come finito e ricomincia",
+        "companion_done_confirm": (
+            "Segnare questo caso come finito e ricominciare dall'inizio? Progressi e bacheca vengono cancellati; "
+            "il registro resta."
+        ),
+        "companion_done_summary": "Finito {count}x · l'ultima volta il {date} · {percent}%",
     },
     "pt": {
         "companion_page_label": "Companheiro de jogo",
@@ -3111,6 +3163,14 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_board_note_placeholder": "Escrevam uma nota…",
         "companion_board_linked": "Provas ligadas: {count}",
         "companion_board_back": "Voltar",
+        "companion_evidence_waiting": "Mais provas deste envelope aparecem quando resolverem os seus enigmas: {count}.",
+        "companion_done_heading": "Caso encerrado",
+        "companion_done_button": "Registar como terminado e recomeçar",
+        "companion_done_confirm": (
+            "Registar este caso como terminado e recomeçar do início? O progresso e o quadro são apagados; o "
+            "registo fica."
+        ),
+        "companion_done_summary": "Terminado {count}x · última vez a {date} · {percent} %",
     },
 }
 STRINGS["cs"] = dict(CS_STRINGS)

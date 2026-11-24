@@ -26,14 +26,16 @@ import java.util.Locale;
  * accusation, and the evidence board. Every device merges that state into its own (companionLogic.js,
  * mergeSharedState).
  *
- * It serves three paths only: the page, api/state (GET and POST), api/reset (POST), and api/info (the address for
- * the QR code). Nothing leaves the local network.
+ * It serves the page, api/state (GET and POST), api/reset (POST), api/history (GET and POST, the record of
+ * finished games), and api/info (the address for the QR code). Nothing leaves the local network.
  */
 final class GameServer {
     static final int PORT = 8080;
     private static final String PAGE = "pruvodce.html";
     private static final String PREFERENCES = "shared-game";
     private static final String STATE_KEY = "state";
+    // The record of finished games: a new game (api/reset) erases the state, never this record.
+    private static final String HISTORY_KEY = "history";
     private static final int MAX_BODY = 256 * 1024;
 
     private final Context context;
@@ -155,6 +157,10 @@ final class GameServer {
             send(output, 200, "application/json", merge(parse(body)).getBytes(StandardCharsets.UTF_8));
         } else if (path.equals("/api/state")) {
             send(output, 200, "application/json", snapshot().getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/api/history") && method.equals("POST")) {
+            send(output, 200, "application/json", addHistory(parse(body)).getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/api/history")) {
+            send(output, 200, "application/json", history().toString().getBytes(StandardCharsets.UTF_8));
         } else if (path.equals("/api/reset") && method.equals("POST")) {
             synchronized (this) {
                 state = new JSONObject();
@@ -166,6 +172,21 @@ final class GameServer {
         } else {
             send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
         }
+    }
+
+    private synchronized JSONArray history() {
+        try {
+            return new JSONArray(preferences.getString(HISTORY_KEY, "[]"));
+        } catch (JSONException error) {
+            return new JSONArray();
+        }
+    }
+
+    private synchronized String addHistory(JSONObject entry) {
+        JSONArray games = history();
+        games.put(entry);
+        preferences.edit().putString(HISTORY_KEY, games.toString()).apply();
+        return games.toString();
     }
 
     private synchronized String snapshot() {

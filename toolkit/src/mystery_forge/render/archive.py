@@ -112,6 +112,21 @@ def document_entry(game: Game, document: AssembledDocument, sheets: list[str]) -
     }
 
 
+def waiting_entry(
+    game: Game, document: AssembledDocument, entry: dict[str, Any], codes: dict[str, str]
+) -> dict[str, Any]:
+    """Seal a document that waits for a puzzle (`after`), so it joins the archive only when players solve it."""
+    after: str | None = document.meta.after
+    accepted: list[str] | None = next(
+        (puzzle.accepted_normalized for puzzle in game.puzzles if puzzle.source.id == after), None
+    )
+    # A document that waits for no puzzle, or for one that does not exist (the checks report it), stays open.
+    if after is None or accepted is None:
+        return entry
+    lock = lock_text(json.dumps(entry, ensure_ascii=False), game.salt, f"document:{document.meta.id}", accepted)
+    return {"id": document.meta.id, "after": codes[after], "lock": lock.as_json()}
+
+
 def build_archive(game: Game, settings: StyleSettings) -> dict[str, Any]:
     """Return the archive data of the player companion, with every envelope after the first one sealed."""
     language: str = game.config.language
@@ -128,13 +143,15 @@ def build_archive(game: Game, settings: StyleSettings) -> dict[str, Any]:
         elif sheet.role in HELPER_ROLES:
             helpers.append(section)
     accepted: dict[str, list[str]] = {puzzle.source.id: puzzle.accepted_normalized for puzzle in game.puzzles}
+    codes: dict[str, str] = {puzzle.source.id: puzzle.code for puzzle in game.puzzles}
     stages: list[dict[str, Any]] = []
     for index, stage in enumerate(game.flow.stages):
         documents: list[AssembledDocument] = sorted(
             (document for document in game.documents if document.meta.stage == stage.id), key=document_sort_key
         )
         entries: list[dict[str, Any]] = [
-            document_entry(game, document, by_document.get(document.meta.id, [])) for document in documents
+            waiting_entry(game, document, document_entry(game, document, by_document.get(document.meta.id, [])), codes)
+            for document in documents
         ]
         if index == 0 and helpers:
             entries.append(
