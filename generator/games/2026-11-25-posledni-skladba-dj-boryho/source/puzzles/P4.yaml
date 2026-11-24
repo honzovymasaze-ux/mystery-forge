@@ -1,0 +1,61 @@
+format_version: 1
+id: P4
+title: Časové mantinely
+stage: B
+mechanic: deduction
+difficulty: medium
+
+in_world_reason: |
+  Pro systematické prověřování sedmi alibi je
+  potřeba vypočítat délku předběžného rozhodného
+  časového intervalu.
+
+reveals: Délku předběžného intervalu pro kontrolu alibi.
+
+reveal_text: |
+  Předběžný interval má 25 minut.
+  Nepovažujte jej však za definitivní časové určení
+  smrtelného konfliktu.
+
+answer: "25"
+accepted: ["25 minut", "dvacet pět", "dvacetpet"]
+
+answer_format:
+  kind: number
+  label: Počet minut
+
+question: Kolik minut trvá předběžný časový interval určený soudní lékařkou pro další prověřování?
+
+params: {}
+unlocks: C
+
+clues:
+  - id: p4-interval
+    document: D14
+    quote: "Pro další prověřování doporučuji pracovat s předběžným časovým intervalem 21:20–21:45."
+
+  - id: p4-omezeni
+    document: D16
+    quote: "Ukončení použitelného senzorového záznamu nelze bez dalších podkladů ztotožnit s okamžikem smrti."
+
+solution:
+  - text: Stanovte začátek a konec předběžného intervalu.
+    uses: [p4-interval]
+
+  - text: Vypočítejte rozdíl mezi 21:20 a 21:45.
+    uses: [p4-interval]
+
+  - text: Nepoužívejte samostatný údaj z chytrých hodinek jako přesný čas úmrtí.
+    uses: [p4-omezeni]
+
+hints:
+  - level: 1
+    text: Hledáte délku časového intervalu, nikoli konkrétní hodinu.
+
+  - level: 2
+    text: Použijte interval 21:20–21:45.
+
+  - level: 3
+    text: Výsledek je o pět minut kratší než půl hodiny.
+
+canary: canary-p4-kapradina

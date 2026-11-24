@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "audience": "adults",
+  "format": "case_file",
+  "players": {
+    "count": 4,
+    "names": []
+  },
+  "host": "self_running",
+  "duration_minutes": 240,
+  "difficulty": "hard",
+  "language": "cs",
+  "theme": {
+    "idea": "Vražda DJ Boryho, hospodského, svatebního DJ a provozovatele dvou koupališť v Kunštátu a okolí",
+    "tone": "dramatic",
+    "era": "modern"
+  },
+  "content": {
+    "death_allowed": true,
+    "scary_level": "mild",
+    "reading_load": "heavy"
+  },
+  "personalization": {
+    "host_name": "",
+    "place": "",
+    "inside_jokes": [],
+    "dedication": ""
+  },
+  "puzzle_preferences": {
+    "words": "neutral",
+    "numbers": "neutral",
+    "logic": "neutral",
+    "visual": "neutral",
+    "crafts": "neutral",
+    "deduction": "neutral"
+  },
+  "equipment": {
+    "printer": "color",
+    "ink_saving": false,
+    "paper": "A4",
+    "scissors": true,
+    "tape_or_glue": true,
+    "envelopes": true,
+    "double_sided": false
+  },
+  "assistance": {
+    "hints": true,
+    "paper_answer_check": true,
+    "companion_page": true
+  },
+  "visuals": {
+    "style": "noir",
+    "images": "svg",
+    "readable_font": false
+  },
+  "generation": {
+    "quality": "best",
+    "pick_concept": "agent",
+    "seed": 0
+  },
+  "output": {
+    "folder": ""
+  }
+}

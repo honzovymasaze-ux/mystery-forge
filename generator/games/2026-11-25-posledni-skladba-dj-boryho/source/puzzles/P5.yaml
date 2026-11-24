@@ -1,0 +1,60 @@
+format_version: 1
+id: P5
+title: Kamera, která předbíhala
+stage: C
+mechanic: recontextualized-document
+difficulty: hard
+
+in_world_reason: |
+  Kamerové záznamy nelze správně vložit do časové osy,
+  dokud není zohledněna zjištěná odchylka hodin kamery.
+
+reveals: Skutečný čas zachycené kamerové události.
+
+reveal_text: |
+  Správně. Událost zachycená v 21:26 podle hodin
+  kamery se ve skutečnosti odehrála v 21:18.
+
+  Opravte stejným způsobem i ostatní záznamy kamery K-02.
+
+answer: "21:18"
+accepted: ["2118", "21.18", "21 18", "21:18:00"]
+
+answer_format:
+  kind: phrase
+  label: Opravený čas HH:MM
+
+question: V kolik hodin skutečného místního času bylo pořízeno kamerové zachycení vozidla s označením FIK-3107?
+
+params: {}
+
+clues:
+  - id: p5-odchylka
+    document: D27
+    quote: "Čas zobrazovaný kamerou K-02 byl o osm minut napřed oproti skutečnému místnímu času."
+
+  - id: p5-snimek
+    document: D28
+    quote: "Na snímku s časovým údajem 21:26 je zachyceno bílé vozidlo s provozním označením FIK-3107."
+
+solution:
+  - text: Zjistěte čas zobrazený přímo na kamerovém záznamu.
+    uses: [p5-snimek]
+
+  - text: Určete velikost a směr časové odchylky.
+    uses: [p5-odchylka]
+
+  - text: Od zobrazeného času odečtěte osm minut.
+    uses: [p5-snimek, p5-odchylka]
+
+hints:
+  - level: 1
+    text: Hodiny kamery nejsou totožné se skutečným místním časem.
+
+  - level: 2
+    text: Kamera předbíhá, takže odchylku musíte odečíst.
+
+  - level: 3
+    text: Odečtěte osm minut od času 21:26.
+
+canary: canary-p5-pazourek

@@ -1,0 +1,72 @@
+format_version: 1
+id: P7
+title: Dvě hromádky peněz
+stage: D
+mechanic: deduction
+difficulty: hard
+
+in_world_reason: |
+  Hospodářské vyšetřování odhalilo dvě odlišné
+  skupiny neoprávněných finančních operací.
+
+  Tým musí vyčíslit škodu způsobenou refundacemi,
+  aniž by do ní zahrnul soukromé výdaje, pohledávky
+  dodavatele nebo rodinný dluh.
+
+reveals: Celkovou hodnotu neoprávněných refundací.
+
+reveal_text: |
+  Částka 187600 Kč odpovídá neoprávněným refundacím.
+
+  Nyní víte, jak velkou finanční nesrovnalost
+  potřebovala objasnit mimořádná účetní kontrola.
+
+answer: "187600"
+accepted: ["187 600", "187600 Kč", "187 600 Kč", "187.600"]
+
+answer_format:
+  kind: number
+  label: Částka v Kč
+
+question: Jaká je celková hodnota neoprávněných refundací bez započtení ostatních finančních nesrovnalostí?
+
+params: {}
+
+clues:
+  - id: p7-soukrome
+    document: D25
+    quote: "Souhrnná hodnota předběžně identifikovaných soukromých výdajů činí 96000 Kč."
+
+  - id: p7-oddeleni
+    document: D41
+    quote: "Soukromé výdaje ve výši 96000 Kč a neoprávněné refundace představují dvě samostatné skupiny transakcí."
+
+  - id: p7-refundace
+    document: D43
+    quote: "Celková hodnota neoprávněných refundací činí 187600 Kč."
+
+  - id: p7-pohledavka
+    document: D51
+    quote: "Celková sporná pohledávka za dodané zboží činí 138400 Kč."
+
+solution:
+  - text: Oddělte soukromé výdaje od zákaznických refundací.
+    uses: [p7-soukrome, p7-oddeleni]
+
+  - text: Vyřaďte dodavatelské pohledávky, které do této skupiny transakcí nepatří.
+    uses: [p7-pohledavka]
+
+  - text: Použijte součet potvrzený kontrolou neoprávněných refundací.
+    uses: [p7-refundace]
+
+hints:
+  - level: 1
+    text: Podnik měl více finančních problémů, ale nemají stejný původ.
+
+  - level: 2
+    text: Hledejte výhradně peníze evidované jako vrácené zákazníkům.
+
+  - level: 3
+    text: Hledaná částka je vyšší než 180000 Kč a nižší než 190000 Kč.
+
+canary: canary-p7-medenec

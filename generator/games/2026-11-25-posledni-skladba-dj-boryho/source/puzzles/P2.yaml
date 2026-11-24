@@ -1,0 +1,57 @@
+format_version: 1
+id: P2
+title: Poslední potvrzený odchod
+stage: A
+mechanic: deduction
+difficulty: medium
+
+in_world_reason: |
+  Tým musí stanovit první spolehlivý časový bod
+  nedělního večera. Výpovědi zaměstnanců obsahují
+  několik různých časových odhadů.
+
+reveals: Poslední ověřený čas odchodu oběti z hospody.
+
+reveal_text: |
+  Čas 19:15 je nezávisle potvrzený.
+  Zaznamenejte jej jako výchozí bod nedělní časové osy.
+
+answer: "19:15"
+accepted: ["1915", "19.15", "19 15", "19:15:00"]
+
+answer_format:
+  kind: phrase
+  label: Čas HH:MM
+
+question: V kolik hodin oběť prokazatelně odešla z hospody?
+
+params: {}
+unlocks: B
+
+clues:
+  - id: p2-odhad
+    document: D7
+    quote: "Odešel někdy kolem sedmé, přesně si to nepamatuji."
+
+  - id: p2-potvrzeni
+    document: D13
+    quote: "Odchod majitele z hospody byl potvrzen v 19:15."
+
+solution:
+  - text: Rozlište přibližný svědecký odhad od ověřeného časového údaje.
+    uses: [p2-odhad, p2-potvrzeni]
+
+  - text: Do časové osy zapište potvrzený čas 19:15.
+    uses: [p2-potvrzeni]
+
+hints:
+  - level: 1
+    text: Odhad času nemusí odpovídat skutečnému okamžiku události.
+
+  - level: 2
+    text: Porovnejte první výpověď manželky s provozní dokumentací hospody.
+
+  - level: 3
+    text: Oběť odešla čtvrt hodiny po sedmé večer.
+
+canary: canary-p2-vreteno
