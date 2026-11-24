@@ -223,13 +223,19 @@ Obrázky stáhněte a pošlete Claudovi s tím, jak se jmenují (např. `portrai
 - `<název případu>.apk` – aplikace do televize (Android TV / Google TV): úvod, kapitoly, hlasovky,
   ověřování odpovědí, nápovědy a obvinění.
 
-## Instalace aplikace do televize
+## Instalace aplikace do televize (Chromecast s Google TV)
 
-1. Na televizi otevřete **Nastavení → Systém → Informace** a sedmkrát klikněte na **Sestavení systému** (zapne
-   vývojářský režim). V **Nastavení → Zabezpečení** povolte **Neznámé zdroje** pro aplikaci, kterou budete
-   instalovat (třeba Downloader nebo Správce souborů).
-2. Soubor `.apk` dostanete do televize přes USB flash disk, nebo aplikací **Send files to TV** z telefonu.
-3. Otevřete ho v televizi a potvrďte instalaci. Aplikace se objeví mezi aplikacemi jako název případu.
+Aplikace běží na **Chromecastu s Google TV** (ten s ovladačem), na Google TV a na Android TV.
+
+1. Na Chromecastu otevřete **Nastavení → Systém → Informace** a sedmkrát klikněte na **Sestavení systému
+   Android TV OS**. Zapne se vývojářský režim.
+2. Z obchodu Google Play na Chromecastu nainstalujte aplikaci **Send files to TV** (stejnou dejte i do telefonu).
+3. V **Nastavení → Aplikace → Zabezpečení a omezení → Neznámé zdroje** povolte aplikaci **Send files to TV**.
+4. Soubor `.apk` pošlete z telefonu přes **Send files to TV** (telefon i Chromecast musí být na stejné Wi-Fi).
+5. Na Chromecastu soubor otevřete a potvrďte **Instalovat**. Hra se objeví v **Aplikacích** pod názvem případu.
+
+Starší Chromecast bez ovladače aplikace instalovat neumí. Tam otevřete soubor `Průvodce hrou.html` v telefonu
+a obrazovku telefonu pošlete do televize: aplikace **Google Home → zařízení → Odeslat obrazovku**.
 
 Ovládání: šipky na ovladači přecházejí mezi tlačítky, OK potvrdí. Odpověď se píše klávesnicí na obrazovce
 (nebo hlasem z ovladače). Hlasovky čte hlas televize. V češtině je potřeba mít v televizi nainstalovaný
