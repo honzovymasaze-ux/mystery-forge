@@ -253,7 +253,8 @@ interface MysteryForgeCompanionPuzzle {
   /** The stage that this puzzle's answer opens, or null. */
   unlocks: string | null;
   hints: { level: number; text: string }[];
-  solution: { steps: string[]; answer: string };
+  /** Null in the player version, which holds no solution. */
+  solution: { steps: string[]; answer: string } | null;
   /** The story payoff that the page shows on a correct answer; empty when the puzzle has none. */
   reveal_text: string;
 }
@@ -292,6 +293,51 @@ interface MysteryForgeCompanionData {
   reveal: string[];
   /** The investigator's story and the voice messages, or null for a game without investigation.yaml. */
   investigation: { narrator: { name: string; role: string }; entries: MysteryForgeCompanionCaseEntry[] } | null;
+  /** True for the player version (TV app and phones): no solutions, sealed endings, and the archive. */
+  player: boolean;
+  archive: MysteryForgeArchive | null;
+  ending_lock: MysteryForgeLock | null;
+}
+
+/** The documents of every envelope (toolkit/src/mystery_forge/render/archive.py). */
+interface MysteryForgeArchive {
+  /** The fonts and the theme of the printed materials, for the printed look of a document. */
+  css: string;
+  body_class: string;
+  stages: MysteryForgeArchiveStage[];
+}
+
+interface MysteryForgeArchiveStage {
+  id: string;
+  envelope: string;
+  label: string;
+  /** The documents of an envelope that opens at the start; null when the envelope is sealed. */
+  documents: MysteryForgeArchiveDocument[] | null;
+  lock: MysteryForgeLock | null;
+}
+
+interface MysteryForgeArchiveContent {
+  label: string;
+  documents: MysteryForgeArchiveDocument[];
+}
+
+interface MysteryForgeArchiveDocument {
+  id: string;
+  kind: string;
+  title: string;
+  /** The HTML of each printed sheet. */
+  sheets: string[];
+  screen: MysteryForgeScreen | null;
+}
+
+/** A digital document drawn as a device screen. */
+interface MysteryForgeScreen {
+  type: 'chat' | 'calls' | 'email' | 'camera';
+  fields: Record<string, string>;
+  messages?: { speaker: string; html: string }[];
+  header?: string[];
+  rows?: string[][];
+  html?: string;
 }
 
 /** One chapter of the investigator's story, or one voice message of the team. */
@@ -327,6 +373,8 @@ interface MysteryForgeCompanionState {
   accusation: Record<string, string> | null;
   /** The ids of the chapters and voice messages that the group has seen on the case tab. */
   seen?: string[];
+  /** The normalized answer of each solved puzzle, by code. It opens the sealed envelopes of the archive. */
+  answers?: Record<string, string>;
 }
 
 interface MysteryForgeAnswerCheck {
@@ -390,6 +438,23 @@ interface MysteryForgeCompanionLogicApi {
   withSeen(state: MysteryForgeCompanionState, ids: string[]): MysteryForgeCompanionState;
   speechSettings(voice: 'male' | 'female'): { pitch: number; rate: number };
   paragraphs(text: string): string[];
+  withAnswer(state: MysteryForgeCompanionState, code: string, normalizedAnswer: string): MysteryForgeCompanionState;
+  openArchiveStage(
+    data: MysteryForgeCompanionData,
+    stage: MysteryForgeArchiveStage,
+    state: MysteryForgeCompanionState,
+  ): MysteryForgeArchiveContent | null;
+  openEndings(
+    data: MysteryForgeCompanionData,
+    state: MysteryForgeCompanionState,
+  ): { epilogues: MysteryForgeCompanionEpilogue[]; reveal: string[] } | null;
+  withOpenedEndings(data: MysteryForgeCompanionData, state: MysteryForgeCompanionState): MysteryForgeCompanionData;
+  mergeSharedState(local: MysteryForgeCompanionState, remote: unknown): MysteryForgeCompanionState;
+  sharedState(state: MysteryForgeCompanionState): {
+    solved: string[];
+    answers: Record<string, string>;
+    accusation: Record<string, string> | null;
+  };
 }
 
 declare var MysteryForgeCompanionLogic: MysteryForgeCompanionLogicApi;
@@ -403,6 +468,40 @@ interface MysteryForgeNativeSpeech {
 
 interface Window {
   MysteryForgeTts?: MysteryForgeNativeSpeech;
+  /** The TV app calls this on the Back button. True when the page closed something itself. */
+  MysteryForgeBack?: () => boolean;
   /** The TV app calls this when it finishes speaking the entry with this id. */
   MysteryForgeTtsDone?: (id: string) => void;
 }
+
+/** A sealed text that each accepted answer opens (toolkit/src/mystery_forge/sealing.py). */
+interface MysteryForgeLock {
+  label: string;
+  check: string;
+  wraps: string[];
+  payload: string;
+}
+
+interface MysteryForgeSealingApi {
+  answerKey(salt: string, label: string, normalizedAnswer: string): string;
+  keyCheck(key: string): string;
+  openText(sealed: string, key: string): string;
+  unlockKey(lock: MysteryForgeLock, salt: string, normalizedAnswer: string): string | null;
+  openLock(lock: MysteryForgeLock, salt: string, normalizedAnswers: string[]): string | null;
+}
+
+declare var MysteryForgeSealing: MysteryForgeSealingApi;
+
+/** The vendored QR encoder (render/companion/qrcode.js, qrcode-generator by Kazuhiko Arase, MIT). */
+interface MysteryForgeQrCodeApi {
+  (
+    typeNumber: number,
+    errorCorrectionLevel: 'L' | 'M' | 'Q' | 'H',
+  ): {
+    addData(data: string): void;
+    make(): void;
+    createSvgTag(options: { cellSize?: number; margin?: number; scalable?: boolean }): string;
+  };
+}
+
+declare var MysteryForgeQrCode: MysteryForgeQrCodeApi;

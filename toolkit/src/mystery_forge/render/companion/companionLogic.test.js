@@ -5,6 +5,7 @@ const path = require('node:path');
 
 // Classic browser scripts, not modules: load them for their side effect, by a computed path that tsc does not resolve.
 require(path.join(__dirname, 'answers.js'));
+require(path.join(__dirname, 'sealing.js'));
 require(path.join(__dirname, 'companionLogic.js'));
 const answers = globalThis.MysteryForgeAnswers;
 const logic = globalThis.MysteryForgeCompanionLogic;
@@ -108,6 +109,9 @@ function sampleData() {
     ],
     reveal: ['By boat.'],
     investigation: null,
+    player: false,
+    archive: null,
+    ending_lock: null,
   };
 }
 
@@ -389,4 +393,120 @@ test('a female voice speaks higher than a male voice', () => {
 
 test('a story text splits into its paragraphs', () => {
   assert.deepEqual(logic.paragraphs('One.\n\n  Two.  \n \n'), ['One.', 'Two.']);
+});
+
+const fs = require('node:fs');
+const sealingContract = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '..', '..', '..', '..', '..', 'contracts', 'sealing-vectors.json'), 'utf8'),
+);
+const sealedStage = sealingContract.vectors[0];
+
+/** @returns {MysteryForgeCompanionData} */
+function playerData() {
+  const data = sampleData();
+  return {
+    ...data,
+    salt: sealingContract.salt,
+    player: true,
+    puzzles: data.puzzles.map((puzzle) => ({ ...puzzle, solution: null })),
+    archive: {
+      css: '',
+      body_class: '',
+      stages: [
+        { id: 'A', envelope: 'Envelope A', label: 'Desk', documents: [], lock: null },
+        { id: 'B', envelope: 'Envelope B', label: '', documents: null, lock: sealedStage.lock },
+      ],
+    },
+  };
+}
+
+test('the player version has no answer step: the last hint is the last step', () => {
+  const data = playerData();
+  let state = logic.freshState();
+  assert.equal(logic.nextHintLevel(data, state, 'A1'), 1);
+  state = logic.withHintStep(data, state, 'A1');
+  state = logic.withHintStep(data, state, 'A1');
+  assert.equal(logic.nextHintLevel(data, state, 'A1'), null);
+  assert.equal(logic.isAnswerShown(data, state, 'A1'), false);
+  assert.equal(logic.withHintStep(data, state, 'A1'), state);
+  assert.equal(logic.nextHintLevel(data, state, 'Z9'), null);
+});
+
+test('an archive envelope opens only with an answer that the group found', () => {
+  const data = playerData();
+  const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+  const sealed = /** @type {MysteryForgeArchiveStage} */ (archive.stages[1]);
+  assert.deepEqual(
+    logic.openArchiveStage(data, /** @type {MysteryForgeArchiveStage} */ (archive.stages[0]), logic.freshState()),
+    {
+      label: 'Desk',
+      documents: [],
+    },
+  );
+  assert.equal(logic.openArchiveStage(data, sealed, logic.freshState()), null);
+  const state = logic.withAnswer(logic.freshState(), 'A1', sealedStage.answers[1]);
+  assert.deepEqual(state.solved, ['A1']);
+  // The vector seals a plain text, so a JSON stage of its own checks the parse.
+  assert.throws(() => logic.openArchiveStage(data, sealed, state));
+  const noDocuments = { ...sealed, lock: null, documents: null, label: 'X' };
+  assert.deepEqual(logic.openArchiveStage(data, noDocuments, state), { label: 'X', documents: [] });
+});
+
+test('sealed endings open with the right accusation and join the readable ones', () => {
+  const ending = sealingContract.vectors.find((/** @type {{label: string}} */ vector) => vector.label === 'epilogue');
+  const data = { ...playerData(), ending_lock: ending.lock };
+  assert.equal(logic.openEndings({ ...data, ending_lock: null }, logic.freshState()), null);
+  assert.equal(logic.withOpenedEndings(data, logic.freshState()), data);
+  assert.equal(logic.openEndings(data, logic.withAccusation(logic.freshState(), { who: 'ana' })), null);
+  const noQuestions = { ...data, deduction: null };
+  assert.equal(logic.openEndings(noQuestions, logic.freshState()), null);
+  assert.throws(() => logic.openEndings(data, logic.withAccusation(logic.freshState(), { who: ending.answers[0] })));
+});
+
+test('opened endings are sorted with the readable ones', () => {
+  const lockText = JSON.stringify({
+    epilogues: [{ min_score_percent: 75, title: 'Top', text: 'All.' }],
+    reveal: ['R'],
+  });
+  const data = { ...playerData(), epilogues: [{ min_score_percent: 0, title: 'Low', text: 'None.' }] };
+  const sealingApi = globalThis.MysteryForgeSealing;
+  const original = sealingApi.openLock;
+  sealingApi.openLock = () => lockText;
+  try {
+    const opened = logic.withOpenedEndings({ ...data, ending_lock: sealedStage.lock }, logic.freshState());
+    assert.deepEqual(
+      opened.epilogues.map((epilogue) => epilogue.title),
+      ['Top', 'Low'],
+    );
+    assert.deepEqual(opened.reveal, ['R']);
+  } finally {
+    sealingApi.openLock = original;
+  }
+});
+
+test('the shared state of the TV merges into a device without losing anything local', () => {
+  let local = logic.withAnswer(logic.freshState(), 'A1', 'boathouse');
+  assert.equal(logic.mergeSharedState(local, null), local);
+  const merged = logic.mergeSharedState(local, {
+    solved: ['A1', 'A2', 7],
+    answers: { A1: 'other', A2: '0726', B1: 5 },
+    accusation: { who: 'felix' },
+  });
+  assert.deepEqual(merged.solved, ['A1', 'A2']);
+  assert.deepEqual(merged.answers, { A1: 'boathouse', A2: '0726' });
+  assert.deepEqual(merged.accusation, { who: 'felix' });
+  const odd = logic.mergeSharedState(logic.freshState(), { solved: 'x', answers: 'y', accusation: { who: 3 } });
+  assert.deepEqual(odd.solved, []);
+  assert.deepEqual(odd.answers, {});
+  assert.equal(odd.accusation, null);
+  local = logic.withAccusation(local, { who: 'ana' });
+  assert.deepEqual(logic.mergeSharedState(local, { accusation: { who: 'felix' } }).accusation, { who: 'ana' });
+  assert.deepEqual(logic.sharedState(logic.freshState()), { solved: [], answers: {}, accusation: null });
+});
+
+test('stored answers must be texts for a saved state to load', () => {
+  const { seen, ...old } = logic.freshState();
+  assert.deepEqual(seen, []);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 'x' } })).answers, { A1: 'x' });
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 2 } })), logic.freshState());
 });

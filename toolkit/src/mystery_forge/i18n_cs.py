@@ -15,6 +15,7 @@ CS_STRINGS: Final[dict[str, str]] = {
     "file_hints": "3 - Nápovědy",
     "file_solutions": "4 - Řešení",
     "file_companion": "Průvodce hrou",
+    "file_player_companion": "Průvodce pro hráče (TV a mobil)",
     "folder_spoilers": "JEN PRO VEDOUCÍHO HRY - řešení",
     "file_export_warnings": "0 - PŘEČTĚTE NEJDŘÍV (upozornění)",
     "export_warnings_title": "Přečtěte si to před hrou",
@@ -380,6 +381,22 @@ CS_COMPANION_STRINGS: Final[dict[str, str]] = {
     "companion_no_speech": "Tento prohlížeč neumí číst nahlas. Text přečte někdo z vás.",
     "companion_new_entries": "Nové ve vyšetřování: {count}",
     "companion_new_entries_open": "Otevřít vyšetřování",
+    "companion_tab_evidence": "Důkazy",
+    "companion_evidence_heading": "Archiv důkazů",
+    "companion_evidence_sealed": "Zapečetěno. Otevře se, až vyřešíte úkol, který otevírá tuto obálku.",
+    "companion_viewer_prev": "Předchozí dokument",
+    "companion_viewer_next": "Další dokument",
+    "companion_viewer_zoom_in": "Přiblížit",
+    "companion_viewer_zoom_out": "Oddálit",
+    "companion_viewer_paper": "Tištěná podoba",
+    "companion_viewer_screen": "Na displeji",
+    "companion_connect_heading": "Připojte telefony",
+    "companion_connect_text": (
+        "Naskenujte kód telefonem připojeným ke stejné Wi-Fi jako televize. Všechny telefony uvidí stejné "
+        "vyřešené úkoly a důkazy."
+    ),
+    "companion_mail_from": "Od",
+    "companion_mail_to": "Komu",
 }
 
 # Czech dates use the genitive month: "24. listopadu 2026".

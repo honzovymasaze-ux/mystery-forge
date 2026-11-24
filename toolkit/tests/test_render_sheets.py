@@ -69,6 +69,7 @@ def test_the_output_file_names_follow_the_game_language() -> None:
             "solutions": "4 - Solutions.pdf",
         },
         companion="Game companion.html",
+        player_companion="Player companion (TV and phones).html",
         warnings="0 - READ FIRST (warnings).txt",
         spoiler_folder="HOST ONLY - spoilers",
     )

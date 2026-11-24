@@ -10,7 +10,7 @@
   const appElement = /** @type {HTMLElement} */ (document.getElementById('app'));
   const key = logic.storageKey(data.salt);
 
-  /** @typedef {'start' | 'case' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
+  /** @typedef {'start' | 'case' | 'evidence' | 'check' | 'hints' | 'accuse' | 'solutions'} TabId */
   /** @typedef {{message: string, yes: string, strong: boolean, onYes: () => void}} ConfirmRequest */
 
   let storageWorks = true;
@@ -166,6 +166,9 @@
     if (data.investigation !== null) {
       list.push(['case', ui('tab_case'), 'M4 7h6l2 2h8v10H4zM8 13h8M8 16h5']);
     }
+    if (data.archive !== null) {
+      list.push(['evidence', ui('tab_evidence'), 'M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7']);
+    }
     list.push(
       ['check', ui('tab_check'), 'M5 12l4 4 10-10'],
       [
@@ -177,7 +180,10 @@
     if (data.deduction !== null) {
       list.push(['accuse', ui('tab_accuse'), 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM16 16l5 5']);
     }
-    list.push(['solutions', ui('tab_solutions'), 'M12 3l9 16H3zM12 10v4M12 17v.5']);
+    // The player version holds no solution, so it has no solutions tab.
+    if (!data.player) {
+      list.push(['solutions', ui('tab_solutions'), 'M12 3l9 16H3zM12 10v4M12 17v.5']);
+    }
     return list;
   }
 
@@ -296,7 +302,7 @@
     if (data.deduction !== null || !logic.isGameFinished(data, solvedCodes())) {
       return null;
     }
-    const epilogue = logic.epilogueForPercent(data, 100);
+    const epilogue = logic.epilogueForPercent(logic.withOpenedEndings(data, state), 100);
     return el('section', { className: 'paper ending reveal-in', attrs: { id: 'ending' } }, [
       el('p', { className: 'stamp', text: ui('final_solved') }),
       el('h2', { className: 'paper-title', text: epilogue ? epilogue.title : ui('ending_heading') }),
@@ -342,6 +348,9 @@
         onYes: () => {
           stopPlayback();
           saveState(logic.freshState());
+          if (sharedGame) {
+            fetch('api/reset', { method: 'POST' }).catch(() => undefined);
+          }
           session.lastCheck = null;
           session.draftChoices = {};
           session.shownSolutions = [];
@@ -357,6 +366,7 @@
       ]),
       storageWorks ? null : el('p', { className: 'notice', text: ui('storage_off'), attrs: { id: 'storage-off' } }),
       renderEnding(),
+      renderConnect(),
       renderIntro(),
       renderTimerCard(),
       renderEnvelopes(),
@@ -585,6 +595,424 @@
     ]);
   }
 
+  // ---------- Evidence: the archive of every printed document ----------
+
+  /** @type {Map<string, MysteryForgeArchiveContent | null>} */
+  const openedStages = new Map();
+
+  /**
+   * The content of an envelope of the archive, or null while it stays sealed. Opening costs many hashes, so the page
+   * keeps each result until the group finds a new answer.
+   * @param {MysteryForgeArchiveStage} stage
+   * @returns {MysteryForgeArchiveContent | null}
+   */
+  function archiveContent(stage) {
+    const key = `${stage.id}:${Object.keys(state.answers ?? {}).join(',')}`;
+    if (!openedStages.has(key)) {
+      openedStages.set(key, logic.openArchiveStage(data, stage, state));
+    }
+    return openedStages.get(key) ?? null;
+  }
+
+  /** The document viewer: the list that it pages through, and how it shows the current document. */
+  const viewer = {
+    /** @type {MysteryForgeArchiveDocument[]} */
+    list: [],
+    index: -1,
+    zoom: 1,
+    paper: false,
+  };
+
+  function viewerOpen() {
+    return viewer.index >= 0;
+  }
+
+  /**
+   * @param {MysteryForgeArchiveDocument[]} list
+   * @param {number} index
+   */
+  function openViewer(list, index) {
+    viewer.list = list;
+    viewer.index = index;
+    viewer.zoom = 1;
+    viewer.paper = /** @type {MysteryForgeArchiveDocument} */ (list[index]).screen === null;
+    render();
+    document.getElementById('viewer-close')?.focus();
+  }
+
+  function closeViewer() {
+    const id = viewer.list[viewer.index]?.id;
+    viewer.index = -1;
+    render();
+    if (id !== undefined) {
+      /** @type {HTMLElement | null} */ (document.querySelector(`[data-document="${id}"]`))?.focus();
+    }
+  }
+
+  /** @param {number} step */
+  function moveViewer(step) {
+    const next = viewer.index + step;
+    if (next >= 0 && next < viewer.list.length) {
+      openViewer(viewer.list, next);
+    }
+  }
+
+  /** @param {number} step */
+  function zoomViewer(step) {
+    viewer.zoom = Math.min(3, Math.max(0.5, Math.round((viewer.zoom + step) * 10) / 10));
+    render();
+  }
+
+  /** @param {number} pixels */
+  function scrollViewer(pixels) {
+    const frame = document.getElementById('viewer-frame');
+    if (frame instanceof HTMLIFrameElement) {
+      frame.contentWindow?.scrollBy(0, pixels);
+    } else {
+      document.getElementById('viewer-body')?.scrollBy(0, pixels);
+    }
+  }
+
+  function renderEvidence() {
+    const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+    const view = el('div', { className: 'view view-evidence' }, [
+      el('h2', { className: 'view-title', text: ui('evidence_heading') }),
+    ]);
+    /** @type {MysteryForgeArchiveDocument[]} */
+    const all = [];
+    for (const stage of archive.stages) {
+      const content = archiveContent(stage);
+      if (content === null) {
+        view.append(
+          el('section', { className: 'evidence-stage is-sealed', attrs: { 'data-stage': stage.id } }, [
+            el('h3', { className: 'section-title', text: stage.envelope }),
+            el('p', { className: 'locked-note', text: ui('evidence_sealed') }),
+          ]),
+        );
+        continue;
+      }
+      const list = el('ul', { className: 'evidence-list' });
+      for (const documentEntry of content.documents) {
+        const index = all.length;
+        all.push(documentEntry);
+        list.append(
+          el('li', {}, [
+            button(
+              documentEntry.title,
+              `evidence-item${documentEntry.screen !== null ? ' is-digital' : ''}`,
+              () => openViewer(all, index),
+              { 'data-document': documentEntry.id, 'data-kind': documentEntry.kind },
+            ),
+          ]),
+        );
+      }
+      view.append(
+        el('section', { className: 'evidence-stage', attrs: { 'data-stage': stage.id } }, [
+          el('h3', {
+            className: 'section-title',
+            text: content.label ? `${stage.envelope} · ${content.label}` : stage.envelope,
+          }),
+          list,
+        ]),
+      );
+    }
+    return view;
+  }
+
+  /**
+   * The printed look: the sheets of the document in an isolated frame with the theme of the materials. A sheet is
+   * as wide as the paper, so the frame zooms it to the screen width first.
+   * @param {MysteryForgeArchiveDocument} documentEntry
+   * @returns {HTMLElement}
+   */
+  function renderPaper(documentEntry) {
+    const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+    const fit = Math.min(1.4, Math.max(0.3, (window.innerWidth - 24) / 820));
+    const zoom = Math.round(fit * viewer.zoom * 100) / 100;
+    const frame = el('iframe', {
+      className: 'viewer-frame',
+      attrs: { id: 'viewer-frame', title: documentEntry.title, tabindex: '-1' },
+    });
+    frame.setAttribute(
+      'srcdoc',
+      `<!doctype html><html><head><meta charset="utf-8"><style>${archive.css}
+html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16px}</style></head>` +
+        `<body class="${archive.body_class} output-materials">${documentEntry.sheets.join('')}</body></html>`,
+    );
+    return frame;
+  }
+
+  /**
+   * @param {string} html
+   * @param {string} className
+   * @returns {HTMLElement}
+   */
+  function htmlBlock(html, className) {
+    const block = el('div', { className });
+    // The toolkit builds this HTML from the game files and escapes every text in it, like the printed materials.
+    block.innerHTML = html;
+    return block;
+  }
+
+  /**
+   * A digital document as the screen of the device that holds it: a phone chat, a call log, a mail client, a camera.
+   * @param {MysteryForgeScreen} screen
+   * @param {string} title
+   * @returns {HTMLElement}
+   */
+  function renderScreen(screen, title) {
+    const fields = screen.fields;
+    if (screen.type === 'chat') {
+      const contact = fields.contact ?? title;
+      const thread = el('div', { className: 'chat-thread' });
+      for (const message of screen.messages ?? []) {
+        if (!message.speaker) {
+          thread.append(htmlBlock(message.html, 'chat-note'));
+          continue;
+        }
+        const incoming = contact.toLowerCase().includes(message.speaker.toLowerCase());
+        thread.append(
+          el('div', { className: `chat-bubble ${incoming ? 'is-in' : 'is-out'}` }, [
+            el('span', { className: 'chat-speaker', text: message.speaker }),
+            htmlBlock(message.html, 'chat-text'),
+          ]),
+        );
+      }
+      return el('div', { className: 'device phone' }, [
+        el('div', { className: 'phone-bar' }, [
+          el('span', { className: 'phone-avatar', text: contact.slice(0, 1).toUpperCase() }),
+          el('span', { className: 'phone-contact', text: contact }),
+          el('span', { className: 'phone-meta', text: fields.date ?? '' }),
+        ]),
+        thread,
+      ]);
+    }
+    if (screen.type === 'calls') {
+      const list = el('ol', { className: 'call-list' });
+      const header = screen.header ?? [];
+      for (const row of screen.rows ?? []) {
+        const kind = row.join(' ').toLowerCase();
+        const direction = /odchoz|outgoing|saliente|sortant|ausgehend|uscente|efectuad/.test(kind) ? 'out' : 'in';
+        list.append(
+          el('li', { className: `call call-${direction}` }, [
+            el('span', {
+              className: 'call-icon',
+              text: direction === 'out' ? '↗' : '↙',
+              attrs: { 'aria-hidden': 'true' },
+            }),
+            el('span', { className: 'call-main', text: row.slice(1).join(' · ') }),
+            el('span', { className: 'call-time', text: row[0] ?? '' }),
+          ]),
+        );
+      }
+      return el('div', { className: 'device phone' }, [
+        el('div', { className: 'phone-bar' }, [
+          el('span', { className: 'phone-contact', text: fields.subscriber ?? title }),
+          el('span', { className: 'phone-meta', text: fields.phone_number ?? '' }),
+        ]),
+        header.length > 0 ? el('p', { className: 'call-header', text: header.join(' · ') }) : null,
+        list,
+      ]);
+    }
+    if (screen.type === 'email') {
+      return el('div', { className: 'device mail' }, [
+        el('div', { className: 'mail-head' }, [
+          el('p', { className: 'mail-subject', text: fields.subject ?? title }),
+          el('p', { className: 'mail-line', text: `${ui('mail_from')}: ${fields.from ?? ''}` }),
+          el('p', { className: 'mail-line', text: `${ui('mail_to')}: ${fields.to ?? ''}` }),
+          fields.cc ? el('p', { className: 'mail-line', text: `Cc: ${fields.cc}` }) : null,
+          el('p', { className: 'mail-date', text: fields.date ?? '' }),
+        ]),
+        htmlBlock(screen.html ?? '', 'mail-body'),
+      ]);
+    }
+    return el('div', { className: 'device camera' }, [
+      el('div', { className: 'camera-screen' }, [
+        el('span', { className: 'camera-rec', text: '● REC' }),
+        el('span', { className: 'camera-name', text: fields.camera ?? '' }),
+        htmlBlock(screen.html ?? '', 'camera-picture'),
+        el('span', { className: 'camera-place', text: fields.location ?? '' }),
+        el('span', { className: 'camera-time', text: `${fields.date ?? ''} ${fields.time ?? ''}`.trim() }),
+      ]),
+      el('div', { className: 'camera-controls', attrs: { 'aria-hidden': 'true' } }, [
+        el('span', { text: '⏮' }),
+        el('span', { text: '▶' }),
+        el('span', { className: 'camera-track' }),
+        el('span', { text: fields.evidence_number ?? '' }),
+      ]),
+    ]);
+  }
+
+  function renderViewer() {
+    if (!viewerOpen()) {
+      return null;
+    }
+    const documentEntry = /** @type {MysteryForgeArchiveDocument} */ (viewer.list[viewer.index]);
+    const screen = documentEntry.screen;
+    const showPaper = viewer.paper || screen === null;
+    const body = showPaper
+      ? renderPaper(documentEntry)
+      : el('div', { className: 'viewer-screen', attrs: { style: `zoom:${viewer.zoom}` } }, [
+          renderScreen(/** @type {MysteryForgeScreen} */ (screen), documentEntry.title),
+        ]);
+    const bar = el('div', { className: 'viewer-bar' }, [
+      el('p', { className: 'viewer-title', text: documentEntry.title }),
+      el('span', { className: 'viewer-count', text: `${viewer.index + 1} / ${viewer.list.length}` }),
+      button('‹', 'button button-quiet viewer-button', () => moveViewer(-1), {
+        'aria-label': ui('viewer_prev'),
+        id: 'viewer-prev',
+      }),
+      button('›', 'button button-quiet viewer-button', () => moveViewer(1), {
+        'aria-label': ui('viewer_next'),
+        id: 'viewer-next',
+      }),
+      button('−', 'button button-quiet viewer-button', () => zoomViewer(-0.2), { 'aria-label': ui('viewer_zoom_out') }),
+      button('+', 'button button-quiet viewer-button', () => zoomViewer(0.2), { 'aria-label': ui('viewer_zoom_in') }),
+      screen !== null
+        ? button(
+            showPaper ? ui('viewer_screen') : ui('viewer_paper'),
+            'button button-quiet',
+            () => {
+              viewer.paper = !showPaper;
+              render();
+            },
+            { id: 'viewer-toggle' },
+          )
+        : null,
+      button(ui('close'), 'button button-primary', closeViewer, { id: 'viewer-close' }),
+    ]);
+    return el('div', { className: 'viewer', attrs: { role: 'dialog', 'aria-modal': 'true', id: 'viewer' } }, [
+      bar,
+      el('div', { className: 'viewer-body', attrs: { id: 'viewer-body', tabindex: '-1' } }, [body]),
+    ]);
+  }
+
+  // ---------- The TV and the phones share one game ----------
+
+  // The TV app serves this page over the local network. Every device then keeps the solved puzzles of the group.
+  const sharedGame = window.location.protocol === 'http:' || window.location.protocol === 'https:';
+  const connection = {
+    /** @type {string | null} */
+    url: null,
+    renderWaiting: false,
+  };
+
+  function pushShared() {
+    if (!sharedGame) {
+      return;
+    }
+    fetch('api/state', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(logic.sharedState(state)),
+    }).catch(() => undefined);
+  }
+
+  async function pullShared() {
+    try {
+      const response = await fetch('api/state', { cache: 'no-store' });
+      if (!response.ok) {
+        return;
+      }
+      const merged = logic.mergeSharedState(state, await response.json());
+      if (JSON.stringify(logic.sharedState(merged)) !== JSON.stringify(logic.sharedState(state))) {
+        saveState(merged);
+        // A new render would reset the document that someone reads, so it waits until the viewer closes.
+        if (viewerOpen() || document.activeElement instanceof HTMLInputElement) {
+          connection.renderWaiting = true;
+        } else {
+          render();
+        }
+      }
+    } catch {
+      // The TV is out of reach for a moment; the next poll tries again.
+    }
+  }
+
+  async function loadConnection() {
+    try {
+      const response = await fetch('api/info', { cache: 'no-store' });
+      const info = response.ok ? await response.json() : null;
+      if (info !== null && typeof info.url === 'string') {
+        connection.url = info.url;
+        render();
+      }
+    } catch {
+      connection.url = null;
+    }
+  }
+
+  function renderConnect() {
+    if (connection.url === null) {
+      return null;
+    }
+    const code = globalThis.MysteryForgeQrCode(0, 'M');
+    code.addData(connection.url);
+    code.make();
+    const picture = el('div', { className: 'qr-code', attrs: { 'aria-hidden': 'true' } });
+    // The vendored encoder builds this SVG from the URL alone.
+    picture.innerHTML = code.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
+    return el('section', { className: 'paper connect-card', attrs: { id: 'connect' } }, [
+      el('h2', { className: 'paper-title', text: ui('connect_heading') }),
+      picture,
+      el('p', { className: 'connect-text', text: ui('connect_text') }),
+      el('p', { className: 'connect-url', text: connection.url }),
+    ]);
+  }
+
+  // ---------- The remote control of a TV ----------
+
+  // In the TV app the arrow keys of the remote move the focus to the nearest button in that direction.
+  const tvMode = window.MysteryForgeTts !== undefined;
+  const FOCUSABLE = 'button, input, summary, [tabindex="0"]';
+
+  /** @param {'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight'} key */
+  function moveFocus(key) {
+    const current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const candidates = Array.from(document.querySelectorAll(FOCUSABLE)).filter(
+      (element) => element instanceof HTMLElement && element.offsetParent !== null && element !== current,
+    );
+    if (current === null || current === document.body) {
+      /** @type {HTMLElement | undefined} */ (candidates[0])?.focus();
+      return;
+    }
+    const from = current.getBoundingClientRect();
+    let best = null;
+    let bestScore = Infinity;
+    for (const element of candidates) {
+      const to = element.getBoundingClientRect();
+      const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+      const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+      const ahead = key === 'ArrowUp' ? -dy : key === 'ArrowDown' ? dy : key === 'ArrowLeft' ? -dx : dx;
+      if (ahead <= 1) {
+        continue;
+      }
+      const side = key === 'ArrowUp' || key === 'ArrowDown' ? Math.abs(dx) : Math.abs(dy);
+      const score = ahead + side * 2;
+      if (score < bestScore) {
+        bestScore = score;
+        best = element;
+      }
+    }
+    if (best instanceof HTMLElement) {
+      best.focus();
+      best.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  // The TV app asks the page first when the Back button is pressed: it closes the viewer or a dialog.
+  window.MysteryForgeBack = () => {
+    if (viewerOpen()) {
+      closeViewer();
+      return true;
+    }
+    if (session.confirm !== null) {
+      closeConfirm(false);
+      return true;
+    }
+    return false;
+  };
+
   // ---------- Check an answer ----------
 
   /**
@@ -609,7 +1037,9 @@
     session.checkCode = code;
     session.lastCheck = { code, check };
     if (check.result === 'correct') {
-      saveState(logic.withSolved(state, code));
+      const normalized = globalThis.MysteryForgeAnswers.normalizeAnswer(session.draftAnswer, data.language);
+      saveState(logic.withAnswer(state, code, normalized));
+      pushShared();
       session.draftAnswer = '';
     }
     render();
@@ -771,7 +1201,7 @@
       card.append(
         el('p', { className: 'answer-box reveal-in', attrs: { 'data-answer': puzzle.code } }, [
           document.createTextNode(ui('solution_answer', { answer: '' })),
-          el('strong', { text: puzzle.solution.answer }),
+          el('strong', { text: puzzle.solution?.answer ?? '' }),
         ]),
       );
     } else if (nextLevel !== null) {
@@ -833,7 +1263,9 @@
    * @param {Record<string, string>} choices
    */
   function renderAccusationResult(deduction, choices) {
-    const score = logic.scoreAccusation(data, choices);
+    // The player version seals the endings: the correct accusation opens them.
+    const scoring = logic.withOpenedEndings(data, state);
+    const score = logic.scoreAccusation(scoring, choices);
     const answersList = el('ol', { className: 'verdicts' });
     for (const question of deduction.questions) {
       const right = score.correctQuestions.includes(question.id);
@@ -850,7 +1282,7 @@
       );
     }
     const reveal = el('ol', { className: 'reveal-steps' });
-    for (const step of data.reveal) {
+    for (const step of scoring.reveal) {
       reveal.append(el('li', { text: step }));
     }
     return el('div', { className: 'view', attrs: { id: 'accuse-result' } }, [
@@ -870,7 +1302,7 @@
           : null,
       ]),
       answersList,
-      data.reveal.length > 0
+      scoring.reveal.length > 0
         ? el('section', { className: 'paper reveal-card' }, [
             el('h3', { className: 'paper-title', text: ui('reveal_heading') }),
             reveal,
@@ -927,6 +1359,7 @@
         strong: false,
         onYes: () => {
           saveState(logic.withAccusation(state, choices));
+          pushShared();
           window.scrollTo(0, 0);
         },
       });
@@ -978,7 +1411,7 @@
           el('span', { className: 'card-title', text: puzzle.title }),
         ]),
       ]);
-      if (shown) {
+      if (shown && puzzle.solution !== null) {
         const steps = el('ol', { className: 'solution-steps reveal-in' });
         for (const step of puzzle.solution.steps) {
           steps.append(el('li', { text: step }));
@@ -1017,6 +1450,7 @@
   const VIEWS = {
     start: renderStart,
     case: renderCase,
+    evidence: renderEvidence,
     check: renderCheck,
     hints: renderHints,
     accuse: renderAccuse,
@@ -1037,6 +1471,12 @@
   function render() {
     const main = el('main', { className: `main main-${session.tab}`, attrs: { id: 'main' } }, [VIEWS[session.tab]()]);
     appElement.replaceChildren(renderTopBar(), main, renderNav());
+    connection.renderWaiting = false;
+    const shown = renderViewer();
+    if (shown !== null) {
+      appElement.append(shown);
+    }
+    document.body.classList.toggle('has-viewer', shown !== null);
     const overlay = renderConfirm();
     if (overlay !== null) {
       appElement.append(overlay);
@@ -1049,8 +1489,50 @@
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && session.confirm !== null) {
       closeConfirm(false);
+      return;
+    }
+    if (viewerOpen() && session.confirm === null) {
+      /** @type {Record<string, () => void>} */
+      const keys = {
+        Escape: closeViewer,
+        Backspace: closeViewer,
+        ArrowLeft: () => moveViewer(-1),
+        ArrowRight: () => moveViewer(1),
+        ArrowUp: () => scrollViewer(-240),
+        ArrowDown: () => scrollViewer(240),
+        PageUp: () => scrollViewer(-600),
+        PageDown: () => scrollViewer(600),
+        '+': () => zoomViewer(0.2),
+        '-': () => zoomViewer(-0.2),
+      };
+      const action = keys[event.key];
+      if (action !== undefined) {
+        event.preventDefault();
+        action();
+      }
+      return;
+    }
+    const arrow = /** @type {'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight'} */ (event.key);
+    const typing = document.activeElement instanceof HTMLInputElement;
+    if (tvMode && !typing && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(arrow)) {
+      event.preventDefault();
+      moveFocus(arrow);
     }
   });
+  window.addEventListener('focusout', () => {
+    if (connection.renderWaiting && !viewerOpen()) {
+      window.setTimeout(() => {
+        if (connection.renderWaiting && !(document.activeElement instanceof HTMLInputElement)) {
+          render();
+        }
+      }, 0);
+    }
+  });
+  if (sharedGame) {
+    void loadConnection();
+    void pullShared();
+    window.setInterval(() => void pullShared(), 4000);
+  }
   window.setInterval(updateTimers, 1000);
   render();
 })();

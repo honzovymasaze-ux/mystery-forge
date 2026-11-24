@@ -25,6 +25,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Hints",
         "file_solutions": "4 - Solutions",
         "file_companion": "Game companion",
+        "file_player_companion": "Player companion (TV and phones)",
         "folder_spoilers": "HOST ONLY - spoilers",
         "file_export_warnings": "0 - READ FIRST (warnings)",
         "export_warnings_title": "Read this before you play",
@@ -326,6 +327,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Pistas",
         "file_solutions": "4 - Soluciones",
         "file_companion": "Compañero de juego",
+        "file_player_companion": "Compañero para jugadores (tele y móviles)",
         "folder_spoilers": "SOLO ANFITRIÓN - spoilers",
         "file_export_warnings": "0 - LEE ESTO PRIMERO (avisos)",
         "export_warnings_title": "Lee esto antes de jugar",
@@ -635,6 +637,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Pistes",
         "file_solutions": "4 - Solucions",
         "file_companion": "Company de joc",
+        "file_player_companion": "Company per a jugadors (tele i mòbils)",
         "folder_spoilers": "NOMÉS AMFITRIÓ - espòilers",
         "file_export_warnings": "0 - LLEGEIX AIXÒ PRIMER (avisos)",
         "export_warnings_title": "Llegeix això abans de jugar",
@@ -941,6 +944,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Indices",
         "file_solutions": "4 - Solutions",
         "file_companion": "Compagnon de jeu",
+        "file_player_companion": "Compagnon des joueurs (télé et téléphones)",
         "folder_spoilers": "HÔTE UNIQUEMENT - révélations",
         "file_export_warnings": "0 - À LIRE D'ABORD (avertissements)",
         "export_warnings_title": "Lisez ceci avant de jouer",
@@ -1255,6 +1259,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Hinweise",
         "file_solutions": "4 - Lösungen",
         "file_companion": "Spielbegleiter",
+        "file_player_companion": "Spielerbegleiter (Fernseher und Handys)",
         "folder_spoilers": "NUR GASTGEBER - Spoiler",
         "file_export_warnings": "0 - ZUERST LESEN (Warnungen)",
         "export_warnings_title": "Lies das vor dem Spiel",
@@ -1566,6 +1571,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Indizi",
         "file_solutions": "4 - Soluzioni",
         "file_companion": "Compagno di gioco",
+        "file_player_companion": "Compagno dei giocatori (TV e telefoni)",
         "folder_spoilers": "SOLO CHI CONDUCE - spoiler",
         "file_export_warnings": "0 - LEGGI PRIMA (avvisi)",
         "export_warnings_title": "Leggi qui prima di giocare",
@@ -1874,6 +1880,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "file_hints": "3 - Pistas",
         "file_solutions": "4 - Soluções",
         "file_companion": "Companheiro de jogo",
+        "file_player_companion": "Companheiro dos jogadores (TV e telemóveis)",
         "folder_spoilers": "SÓ ANFITRIÃO - spoilers",
         "file_export_warnings": "0 - LEIA PRIMEIRO (avisos)",
         "export_warnings_title": "Leia isto antes de jogar",
@@ -2261,6 +2268,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "This browser cannot read aloud. One of you reads the text instead.",
         "companion_new_entries": "New in the case: {count}",
         "companion_new_entries_open": "Open the case",
+        "companion_tab_evidence": "Evidence",
+        "companion_evidence_heading": "Evidence archive",
+        "companion_evidence_sealed": "Sealed. It opens when you solve the puzzle that opens this envelope.",
+        "companion_viewer_prev": "Previous document",
+        "companion_viewer_next": "Next document",
+        "companion_viewer_zoom_in": "Zoom in",
+        "companion_viewer_zoom_out": "Zoom out",
+        "companion_viewer_paper": "Printed look",
+        "companion_viewer_screen": "On screen",
+        "companion_connect_heading": "Connect your phones",
+        "companion_connect_text": (
+            "Scan the code with a phone on the same Wi-Fi as the TV. Every phone sees the same solved puzzles and"
+            " evidence."
+        ),
+        "companion_mail_from": "From",
+        "companion_mail_to": "To",
     },
     "es": {
         "companion_page_label": "Compañero de juego",
@@ -2347,6 +2370,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Este navegador no puede leer en voz alta. Que alguien lea el texto.",
         "companion_new_entries": "Novedades en el caso: {count}",
         "companion_new_entries_open": "Abrir el caso",
+        "companion_tab_evidence": "Pruebas",
+        "companion_evidence_heading": "Archivo de pruebas",
+        "companion_evidence_sealed": "Sellado. Se abre al resolver el enigma que abre este sobre.",
+        "companion_viewer_prev": "Documento anterior",
+        "companion_viewer_next": "Documento siguiente",
+        "companion_viewer_zoom_in": "Acercar",
+        "companion_viewer_zoom_out": "Alejar",
+        "companion_viewer_paper": "Aspecto impreso",
+        "companion_viewer_screen": "En pantalla",
+        "companion_connect_heading": "Conectad los móviles",
+        "companion_connect_text": (
+            "Escanead el código con un móvil en la misma wifi que la tele. Todos los móviles ven los mismos "
+            "enigmas resueltos y pruebas."
+        ),
+        "companion_mail_from": "De",
+        "companion_mail_to": "Para",
     },
     "ca": {
         "companion_page_label": "Company de joc",
@@ -2432,6 +2471,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Aquest navegador no pot llegir en veu alta. Que algú llegeixi el text.",
         "companion_new_entries": "Novetats en el cas: {count}",
         "companion_new_entries_open": "Obre el cas",
+        "companion_tab_evidence": "Proves",
+        "companion_evidence_heading": "Arxiu de proves",
+        "companion_evidence_sealed": "Segellat. S'obre quan resoleu l'enigma que obre aquest sobre.",
+        "companion_viewer_prev": "Document anterior",
+        "companion_viewer_next": "Document següent",
+        "companion_viewer_zoom_in": "Apropa",
+        "companion_viewer_zoom_out": "Allunya",
+        "companion_viewer_paper": "Aspecte imprès",
+        "companion_viewer_screen": "En pantalla",
+        "companion_connect_heading": "Connecteu els mòbils",
+        "companion_connect_text": (
+            "Escanegeu el codi amb un mòbil a la mateixa wifi que la tele. Tots els mòbils veuen els mateixos "
+            "enigmes resolts i proves."
+        ),
+        "companion_mail_from": "De",
+        "companion_mail_to": "Per a",
     },
     "fr": {
         "companion_page_label": "Compagnon de jeu",
@@ -2518,6 +2573,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Ce navigateur ne sait pas lire à voix haute. Quelqu'un lit le texte.",
         "companion_new_entries": "Nouveau dans l'enquête : {count}",
         "companion_new_entries_open": "Ouvrir l'enquête",
+        "companion_tab_evidence": "Preuves",
+        "companion_evidence_heading": "Archive des preuves",
+        "companion_evidence_sealed": "Scellé. Il s'ouvre quand vous résolvez l'énigme qui ouvre cette enveloppe.",
+        "companion_viewer_prev": "Document précédent",
+        "companion_viewer_next": "Document suivant",
+        "companion_viewer_zoom_in": "Agrandir",
+        "companion_viewer_zoom_out": "Réduire",
+        "companion_viewer_paper": "Aspect imprimé",
+        "companion_viewer_screen": "À l'écran",
+        "companion_connect_heading": "Connectez vos téléphones",
+        "companion_connect_text": (
+            "Scannez le code avec un téléphone sur le même Wi-Fi que la télé. Chaque téléphone voit les mêmes "
+            "énigmes résolues et preuves."
+        ),
+        "companion_mail_from": "De",
+        "companion_mail_to": "À",
     },
     "de": {
         "companion_page_label": "Spielbegleiter",
@@ -2604,6 +2675,24 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Dieser Browser kann nicht vorlesen. Eine Person liest den Text vor.",
         "companion_new_entries": "Neu im Fall: {count}",
         "companion_new_entries_open": "Fall öffnen",
+        "companion_tab_evidence": "Beweise",
+        "companion_evidence_heading": "Beweisarchiv",
+        "companion_evidence_sealed": (
+            "Versiegelt. Es öffnet sich, wenn ihr das Rätsel löst, das diesen Umschlag öffnet."
+        ),
+        "companion_viewer_prev": "Vorheriges Dokument",
+        "companion_viewer_next": "Nächstes Dokument",
+        "companion_viewer_zoom_in": "Vergrößern",
+        "companion_viewer_zoom_out": "Verkleinern",
+        "companion_viewer_paper": "Gedruckte Ansicht",
+        "companion_viewer_screen": "Auf dem Bildschirm",
+        "companion_connect_heading": "Handys verbinden",
+        "companion_connect_text": (
+            "Scannt den Code mit einem Handy im selben WLAN wie der Fernseher. Alle Handys sehen dieselben "
+            "gelösten Rätsel und Beweise."
+        ),
+        "companion_mail_from": "Von",
+        "companion_mail_to": "An",
     },
     "it": {
         "companion_page_label": "Compagno di gioco",
@@ -2689,6 +2778,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Questo browser non sa leggere ad alta voce. Qualcuno legga il testo.",
         "companion_new_entries": "Novità nel caso: {count}",
         "companion_new_entries_open": "Apri il caso",
+        "companion_tab_evidence": "Prove",
+        "companion_evidence_heading": "Archivio delle prove",
+        "companion_evidence_sealed": "Sigillato. Si apre quando risolvete l'enigma che apre questa busta.",
+        "companion_viewer_prev": "Documento precedente",
+        "companion_viewer_next": "Documento successivo",
+        "companion_viewer_zoom_in": "Ingrandisci",
+        "companion_viewer_zoom_out": "Riduci",
+        "companion_viewer_paper": "Aspetto stampato",
+        "companion_viewer_screen": "Sullo schermo",
+        "companion_connect_heading": "Collegate i telefoni",
+        "companion_connect_text": (
+            "Scansionate il codice con un telefono sulla stessa Wi-Fi della TV. Tutti i telefoni vedono gli "
+            "stessi enigmi risolti e le stesse prove."
+        ),
+        "companion_mail_from": "Da",
+        "companion_mail_to": "A",
     },
     "pt": {
         "companion_page_label": "Companheiro de jogo",
@@ -2774,6 +2879,22 @@ COMPANION_STRINGS: Final[dict[str, dict[str, str]]] = {
         "companion_no_speech": "Este navegador não consegue ler em voz alta. Alguém lê o texto.",
         "companion_new_entries": "Novidades no caso: {count}",
         "companion_new_entries_open": "Abrir o caso",
+        "companion_tab_evidence": "Provas",
+        "companion_evidence_heading": "Arquivo de provas",
+        "companion_evidence_sealed": "Selado. Abre quando resolverem o enigma que abre este envelope.",
+        "companion_viewer_prev": "Documento anterior",
+        "companion_viewer_next": "Documento seguinte",
+        "companion_viewer_zoom_in": "Aproximar",
+        "companion_viewer_zoom_out": "Afastar",
+        "companion_viewer_paper": "Aspeto impresso",
+        "companion_viewer_screen": "No ecrã",
+        "companion_connect_heading": "Liguem os telemóveis",
+        "companion_connect_text": (
+            "Leiam o código com um telemóvel na mesma rede Wi-Fi da TV. Todos os telemóveis veem os mesmos "
+            "enigmas resolvidos e provas."
+        ),
+        "companion_mail_from": "De",
+        "companion_mail_to": "Para",
     },
 }
 STRINGS["cs"] = dict(CS_STRINGS)

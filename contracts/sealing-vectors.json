@@ -1,0 +1,42 @@
+{
+  "description": "Shared test vectors for sealed content. The Python toolkit (sealing.py) and the JavaScript companion (sealing.js) must give and open these exact locks.",
+  "salt": "test-salt",
+  "vectors": [
+    {
+      "label": "stage:B",
+      "text": "Pitevní protokol – Bořek Vítek",
+      "answers": ["pokladna", "provoznimobil"],
+      "lock": {
+        "label": "stage:B",
+        "check": "e63fe2f987fec855",
+        "wraps": [
+          "52f2ea2a2049358afae537b4be5dae53ba59f08d84981506345bb780c5b3b538",
+          "a68c72b74bc1dffb91449eb4f290e69502a418a57918383ab215cfff27936bd0"
+        ],
+        "payload": "J7i10VL2letIxMeNjjq9Sj+woMJMtgc57x47b8ERQYiJ1dY="
+      }
+    },
+    {
+      "label": "epilogue",
+      "text": "Case closed. 🔒 Ünïcode",
+      "answers": ["radim"],
+      "lock": {
+        "label": "epilogue",
+        "check": "6120d039885d44f3",
+        "wraps": ["e870f0a5cf62950def3c52740083860b7316947ce5c2f2f9845e2ed5adbe392c"],
+        "payload": "LZJF4fOg5eWfDQF1xU3x+qWCiXyLee8DfN+a"
+      }
+    },
+    {
+      "label": "stage:C",
+      "text": "",
+      "answers": ["0231"],
+      "lock": {
+        "label": "stage:C",
+        "check": "be09273a8d14edea",
+        "wraps": ["72ef4b41b7f55eaee85a845ae46b20dbf5e0252bff1e2852147fffd93d3fe2bb"],
+        "payload": ""
+      }
+    }
+  ]
+}

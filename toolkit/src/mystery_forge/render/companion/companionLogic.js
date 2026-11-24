@@ -240,7 +240,12 @@
    */
   function stepsLeft(data, state, code) {
     const puzzle = findPuzzle(data, code);
-    return puzzle === undefined ? 0 : puzzle.hints.length + 1 - (state.hintSteps[code] ?? 0);
+    if (puzzle === undefined) {
+      return 0;
+    }
+    // The player version has no solution, so its last step is the last hint, not the answer.
+    const answerStep = puzzle.solution === null ? 0 : 1;
+    return puzzle.hints.length + answerStep - (state.hintSteps[code] ?? 0);
   }
 
   /**
@@ -250,7 +255,9 @@
    * @returns {number | null}
    */
   function nextHintLevel(data, state, code) {
-    return stepsLeft(data, state, code) > 1 ? (state.hintSteps[code] ?? 0) + 1 : null;
+    const puzzle = findPuzzle(data, code);
+    const reserved = puzzle !== undefined && puzzle.solution === null ? 0 : 1;
+    return stepsLeft(data, state, code) > reserved ? (state.hintSteps[code] ?? 0) + 1 : null;
   }
 
   /**
@@ -272,7 +279,7 @@
    */
   function isAnswerShown(data, state, code) {
     const puzzle = findPuzzle(data, code);
-    return puzzle !== undefined && (state.hintSteps[code] ?? 0) > puzzle.hints.length;
+    return puzzle !== undefined && puzzle.solution !== null && (state.hintSteps[code] ?? 0) > puzzle.hints.length;
   }
 
   /**
@@ -338,6 +345,8 @@
       isTimer(value.timer) &&
       (value.accusation === null ||
         (isRecord(value.accusation) && Object.values(value.accusation).every((id) => typeof id === 'string'))) &&
+      (value.answers === undefined ||
+        (isRecord(value.answers) && Object.values(value.answers).every((answer) => typeof answer === 'string'))) &&
       // A state from before the case tab has no `seen` list; it stays valid.
       (value.seen === undefined || (Array.isArray(value.seen) && value.seen.every((id) => typeof id === 'string')))
     );
@@ -446,6 +455,107 @@
       .filter((part) => part !== '');
   }
 
+  /**
+   * Remember the normalized answer of a solved puzzle: it opens the sealed envelopes of the archive.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} code
+   * @param {string} normalizedAnswer
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withAnswer(state, code, normalizedAnswer) {
+    return { ...withSolved(state, code), answers: { ...(state.answers ?? {}), [code]: normalizedAnswer } };
+  }
+
+  /**
+   * Open one envelope of the archive with the answers that the group found, or return null while it stays sealed.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeArchiveStage} stage
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeArchiveContent | null}
+   */
+  function openArchiveStage(data, stage, state) {
+    if (stage.lock === null) {
+      return { label: stage.label, documents: stage.documents ?? [] };
+    }
+    const text = globalThis.MysteryForgeSealing.openLock(stage.lock, data.salt, Object.values(state.answers ?? {}));
+    return text === null ? null : JSON.parse(text);
+  }
+
+  /**
+   * Open the sealed endings of the player version with the accusation and the answers, or return null.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {{epilogues: MysteryForgeCompanionEpilogue[], reveal: string[]} | null}
+   */
+  function openEndings(data, state) {
+    if (data.ending_lock === null) {
+      return null;
+    }
+    const firstQuestion = data.deduction?.questions[0];
+    const keys = [
+      ...(firstQuestion !== undefined && state.accusation?.[firstQuestion.id]
+        ? [state.accusation[firstQuestion.id]]
+        : []),
+      ...Object.values(state.answers ?? {}),
+    ];
+    const text = globalThis.MysteryForgeSealing.openLock(data.ending_lock, data.salt, /** @type {string[]} */ (keys));
+    return text === null ? null : JSON.parse(text);
+  }
+
+  /**
+   * The data with the endings and the reveal that the group has opened, so the scoring code finds every ending.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeCompanionData}
+   */
+  function withOpenedEndings(data, state) {
+    const opened = openEndings(data, state);
+    if (opened === null) {
+      return data;
+    }
+    const epilogues = [...opened.epilogues, ...data.epilogues].sort(
+      (left, right) => right.min_score_percent - left.min_score_percent,
+    );
+    return { ...data, epilogues, reveal: opened.reveal };
+  }
+
+  /**
+   * Merge the state that the TV keeps for every device into this device's state: the solved puzzles and their
+   * answers join, and the accusation of either side wins over none. Hints, the clock, and the seen list stay local.
+   * @param {MysteryForgeCompanionState} local
+   * @param {unknown} remote
+   * @returns {MysteryForgeCompanionState}
+   */
+  function mergeSharedState(local, remote) {
+    if (!isRecord(remote)) {
+      return local;
+    }
+    const remoteAnswers = isRecord(remote.answers) ? remote.answers : {};
+    /** @type {Record<string, string>} */
+    const answers = { ...(local.answers ?? {}) };
+    for (const [code, answer] of Object.entries(remoteAnswers)) {
+      if (typeof answer === 'string' && answers[code] === undefined) {
+        answers[code] = answer;
+      }
+    }
+    const remoteSolved = Array.isArray(remote.solved) ? remote.solved.filter((code) => typeof code === 'string') : [];
+    const solved = [...local.solved, ...remoteSolved.filter((code) => !local.solved.includes(code))];
+    const remoteAccusation =
+      isRecord(remote.accusation) && Object.values(remote.accusation).every((id) => typeof id === 'string')
+        ? /** @type {Record<string, string>} */ (remote.accusation)
+        : null;
+    return { ...local, solved, answers, accusation: local.accusation ?? remoteAccusation };
+  }
+
+  /**
+   * The part of the state that the TV shares with every device.
+   * @param {MysteryForgeCompanionState} state
+   * @returns {{solved: string[], answers: Record<string, string>, accusation: Record<string, string> | null}}
+   */
+  function sharedState(state) {
+    return { solved: state.solved, answers: state.answers ?? {}, accusation: state.accusation };
+  }
+
   globalThis.MysteryForgeCompanionLogic = {
     freshState,
     storageKey,
@@ -477,5 +587,11 @@
     withSeen,
     speechSettings,
     paragraphs,
+    withAnswer,
+    openArchiveStage,
+    openEndings,
+    withOpenedEndings,
+    mergeSharedState,
+    sharedState,
   };
 })();

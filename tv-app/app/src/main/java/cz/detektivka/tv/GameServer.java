@@ -1,0 +1,255 @@
+package cz.detektivka.tv;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Locale;
+
+/**
+ * A small web server on the local network. It serves the player companion page to the TV itself and to the phones
+ * that scan the QR code, and it keeps the shared state of the group: the solved puzzles, their answers, and the
+ * accusation. Every device merges that state into its own (companionLogic.js, mergeSharedState).
+ *
+ * It serves three paths only: the page, api/state (GET and POST), api/reset (POST), and api/info (the address for
+ * the QR code). Nothing leaves the local network.
+ */
+final class GameServer {
+    static final int PORT = 8080;
+    private static final String PAGE = "pruvodce.html";
+    private static final String PREFERENCES = "shared-game";
+    private static final String STATE_KEY = "state";
+    private static final int MAX_BODY = 256 * 1024;
+
+    private final Context context;
+    private final SharedPreferences preferences;
+    private ServerSocket socket;
+    private volatile boolean running;
+    private JSONObject state;
+
+    GameServer(Context context) {
+        this.context = context.getApplicationContext();
+        this.preferences = this.context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        this.state = parse(preferences.getString(STATE_KEY, "{}"));
+    }
+
+    void start() {
+        if (running) {
+            return;
+        }
+        running = true;
+        Thread thread = new Thread(this::serve, "game-server");
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    void stop() {
+        running = false;
+        try {
+            if (socket != null) {
+                socket.close();
+            }
+        } catch (IOException ignored) {
+            // The socket is already closed.
+        }
+    }
+
+    /** The address that a phone on the same Wi-Fi opens, or null when the TV has no local network address. */
+    static String localUrl() {
+        try {
+            for (NetworkInterface network : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                if (!network.isUp() || network.isLoopback()) {
+                    continue;
+                }
+                for (InetAddress address : Collections.list(network.getInetAddresses())) {
+                    if (address instanceof Inet4Address && address.isSiteLocalAddress()) {
+                        return "http://" + address.getHostAddress() + ":" + PORT + "/";
+                    }
+                }
+            }
+        } catch (Exception ignored) {
+            // No network: the page shows no QR code.
+        }
+        return null;
+    }
+
+    private void serve() {
+        try {
+            socket = new ServerSocket(PORT);
+            while (running) {
+                Socket client = socket.accept();
+                Thread worker = new Thread(() -> handle(client), "game-client");
+                worker.setDaemon(true);
+                worker.start();
+            }
+        } catch (IOException ignored) {
+            running = false;
+        }
+    }
+
+    private void handle(Socket client) {
+        try (Socket connection = client) {
+            connection.setSoTimeout(10000);
+            InputStream input = connection.getInputStream();
+            // Read the head byte by byte: Content-Length counts bytes, and a UTF-8 body has more bytes than chars.
+            ByteArrayOutputStream head = new ByteArrayOutputStream();
+            int last = 0;
+            int current;
+            while ((current = input.read()) >= 0) {
+                head.write(current);
+                last = (last << 8 | current) & 0xFFFFFFFF;
+                if (last == 0x0D0A0D0A || head.size() > 16384) {
+                    break;
+                }
+            }
+            String[] lines = head.toString("US-ASCII").split("\r\n");
+            String[] parts = lines.length > 0 ? lines[0].split(" ") : new String[0];
+            String method = parts.length > 0 ? parts[0] : "";
+            String path = parts.length > 1 ? parts[1].split("\\?")[0] : "/";
+            int length = 0;
+            for (String header : lines) {
+                if (header.toLowerCase(Locale.ROOT).startsWith("content-length:")) {
+                    length = Math.min(MAX_BODY, Integer.parseInt(header.substring(15).trim()));
+                }
+            }
+            byte[] body = new byte[length];
+            int read = 0;
+            while (read < length) {
+                int count = input.read(body, read, length - read);
+                if (count < 0) {
+                    break;
+                }
+                read += count;
+            }
+            respond(connection.getOutputStream(), method, path, new String(body, 0, read, StandardCharsets.UTF_8));
+        } catch (Exception ignored) {
+            // A broken request from one device must not stop the server.
+        }
+    }
+
+    private void respond(OutputStream output, String method, String path, String body) throws IOException {
+        if (path.equals("/api/info")) {
+            JSONObject info = new JSONObject();
+            try {
+                info.put("url", localUrl() == null ? JSONObject.NULL : localUrl());
+            } catch (JSONException ignored) {
+                // A fixed key and a string value cannot fail.
+            }
+            send(output, 200, "application/json", info.toString().getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/api/state") && method.equals("POST")) {
+            send(output, 200, "application/json", merge(parse(body)).getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/api/state")) {
+            send(output, 200, "application/json", snapshot().getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/api/reset") && method.equals("POST")) {
+            synchronized (this) {
+                state = new JSONObject();
+                preferences.edit().putString(STATE_KEY, "{}").apply();
+            }
+            send(output, 200, "application/json", "{}".getBytes(StandardCharsets.UTF_8));
+        } else if (path.equals("/") || path.equals("/index.html")) {
+            send(output, 200, "text/html; charset=utf-8", readAsset());
+        } else {
+            send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private synchronized String snapshot() {
+        return state.toString();
+    }
+
+    /** Join the solved puzzles and the answers of a device into the shared state; the first accusation stays. */
+    private synchronized String merge(JSONObject incoming) {
+        try {
+            JSONArray solved = state.optJSONArray("solved");
+            if (solved == null) {
+                solved = new JSONArray();
+            }
+            JSONArray incomingSolved = incoming.optJSONArray("solved");
+            if (incomingSolved != null) {
+                for (int index = 0; index < incomingSolved.length(); index++) {
+                    String code = incomingSolved.optString(index, "");
+                    if (!code.isEmpty() && !contains(solved, code)) {
+                        solved.put(code);
+                    }
+                }
+            }
+            JSONObject answers = state.optJSONObject("answers");
+            if (answers == null) {
+                answers = new JSONObject();
+            }
+            JSONObject incomingAnswers = incoming.optJSONObject("answers");
+            if (incomingAnswers != null) {
+                for (java.util.Iterator<String> keys = incomingAnswers.keys(); keys.hasNext(); ) {
+                    String code = keys.next();
+                    if (!answers.has(code)) {
+                        answers.put(code, incomingAnswers.optString(code, ""));
+                    }
+                }
+            }
+            state.put("solved", solved);
+            state.put("answers", answers);
+            if (state.optJSONObject("accusation") == null && incoming.optJSONObject("accusation") != null) {
+                state.put("accusation", incoming.optJSONObject("accusation"));
+            }
+            preferences.edit().putString(STATE_KEY, state.toString()).apply();
+        } catch (JSONException ignored) {
+            // A malformed part is skipped; the rest of the state stays.
+        }
+        return state.toString();
+    }
+
+    private static boolean contains(JSONArray array, String value) {
+        for (int index = 0; index < array.length(); index++) {
+            if (value.equals(array.optString(index))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static JSONObject parse(String text) {
+        try {
+            return new JSONObject(text);
+        } catch (JSONException error) {
+            return new JSONObject();
+        }
+    }
+
+    private byte[] readAsset() throws IOException {
+        try (InputStream asset = context.getAssets().open(PAGE)) {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] chunk = new byte[16384];
+            int count;
+            while ((count = asset.read(chunk)) > 0) {
+                buffer.write(chunk, 0, count);
+            }
+            return buffer.toByteArray();
+        }
+    }
+
+    private static void send(OutputStream output, int status, String type, byte[] body) throws IOException {
+        String reason = status == 200 ? "OK" : "Not Found";
+        String head = "HTTP/1.1 " + status + " " + reason + "\r\n"
+            + "Content-Type: " + type + "\r\n"
+            + "Content-Length: " + body.length + "\r\n"
+            + "Cache-Control: no-store\r\n"
+            + "Connection: close\r\n\r\n";
+        output.write(head.getBytes(StandardCharsets.US_ASCII));
+        output.write(body);
+        output.flush();
+    }
+}
