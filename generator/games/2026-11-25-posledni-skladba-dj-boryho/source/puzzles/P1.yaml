@@ -1,0 +1,55 @@
+format_version: 1
+id: P1
+title: První ohledání
+stage: A
+mechanic: observation
+difficulty: easy
+
+in_world_reason: |
+  Vedoucí vyšetřování požaduje správné přiřazení
+  protokolu o nálezu těla k evidenčnímu plánku.
+
+reveals: Identifikaci místnosti nálezu.
+
+reveal_text: |
+  Správně. Místnost T-04 odpovídá technickému zázemí.
+  Toto označení používejte při další práci se spisem.
+
+answer: "T-04"
+accepted: ["T04", "T 04", "t-04", "04"]
+
+answer_format:
+  kind: phrase
+  label: Evidenční označení místnosti
+
+question: Jaké je evidenční označení místnosti, ve které bylo nalezeno tělo?
+
+params: {}
+
+clues:
+  - id: p1-nalez
+    document: D2
+    quote: "Tělo bylo nalezeno v provozní místnosti T-04."
+
+  - id: p1-plan
+    document: D3
+    quote: "T-04 – technická místnost a provozní zázemí."
+
+solution:
+  - text: Vyhledejte evidenční označení místa nálezu v úředním záznamu.
+    uses: [p1-nalez]
+
+  - text: Porovnejte označení s provozním plánkem.
+    uses: [p1-plan]
+
+hints:
+  - level: 1
+    text: Zatím nepotřebujete znát příčinu smrti ani podezřelého.
+
+  - level: 2
+    text: Pracujte s dokumenty D2 a D3.
+
+  - level: 3
+    text: Hledané označení začíná písmenem T a končí číslem 04.
+
+canary: canary-p1-jasan

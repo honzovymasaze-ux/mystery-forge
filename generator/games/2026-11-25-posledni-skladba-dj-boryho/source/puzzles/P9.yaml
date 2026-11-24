@@ -1,0 +1,69 @@
+format_version: 1
+id: P9
+title: Rozpad časové osy
+stage: E
+mechanic: deduction
+difficulty: hard
+
+in_world_reason: |
+  Vyšetřovatelé mají k dispozici závěrečnou korelaci
+  časových záznamů. Před obviněním musí nahradit
+  původní širší interval přesněji vymezeným obdobím
+  fyzického konfliktu.
+
+reveals: Definitivní délku rozhodného intervalu.
+
+reveal_text: |
+  Osm minut.
+
+  Právě těchto osm minut musí pokrýt skutečné osobní
+  alibi každého ze sedmi podezřelých.
+
+  Vraťte se ke všem výpovědím, i k těm, které jste
+  považovali za uzavřené.
+
+answer: "8"
+accepted: ["08", "osm", "8 minut"]
+
+answer_format:
+  kind: number
+  label: Počet minut
+
+question: Kolik minut trvá závěrečný interval, do kterého byl nezávislými záznamy vymezen fyzický konflikt?
+
+params: {}
+
+clues:
+  - id: p9-puvodni
+    document: D14
+    quote: "Pro další prověřování doporučuji pracovat s předběžným časovým intervalem 21:20–21:45."
+
+  - id: p9-kamera
+    document: D27
+    quote: "Čas zobrazovaný kamerou K-02 byl o osm minut napřed oproti skutečnému místnímu času."
+
+  - id: p9-zaver
+    document: D60
+    quote: "Vzájemná korelace nezávislých záznamů vymezuje rozhodný fyzický konflikt do intervalu 21:24–21:32."
+
+solution:
+  - text: Odlište původní předběžný časový interval od závěrečného časového zařazení konfliktu.
+    uses: [p9-puvodni, p9-zaver]
+
+  - text: Ověřte, že při práci s kamerou používáte opravené časové údaje.
+    uses: [p9-kamera]
+
+  - text: Vypočítejte délku intervalu 21:24–21:32.
+    uses: [p9-zaver]
+
+hints:
+  - level: 1
+    text: Původních 25 minut již není konečným rozhodným intervalem.
+
+  - level: 2
+    text: Hledejte závěrečnou korelaci časových údajů v D60.
+
+  - level: 3
+    text: Odečtěte 24 od 32.
+
+canary: canary-p9-pramen

@@ -1,0 +1,77 @@
+format_version: 1
+id: P7
+title: Chybějící tablety
+stage: D
+mechanic: arithmetic-lock
+difficulty: medium
+in_world_reason: Lékárna i domovní prohlídka uvádějí jen počty, rozdíl musí spočítat vyšetřovatel.
+reveals: Z balení somnaxinu Ivety Kočové chybějí čtyři tablety (40 mg), které nikdo neužil, tedy přesně dávka z Bořkovy krve.
+reveal_text: Z Ivetina balení zmizely tablety, které nikdo z domácnosti nesnědl. Laboratoř přitom spočítala, kolik jich Bořek měl v krvi.
+answer: '40'
+answer_format:
+  kind: digits
+  label: dvě číslice
+  length: 2
+question: Kolik miligramů somnaxinu z Ivetina balení chybí? Dvě číslice.
+params:
+  steps:
+  - label: vydano
+    value: 30
+  - label: doma
+    value: 19
+  - label: uzila
+    value: 7
+  - label: mg
+    value: 10
+  expression: (vydano - doma - uzila) * mg
+  digits: 2
+clues:
+- id: p7-vydano
+  document: D26
+  quote: 'Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.'
+- id: p7-doma
+  document: D26
+  quote: Iveta Kočová 19 tablet
+- id: p7-uzila
+  document: D26
+  quote: Iveta Kočová uvedla, že od 3. 8. užila nejvýš sedm tablet.
+- id: p7-davka
+  document: D13
+  quote: Koncentrace v krvi odpovídá zhruba třem až čtyřem tabletám.
+- id: p7-mg
+  document: D26
+  quote: Somnaxin 10 mg, 30 tbl.
+solution:
+- text: Ivetě Kočové lékárna vydala 30 tablet.
+  uses:
+  - p7-vydano
+- text: Při prohlídce měla doma 19 tablet a sama jich užila nejvýš sedm.
+  uses:
+  - p7-doma
+  - p7-uzila
+- text: 30 − 19 − 7 = 4 tablety po 10 mg, tedy 40 mg. Čtyři tablety odpovídají dávce, kterou laboratoř našla v Bořkově krvi.
+  uses:
+  - p7-vydano
+  - p7-mg
+  - p7-davka
+hints:
+- level: 1
+  text: Všechna čísla jsou ve výpisu z lékárny, u Ivety Kočové.
+  points_to:
+  - p7-vydano
+  - p7-doma
+  - p7-uzila
+- level: 2
+  text: Od vydaného počtu odečtěte, co našla policie doma, a co Iveta sama užila.
+  points_to:
+  - p7-vydano
+  - p7-doma
+  - p7-uzila
+- level: 3
+  text: 30 − 19 − 7 tablet, každá má 10 mg. Porovnejte výsledek s poznámkou laboratoře o dávce v krvi.
+  points_to:
+  - p7-vydano
+  - p7-doma
+  - p7-uzila
+  - p7-davka
+canary: canary-bory-p7-tablety

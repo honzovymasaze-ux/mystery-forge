@@ -1,0 +1,60 @@
+format_version: 1
+id: P4
+title: Auto u benzinky
+stage: C
+mechanic: observation
+difficulty: medium
+depends_on:
+- P2
+in_world_reason: Kamera zachytila jen část značky, celou SPZ zná jen evidence parkovacích karet.
+reveals: Auto, které ve 02:43 zachytila kamera čerpací stanice, je Radimova Octavia s SPZ 2BE 4185.
+reveal_text: Kamera ve 02:43 zachytila auto, které má parkovací kartu na koupališti. Dvě minuty předtím opustil služební mobil buňku u koupaliště.
+answer: 2BE4185
+answer_format:
+  kind: word
+  label: SPZ bez mezer
+  length: 7
+question: Jaká je celá SPZ toho auta? Napište ji bez mezer.
+params: {}
+clues:
+- id: p4-kamera
+  document: D22
+  quote: Tmavé kombi Škoda Octavia se střešním boxem odbočuje směrem na Rudku.
+- id: p4-znacka
+  document: D22
+  quote: Z registrační značky je čitelný jen začátek 2B a konec 85.
+- id: p4-karty
+  document: D23
+  quote: Škoda Octavia combi, tmavě modrá  2BE 4185  střešní box
+- id: p4-mobil
+  document: D21
+  quote: 01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH
+solution:
+- text: Kamera ukazuje tmavé kombi Octavia se střešním boxem, značka začíná 2B a končí 85.
+  uses:
+  - p4-kamera
+  - p4-znacka
+- text: 'Na 2B…85 sedí tři auta ze seznamu, ale Octavia se střešním boxem je jen jedna: 2BE 4185.'
+  uses:
+  - p4-karty
+- text: Kamera zachytila auto ve 02:43, dvě minuty poté, co služební mobil opustil buňku u koupaliště.
+  uses:
+  - p4-mobil
+  - p4-kamera
+hints:
+- level: 1
+  text: Co všechno je na záběru z kamery vidět kromě kousku značky?
+  points_to:
+  - p4-kamera
+- level: 2
+  text: Seznam parkovacích karet má sloupec s poznámkou. Několik aut sedí na začátek a konec značky.
+  points_to:
+  - p4-karty
+- level: 3
+  text: Hledejte Octavii, která je tmavá a má střešní box.
+  points_to:
+  - p4-karty
+leak_allowlist:
+- text: Škoda Octavia combi, tmavě modrá  2BE 4185
+  reason: Seznam karet je materiál úkolu.
+canary: canary-bory-p4-benzinka

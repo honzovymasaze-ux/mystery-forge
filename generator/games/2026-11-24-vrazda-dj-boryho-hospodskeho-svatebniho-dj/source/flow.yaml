@@ -1,0 +1,20 @@
+format_version: 1
+structure: linear
+stages:
+  - id: A
+    label: Nález u bazénu
+    opens_with: start
+  - id: B
+    label: Pitva a laboratoř
+    opens_with: P1
+    opening_text: Soudní lékařka poslala pitevní protokol dřív, než jsme čekali. A laboratoř volala, že máme přijet osobně.
+  - id: C
+    label: Telefony a kamery
+    opens_with: P2
+    opening_text: Operátor konečně vydal výpisy a benzinka poslala záznam z kamery. Teď už nejde o nehodu.
+  - id: D
+    label: Peníze z Rudky
+    opens_with: P4
+    opening_text: Z hospody Na Hrázi jsme si odvezli Bořkův šanon s fakturami. Na první straně je jeho rukopis.
+final_puzzle: P5
+accusation: true

@@ -1,0 +1,53 @@
+format_version: 1
+id: P1
+title: Číslo bez jména
+stage: A
+mechanic: observation
+difficulty: easy
+in_world_reason: Neznámé číslo ve výpisu Bořkova telefonu nemá v jeho kontaktech jméno.
+reveals: SMS ve 23:52 přišla ze služebního mobilu pokladny lesního koupaliště v Rudce.
+reveal_text: 'Číslo patří pokladně v Rudce. Ten telefon ale nemá jednoho majitele: berou si ho lidé z personálu. Kdo ho měl v sobotu v noci u sebe?'
+answer: pokladna
+accepted:
+- pokladna a provozní mobil
+- provozní mobil
+- pokladna rudka
+answer_format:
+  kind: word
+  label: jedno slovo
+question: Odkud přesně v Rudce přišla ta zpráva ve 23:52? Napište mi jedno slovo, které u čísla stojí.
+params: {}
+clues:
+- id: p1-cislo
+  document: D4
+  quote: Číslo 734 552 019 v kontaktech uloženo není.
+- id: p1-cenik
+  document: D14
+  quote: 'Pokladna a provozní mobil: 734 552 019'
+solution:
+- text: Ve výpisu Bořkova telefonu je ve 23:52 SMS z čísla 734 552 019, které nemá v kontaktech.
+  uses:
+  - p1-cislo
+- text: Stejné číslo stojí na ceníku lesního koupaliště Rudka u slova Pokladna.
+  uses:
+  - p1-cenik
+hints:
+- level: 1
+  text: Najděte ve výpisu telefonu číslo, ke kterému vyšetřovatel nedoplnil jméno.
+  points_to:
+  - p1-cislo
+- level: 2
+  text: To číslo je vytištěné ještě na jednom papíru z obálky A, mezi kontakty jednoho koupaliště.
+  points_to:
+  - p1-cenik
+- level: 3
+  text: Na ceníku koupaliště v Rudce stojí 734 552 019 u prvního slova řádku s kontakty.
+  points_to:
+  - p1-cenik
+leak_allowlist:
+- text: 'Pokladna a provozní mobil: 734 552 019'
+  reason: Ceník je materiál úkolu, hráči v něm odpověď hledají.
+canary: canary-bory-p1-hruska
+near_misses:
+- answer: Rudka
+  message: Ano, Rudka. Ale odkud přesně? Podívejte se, jaké slovo stojí přímo u čísla.

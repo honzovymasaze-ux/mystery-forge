@@ -1,0 +1,62 @@
+format_version: 1
+id: P8
+title: Peníze bez jména
+stage: D
+mechanic: recontextualized-document
+difficulty: hard
+
+in_world_reason: |
+  Bankovní instituce potřebuje jednoznačný identifikátor
+  finančního toku, aby bylo možné pokračovat v prověřování
+  skutečného příjemce refundací.
+
+reveals: Bankovní token spojený s neoprávněnými refundacemi.
+
+reveal_text: |
+  Token BT-552 odpovídá prověřovanému platebnímu profilu.
+
+  Bankovní potvrzení bylo přiřazeno ke správné žádosti.
+  Spolu s dalšími závěrečnými materiály je nyní dostupné.
+
+answer: "BT-552"
+accepted: ["BT552", "BT 552", "bt-552", "552"]
+
+answer_format:
+  kind: phrase
+  label: Bankovní identifikátor
+
+question: Jaký bankovní token odpovídá platebnímu profilu, na který směřovaly všechny neoprávněné refundace?
+
+params: {}
+unlocks: E
+
+clues:
+  - id: p8-profil
+    document: D43
+    quote: "Všechny neoprávněné refundace směřovaly k příjemci označenému R-419."
+
+  - id: p8-token
+    document: D44
+    quote: "Platební profil R-419 byl v rozhodném období spojen s bankovním tokenem BT-552."
+
+solution:
+  - text: V exportu refundací najděte společný identifikátor příjemce.
+    uses: [p8-profil]
+
+  - text: Vyhledejte tento identifikátor v evidenci platební služby.
+    uses: [p8-token]
+
+  - text: Zapište bankovní token, nikoli platební profil.
+    uses: [p8-token]
+
+hints:
+  - level: 1
+    text: Provozní účet, platební profil a bankovní token jsou tři různé údaje.
+
+  - level: 2
+    text: Nejprve najděte profil R-419 a potom jeho odpovídající řádek v D44.
+
+  - level: 3
+    text: Token začíná BT a obsahuje číslice 552.
+
+canary: canary-p8-krystal

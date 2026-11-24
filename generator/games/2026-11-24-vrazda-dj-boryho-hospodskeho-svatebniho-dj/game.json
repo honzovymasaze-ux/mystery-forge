@@ -1,0 +1,2789 @@
+{
+  "config": {
+    "schema_version": 1,
+    "audience": "adults",
+    "format": "case_file",
+    "players": {
+      "count": 4,
+      "names": []
+    },
+    "host": "self_running",
+    "duration_minutes": 90,
+    "difficulty": "medium",
+    "language": "cs",
+    "theme": {
+      "idea": "Vražda DJ Boryho, hospodského, svatebního DJ a provozovatele dvou koupališť v Kunštátu a okolí",
+      "tone": "dramatic",
+      "era": "modern"
+    },
+    "content": {
+      "death_allowed": true,
+      "scary_level": "mild",
+      "reading_load": "heavy"
+    },
+    "personalization": {
+      "host_name": "",
+      "place": "",
+      "inside_jokes": [],
+      "dedication": ""
+    },
+    "puzzle_preferences": {
+      "words": "neutral",
+      "numbers": "neutral",
+      "logic": "neutral",
+      "visual": "neutral",
+      "crafts": "neutral",
+      "deduction": "neutral"
+    },
+    "equipment": {
+      "printer": "color",
+      "ink_saving": false,
+      "paper": "A4",
+      "scissors": true,
+      "tape_or_glue": true,
+      "envelopes": true,
+      "double_sided": false
+    },
+    "assistance": {
+      "hints": true,
+      "paper_answer_check": true,
+      "companion_page": true
+    },
+    "visuals": {
+      "style": "noir",
+      "images": "svg",
+      "readable_font": false
+    },
+    "generation": {
+      "quality": "best",
+      "pick_concept": "agent",
+      "seed": 0
+    },
+    "output": {
+      "folder": ""
+    }
+  },
+  "brief": {
+    "puzzle_count": 24,
+    "stage_count": 6,
+    "parallel_width": 2,
+    "solver_count": 5,
+    "reading_words": 17640,
+    "printed_pages": 46,
+    "generation_minutes": 212,
+    "minutes_per_puzzle": 9,
+    "seed": 656522790,
+    "language": "cs",
+    "audience": "adults",
+    "format": "case_file",
+    "difficulty": "medium",
+    "players": 4
+  },
+  "story": {
+    "format_version": 1,
+    "title": "Poslední song DJ Boryho",
+    "tagline": "Hrál celou noc pro svatebčany. Ráno ho našli v bazénu jeho vlastního koupaliště.",
+    "premise": "V neděli 23. srpna 2026 ráno našla plavčice v bazénu koupaliště Pod Hradem v Kunštátě mrtvého Bořka Vítka, hospodského, svatebního DJ a provozovatele dvou koupališť. Noc předtím hrál na svatbě. Vypadá to na opilce, který spadl do vody. Soudní lékařka si tím ale jistá není.",
+    "setting": "Kunštát a Rudka na Boskovicku, hospoda, dvě koupaliště a svatební statek",
+    "era": "2026",
+    "tone": "dramatický, realistický",
+    "truth": "Radim Kočí provozoval s Bořkem Vítkem lesní koupaliště v Rudce. Od jara si nechával proplácet faktury za chlor od firmy svého bratra Tomáše Kočího, ale do Rudky přišla jen jedna dodávka ze tří. Bořek na podvod přišel, když porovnal faktury s provozním deníkem, a na pondělí 24. srpna domluvil schůzku s účetní. Radim si v sobotu 22. srpna v 19:40 vzal na pokladně v Rudce služební mobil. Ve 23:52 z něj Bořkovi napsal, ať po svatbě přijede sám na koupaliště v Kunštátě. Svůj vlastní telefon nechal doma, aby to vypadalo, že spal. Do láhve slivovice, kterou Bořkovi předtím daroval „na usmířenou“, přimíchal prášky na spaní somnaxin, předepsané své ženě Ivetě. Bořek odjel ze svatby v 01:10 a v kanceláři koupaliště se s Radimem setkal kolem půl druhé. Napil se slivovice. Ve 02:12 už omámený zkusil zavolat manželce Monice, ale ta na svatbě tančila a telefon neslyšela. Radim ho pak udeřil tyčí na sběr listí, a když upadl, svezl ho do bazénu, kde se utopil. Ve 02:43 projel Radim autem kolem kamery čerpací stanice na výjezdu z Kunštátu a ve 03:05 byl služební mobil zpátky v Rudce. Monika zůstala na svatbě do půl třetí, Lenka Šimková spala doma v Rudce a Tomáš Pešek hrál do tří v klubu v Boskovicích.",
+    "characters": [
+      {
+        "id": "borek-vitek",
+        "name": "Bořek Vítek",
+        "role": "hospodský, DJ a provozovatel koupališť",
+        "description": "Říkali mu DJ Bory. Vede hospodu Na Hrázi, hraje na svatbách a akcích pro děti a provozuje dvě koupaliště.",
+        "age": 47,
+        "is_suspect": false,
+        "is_culprit": false,
+        "is_victim": true,
+        "secret": "",
+        "aliases": []
+      },
+      {
+        "id": "monika-vitkova",
+        "name": "Monika Vítková",
+        "role": "manželka, vede kuchyni hospody",
+        "description": "Bořkova žena. Na svatbě se s ním hlasitě pohádala.",
+        "age": 44,
+        "is_suspect": true,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "Ví o Bořkově poměru s plavčicí a zvažovala rozvod.",
+        "aliases": []
+      },
+      {
+        "id": "radim-koci",
+        "name": "Radim Kočí",
+        "role": "společník, provozuje koupaliště v Rudce",
+        "description": "Bořkův společník a kamarád z mládí. Stará se o lesní koupaliště v Rudce.",
+        "age": 41,
+        "is_suspect": true,
+        "is_culprit": true,
+        "is_victim": false,
+        "secret": "Proplácí fiktivní faktury za chlor firmě svého bratra.",
+        "aliases": []
+      },
+      {
+        "id": "lenka-simkova",
+        "name": "Lenka Šimková",
+        "role": "plavčice a vedoucí koupaliště v Kunštátě",
+        "description": "Mladá plavčice, která ráno našla tělo. Měla s Bořkem poměr.",
+        "age": 28,
+        "is_suspect": true,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "Chtěla, aby Bořek o poměru řekl manželce.",
+        "aliases": []
+      },
+      {
+        "id": "tomas-pesek",
+        "name": "Tomáš Pešek",
+        "role": "DJ Tommy, konkurent",
+        "description": "Mladší DJ z Boskovic. Bořek mu přebral tři svatby a Tomáš mu to dával veřejně najevo.",
+        "age": 34,
+        "is_suspect": true,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "",
+        "aliases": []
+      },
+      {
+        "id": "iveta-kocova",
+        "name": "Iveta Kočová",
+        "role": "Radimova manželka",
+        "description": "Zdravotní sestra z Rudky. Tvrdí, že manžel byl celou noc doma.",
+        "age": 39,
+        "is_suspect": false,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "",
+        "aliases": []
+      },
+      {
+        "id": "marek-sedlak",
+        "name": "Marek Sedlák",
+        "role": "svatební fotograf",
+        "description": "Fotil svatbu na statku Na Výsluní celou noc.",
+        "age": 36,
+        "is_suspect": false,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "",
+        "aliases": []
+      },
+      {
+        "id": "dana-krejci",
+        "name": "Dana Krejčí",
+        "role": "účetní",
+        "description": "Vede účetnictví obou koupališť.",
+        "age": 55,
+        "is_suspect": false,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "",
+        "aliases": []
+      },
+      {
+        "id": "petr-hala",
+        "name": "Petr Hála",
+        "role": "nadstrážmistr, obvodní oddělení Kunštát",
+        "description": "Policista, který přijel ráno na koupaliště jako první.",
+        "age": 31,
+        "is_suspect": false,
+        "is_culprit": false,
+        "is_victim": false,
+        "secret": "",
+        "aliases": []
+      }
+    ],
+    "locations": [
+      {
+        "id": "koupaliste-kunstat",
+        "name": "koupaliště Pod Hradem",
+        "description": "Koupaliště v Kunštátě s pětadvacetimetrovým bazénem a kanceláří u pokladny."
+      },
+      {
+        "id": "koupaliste-rudka",
+        "name": "lesní koupaliště Rudka",
+        "description": "Menší koupaliště v lese u Rudky."
+      },
+      {
+        "id": "statek",
+        "name": "statek Na Výsluní",
+        "description": "Svatební statek asi devět kilometrů od Kunštátu."
+      },
+      {
+        "id": "hospoda",
+        "name": "hospoda Na Hrázi",
+        "description": "Vítkovic hospoda v Kunštátě."
+      },
+      {
+        "id": "klub-sklep",
+        "name": "klub Sklep v Boskovicích",
+        "description": "Hudební klub, kde hraje DJ Tommy."
+      },
+      {
+        "id": "dum-kocich",
+        "name": "dům Kočích v Rudce",
+        "description": "Rodinný dům Radima a Ivety Kočích."
+      },
+      {
+        "id": "dum-simkove",
+        "name": "byt Lenky Šimkové v Rudce",
+        "description": "Podkrovní byt v Rudce."
+      },
+      {
+        "id": "cerpaci-stanice",
+        "name": "čerpací stanice na výjezdu z Kunštátu",
+        "description": "Benzinka u silnice na Rudku s kamerou nad výjezdem."
+      }
+    ],
+    "objects": [
+      {
+        "id": "slivovice",
+        "name": "láhev s ručně psanou cedulkou",
+        "description": "Domácí pálenka v litrové láhvi s ručně psanou cedulkou."
+      },
+      {
+        "id": "sluzebni-mobil",
+        "name": "služební mobil koupaliště Rudka",
+        "description": "Telefon, který si personál bere na pokladně."
+      },
+      {
+        "id": "tyc",
+        "name": "tyč na sběr listí",
+        "description": "Hliníková tyč se síťkou, opřená u bazénu."
+      }
+    ],
+    "timeline": [
+      {
+        "id": "svatba",
+        "start": "2026-08-22 17:00",
+        "end": "2026-08-23 02:40",
+        "location": "statek",
+        "participants": [
+          "monika-vitkova",
+          "marek-sedlak"
+        ],
+        "description": "Svatba na statku Na Výsluní. Monika na ní zůstala do konce.",
+        "known_to_players": true
+      },
+      {
+        "id": "bory-hraje",
+        "start": "2026-08-22 18:00",
+        "end": "2026-08-23 01:00",
+        "location": "statek",
+        "participants": [
+          "borek-vitek"
+        ],
+        "description": "Bořek hraje na svatbě jako DJ.",
+        "known_to_players": true
+      },
+      {
+        "id": "hadka",
+        "start": "2026-08-22 22:30",
+        "end": "2026-08-22 22:40",
+        "location": "statek",
+        "participants": [
+          "borek-vitek",
+          "monika-vitkova"
+        ],
+        "description": "Monika a Bořek se hlasitě pohádají u baru.",
+        "known_to_players": true
+      },
+      {
+        "id": "vydej-mobilu",
+        "start": "2026-08-22 19:40",
+        "end": null,
+        "location": "koupaliste-rudka",
+        "participants": [
+          "radim-koci"
+        ],
+        "description": "Radim si na pokladně v Rudce vezme služební mobil.",
+        "known_to_players": false
+      },
+      {
+        "id": "tommy-hraje",
+        "start": "2026-08-22 21:00",
+        "end": "2026-08-23 03:00",
+        "location": "klub-sklep",
+        "participants": [
+          "tomas-pesek"
+        ],
+        "description": "Tomáš hraje v klubu Sklep.",
+        "known_to_players": false
+      },
+      {
+        "id": "lenka-doma",
+        "start": "2026-08-22 21:30",
+        "end": "2026-08-23 07:00",
+        "location": "dum-simkove",
+        "participants": [
+          "lenka-simkova"
+        ],
+        "description": "Lenka je doma v Rudce.",
+        "known_to_players": false
+      },
+      {
+        "id": "sms",
+        "start": "2026-08-22 23:52",
+        "end": null,
+        "location": "dum-kocich",
+        "participants": [
+          "radim-koci"
+        ],
+        "description": "Radim pošle ze služebního mobilu Bořkovi SMS se schůzkou.",
+        "known_to_players": false
+      },
+      {
+        "id": "bory-odjezd",
+        "start": "2026-08-23 01:10",
+        "end": null,
+        "location": "statek",
+        "participants": [
+          "borek-vitek"
+        ],
+        "description": "Bořek odjede ze svatby dodávkou.",
+        "known_to_players": true
+      },
+      {
+        "id": "vrazda",
+        "start": "2026-08-23 01:30",
+        "end": "2026-08-23 02:35",
+        "location": "koupaliste-kunstat",
+        "participants": [
+          "borek-vitek",
+          "radim-koci"
+        ],
+        "description": "Schůzka v kanceláři, slivovice se somnaxinem, úder tyčí a svržení do bazénu.",
+        "known_to_players": false
+      },
+      {
+        "id": "kamera",
+        "start": "2026-08-23 02:43",
+        "end": null,
+        "location": "cerpaci-stanice",
+        "participants": [
+          "radim-koci"
+        ],
+        "description": "Radimovo auto projede kolem kamery čerpací stanice.",
+        "known_to_players": false
+      },
+      {
+        "id": "nalez",
+        "start": "2026-08-23 07:35",
+        "end": null,
+        "location": "koupaliste-kunstat",
+        "participants": [
+          "lenka-simkova"
+        ],
+        "description": "Lenka najde tělo v bazénu.",
+        "known_to_players": true
+      },
+      {
+        "id": "schuzka-ucetni",
+        "start": "2026-08-24 09:00",
+        "end": null,
+        "location": "hospoda",
+        "participants": [
+          "dana-krejci"
+        ],
+        "description": "Plánovaná pondělní schůzka Bořka s účetní, na kterou už nedošlo.",
+        "known_to_players": false
+      }
+    ],
+    "clues": [
+      {
+        "id": "sms-2352",
+        "document": "D4",
+        "quote": "23:52  SMS příchozí  734 552 019",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "hovor-0212",
+        "document": "D4",
+        "quote": "02:12  hovor odchozí  603 418 227 (Monika)",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "monika-prasky",
+        "document": "D7",
+        "quote": "Somnaxin 10 mg, 30 tbl. – na předpis – pacient: Vítková Monika",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "hadka-u-baru",
+        "document": "D6",
+        "quote": "Kolem půl jedenácté se Bory s Monikou u baru hrozně pohádali, ona na něj křičela, že ho zabije.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "radim-flaska",
+        "document": "D5",
+        "quote": "Radim: Nechal jsem ti v kanclu na koupáku flašku domácí švestkové. Na usmířenou, ať se zase můžeme normálně bavit.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "lenka-vyhruzka",
+        "document": "D9",
+        "quote": "Lenka: Jestli to Monice do konce prázdnin neřekneš ty, řeknu jí to já.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "tommy-vyhruzka",
+        "document": "D10",
+        "quote": "Tommy: Tohle ti nedaruju, Bory. Třetí svatba, co mi přebereš.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "rana-do-hlavy",
+        "document": "D12",
+        "quote": "Na temeni hlavy vlevo podlitina s tržnou ranou 3 cm, vzniklá úderem tupým předmětem podlouhlého tvaru před vniknutím do vody.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "stopa-e3",
+        "document": "D11",
+        "quote": "láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "lenka-bunky",
+        "document": "D16",
+        "quote": "Mobilní telefon Lenky Šimkové byl od 21:30 do 07:05 přihlášen výhradně v buňce RUDKA-OBEC.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "tommy-uctenka",
+        "document": "D17",
+        "quote": "23.08.2026 02:20 obsluha: Tommy (DJ)",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "kniha-vydeje",
+        "document": "D19",
+        "quote": "19:40  služební mobil + klíče od pokladny  R. K.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "radim-alibi",
+        "document": "D20",
+        "quote": "KOČÍ: Byl jsem doma od jedenácti, spal jsem. Telefon jsem měl na nočním stolku, můžete se podívat.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "bunky-sluzebni",
+        "document": "D21",
+        "quote": "01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "iveta-recept",
+        "document": "D26",
+        "quote": "Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "bory-poznamka",
+        "document": "D25",
+        "quote": "Rudka – chlor. Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!",
+        "note": "",
+        "hidden": false,
+        "revealed_by": null
+      },
+      {
+        "id": "monika-do-konce",
+        "document": null,
+        "quote": "Monika byla na statku Na Výsluní ještě ve 02:31, tedy v době, kdy byl Bořek na koupališti v Kunštátě už omámený.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P3"
+      },
+      {
+        "id": "sms-z-pokladny",
+        "document": null,
+        "quote": "SMS ve 23:52 přišla ze služebního mobilu pokladny lesního koupaliště v Rudce.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P1"
+      },
+      {
+        "id": "jed-ve-slivovici",
+        "document": null,
+        "quote": "Somnaxin byl ve slivovici z láhve, kterou Bořek dostal darem do kanceláře.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P2"
+      },
+      {
+        "id": "auto-radima",
+        "document": null,
+        "quote": "Auto, které ve 02:43 zachytila kamera čerpací stanice, je Radimova Octavia s SPZ 2BE 4185.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P4"
+      },
+      {
+        "id": "obalka-v-trezoru",
+        "document": null,
+        "quote": "V trezoru v kanceláři ležela obálka s kopiemi faktur z Rudky a s poznámkou o pondělní schůzce s účetní.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P6"
+      },
+      {
+        "id": "chybi-tablety",
+        "document": null,
+        "quote": "Z balení somnaxinu Ivety Kočové chybějí čtyři tablety, které nikdo neužil, tedy přesně dávka z Bořkovy krve.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P7"
+      },
+      {
+        "id": "zpronevera",
+        "document": null,
+        "quote": "Bořek zaplatil 48 600 Kč za dvě dodávky chloru do Rudky, které nikdy nepřišly.",
+        "note": "",
+        "hidden": true,
+        "revealed_by": "P5"
+      }
+    ],
+    "intro": "Neděle 23. srpna 2026, devět hodin ráno. Jste vyšetřovací tým krajského ředitelství a právě jste dostali na stůl spis z Kunštátu. V bazénu koupaliště Pod Hradem našli mrtvého Bořka Vítka, kterému celý kraj říkal DJ Bory. Ještě v noci hrál na svatbě a ráno ho plavčice našla ve vodě. Místní policie by případ nejradši uzavřela jako nešťastnou náhodu opilého muže. Vedoucí vyšetřování kapitánka Horáková tomu nevěří. Projděte všechny dokumenty, porovnávejte časy, výpovědi a výpisy. Zjistěte, kdo Bořka zabil, jak to udělal a proč. Než bude spis uzavřen, musíte mít jasno.",
+    "deduction": {
+      "culprit": "radim-koci",
+      "questions": [
+        {
+          "id": "kdo",
+          "prompt": "Kdo zabil Bořka Vítka?",
+          "options": [
+            {
+              "id": "radim",
+              "text": "Radim Kočí, společník"
+            },
+            {
+              "id": "tomas",
+              "text": "Tomáš Pešek, DJ Tommy"
+            },
+            {
+              "id": "lenka",
+              "text": "Lenka Šimková, plavčice"
+            },
+            {
+              "id": "monika",
+              "text": "Monika Vítková, manželka"
+            }
+          ],
+          "correct": "radim",
+          "points": 45,
+          "proven_by": [
+            "kniha-vydeje",
+            "bunky-sluzebni",
+            "auto-radima",
+            "sms-z-pokladny"
+          ]
+        },
+        {
+          "id": "jak",
+          "prompt": "Jak vrah Bořka omámil?",
+          "options": [
+            {
+              "id": "injekce",
+              "text": "Injekcí"
+            },
+            {
+              "id": "koktejl",
+              "text": "Prášky v drinku na svatbě"
+            },
+            {
+              "id": "slivovice",
+              "text": "Prášky ve slivovici, kterou Bořek dostal darem"
+            }
+          ],
+          "correct": "slivovice",
+          "points": 15,
+          "proven_by": [
+            "jed-ve-slivovici",
+            "radim-flaska",
+            "stopa-e3"
+          ]
+        },
+        {
+          "id": "proc",
+          "prompt": "Proč musel Bořek zemřít?",
+          "options": [
+            {
+              "id": "svatby",
+              "text": "Přebíral konkurenci svatby"
+            },
+            {
+              "id": "pojistka",
+              "text": "Kvůli životní pojistce"
+            },
+            {
+              "id": "pomer",
+              "text": "Kvůli poměru s plavčicí"
+            },
+            {
+              "id": "zprone",
+              "text": "Přišel na podvod s fakturami za chlor v Rudce"
+            }
+          ],
+          "correct": "zprone",
+          "points": 25,
+          "proven_by": [
+            "zpronevera",
+            "bory-poznamka",
+            "obalka-v-trezoru"
+          ]
+        },
+        {
+          "id": "prasky",
+          "prompt": "Odkud pocházely prášky somnaxin, kterými byl Bořek omámen?",
+          "options": [
+            {
+              "id": "monika",
+              "text": "Z předpisu Moniky Vítkové"
+            },
+            {
+              "id": "iveta",
+              "text": "Z předpisu Ivety Kočové"
+            },
+            {
+              "id": "lekarna",
+              "text": "Koupené bez předpisu"
+            }
+          ],
+          "correct": "iveta",
+          "points": 15,
+          "proven_by": [
+            "iveta-recept",
+            "chybi-tablety",
+            "jed-ve-slivovici"
+          ]
+        }
+      ],
+      "exclusions": [
+        {
+          "suspect": "monika-vitkova",
+          "clues": [
+            "monika-do-konce",
+            "hovor-0212"
+          ],
+          "explanation": "Ve 02:12 Bořek z koupaliště volal Monice a ta to nebrala. Fotky z fotoaparátu svatebního fotografa ji ale ukazují na statku, devět kilometrů daleko, ještě ve 02:31. Na koupališti v době činu být nemohla."
+        },
+        {
+          "suspect": "lenka-simkova",
+          "clues": [
+            "lenka-bunky",
+            "kniha-vydeje"
+          ],
+          "explanation": "Lenčin telefon byl celou noc v Rudce a služební mobil, ze kterého přišla SMS, si v sobotu večer nevzala ona, ale R. K."
+        },
+        {
+          "suspect": "tomas-pesek",
+          "clues": [
+            "tommy-uctenka"
+          ],
+          "explanation": "Tomáš ve 02:20 sám namarkoval útratu na baru klubu Sklep v Boskovicích, víc než dvacet kilometrů od Kunštátu."
+        }
+      ]
+    },
+    "epilogues": [
+      {
+        "id": "vyreseno",
+        "min_score_percent": 75,
+        "title": "Případ uzavřen",
+        "text": "Radim Kočí se při konfrontaci s kamerovým záznamem a výpisem ze služebního mobilu zhroutil. Účetní Dana Krejčí dohledala všechny fiktivní faktury. Monika Vítková hospodu Na Hrázi nezavřela: v září na Bořkovu počest uspořádala dětský den, jaký by si přál. Hrálo se jeho playlistem."
+      },
+      {
+        "id": "napul",
+        "min_score_percent": 40,
+        "title": "Napůl",
+        "text": "Správné jméno jste měli, ale obžaloba se rozpadá na detailech. Obhájce zpochybní motiv i původ prášků a vyšetřování se táhne ještě půl roku. Na koupaliště v Kunštátě se letos už nikdo nevrátí."
+      },
+      {
+        "id": "nevyreseno",
+        "min_score_percent": 0,
+        "title": "Nehoda",
+        "text": "Spis se uzavírá jako nešťastná náhoda opilého muže. Vrah dál chodí do hospody Na Hrázi na pivo a při každé svatbě v kraji si někdo vzpomene na DJ Boryho a na to, že tahle smrt nikdy nedávala smysl."
+      }
+    ],
+    "reveal": [
+      {
+        "text": "SMS se schůzkou přišla ze služebního mobilu koupaliště v Rudce, který si v sobotu večer vzal R. K.",
+        "clues": [
+          "sms-2352",
+          "sms-z-pokladny",
+          "kniha-vydeje"
+        ]
+      },
+      {
+        "text": "Služební mobil byl mezi 01:22 a 02:41 v buňce u koupaliště v Kunštátě, zatímco Radimův vlastní telefon ležel doma. Ve 02:43 kamera zachytila Radimovu Octavii.",
+        "clues": [
+          "bunky-sluzebni",
+          "radim-alibi",
+          "auto-radima"
+        ]
+      },
+      {
+        "text": "Somnaxin byl ve slivovici, kterou Radim Bořkovi daroval. Na prášky měla předpis jeho žena Iveta.",
+        "clues": [
+          "jed-ve-slivovici",
+          "radim-flaska",
+          "iveta-recept"
+        ]
+      },
+      {
+        "text": "Bořek přišel na to, že dvě dodávky chloru do Rudky nikdy nepřišly, a na pondělí si objednal účetní.",
+        "clues": [
+          "bory-poznamka",
+          "zpronevera"
+        ]
+      },
+      {
+        "text": "Monika byla v době činu na svatbě, Lenka doma v Rudce a Tomáš v klubu v Boskovicích.",
+        "clues": [
+          "monika-do-konce",
+          "lenka-bunky",
+          "tommy-uctenka"
+        ]
+      }
+    ],
+    "visual_style": "noir"
+  },
+  "flow": {
+    "format_version": 1,
+    "structure": "linear",
+    "stages": [
+      {
+        "id": "A",
+        "label": "Nález u bazénu",
+        "opens_with": "start",
+        "opening_text": ""
+      },
+      {
+        "id": "B",
+        "label": "Pitva a laboratoř",
+        "opens_with": "P1",
+        "opening_text": "Soudní lékařka poslala pitevní protokol dřív, než jsme čekali. A laboratoř volala, že máme přijet osobně."
+      },
+      {
+        "id": "C",
+        "label": "Telefony a kamery",
+        "opens_with": "P2",
+        "opening_text": "Operátor konečně vydal výpisy a benzinka poslala záznam z kamery. Teď už nejde o nehodu."
+      },
+      {
+        "id": "D",
+        "label": "Peníze z Rudky",
+        "opens_with": "P4",
+        "opening_text": "Z hospody Na Hrázi jsme si odvezli Bořkův šanon s fakturami. Na první straně je jeho rukopis."
+      }
+    ],
+    "final_puzzle": "P5",
+    "accusation": true
+  },
+  "puzzles": [
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P1",
+        "title": "Číslo bez jména",
+        "stage": "A",
+        "mechanic": "observation",
+        "difficulty": "easy",
+        "depends_on": [],
+        "in_world_reason": "Neznámé číslo ve výpisu Bořkova telefonu nemá v jeho kontaktech jméno.",
+        "reveals": "SMS ve 23:52 přišla ze služebního mobilu pokladny lesního koupaliště v Rudce.",
+        "reveal_text": "Číslo patří pokladně v Rudce. Ten telefon ale nemá jednoho majitele: berou si ho lidé z personálu. Kdo ho měl v sobotu v noci u sebe?",
+        "answer": "pokladna",
+        "accepted": [
+          "pokladna a provozní mobil",
+          "provozní mobil",
+          "pokladna rudka"
+        ],
+        "near_misses": [
+          {
+            "answer": "Rudka",
+            "message": "Ano, Rudka. Ale odkud přesně? Podívejte se, jaké slovo stojí přímo u čísla."
+          }
+        ],
+        "decoys": [],
+        "answer_format": {
+          "kind": "word",
+          "label": "jedno slovo",
+          "length": null,
+          "choices": []
+        },
+        "question": "Odkud přesně v Rudce přišla ta zpráva ve 23:52? Napište mi jedno slovo, které u čísla stojí.",
+        "params": {},
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p1-cislo",
+            "document": "D4",
+            "quote": "Číslo 734 552 019 v kontaktech uloženo není.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p1-cenik",
+            "document": "D14",
+            "quote": "Pokladna a provozní mobil: 734 552 019",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Ve výpisu Bořkova telefonu je ve 23:52 SMS z čísla 734 552 019, které nemá v kontaktech.",
+            "uses": [
+              "p1-cislo"
+            ]
+          },
+          {
+            "text": "Stejné číslo stojí na ceníku lesního koupaliště Rudka u slova Pokladna.",
+            "uses": [
+              "p1-cenik"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Najděte ve výpisu telefonu číslo, ke kterému vyšetřovatel nedoplnil jméno.",
+            "points_to": [
+              "p1-cislo"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "To číslo je vytištěné ještě na jednom papíru z obálky A, mezi kontakty jednoho koupaliště.",
+            "points_to": [
+              "p1-cenik"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "Na ceníku koupaliště v Rudce stojí 734 552 019 u prvního slova řádku s kontakty.",
+            "points_to": [
+              "p1-cenik"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p1-hruska",
+        "leak_allowlist": [
+          {
+            "text": "Pokladna a provozní mobil: 734 552 019",
+            "reason": "Ceník je materiál úkolu, hráči v něm odpověď hledají."
+          }
+        ],
+        "is_meta": false
+      },
+      "file": "puzzles/P1.yaml",
+      "code": "A1",
+      "artifact": {
+        "html": "",
+        "solver_text": "",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "pokladna",
+        "pokladnaaprovoznimobil",
+        "provoznimobil",
+        "pokladnarudka"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P2",
+        "title": "Co vypil",
+        "stage": "B",
+        "mechanic": "recontextualized-document",
+        "difficulty": "hard",
+        "depends_on": [
+          "P1"
+        ],
+        "in_world_reason": "Laboratoř označuje vzorky jen čísly, popis předmětů je v soupisu stop.",
+        "reveals": "Somnaxin byl ve slivovici z láhve, kterou Bořek dostal darem do kanceláře.",
+        "reveal_text": "Somnaxin byl v pálence z láhve s cedulkou „Pro Boryho“. Bořek ji nepřinesl ze svatby: našel ji v kanceláři jako dárek. Kdo mu ji tam nechal?",
+        "answer": "slivovice",
+        "accepted": [
+          "svestkovice",
+          "palenka",
+          "slivovici",
+          "svestkova palenka"
+        ],
+        "near_misses": [
+          {
+            "answer": "sklenka",
+            "message": "Ve sklence byly prášky taky, ale odkud se tam nalily?"
+          },
+          {
+            "answer": "láhev",
+            "message": "Ano, láhev. Ale co v ní bylo? Jedno slovo pro ten nápoj."
+          }
+        ],
+        "decoys": [],
+        "answer_format": {
+          "kind": "word",
+          "label": "jedno slovo",
+          "length": null,
+          "choices": []
+        },
+        "question": "V čem měl Bořek ty prášky? Jedno slovo, žádné značky.",
+        "params": {},
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p2-lab",
+            "document": "D13",
+            "quote": "E-3  pozitivní  ano  Bořek Vítek, další otisk nepoužitelný",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p2-soupis",
+            "document": "D11",
+            "quote": "láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Laboratoř našla somnaxin v krvi, ve sklence E-2 a v láhvi E-3. Plechovka E-5 je čistá.",
+            "uses": [
+              "p2-lab"
+            ]
+          },
+          {
+            "text": "Podle soupisu stop je E-3 litrová láhev čiré kapaliny s vůní švestek: švestková pálenka, slivovice.",
+            "uses": [
+              "p2-soupis"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Laboratoř píše jen čísla vzorků. Kde jste viděli, co která čísla znamenají?",
+            "points_to": [
+              "p2-soupis"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Soupis zajištěných stop z obálky A. Hledejte vzorek s pozitivním somnaxinem, který není krev ani sklo na pití.",
+            "points_to": [
+              "p2-lab",
+              "p2-soupis"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "E-3 je láhev čiré kapaliny s vůní švestek. Jak se takové pálence říká?",
+            "points_to": [
+              "p2-soupis"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p2-svestka",
+        "leak_allowlist": [],
+        "is_meta": false
+      },
+      "file": "puzzles/P2.yaml",
+      "code": "B1",
+      "artifact": {
+        "html": "",
+        "solver_text": "",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "slivovice",
+        "svestkovice",
+        "palenka",
+        "slivovici",
+        "svestkovapalenka"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P3",
+        "title": "Do posledního tance",
+        "stage": "B",
+        "mechanic": "deduction",
+        "difficulty": "medium",
+        "depends_on": [
+          "P1"
+        ],
+        "in_world_reason": "Fotograf posílá jen seznam souborů s časy, fotky samotné jsou u nevěsty.",
+        "reveals": "Monika byla na statku Na Výsluní ještě ve 02:31.",
+        "reveal_text": "Monika tančila s nevěstou kolečko ještě dlouho po druhé hodině, devět kilometrů od koupaliště. Hovor od manžela ve 02:12 neslyšela.",
+        "answer": "0231",
+        "accepted": [
+          "231"
+        ],
+        "near_misses": [
+          {
+            "answer": "0238",
+            "message": "Podívejte se pořádně na paní na té fotce. Je to opravdu Monika?"
+          }
+        ],
+        "decoys": [],
+        "answer_format": {
+          "kind": "digits",
+          "label": "čas, čtyři číslice",
+          "length": 4,
+          "choices": []
+        },
+        "question": "Do kolika hodin Monika na svatbě opravdu byla? Napište čas poslední fotky, na které je, čtyřmi číslicemi.",
+        "params": {},
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p3-saty",
+            "document": "D6",
+            "quote": "Byla v tmavě zelených šatech a s červenou mašlí ve vlasech",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p3-foto",
+            "document": "D18",
+            "quote": "nevěsta a paní v zelených šatech s červenou mašlí tančí kolečko",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p3-past",
+            "document": "D18",
+            "quote": "paní v zelených šatech bez mašle odjíždí taxíkem",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Ženich popsal Moniku: tmavě zelené šaty a červená mašle ve vlasech.",
+            "uses": [
+              "p3-saty"
+            ]
+          },
+          {
+            "text": "Poslední fotka s paní v zelených šatech s červenou mašlí je MS_4179 ve 02:31.",
+            "uses": [
+              "p3-foto"
+            ]
+          },
+          {
+            "text": "Paní na fotce ve 02:38 mašli nemá, takže to není Monika.",
+            "uses": [
+              "p3-past"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Fotograf Moniku nezná jménem. Jak ji popsal někdo, kdo ji zná?",
+            "points_to": [
+              "p3-saty"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Ženich ve výpovědi zmínil šaty i jednu výraznou věc ve vlasech.",
+            "points_to": [
+              "p3-saty"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "Hledejte poslední řádek, kde má paní v zelených šatech i červenou mašli. Pozor na řádek ve 02:38.",
+            "points_to": [
+              "p3-foto",
+              "p3-past"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p3-masle",
+        "leak_allowlist": [
+          {
+            "text": "MS_4179  02:31",
+            "reason": "Seznam fotek je materiál úkolu, hráči v něm čas hledají."
+          }
+        ],
+        "is_meta": false
+      },
+      "file": "puzzles/P3.yaml",
+      "code": "B2",
+      "artifact": {
+        "html": "",
+        "solver_text": "",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "0231",
+        "231"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P4",
+        "title": "Auto u benzinky",
+        "stage": "C",
+        "mechanic": "observation",
+        "difficulty": "medium",
+        "depends_on": [
+          "P2"
+        ],
+        "in_world_reason": "Kamera zachytila jen část značky, celou SPZ zná jen evidence parkovacích karet.",
+        "reveals": "Auto, které ve 02:43 zachytila kamera čerpací stanice, je Radimova Octavia s SPZ 2BE 4185.",
+        "reveal_text": "Kamera ve 02:43 zachytila auto, které má parkovací kartu na koupališti. Dvě minuty předtím opustil služební mobil buňku u koupaliště.",
+        "answer": "2BE4185",
+        "accepted": [],
+        "near_misses": [],
+        "decoys": [],
+        "answer_format": {
+          "kind": "word",
+          "label": "SPZ bez mezer",
+          "length": 7,
+          "choices": []
+        },
+        "question": "Jaká je celá SPZ toho auta? Napište ji bez mezer.",
+        "params": {},
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p4-kamera",
+            "document": "D22",
+            "quote": "Tmavé kombi Škoda Octavia se střešním boxem odbočuje směrem na Rudku.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p4-znacka",
+            "document": "D22",
+            "quote": "Z registrační značky je čitelný jen začátek 2B a konec 85.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p4-karty",
+            "document": "D23",
+            "quote": "Škoda Octavia combi, tmavě modrá  2BE 4185  střešní box",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p4-mobil",
+            "document": "D21",
+            "quote": "01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Kamera ukazuje tmavé kombi Octavia se střešním boxem, značka začíná 2B a končí 85.",
+            "uses": [
+              "p4-kamera",
+              "p4-znacka"
+            ]
+          },
+          {
+            "text": "Na 2B…85 sedí tři auta ze seznamu, ale Octavia se střešním boxem je jen jedna: 2BE 4185.",
+            "uses": [
+              "p4-karty"
+            ]
+          },
+          {
+            "text": "Kamera zachytila auto ve 02:43, dvě minuty poté, co služební mobil opustil buňku u koupaliště.",
+            "uses": [
+              "p4-mobil",
+              "p4-kamera"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Co všechno je na záběru z kamery vidět kromě kousku značky?",
+            "points_to": [
+              "p4-kamera"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Seznam parkovacích karet má sloupec s poznámkou. Několik aut sedí na začátek a konec značky.",
+            "points_to": [
+              "p4-karty"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "Hledejte Octavii, která je tmavá a má střešní box.",
+            "points_to": [
+              "p4-karty"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p4-benzinka",
+        "leak_allowlist": [
+          {
+            "text": "Škoda Octavia combi, tmavě modrá  2BE 4185",
+            "reason": "Seznam karet je materiál úkolu."
+          }
+        ],
+        "is_meta": false
+      },
+      "file": "puzzles/P4.yaml",
+      "code": "C1",
+      "artifact": {
+        "html": "",
+        "solver_text": "",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "2be4185"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P5",
+        "title": "Chlor, který nepřišel",
+        "stage": "D",
+        "mechanic": "anachronism-hunt",
+        "difficulty": "hard",
+        "depends_on": [
+          "P4"
+        ],
+        "in_world_reason": "Podvod je vidět jen tehdy, když vedle sebe položíte faktury a provozní deník.",
+        "reveals": "Bořek zaplatil 48 600 Kč za dvě dodávky chloru do Rudky, které nikdy nepřišly.",
+        "reveal_text": "Dvě ze tří faktur jsou na zboží, které nikdy nepřijelo. A obě převzetí podepsal stejný člověk. Bořek to v pondělí chtěl ukázat účetní.",
+        "answer": "48600",
+        "accepted": [
+          "48 600"
+        ],
+        "near_misses": [],
+        "decoys": [],
+        "answer_format": {
+          "kind": "number",
+          "label": "částka v Kč bez mezer",
+          "length": null,
+          "choices": []
+        },
+        "question": "Kolik korun celkem zaplatil Bořek za chlor, který do Rudky nikdy nedorazil? Napište jen číslo bez mezer.",
+        "params": {},
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p5-faktura2",
+            "document": "D24",
+            "quote": "2026/032  16. 6. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p5-faktura3",
+            "document": "D24",
+            "quote": "2026/033  21. 7. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p5-bourka",
+            "document": "D27",
+            "quote": "16. 6. – celý den bouřka, areál zavřený. Nikdo nepřijel, sklep beze změny (6 sudů, z toho 2 načaté). J. B.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p5-sucho",
+            "document": "D27",
+            "quote": "21. 7. – sucho, plno lidí. Dovoz chloru žádný. Došel nám, půjčili jsme si sud z Kunštátu. J. B.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p5-bory",
+            "document": "D25",
+            "quote": "Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Bořek sám napsal, že je potřeba porovnat faktury s provozním deníkem.",
+            "uses": [
+              "p5-bory"
+            ]
+          },
+          {
+            "text": "Podle deníku 16. 6. nikdo nepřijel a sklep byl beze změny, takže dodávka z faktury 2026/032 nepřišla.",
+            "uses": [
+              "p5-faktura2",
+              "p5-bourka"
+            ]
+          },
+          {
+            "text": "21. 7. deník výslovně píše, že dovoz chloru žádný nebyl, takže ani faktura 2026/033 neplatí.",
+            "uses": [
+              "p5-faktura3",
+              "p5-sucho"
+            ]
+          },
+          {
+            "text": "Dvě nedodané dodávky po 24 300 Kč dělají 48 600 Kč.",
+            "uses": [
+              "p5-faktura2",
+              "p5-faktura3"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Položte vedle sebe faktury a provozní deník a porovnejte data dodání.",
+            "points_to": [
+              "p5-faktura2",
+              "p5-bourka"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Ke každému datu dodání z faktur najděte v deníku stejný den. Co se ten den v Rudce dělo?",
+            "points_to": [
+              "p5-bourka",
+              "p5-sucho"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "16. 6. a 21. 7. žádný chlor nepřišel. Sečtěte částky těch dvou faktur.",
+            "points_to": [
+              "p5-faktura2",
+              "p5-faktura3"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p5-sudy",
+        "leak_allowlist": [],
+        "is_meta": false
+      },
+      "file": "puzzles/P5.yaml",
+      "code": "D1",
+      "artifact": {
+        "html": "",
+        "solver_text": "",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "48600"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P6",
+        "title": "Kód od trezoru",
+        "stage": "A",
+        "mechanic": "arithmetic-lock",
+        "difficulty": "medium",
+        "depends_on": [],
+        "in_world_reason": "Bořek nechával kód od trezoru v kanceláři jako počty z věcí, které zná jen personál.",
+        "reveals": "V trezoru v kanceláři ležela obálka s kopiemi faktur z Rudky a s poznámkou o pondělní schůzce s účetní.",
+        "reveal_text": "Trezor cvakl. Kromě tržeb z pokladny v něm leží obálka nadepsaná Bořkovou rukou: „Rudka – kopie faktur. Pondělí 9:00 Krejčová.“ Bořek si něco schovával mimo hospodu.",
+        "answer": "4032",
+        "accepted": [],
+        "near_misses": [],
+        "decoys": [],
+        "answer_format": {
+          "kind": "digits",
+          "label": "čtyři číslice",
+          "length": 4,
+          "choices": []
+        },
+        "question": "Jaký je kód od trezoru? Čtyři číslice.",
+        "params": {
+          "steps": [
+            {
+              "label": "koupaliste",
+              "value": "2"
+            },
+            {
+              "label": "rok",
+              "value": "2019"
+            },
+            {
+              "label": "drahy",
+              "value": "6"
+            }
+          ],
+          "expression": "koupaliste * rok - drahy",
+          "digits": "4"
+        },
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p6-dve",
+            "document": "D1",
+            "quote": "se společníkem provozoval dvě koupaliště",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p6-rok",
+            "document": "D3",
+            "quote": "tam to s Radimem otevřeli v roce 2019",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p6-drahy",
+            "document": "D2",
+            "quote": "Koupaliště má jeden šestidráhový pětadvacetimetrový bazén",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p6-vzorec",
+            "document": "D29",
+            "quote": "vynásob ho rokem, kdy jsme otevřeli Rudku, a odečti počet drah tady v bazénu",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Bořek se společníkem provozoval dvě koupaliště.",
+            "uses": [
+              "p6-dve"
+            ]
+          },
+          {
+            "text": "Rudku otevřeli v roce 2019.",
+            "uses": [
+              "p6-rok"
+            ]
+          },
+          {
+            "text": "Bazén v Kunštátě má šest drah.",
+            "uses": [
+              "p6-drahy"
+            ]
+          },
+          {
+            "text": "Podle lístečku: 2 × 2019 − 6 = 4032.",
+            "uses": [
+              "p6-vzorec"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Každá část vzorce na lístečku je fakt z jiného papíru obálky A.",
+            "points_to": [
+              "p6-vzorec"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Kolik koupališť Bořek provozoval, říká úvod spisu. Rok otevření Rudky zmínila plavčice při výslechu.",
+            "points_to": [
+              "p6-dve",
+              "p6-rok"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "Počet drah je v úředním záznamu o nálezu. Spočítejte 2 × 2019 a odečtěte počet drah.",
+            "points_to": [
+              "p6-drahy"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p6-trezor",
+        "leak_allowlist": [],
+        "is_meta": false
+      },
+      "file": "puzzles/P6.yaml",
+      "code": "A2",
+      "artifact": {
+        "html": "<div class=\"mf-arithmetic-lock\"><svg class=\"mf-lock\" data-dials=\"4\" viewBox=\"0 0 140 90\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3\"><path d=\"M52 40 V24 A18 18 0 0 1 88 24 V40\"/><rect x=\"5\" y=\"40\" width=\"130\" height=\"46\" rx=\"6\"/><rect class=\"mf-lock-dial\" x=\"15\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/><rect class=\"mf-lock-dial\" x=\"45\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/><rect class=\"mf-lock-dial\" x=\"75\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/><rect class=\"mf-lock-dial\" x=\"105\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/></g></svg></div>",
+        "solver_text": "A combination lock with 4 digit dials.",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "4032"
+      ]
+    },
+    {
+      "source": {
+        "format_version": 1,
+        "id": "P7",
+        "title": "Chybějící tablety",
+        "stage": "D",
+        "mechanic": "arithmetic-lock",
+        "difficulty": "medium",
+        "depends_on": [],
+        "in_world_reason": "Lékárna i domovní prohlídka uvádějí jen počty, rozdíl musí spočítat vyšetřovatel.",
+        "reveals": "Z balení somnaxinu Ivety Kočové chybějí čtyři tablety (40 mg), které nikdo neužil, tedy přesně dávka z Bořkovy krve.",
+        "reveal_text": "Z Ivetina balení zmizely tablety, které nikdo z domácnosti nesnědl. Laboratoř přitom spočítala, kolik jich Bořek měl v krvi.",
+        "answer": "40",
+        "accepted": [],
+        "near_misses": [],
+        "decoys": [],
+        "answer_format": {
+          "kind": "digits",
+          "label": "dvě číslice",
+          "length": 2,
+          "choices": []
+        },
+        "question": "Kolik miligramů somnaxinu z Ivetina balení chybí? Dvě číslice.",
+        "params": {
+          "steps": [
+            {
+              "label": "vydano",
+              "value": "30"
+            },
+            {
+              "label": "doma",
+              "value": "19"
+            },
+            {
+              "label": "uzila",
+              "value": "7"
+            },
+            {
+              "label": "mg",
+              "value": "10"
+            }
+          ],
+          "expression": "(vydano - doma - uzila) * mg",
+          "digits": "2"
+        },
+        "seed": 0,
+        "clues": [
+          {
+            "id": "p7-vydano",
+            "document": "D26",
+            "quote": "Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p7-doma",
+            "document": "D26",
+            "quote": "Iveta Kočová 19 tablet",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p7-uzila",
+            "document": "D26",
+            "quote": "Iveta Kočová uvedla, že od 3. 8. užila nejvýš sedm tablet.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p7-davka",
+            "document": "D13",
+            "quote": "Koncentrace v krvi odpovídá zhruba třem až čtyřem tabletám.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          },
+          {
+            "id": "p7-mg",
+            "document": "D26",
+            "quote": "Somnaxin 10 mg, 30 tbl.",
+            "note": "",
+            "hidden": false,
+            "revealed_by": null
+          }
+        ],
+        "solution": [
+          {
+            "text": "Ivetě Kočové lékárna vydala 30 tablet.",
+            "uses": [
+              "p7-vydano"
+            ]
+          },
+          {
+            "text": "Při prohlídce měla doma 19 tablet a sama jich užila nejvýš sedm.",
+            "uses": [
+              "p7-doma",
+              "p7-uzila"
+            ]
+          },
+          {
+            "text": "30 − 19 − 7 = 4 tablety po 10 mg, tedy 40 mg. Čtyři tablety odpovídají dávce, kterou laboratoř našla v Bořkově krvi.",
+            "uses": [
+              "p7-vydano",
+              "p7-mg",
+              "p7-davka"
+            ]
+          }
+        ],
+        "hints": [
+          {
+            "level": 1,
+            "text": "Všechna čísla jsou ve výpisu z lékárny, u Ivety Kočové.",
+            "points_to": [
+              "p7-vydano",
+              "p7-doma",
+              "p7-uzila"
+            ]
+          },
+          {
+            "level": 2,
+            "text": "Od vydaného počtu odečtěte, co našla policie doma, a co Iveta sama užila.",
+            "points_to": [
+              "p7-vydano",
+              "p7-doma",
+              "p7-uzila"
+            ]
+          },
+          {
+            "level": 3,
+            "text": "30 − 19 − 7 tablet, každá má 10 mg. Porovnejte výsledek s poznámkou laboratoře o dávce v krvi.",
+            "points_to": [
+              "p7-vydano",
+              "p7-doma",
+              "p7-uzila",
+              "p7-davka"
+            ]
+          }
+        ],
+        "canary": "canary-bory-p7-tablety",
+        "leak_allowlist": [],
+        "is_meta": false
+      },
+      "file": "puzzles/P7.yaml",
+      "code": "D2",
+      "artifact": {
+        "html": "<div class=\"mf-arithmetic-lock\"><svg class=\"mf-lock\" data-dials=\"2\" viewBox=\"0 0 80 90\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"3\"><path d=\"M22 40 V24 A18 18 0 0 1 58 24 V40\"/><rect x=\"5\" y=\"40\" width=\"70\" height=\"46\" rx=\"6\"/><rect class=\"mf-lock-dial\" x=\"15\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/><rect class=\"mf-lock-dial\" x=\"45\" y=\"52\" width=\"20\" height=\"24\" rx=\"3\" stroke-width=\"2\"/></g></svg></div>",
+        "solver_text": "A combination lock with 2 digit dials.",
+        "print_notes": [],
+        "needs_in_documents": [],
+        "parts": []
+      },
+      "accepted_normalized": [
+        "40"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D1",
+        "kind": "case-briefing",
+        "stage": "A",
+        "title": "Spis KRPB-2318/TČ-2026",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "agency": "Policie ČR – Krajské ředitelství policie Jihomoravského kraje, SKPV",
+          "case_number": "KRPB-2318/TČ-2026",
+          "classification": "Neveřejné",
+          "recipient": "Vyšetřovací tým",
+          "date": "23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 1
+      },
+      "file": "documents/D1.md",
+      "body_html": "<p><strong>Věc:</strong> úmrtí Bořka Vítka (47), Kunštát</p>\n<p>Kolegové,</p>\n<p>v neděli 23. srpna 2026 v 07:35 našla plavčice Lenka Šimková v bazénu koupaliště Pod Hradem v Kunštátě tělo\nBořek Vítek, kterému celé Boskovicko říkalo DJ Bory. Bořek vedl hospoda Na Hrázi, hrál na svatbách,\nplesech a dětských dnech a se společníkem provozoval dvě koupaliště: koupaliště Pod Hradem v Kunštátě\na lesní koupaliště Rudka.</p>\n<p>V sobotu večer hrál na svatbě na statek Na Výsluní. Hosté ho viděli odjíždět kolem jedné hodiny. Obvodní oddělení\nKunštát by případ nejradši uzavřelo jako nešťastnou náhodu: opilý muž po akci zašel na své koupaliště a spadl do vody.</p>\n<p>Já tomu nevěřím. V této obálce máte všechno, co jsme stihli zajistit do rána: úřední záznam o nálezu, soupis stop,\nprvní výslechy, výpis jeho telefonu a zprávy z mobilu, který měl v autě. Další obálky otevřete, až vám to spis řekne.</p>\n<p>Pracujte pečlivě. Porovnávejte časy. Lidé lžou, výpisy ne.</p>\n<div class=\"mf-handwriting\">\n<p>kpt. Jana Horáková, vedoucí vyšetřování</p>\n</div>\n",
+      "text": "Věc: úmrtí Bořka Vítka (47), Kunštát\n\nKolegové,\n\nv neděli 23. srpna 2026 v 07:35 našla plavčice Lenka Šimková v bazénu koupaliště Pod Hradem v Kunštátě tělo Bořek Vítek, kterému celé Boskovicko říkalo DJ Bory. Bořek vedl hospoda Na Hrázi, hrál na svatbách, plesech a dětských dnech a se společníkem provozoval dvě koupaliště: koupaliště Pod Hradem v Kunštátě a lesní koupaliště Rudka.\n\nV sobotu večer hrál na svatbě na statek Na Výsluní. Hosté ho viděli odjíždět kolem jedné hodiny. Obvodní oddělení Kunštát by případ nejradši uzavřelo jako nešťastnou náhodu: opilý muž po akci zašel na své koupaliště a spadl do vody.\n\nJá tomu nevěřím. V této obálce máte všechno, co jsme stihli zajistit do rána: úřední záznam o nálezu, soupis stop, první výslechy, výpis jeho telefonu a zprávy z mobilu, který měl v autě. Další obálky otevřete, až vám to spis řekne.\n\nPracujte pečlivě. Porovnávejte časy. Lidé lžou, výpisy ne.\n\nkpt. Jana Horáková, vedoucí vyšetřování"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D2",
+        "kind": "police-report",
+        "stage": "A",
+        "title": "Úřední záznam o nálezu těla",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "station": "Policie ČR, obvodní oddělení Kunštát",
+          "case_number": "KRPB-2318/TČ-2026",
+          "officer": "nprap. Petr Hála",
+          "date": "23. 8. 2026, 07:52",
+          "subject": "Nález osoby bez známek života"
+        },
+        "copies": 1,
+        "order": 2
+      },
+      "file": "documents/D2.md",
+      "body_html": "<p>Dne 23. 8. 2026 v 07:41 přijato oznámení od Lenky Šimkové (28), plavčice, že v bazénu koupaliště Pod Hradem\nv Kunštátě leží člověk. Na místo jsem dorazil v 07:52.</p>\n<p>Koupaliště má jeden šestidráhový pětadvacetimetrový bazén, brouzdaliště a dřevěnou budovu s kanceláří a šatnami.\nBranka u silnice byla zamčená, branka od parkoviště za budovou byla jen přivřená a zámek nebyl poškozen.</p>\n<p>Tělo muže leželo tváří dolů u stěny bazénu v třetí dráze, asi dva metry od schůdků. Oznamovatelka muže vytáhla na\nokraj a zahájila oživování, které ukončila RZS v 08:09. Muž identifikován jako Bořek Vítek, nar. 1979, provozovatel\nkoupaliště.</p>\n<p>Oděv: černé kalhoty a košile s logem „DJ Bory“. V kapse promočený nefunkční telefon. Klíče v zámku kanceláře.</p>\n<p>V kanceláři svítilo světlo. Na stole láhev s cedulkou a dvě sklenky, na zemi u bazénu tyč na sběr listí se síťkou.\nNa parkovišti za budovou stála dodávka Ford Transit s nápisem DJ BORY, odemčená, motor studený.</p>\n<p>Na místo přivolána výjezdová skupina SKPV a soudní lékařka MUDr. Věra Kalinová. Stopy zajištěny, viz soupis.</p>\n<div class=\"mf-stamp\">\n<p>Založeno do spisu</p>\n</div>\n",
+      "text": "Dne 23. 8. 2026 v 07:41 přijato oznámení od Lenky Šimkové (28), plavčice, že v bazénu koupaliště Pod Hradem v Kunštátě leží člověk. Na místo jsem dorazil v 07:52.\n\nKoupaliště má jeden šestidráhový pětadvacetimetrový bazén, brouzdaliště a dřevěnou budovu s kanceláří a šatnami. Branka u silnice byla zamčená, branka od parkoviště za budovou byla jen přivřená a zámek nebyl poškozen.\n\nTělo muže leželo tváří dolů u stěny bazénu v třetí dráze, asi dva metry od schůdků. Oznamovatelka muže vytáhla na okraj a zahájila oživování, které ukončila RZS v 08:09. Muž identifikován jako Bořek Vítek, nar. 1979, provozovatel koupaliště.\n\nOděv: černé kalhoty a košile s logem „DJ Bory“. V kapse promočený nefunkční telefon. Klíče v zámku kanceláře.\n\nV kanceláři svítilo světlo. Na stole láhev s cedulkou a dvě sklenky, na zemi u bazénu tyč na sběr listí se síťkou. Na parkovišti za budovou stála dodávka Ford Transit s nápisem DJ BORY, odemčená, motor studený.\n\nNa místo přivolána výjezdová skupina SKPV a soudní lékařka MUDr. Věra Kalinová. Stopy zajištěny, viz soupis.\n\nZaloženo do spisu"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D3",
+        "kind": "transcript",
+        "stage": "A",
+        "title": "Výslech Lenky Šimkové",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "case_number": "KRPB-2318/TČ-2026",
+          "subject": "Lenka Šimková, plavčice, nálezkyně",
+          "interviewer": "kpt. Jana Horáková",
+          "place": "koupaliště Pod Hradem, kancelář",
+          "date": "23. 8. 2026, 09:40"
+        },
+        "copies": 1,
+        "order": 3
+      },
+      "file": "documents/D3.md",
+      "body_html": "<p>HORÁKOVÁ: Jak dlouho pro pana Vítka pracujete?\nŠIMKOVÁ: Třetí sezónu. Začínala jsem v Rudce, tam to s Radimem otevřeli v roce 2019. Letos dělám vedoucí tady v Kunštátě.\nHORÁKOVÁ: Co jste dělala v sobotu večer?\nŠIMKOVÁ: Koupák jsme zavírali v osm, kvůli svatbě nebyl Bory u kasy, tak jsem to zamykala já. Pak jsem jela domů do Rudky. Byla jsem doma od půl desáté, sama.\nHORÁKOVÁ: Kdy jste dnes přišla?\nŠIMKOVÁ: Krátce po půl osmé. Branka u parkoviště byla otevřená, to mě zarazilo. A pak jsem uviděla ve vodě černou košili. [pláče] Skočila jsem pro něj, ale byl studený.\nHORÁKOVÁ: Měla jste s panem Vítkem i jiný než pracovní vztah?\nŠIMKOVÁ: [dlouhá pauza] Ano. Od jara. Monika o tom neví. Nebo nevěděla.\nHORÁKOVÁ: Kdo kromě vás má klíče od kanceláře?\nŠIMKOVÁ: Bory, já a Radim Kočí, ten má jedny pro jistotu. A Monika asi taky, ty jejich klíče visí doma u dveří.\nHORÁKOVÁ: Pil pan Vítek po akcích?\nŠIMKOVÁ: Pivo, dvě. Na svatbách nepil, říkal, že DJ musí mít čistou hlavu. Proto mi to celé nedává smysl.</p>\n",
+      "text": "HORÁKOVÁ: Jak dlouho pro pana Vítka pracujete? ŠIMKOVÁ: Třetí sezónu. Začínala jsem v Rudce, tam to s Radimem otevřeli v roce 2019. Letos dělám vedoucí tady v Kunštátě. HORÁKOVÁ: Co jste dělala v sobotu večer? ŠIMKOVÁ: Koupák jsme zavírali v osm, kvůli svatbě nebyl Bory u kasy, tak jsem to zamykala já. Pak jsem jela domů do Rudky. Byla jsem doma od půl desáté, sama. HORÁKOVÁ: Kdy jste dnes přišla? ŠIMKOVÁ: Krátce po půl osmé. Branka u parkoviště byla otevřená, to mě zarazilo. A pak jsem uviděla ve vodě černou košili. [pláče] Skočila jsem pro něj, ale byl studený. HORÁKOVÁ: Měla jste s panem Vítkem i jiný než pracovní vztah? ŠIMKOVÁ: [dlouhá pauza] Ano. Od jara. Monika o tom neví. Nebo nevěděla. HORÁKOVÁ: Kdo kromě vás má klíče od kanceláře? ŠIMKOVÁ: Bory, já a Radim Kočí, ten má jedny pro jistotu. A Monika asi taky, ty jejich klíče visí doma u dveří. HORÁKOVÁ: Pil pan Vítek po akcích? ŠIMKOVÁ: Pivo, dvě. Na svatbách nepil, říkal, že DJ musí mít čistou hlavu. Proto mi to celé nedává smysl."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D4",
+        "kind": "phone-records",
+        "stage": "A",
+        "title": "Výpis telefonu Bořka Vítka",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Moravský Mobil a.s. – oddělení součinnosti s OČTŘ",
+          "subscriber": "Bořek Vítek",
+          "phone_number": "+420 732 118 904",
+          "period": "22. 8. 2026 17:00 – 23. 8. 2026 08:00",
+          "case_number": "KRPB-2318/TČ-2026",
+          "number": "S-55812"
+        },
+        "copies": 1,
+        "order": 4
+      },
+      "file": "documents/D4.md",
+      "body_html": "<p>Výpis uskutečněných a přijatých hovorů, SMS a datových relací. Obsah zpráv operátor neuchovává.</p>\n<table>\n<thead>\n<tr>\n<th>Čas</th>\n<th>Typ</th>\n<th>Druhé číslo</th>\n<th>Délka</th>\n<th>Buňka</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>17:12</td>\n<td>hovor příchozí</td>\n<td>603 418 227 (Monika)</td>\n<td>1:40</td>\n<td>KUNŠTÁT-CENTRUM</td>\n</tr>\n<tr>\n<td>17:48</td>\n<td>data</td>\n<td>–</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>18:05</td>\n<td>SMS odchozí</td>\n<td>739 204 556 (Lenka)</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>19:31</td>\n<td>SMS příchozí</td>\n<td>739 204 556 (Lenka)</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>20:02</td>\n<td>hovor příchozí</td>\n<td>777 610 393 (Tommy)</td>\n<td>0:00</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>21:15</td>\n<td>SMS příchozí</td>\n<td>608 377 140 (Radim)</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>22:44</td>\n<td>hovor příchozí</td>\n<td>603 418 227 (Monika)</td>\n<td>0:00</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>23:52</td>\n<td>SMS příchozí</td>\n<td>734 552 019</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>23:58</td>\n<td>SMS odchozí</td>\n<td>734 552 019</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>00:40</td>\n<td>data</td>\n<td>–</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>01:12</td>\n<td>data</td>\n<td>–</td>\n<td>–</td>\n<td>LHOTA-VÝSLUNÍ</td>\n</tr>\n<tr>\n<td>01:27</td>\n<td>data</td>\n<td>–</td>\n<td>–</td>\n<td>KUNŠTÁT-JIH</td>\n</tr>\n<tr>\n<td>02:12</td>\n<td>hovor odchozí</td>\n<td>603 418 227 (Monika)</td>\n<td>0:00</td>\n<td>KUNŠTÁT-JIH</td>\n</tr>\n<tr>\n<td>02:19</td>\n<td>data</td>\n<td>–</td>\n<td>–</td>\n<td>KUNŠTÁT-JIH</td>\n</tr>\n<tr>\n<td>02:37</td>\n<td>odhlášení ze sítě</td>\n<td>–</td>\n<td>–</td>\n<td>KUNŠTÁT-JIH</td>\n</tr>\n</tbody>\n</table>\n<p>Jména u čísel doplnil vyšetřovatel podle kontaktů v telefonu. Číslo 734 552 019 v kontaktech uloženo není.</p>\n<p>Buňka KUNŠTÁT-JIH pokrývá jižní okraj Kunštátu včetně koupaliště Pod Hradem. Buňka LHOTA-VÝSLUNÍ pokrývá okolí\nstatku Na Výsluní.</p>\n",
+      "text": "Výpis uskutečněných a přijatých hovorů, SMS a datových relací. Obsah zpráv operátor neuchovává.\n\nČas  Typ  Druhé číslo  Délka  Buňka\n17:12  hovor příchozí  603 418 227 (Monika)  1:40  KUNŠTÁT-CENTRUM\n17:48  data  –  –  LHOTA-VÝSLUNÍ\n18:05  SMS odchozí  739 204 556 (Lenka)  –  LHOTA-VÝSLUNÍ\n19:31  SMS příchozí  739 204 556 (Lenka)  –  LHOTA-VÝSLUNÍ\n20:02  hovor příchozí  777 610 393 (Tommy)  0:00  LHOTA-VÝSLUNÍ\n21:15  SMS příchozí  608 377 140 (Radim)  –  LHOTA-VÝSLUNÍ\n22:44  hovor příchozí  603 418 227 (Monika)  0:00  LHOTA-VÝSLUNÍ\n23:52  SMS příchozí  734 552 019  –  LHOTA-VÝSLUNÍ\n23:58  SMS odchozí  734 552 019  –  LHOTA-VÝSLUNÍ\n00:40  data  –  –  LHOTA-VÝSLUNÍ\n01:12  data  –  –  LHOTA-VÝSLUNÍ\n01:27  data  –  –  KUNŠTÁT-JIH\n02:12  hovor odchozí  603 418 227 (Monika)  0:00  KUNŠTÁT-JIH\n02:19  data  –  –  KUNŠTÁT-JIH\n02:37  odhlášení ze sítě  –  –  KUNŠTÁT-JIH\n\nJména u čísel doplnil vyšetřovatel podle kontaktů v telefonu. Číslo 734 552 019 v kontaktech uloženo není.\n\nBuňka KUNŠTÁT-JIH pokrývá jižní okraj Kunštátu včetně koupaliště Pod Hradem. Buňka LHOTA-VÝSLUNÍ pokrývá okolí statku Na Výsluní."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D5",
+        "kind": "chat-log",
+        "stage": "A",
+        "title": "Zprávy Bořek – Radim",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "contact": "Radim Rudka",
+          "owner": "Bořek Vítek",
+          "date": "18. – 22. 8. 2026",
+          "device": "druhý telefon v dodávce"
+        },
+        "copies": 1,
+        "order": 5
+      },
+      "file": "documents/D5.md",
+      "body_html": "<p>Bory: Radime, ty čísla z Rudky mi nesedí. Musíme si sednout.\nRadim: Co ti nesedí? Všechno jde přes Krejčovou, ona to kontroluje.\nBory: Tak si sedneme všichni tři. Pondělí po svatbě.\nRadim: Jak chceš. Ale nedělej z toho drama, jsme kámoši třicet let.\nRadim: Nechal jsem ti v kanclu na koupáku flašku domácí švestkové. Na usmířenou, ať se zase můžeme normálně bavit.\nBory: Díky. Ale pondělí platí.\nRadim: Hraješ v sobotu na Výsluní?\nBory: Jo, do jedné. Pak padám.</p>\n",
+      "text": "Bory: Radime, ty čísla z Rudky mi nesedí. Musíme si sednout. Radim: Co ti nesedí? Všechno jde přes Krejčovou, ona to kontroluje. Bory: Tak si sedneme všichni tři. Pondělí po svatbě. Radim: Jak chceš. Ale nedělej z toho drama, jsme kámoši třicet let. Radim: Nechal jsem ti v kanclu na koupáku flašku domácí švestkové. Na usmířenou, ať se zase můžeme normálně bavit. Bory: Díky. Ale pondělí platí. Radim: Hraješ v sobotu na Výsluní? Bory: Jo, do jedné. Pak padám."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D6",
+        "kind": "transcript",
+        "stage": "A",
+        "title": "Výpověď svědka ze svatby",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "case_number": "KRPB-2318/TČ-2026",
+          "subject": "Ondřej Musil, ženich",
+          "interviewer": "nprap. Petr Hála",
+          "place": "statek Na Výsluní",
+          "date": "23. 8. 2026, 11:15"
+        },
+        "copies": 1,
+        "order": 6
+      },
+      "file": "documents/D6.md",
+      "body_html": "<p>HÁLA: Kdo z rodiny pana Vítka byl na svatbě?\nMUSIL: Monika, jeho žena. Je to sestřenice mojí ženy. Byla v tmavě zelených šatech a s červenou mašlí ve vlasech, toho si všiml každý.\nHÁLA: Stalo se během večera něco neobvyklého?\nMUSIL: Kolem půl jedenácté se Bory s Monikou u baru hrozně pohádali, ona na něj křičela, že ho zabije.\nHÁLA: Víte proč?\nMUSIL: Šuškalo se něco o nějaké holce z koupaliště. Monika pak odešla ven a chvíli jsme ji neviděli.\nHÁLA: Kdy pan Vítek odjel?\nMUSIL: Dohrál v jednu, sbalil aparaturu a v deset minut po jedné odjel dodávkou. Byl střízlivý, pil celou noc jen kofolu.\nHÁLA: A paní Vítková?\nMUSIL: To nevím přesně. Někdo říkal, že odjela s ním, někdo, že taxíkem. Já už jsem měl dost, pardon.</p>\n",
+      "text": "HÁLA: Kdo z rodiny pana Vítka byl na svatbě? MUSIL: Monika, jeho žena. Je to sestřenice mojí ženy. Byla v tmavě zelených šatech a s červenou mašlí ve vlasech, toho si všiml každý. HÁLA: Stalo se během večera něco neobvyklého? MUSIL: Kolem půl jedenácté se Bory s Monikou u baru hrozně pohádali, ona na něj křičela, že ho zabije. HÁLA: Víte proč? MUSIL: Šuškalo se něco o nějaké holce z koupaliště. Monika pak odešla ven a chvíli jsme ji neviděli. HÁLA: Kdy pan Vítek odjel? MUSIL: Dohrál v jednu, sbalil aparaturu a v deset minut po jedné odjel dodávkou. Byl střízlivý, pil celou noc jen kofolu. HÁLA: A paní Vítková? MUSIL: To nevím přesně. Někdo říkal, že odjela s ním, někdo, že taxíkem. Já už jsem měl dost, pardon."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D7",
+        "kind": "receipt",
+        "stage": "A",
+        "title": "Účtenka z lékárny v Monice kabelce",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "shop": "Lékárna U Sv. Jana",
+          "address": "Náměstí 14, Kunštát",
+          "date": "14.08.2026 16:22",
+          "number": "2026/08/1187",
+          "total": "312,00 Kč"
+        },
+        "copies": 1,
+        "order": 7
+      },
+      "file": "documents/D7.md",
+      "body_html": "<p>Somnaxin 10 mg, 30 tbl. – na předpis – pacient: Vítková Monika</p>\n<p>doplatek ........................ 96,00</p>\n<p>Ibuprofen 400 mg, 24 tbl. ........ 89,00</p>\n<p>Opalovací krém SPF 50 ........... 127,00</p>\n<p>Platba kartou: ****4471</p>\n",
+      "text": "Somnaxin 10 mg, 30 tbl. – na předpis – pacient: Vítková Monika\n\ndoplatek ........................ 96,00\n\nIbuprofen 400 mg, 24 tbl. ........ 89,00\n\nOpalovací krém SPF 50 ........... 127,00\n\nPlatba kartou: ****4471"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D8",
+        "kind": "note",
+        "stage": "A",
+        "title": "Vzkaz kapitánky Horákové",
+        "puzzle": "P1",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "signature": "J. H.",
+          "date": "neděle"
+        },
+        "copies": 1,
+        "order": 8
+      },
+      "file": "documents/D8.md",
+      "body_html": "<p>To neznámé číslo ze 23:52 mi nedá spát. Bory na tu zprávu za šest minut odpověděl, takže odesílatele znal.</p>\n<p>Odkud přesně v Rudce přišla ta zpráva ve 23:52? Napište mi jedno slovo, které u čísla stojí.</p>\n",
+      "text": "To neznámé číslo ze 23:52 mi nedá spát. Bory na tu zprávu za šest minut odpověděl, takže odesílatele znal.\n\nOdkud přesně v Rudce přišla ta zpráva ve 23:52? Napište mi jedno slovo, které u čísla stojí."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D9",
+        "kind": "chat-log",
+        "stage": "A",
+        "title": "Zprávy Bořek – Lenka",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "contact": "Lenka",
+          "owner": "Bořek Vítek",
+          "date": "20. – 22. 8. 2026",
+          "device": "druhý telefon v dodávce"
+        },
+        "copies": 1,
+        "order": 9
+      },
+      "file": "documents/D9.md",
+      "body_html": "<p>Lenka: Zase jsi slíbil, že to vyřešíš.\nBory: Po sezóně. Teď nemůžu, mám svatby a dva koupáky.\nLenka: Jestli to Monice do konce prázdnin neřekneš ty, řeknu jí to já.\nBory: Prosím tě, ne. Dej mi čas.\nLenka: Zamknu dneska já, ty hraj. Dobrou noc.\nBory: Díky. Zítra ráno nespěchej, otevřu já.</p>\n",
+      "text": "Lenka: Zase jsi slíbil, že to vyřešíš. Bory: Po sezóně. Teď nemůžu, mám svatby a dva koupáky. Lenka: Jestli to Monice do konce prázdnin neřekneš ty, řeknu jí to já. Bory: Prosím tě, ne. Dej mi čas. Lenka: Zamknu dneska já, ty hraj. Dobrou noc. Bory: Díky. Zítra ráno nespěchej, otevřu já."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D10",
+        "kind": "chat-log",
+        "stage": "A",
+        "title": "Zprávy Bořek – Tommy",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "contact": "DJ Tommy",
+          "owner": "Bořek Vítek",
+          "date": "15. – 22. 8. 2026",
+          "device": "druhý telefon v dodávce"
+        },
+        "copies": 1,
+        "order": 10
+      },
+      "file": "documents/D10.md",
+      "body_html": "<p>Tommy: Slyšel jsem, že máš Musilovu svatbu na Výsluní. To byla moje svatba.\nBory: Ženich si vybral. Nic osobního.\nTommy: Tohle ti nedaruju, Bory. Třetí svatba, co mi přebereš.\nBory: Hraj líp a nebudou utíkat.\nTommy: Uvidíme se. Kraj je malej.</p>\n",
+      "text": "Tommy: Slyšel jsem, že máš Musilovu svatbu na Výsluní. To byla moje svatba. Bory: Ženich si vybral. Nic osobního. Tommy: Tohle ti nedaruju, Bory. Třetí svatba, co mi přebereš. Bory: Hraj líp a nebudou utíkat. Tommy: Uvidíme se. Kraj je malej."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D11",
+        "kind": "police-report",
+        "stage": "A",
+        "title": "Soupis zajištěných stop",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "station": "SKPV Blansko – výjezdová skupina",
+          "case_number": "KRPB-2318/TČ-2026",
+          "officer": "por. Ing. Karel Dostál",
+          "date": "23. 8. 2026, 09:05",
+          "subject": "Koupaliště Pod Hradem"
+        },
+        "copies": 1,
+        "order": 11
+      },
+      "file": "documents/D11.md",
+      "body_html": "<table>\n<thead>\n<tr>\n<th>Stopa</th>\n<th>Popis a místo nálezu</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>E-1</td>\n<td>vzorek krve zemřelého, odebrán při pitvě</td>\n</tr>\n<tr>\n<td>E-2</td>\n<td>sklenka 1, na stole v kanceláři, zbytek čiré tekutiny</td>\n</tr>\n<tr>\n<td>E-3</td>\n<td>láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři</td>\n</tr>\n<tr>\n<td>E-4</td>\n<td>sklenka 2, na stole v kanceláři, čistá, bez otisků</td>\n</tr>\n<tr>\n<td>E-5</td>\n<td>plechovka energetického nápoje, v dodávce na sedadle spolujezdce</td>\n</tr>\n<tr>\n<td>E-6</td>\n<td>tyč na sběr listí se síťkou, hliníková, na dlažbě u bazénu</td>\n</tr>\n<tr>\n<td>E-7</td>\n<td>vzorek vody z bazénu, třetí dráha</td>\n</tr>\n</tbody>\n</table>\n<p>Na láhvi E-3 papírová cedulka, rukou psáno: „Pro Boryho. Ať je zase dobře.“ Bez podpisu.</p>\n<p>Na sklence E-4 nebyly nalezeny žádné otisky prstů, přestože ostatní předměty na stole otisky nesly. Někdo ji\npravděpodobně otřel.</p>\n",
+      "text": "Stopa  Popis a místo nálezu\nE-1  vzorek krve zemřelého, odebrán při pitvě\nE-2  sklenka 1, na stole v kanceláři, zbytek čiré tekutiny\nE-3  láhev 1 l, čirá kapalina s vůní švestek, na stole v kanceláři\nE-4  sklenka 2, na stole v kanceláři, čistá, bez otisků\nE-5  plechovka energetického nápoje, v dodávce na sedadle spolujezdce\nE-6  tyč na sběr listí se síťkou, hliníková, na dlažbě u bazénu\nE-7  vzorek vody z bazénu, třetí dráha\n\nNa láhvi E-3 papírová cedulka, rukou psáno: „Pro Boryho. Ať je zase dobře.“ Bez podpisu.\n\nNa sklence E-4 nebyly nalezeny žádné otisky prstů, přestože ostatní předměty na stole otisky nesly. Někdo ji pravděpodobně otřel."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D12",
+        "kind": "autopsy-report",
+        "stage": "B",
+        "title": "Pitevní protokol – Bořek Vítek",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Ústav soudního lékařství, Brno",
+          "case_number": "KRPB-2318/TČ-2026",
+          "date": "23. 8. 2026",
+          "examiner": "MUDr. Věra Kalinová",
+          "deceased": "Bořek Vítek, 47 let",
+          "time_of_death": "23. 8. 2026 mezi 01:45 a 03:00",
+          "cause_of_death": "Utonutí v bezvědomí"
+        },
+        "copies": 1,
+        "order": 1
+      },
+      "file": "documents/D12.md",
+      "body_html": "<p><strong>Zevní prohlídka.</strong> Muž středního vzrůstu, oděn. Kůže prstů rukou zvrásnělá od vody.</p>\n<p>Na temeni hlavy vlevo podlitina s tržnou ranou 3 cm, vzniklá úderem tupým předmětem podlouhlého tvaru před vniknutím do vody.</p>\n<p>Na zádech a loktech oděrky, jaké vznikají při smýkání po drsném povrchu, například po dlažbě.</p>\n<p><strong>Vnitřní prohlídka.</strong> V plicích a žaludku voda z bazénu. Muž tedy do vody upadl ještě živý, ale podle stavu dýchacích\ncest se nebránil a vodu vdechoval bez kašle, tedy v bezvědomí nebo hlubokém útlumu.</p>\n<p><strong>Závěr.</strong> Úder do hlavy sám o sobě smrtelný nebyl. Příčinou smrti je utonutí. Zemřelý se do vody s vysokou\npravděpodobností nedostal sám. Doporučuji toxikologické vyšetření, výsledky viz laboratorní protokol.</p>\n<table>\n<thead>\n<tr>\n<th>Nález</th>\n<th>Hodnota</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>alkohol v krvi</td>\n<td>0,6 ‰</td>\n</tr>\n<tr>\n<td>teplota vody v bazénu ráno</td>\n<td>19 °C</td>\n</tr>\n<tr>\n<td>odhad doby smrti</td>\n<td>01:45 – 03:00</td>\n</tr>\n</tbody>\n</table>\n",
+      "text": "Zevní prohlídka. Muž středního vzrůstu, oděn. Kůže prstů rukou zvrásnělá od vody.\n\nNa temeni hlavy vlevo podlitina s tržnou ranou 3 cm, vzniklá úderem tupým předmětem podlouhlého tvaru před vniknutím do vody.\n\nNa zádech a loktech oděrky, jaké vznikají při smýkání po drsném povrchu, například po dlažbě.\n\nVnitřní prohlídka. V plicích a žaludku voda z bazénu. Muž tedy do vody upadl ještě živý, ale podle stavu dýchacích cest se nebránil a vodu vdechoval bez kašle, tedy v bezvědomí nebo hlubokém útlumu.\n\nZávěr. Úder do hlavy sám o sobě smrtelný nebyl. Příčinou smrti je utonutí. Zemřelý se do vody s vysokou pravděpodobností nedostal sám. Doporučuji toxikologické vyšetření, výsledky viz laboratorní protokol.\n\nNález  Hodnota\nalkohol v krvi  0,6 ‰\nteplota vody v bazénu ráno  19 °C\nodhad doby smrti  01:45 – 03:00"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D13",
+        "kind": "lab-report",
+        "stage": "B",
+        "title": "Toxikologie a stopy",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Kriminalistický ústav, odbor chemie",
+          "number": "L-4410",
+          "case_number": "KRPB-2318/TČ-2026",
+          "sample": "E-1 až E-7 podle soupisu stop",
+          "test": "Toxikologie a daktyloskopie",
+          "requested_by": "kpt. Jana Horáková",
+          "date": "23. 8. 2026",
+          "analyst": "Mgr. Tereza Ortová"
+        },
+        "copies": 1,
+        "order": 2
+      },
+      "file": "documents/D13.md",
+      "body_html": "<table>\n<thead>\n<tr>\n<th>Vzorek</th>\n<th>Somnaxin</th>\n<th>Ethanol</th>\n<th>Otisky prstů</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>E-1</td>\n<td>pozitivní, 0,9 mg/l</td>\n<td>0,6 ‰</td>\n<td>–</td>\n</tr>\n<tr>\n<td>E-2</td>\n<td>pozitivní</td>\n<td>ano</td>\n<td>Bořek Vítek</td>\n</tr>\n<tr>\n<td>E-3</td>\n<td>pozitivní</td>\n<td>ano</td>\n<td>Bořek Vítek, další otisk nepoužitelný</td>\n</tr>\n<tr>\n<td>E-4</td>\n<td>negativní</td>\n<td>ne</td>\n<td>žádné</td>\n</tr>\n<tr>\n<td>E-5</td>\n<td>negativní</td>\n<td>ne</td>\n<td>Bořek Vítek</td>\n</tr>\n<tr>\n<td>E-6</td>\n<td>–</td>\n<td>–</td>\n<td>rozmazané, otřené</td>\n</tr>\n<tr>\n<td>E-7</td>\n<td>negativní</td>\n<td>–</td>\n<td>–</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Poznámka analytika:</strong> somnaxin je silné hypnotikum na předpis. Koncentrace v krvi odpovídá zhruba třem až čtyřem\ntabletám. Po požití s alkoholem přichází útlum do 20 až 45 minut. Bez lékařské pomoci by se postižený v hlubokém\nspánku do vody sám nedostal a ani by z ní nevylezl.</p>\n",
+      "text": "Vzorek  Somnaxin  Ethanol  Otisky prstů\nE-1  pozitivní, 0,9 mg/l  0,6 ‰  –\nE-2  pozitivní  ano  Bořek Vítek\nE-3  pozitivní  ano  Bořek Vítek, další otisk nepoužitelný\nE-4  negativní  ne  žádné\nE-5  negativní  ne  Bořek Vítek\nE-6  –  –  rozmazané, otřené\nE-7  negativní  –  –\n\nPoznámka analytika: somnaxin je silné hypnotikum na předpis. Koncentrace v krvi odpovídá zhruba třem až čtyřem tabletám. Po požití s alkoholem přichází útlum do 20 až 45 minut. Bez lékařské pomoci by se postižený v hlubokém spánku do vody sám nedostal a ani by z ní nevylezl."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D14",
+        "kind": "poster",
+        "stage": "A",
+        "title": "Ceník lesního koupaliště Rudka",
+        "puzzle": "P1",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Lesní koupaliště Rudka",
+          "headline": "CENÍK 2026",
+          "subheadline": "Otevřeno denně 9–20 h za příznivého počasí"
+        },
+        "copies": 1,
+        "order": 14
+      },
+      "file": "documents/D14.md",
+      "body_html": "<table>\n<thead>\n<tr>\n<th>Vstupné</th>\n<th>Cena</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>dospělí</td>\n<td>80 Kč</td>\n</tr>\n<tr>\n<td>děti 3–15 let</td>\n<td>50 Kč</td>\n</tr>\n<tr>\n<td>rodinné (2+2)</td>\n<td>220 Kč</td>\n</tr>\n<tr>\n<td>po 17. hodině</td>\n<td>45 Kč</td>\n</tr>\n<tr>\n<td>zapůjčení lehátka</td>\n<td>30 Kč</td>\n</tr>\n</tbody>\n</table>\n<p>Psi, sklo a grilování v areálu zakázány. Plavčík je ve službě od 10 do 19 hodin.</p>\n<p><strong>Kontakty</strong></p>\n<p>Pokladna a provozní mobil: 734 552 019</p>\n<p>Rezervace dětských dnů a akcí s DJ Borym: 732 118 904</p>\n<p>Provozovatel: Vítek &amp; Kočí – koupaliště s.r.o., Kunštát</p>\n",
+      "text": "Vstupné  Cena\ndospělí  80 Kč\nděti 3–15 let  50 Kč\nrodinné (2+2)  220 Kč\npo 17. hodině  45 Kč\nzapůjčení lehátka  30 Kč\n\nPsi, sklo a grilování v areálu zakázány. Plavčík je ve službě od 10 do 19 hodin.\n\nKontakty\n\nPokladna a provozní mobil: 734 552 019\n\nRezervace dětských dnů a akcí s DJ Borym: 732 118 904\n\nProvozovatel: Vítek & Kočí – koupaliště s.r.o., Kunštát"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D15",
+        "kind": "note",
+        "stage": "B",
+        "title": "Vzkaz kapitánky Horákové",
+        "puzzle": "P2",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "signature": "J. H.",
+          "date": "neděle večer"
+        },
+        "copies": 1,
+        "order": 3
+      },
+      "file": "documents/D15.md",
+      "body_html": "<p>Laboratoř píše jen čísla vzorků. Já potřebuju vědět, co přesně Bory vypil, než usnul.</p>\n<p>V čem měl Bořek ty prášky? Jedno slovo, žádné značky.</p>\n",
+      "text": "Laboratoř píše jen čísla vzorků. Já potřebuju vědět, co přesně Bory vypil, než usnul.\n\nV čem měl Bořek ty prášky? Jedno slovo, žádné značky."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D16",
+        "kind": "police-report",
+        "stage": "B",
+        "title": "Lokalizace telefonů podezřelých",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "station": "SKPV Blansko – analytické oddělení",
+          "case_number": "KRPB-2318/TČ-2026",
+          "officer": "npor. Ing. Filip Kratochvíl",
+          "date": "24. 8. 2026",
+          "subject": "Lokalizace mobilních telefonů v noci 22./23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 4
+      },
+      "file": "documents/D16.md",
+      "body_html": "<p>Na žádost vedoucí vyšetřování byly od operátora vyžádány lokalizační údaje osobních telefonů osob ze zájmového okruhu.</p>\n<p>Mobilní telefon Lenky Šimkové byl od 21:30 do 07:05 přihlášen výhradně v buňce RUDKA-OBEC.</p>\n<p>Mobilní telefon Radima Kočího byl od 22:50 do 08:10 přihlášen výhradně v buňce RUDKA-OBEC. V noci nebyl použit\nk hovorům ani zprávám.</p>\n<p>Mobilní telefon Tomáše Peška byl od 20:40 do 03:30 přihlášen v buňce BOSKOVICE-CENTRUM.</p>\n<p>Lokalizace telefonu Moniky Vítkové zatím nebyla vydána, operátor žádost vrátil kvůli formální chybě.</p>\n<p>Upozornění: lokalizace telefonu prokazuje polohu přístroje, nikoli jeho majitele.</p>\n",
+      "text": "Na žádost vedoucí vyšetřování byly od operátora vyžádány lokalizační údaje osobních telefonů osob ze zájmového okruhu.\n\nMobilní telefon Lenky Šimkové byl od 21:30 do 07:05 přihlášen výhradně v buňce RUDKA-OBEC.\n\nMobilní telefon Radima Kočího byl od 22:50 do 08:10 přihlášen výhradně v buňce RUDKA-OBEC. V noci nebyl použit k hovorům ani zprávám.\n\nMobilní telefon Tomáše Peška byl od 20:40 do 03:30 přihlášen v buňce BOSKOVICE-CENTRUM.\n\nLokalizace telefonu Moniky Vítkové zatím nebyla vydána, operátor žádost vrátil kvůli formální chybě.\n\nUpozornění: lokalizace telefonu prokazuje polohu přístroje, nikoli jeho majitele."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D17",
+        "kind": "receipt",
+        "stage": "B",
+        "title": "Účtenka z klubu Sklep",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "shop": "KLUB SKLEP",
+          "address": "Masarykovo nám. 6, Boskovice",
+          "date": "23.08.2026",
+          "number": "U-30215",
+          "total": "184,00 Kč"
+        },
+        "copies": 1,
+        "order": 5
+      },
+      "file": "documents/D17.md",
+      "body_html": "<p>23.08.2026 02:20 obsluha: Tommy (DJ)</p>\n<p>2× Kofola 0,5 ........... 78,00</p>\n<p>1× Red Bull ............. 69,00</p>\n<p>1× tatranka ............. 37,00</p>\n<p>Zaměstnanecká sleva 0 %</p>\n<p>Účet namarkoval sám DJ na pokladně u pultu.</p>\n",
+      "text": "23.08.2026 02:20 obsluha: Tommy (DJ)\n\n2× Kofola 0,5 ........... 78,00\n\n1× Red Bull ............. 69,00\n\n1× tatranka ............. 37,00\n\nZaměstnanecká sleva 0 %\n\nÚčet namarkoval sám DJ na pokladně u pultu."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D18",
+        "kind": "generic",
+        "stage": "B",
+        "title": "Seznam fotek od svatebního fotografa",
+        "puzzle": "P3",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {},
+        "copies": 1,
+        "order": 6
+      },
+      "file": "documents/D18.md",
+      "body_html": "<div class=\"mf-typewriter\">\n<p>Od: Marek Sedlák – svatební fotograf\nKomu: kpt. Jana Horáková\nVěc: Výpis souborů ze svatby Musilových, druhá půlka noci</p>\n</div>\n<p>Posílám seznam souborů s časem z fotoaparátu (čas sedí na vteřinu, nastavuji ho podle telefonu). Fotky samotné\nmá nevěsta, popisky jsem psal hned v noci pro sebe. Lidi neznám jménem, tak je popisuju, jak vypadali.</p>\n<table>\n<thead>\n<tr>\n<th>Soubor</th>\n<th>Čas</th>\n<th>Co je na fotce</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>MS_4112</td>\n<td>00:58</td>\n<td>DJ za pultem, poslední písnička</td>\n</tr>\n<tr>\n<td>MS_4120</td>\n<td>01:06</td>\n<td>DJ balí reproduktory, pomáhá mu ženich</td>\n</tr>\n<tr>\n<td>MS_4131</td>\n<td>01:24</td>\n<td>nevěsta háže kytici, chytila holka v modrém</td>\n</tr>\n<tr>\n<td>MS_4140</td>\n<td>01:39</td>\n<td>starosta a tatínek nevěsty u vína</td>\n</tr>\n<tr>\n<td>MS_4152</td>\n<td>01:55</td>\n<td>paní v zelených šatech s červenou mašlí sedí venku na lavičce, kouří</td>\n</tr>\n<tr>\n<td>MS_4166</td>\n<td>02:08</td>\n<td>ženich nese nevěstu přes louži</td>\n</tr>\n<tr>\n<td>MS_4171</td>\n<td>02:18</td>\n<td>paní v zelených šatech s červenou mašlí a nevěsta u stolu, pláčou a smějí se</td>\n</tr>\n<tr>\n<td>MS_4179</td>\n<td>02:31</td>\n<td>nevěsta a paní v zelených šatech s červenou mašlí tančí kolečko</td>\n</tr>\n<tr>\n<td>MS_4184</td>\n<td>02:38</td>\n<td>paní v zelených šatech bez mašle odjíždí taxíkem</td>\n</tr>\n<tr>\n<td>MS_4190</td>\n<td>02:44</td>\n<td>prázdný sál, rozsvíceno</td>\n</tr>\n</tbody>\n</table>\n<div class=\"mf-note\">\n<p>Do kolika hodin Monika na svatbě opravdu byla? Napište čas poslední fotky, na které je, čtyřmi číslicemi. – J. H.</p>\n</div>\n",
+      "text": "Od: Marek Sedlák – svatební fotograf Komu: kpt. Jana Horáková Věc: Výpis souborů ze svatby Musilových, druhá půlka noci\n\nPosílám seznam souborů s časem z fotoaparátu (čas sedí na vteřinu, nastavuji ho podle telefonu). Fotky samotné má nevěsta, popisky jsem psal hned v noci pro sebe. Lidi neznám jménem, tak je popisuju, jak vypadali.\n\nSoubor  Čas  Co je na fotce\nMS_4112  00:58  DJ za pultem, poslední písnička\nMS_4120  01:06  DJ balí reproduktory, pomáhá mu ženich\nMS_4131  01:24  nevěsta háže kytici, chytila holka v modrém\nMS_4140  01:39  starosta a tatínek nevěsty u vína\nMS_4152  01:55  paní v zelených šatech s červenou mašlí sedí venku na lavičce, kouří\nMS_4166  02:08  ženich nese nevěstu přes louži\nMS_4171  02:18  paní v zelených šatech s červenou mašlí a nevěsta u stolu, pláčou a smějí se\nMS_4179  02:31  nevěsta a paní v zelených šatech s červenou mašlí tančí kolečko\nMS_4184  02:38  paní v zelených šatech bez mašle odjíždí taxíkem\nMS_4190  02:44  prázdný sál, rozsvíceno\n\nDo kolika hodin Monika na svatbě opravdu byla? Napište čas poslední fotky, na které je, čtyřmi číslicemi. – J. H."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D19",
+        "kind": "form",
+        "stage": "C",
+        "title": "Kniha výdeje klíčů – koupaliště Rudka",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Vítek & Kočí – koupaliště s.r.o.",
+          "form_number": "Kniha výdeje 2026",
+          "date": "srpen 2026"
+        },
+        "copies": 1,
+        "order": 1
+      },
+      "file": "documents/D19.md",
+      "body_html": "<table>\n<thead>\n<tr>\n<th>Den</th>\n<th>Čas</th>\n<th>Co</th>\n<th>Kdo vzal</th>\n<th>Vráceno</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>21. 8.</td>\n<td>08:10</td>\n<td>služební mobil + klíče od pokladny</td>\n<td>L. Š.</td>\n<td>21. 8. 20:05</td>\n</tr>\n<tr>\n<td>22. 8.</td>\n<td>08:05</td>\n<td>služební mobil + klíče od pokladny</td>\n<td>J. B.</td>\n<td>22. 8. 19:30</td>\n</tr>\n<tr>\n<td>22. 8.</td>\n<td>19:40</td>\n<td>služební mobil + klíče od pokladny</td>\n<td>R. K.</td>\n<td>–</td>\n</tr>\n<tr>\n<td>23. 8.</td>\n<td>08:30</td>\n<td>klíče od pokladny (náhradní)</td>\n<td>J. B.</td>\n<td>23. 8. 19:50</td>\n</tr>\n</tbody>\n</table>\n<p>Zapisuje každý sám. Služební mobil se nosí domů jen výjimečně, když je na víkend hlídání areálu.</p>\n<p>L. Š. = Lenka Šimková, J. B. = Jaroslav Bláha (technik), R. K. = Radim Kočí.</p>\n",
+      "text": "Den  Čas  Co  Kdo vzal  Vráceno\n21. 8.  08:10  služební mobil + klíče od pokladny  L. Š.  21. 8. 20:05\n22. 8.  08:05  služební mobil + klíče od pokladny  J. B.  22. 8. 19:30\n22. 8.  19:40  služební mobil + klíče od pokladny  R. K.  –\n23. 8.  08:30  klíče od pokladny (náhradní)  J. B.  23. 8. 19:50\n\nZapisuje každý sám. Služební mobil se nosí domů jen výjimečně, když je na víkend hlídání areálu.\n\nL. Š. = Lenka Šimková, J. B. = Jaroslav Bláha (technik), R. K. = Radim Kočí."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D20",
+        "kind": "transcript",
+        "stage": "C",
+        "title": "Výslech Radima Kočího",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "case_number": "KRPB-2318/TČ-2026",
+          "subject": "Radim Kočí, společník",
+          "interviewer": "kpt. Jana Horáková",
+          "place": "OOP Kunštát",
+          "date": "25. 8. 2026, 10:00"
+        },
+        "copies": 1,
+        "order": 2
+      },
+      "file": "documents/D20.md",
+      "body_html": "<p>HORÁKOVÁ: Kdy jste naposledy viděl pana Vítka?\nKOČÍ: Ve středu. Mluvili jsme o sezóně. Byl to můj nejlepší kamarád, chápete.\nHORÁKOVÁ: Měli jste spory?\nKOČÍ: O peníze, jako každý společníci. Nic vážného. Proto jsem mu nechal tu flašku, ať je zase klid.\nHORÁKOVÁ: Kde jste byl v noci ze soboty na neděli?\nKOČÍ: Byl jsem doma od jedenácti, spal jsem. Telefon jsem měl na nočním stolku, můžete se podívat.\nHORÁKOVÁ: Měl jste ten víkend u sebe služební mobil z Rudky?\nKOČÍ: [pauza] Myslím, že ne. Ten nosí Jarda nebo Lenka.\nHORÁKOVÁ: Jakým autem jezdíte?\nKOČÍ: Octavií. Proč?\nHORÁKOVÁ: Bere vaše žena nějaké léky na spaní?\nKOČÍ: To se zeptejte jí. Myslím, že tohle nemá s ničím nic společného.</p>\n",
+      "text": "HORÁKOVÁ: Kdy jste naposledy viděl pana Vítka? KOČÍ: Ve středu. Mluvili jsme o sezóně. Byl to můj nejlepší kamarád, chápete. HORÁKOVÁ: Měli jste spory? KOČÍ: O peníze, jako každý společníci. Nic vážného. Proto jsem mu nechal tu flašku, ať je zase klid. HORÁKOVÁ: Kde jste byl v noci ze soboty na neděli? KOČÍ: Byl jsem doma od jedenácti, spal jsem. Telefon jsem měl na nočním stolku, můžete se podívat. HORÁKOVÁ: Měl jste ten víkend u sebe služební mobil z Rudky? KOČÍ: [pauza] Myslím, že ne. Ten nosí Jarda nebo Lenka. HORÁKOVÁ: Jakým autem jezdíte? KOČÍ: Octavií. Proč? HORÁKOVÁ: Bere vaše žena nějaké léky na spaní? KOČÍ: To se zeptejte jí. Myslím, že tohle nemá s ničím nic společného."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D21",
+        "kind": "phone-records",
+        "stage": "C",
+        "title": "Výpis služebního mobilu 734 552 019",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Moravský Mobil a.s. – oddělení součinnosti s OČTŘ",
+          "subscriber": "Vítek & Kočí – koupaliště s.r.o.",
+          "phone_number": "+420 734 552 019",
+          "period": "22. 8. 2026 18:00 – 23. 8. 2026 08:00",
+          "case_number": "KRPB-2318/TČ-2026",
+          "number": "S-55931"
+        },
+        "copies": 1,
+        "order": 3
+      },
+      "file": "documents/D21.md",
+      "body_html": "<table>\n<thead>\n<tr>\n<th>Čas</th>\n<th>Typ</th>\n<th>Druhé číslo</th>\n<th>Buňka</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>18:00 – 19:44</td>\n<td>bez provozu</td>\n<td>–</td>\n<td>RUDKA-KOUPALIŠTĚ</td>\n</tr>\n<tr>\n<td>19:51 – 23:58</td>\n<td>bez provozu</td>\n<td>–</td>\n<td>RUDKA-OBEC</td>\n</tr>\n<tr>\n<td>23:52</td>\n<td>SMS odchozí</td>\n<td>732 118 904</td>\n<td>RUDKA-OBEC</td>\n</tr>\n<tr>\n<td>23:58</td>\n<td>SMS příchozí</td>\n<td>732 118 904</td>\n<td>RUDKA-OBEC</td>\n</tr>\n<tr>\n<td>01:05 – 01:14</td>\n<td>data</td>\n<td>–</td>\n<td>RUDKA-OBEC → SVITÁVKA-SEVER</td>\n</tr>\n</tbody>\n</table>\n<p>Přehled buněk v noci:</p>\n<table>\n<thead>\n<tr>\n<th>Čas</th>\n<th>Typ</th>\n<th>Buňka</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>01:22 – 02:41</td>\n<td>data / bez hovorů</td>\n<td>KUNŠTÁT-JIH</td>\n</tr>\n<tr>\n<td>02:52</td>\n<td>data</td>\n<td>SVITÁVKA-SEVER</td>\n</tr>\n<tr>\n<td>03:05 – 08:00</td>\n<td>bez provozu</td>\n<td>RUDKA-OBEC</td>\n</tr>\n</tbody>\n</table>\n<p>Buňka KUNŠTÁT-JIH pokrývá jižní okraj Kunštátu včetně koupaliště Pod Hradem. Buňka RUDKA-OBEC pokrývá obec Rudka.</p>\n",
+      "text": "Čas  Typ  Druhé číslo  Buňka\n18:00 – 19:44  bez provozu  –  RUDKA-KOUPALIŠTĚ\n19:51 – 23:58  bez provozu  –  RUDKA-OBEC\n23:52  SMS odchozí  732 118 904  RUDKA-OBEC\n23:58  SMS příchozí  732 118 904  RUDKA-OBEC\n01:05 – 01:14  data  –  RUDKA-OBEC → SVITÁVKA-SEVER\n\nPřehled buněk v noci:\n\nČas  Typ  Buňka\n01:22 – 02:41  data / bez hovorů  KUNŠTÁT-JIH\n02:52  data  SVITÁVKA-SEVER\n03:05 – 08:00  bez provozu  RUDKA-OBEC\n\nBuňka KUNŠTÁT-JIH pokrývá jižní okraj Kunštátu včetně koupaliště Pod Hradem. Buňka RUDKA-OBEC pokrývá obec Rudka."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D22",
+        "kind": "cctv-still",
+        "stage": "C",
+        "title": "Kamera čerpací stanice – výjezd na Rudku",
+        "puzzle": "P4",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "camera": "CAM 03",
+          "location": "Čerpací stanice Kunštát, výjezd",
+          "date": "23.08.2026",
+          "time": "02:43:17",
+          "evidence_number": "E-12"
+        },
+        "copies": 1,
+        "order": 4
+      },
+      "file": "documents/D22.md",
+      "body_html": "<p>Tmavé kombi Škoda Octavia se střešním boxem odbočuje směrem na Rudku. Řidič není rozpoznatelný.</p>\n<p>Z registrační značky je čitelný jen začátek <strong>2B</strong> a konec <strong>85</strong>.</p>\n",
+      "text": "Tmavé kombi Škoda Octavia se střešním boxem odbočuje směrem na Rudku. Řidič není rozpoznatelný.\n\nZ registrační značky je čitelný jen začátek 2B a konec 85."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D23",
+        "kind": "form",
+        "stage": "C",
+        "title": "Seznam parkovacích karet zaměstnanců",
+        "puzzle": "P4",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Vítek & Kočí – koupaliště s.r.o.",
+          "form_number": "Parkování 2026",
+          "date": "1. 6. 2026"
+        },
+        "copies": 1,
+        "order": 5
+      },
+      "file": "documents/D23.md",
+      "body_html": "<p>Parkovací karty pro parkoviště za budovou koupaliště Pod Hradem a v Rudce.</p>\n<table>\n<thead>\n<tr>\n<th>Jméno</th>\n<th>Auto</th>\n<th>SPZ</th>\n<th>Poznámka</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Bořek Vítek</td>\n<td>Ford Transit, dodávka</td>\n<td>2BC 1190</td>\n<td>nápis DJ BORY</td>\n</tr>\n<tr>\n<td>Monika Vítková</td>\n<td>Hyundai i30</td>\n<td>2BA 7185</td>\n<td>–</td>\n</tr>\n<tr>\n<td>Radim Kočí</td>\n<td>Škoda Octavia combi, tmavě modrá</td>\n<td>2BE 4185</td>\n<td>střešní box</td>\n</tr>\n<tr>\n<td>Lenka Šimková</td>\n<td>Škoda Fabia</td>\n<td>2BD 3385</td>\n<td>–</td>\n</tr>\n<tr>\n<td>Jaroslav Bláha</td>\n<td>Škoda Octavia combi, šedá</td>\n<td>2BB 6285</td>\n<td>tažné zařízení</td>\n</tr>\n<tr>\n<td>Dana Krejčí</td>\n<td>Toyota Yaris</td>\n<td>1BX 2200</td>\n<td>jen v pondělí</td>\n</tr>\n</tbody>\n</table>\n<div class=\"mf-note\">\n<p>Jaká je celá SPZ toho auta? Napište ji bez mezer. – J. H.</p>\n</div>\n",
+      "text": "Parkovací karty pro parkoviště za budovou koupaliště Pod Hradem a v Rudce.\n\nJméno  Auto  SPZ  Poznámka\nBořek Vítek  Ford Transit, dodávka  2BC 1190  nápis DJ BORY\nMonika Vítková  Hyundai i30  2BA 7185  –\nRadim Kočí  Škoda Octavia combi, tmavě modrá  2BE 4185  střešní box\nLenka Šimková  Škoda Fabia  2BD 3385  –\nJaroslav Bláha  Škoda Octavia combi, šedá  2BB 6285  tažné zařízení\nDana Krejčí  Toyota Yaris  1BX 2200  jen v pondělí\n\nJaká je celá SPZ toho auta? Napište ji bez mezer. – J. H."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D24",
+        "kind": "form",
+        "stage": "D",
+        "title": "Faktury od firmy Bazénová chemie Kočí",
+        "puzzle": "P5",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Bazénová chemie Kočí, Tomáš Kočí, Svitávka",
+          "form_number": "Faktury 2026/031–033",
+          "date": "květen – červenec 2026"
+        },
+        "copies": 1,
+        "order": 1
+      },
+      "file": "documents/D24.md",
+      "body_html": "<p>Kopie faktur ze šanonu „Rudka 2026“. Všechny proplatil Bořek Vítek převodem z účtu společnosti.</p>\n<table>\n<thead>\n<tr>\n<th>Faktura</th>\n<th>Datum dodání</th>\n<th>Položka</th>\n<th>Množství</th>\n<th>Částka</th>\n<th>Převzal</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>2026/031</td>\n<td>12. 5. 2026</td>\n<td>chlornan sodný, sudy 60 l</td>\n<td>6 sudů</td>\n<td>24 300 Kč</td>\n<td>J. Bláha</td>\n</tr>\n<tr>\n<td>2026/032</td>\n<td>16. 6. 2026</td>\n<td>chlornan sodný, sudy 60 l</td>\n<td>6 sudů</td>\n<td>24 300 Kč</td>\n<td>R. Kočí</td>\n</tr>\n<tr>\n<td>2026/033</td>\n<td>21. 7. 2026</td>\n<td>chlornan sodný, sudy 60 l</td>\n<td>6 sudů</td>\n<td>24 300 Kč</td>\n<td>R. Kočí</td>\n</tr>\n</tbody>\n</table>\n<p>Všechny faktury uhrazeny do 14 dnů.</p>\n",
+      "text": "Kopie faktur ze šanonu „Rudka 2026“. Všechny proplatil Bořek Vítek převodem z účtu společnosti.\n\nFaktura  Datum dodání  Položka  Množství  Částka  Převzal\n2026/031  12. 5. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  J. Bláha\n2026/032  16. 6. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí\n2026/033  21. 7. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí\n\nVšechny faktury uhrazeny do 14 dnů."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D25",
+        "kind": "note",
+        "stage": "D",
+        "title": "Bořkova poznámka na šanonu",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "signature": "B.",
+          "date": "srpen"
+        },
+        "copies": 1,
+        "order": 2
+      },
+      "file": "documents/D25.md",
+      "body_html": "<p>Rudka – chlor. Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!</p>\n<p>V pondělí s Krejčovou.</p>\n",
+      "text": "Rudka – chlor. Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!\n\nV pondělí s Krejčovou."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D26",
+        "kind": "form",
+        "stage": "D",
+        "title": "Výpis z lékárny – vydané léky",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "issuer": "Lékárna U Sv. Jana, Kunštát",
+          "form_number": "Výpis pro Policii ČR",
+          "date": "26. 8. 2026"
+        },
+        "copies": 1,
+        "order": 3
+      },
+      "file": "documents/D26.md",
+      "body_html": "<p>Na žádost Policie ČR vydáváme přehled výdejů léčivého přípravku Somnaxin za červenec a srpen 2026.</p>\n<p>Pacient: Vítková Monika, Kunštát – Somnaxin 10 mg, 30 tbl. – vydáno 14. 8. 2026, vydáno 30 tbl.</p>\n<p>Pacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.</p>\n<p>Pacient: Novotný Jiří, Kunštát – Somnaxin 10 mg, 30 tbl. – vydáno 29. 7. 2026, vydáno 30 tbl.</p>\n<p>Policie při domovní prohlídce 26. 8. 2026 zjistila: Monika Vítková má doma 28 tablet, Iveta Kočová 19 tablet.\nIveta Kočová uvedla, že od 3. 8. užila nejvýš sedm tablet.</p>\n",
+      "text": "Na žádost Policie ČR vydáváme přehled výdejů léčivého přípravku Somnaxin za červenec a srpen 2026.\n\nPacient: Vítková Monika, Kunštát – Somnaxin 10 mg, 30 tbl. – vydáno 14. 8. 2026, vydáno 30 tbl.\n\nPacient: Kočová Iveta, Rudka 112 – Somnaxin 10 mg, 30 tbl. – vydáno 3. 8. 2026, vydáno 30 tbl.\n\nPacient: Novotný Jiří, Kunštát – Somnaxin 10 mg, 30 tbl. – vydáno 29. 7. 2026, vydáno 30 tbl.\n\nPolicie při domovní prohlídce 26. 8. 2026 zjistila: Monika Vítková má doma 28 tablet, Iveta Kočová 19 tablet. Iveta Kočová uvedla, že od 3. 8. užila nejvýš sedm tablet."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D27",
+        "kind": "notebook",
+        "stage": "D",
+        "title": "Provozní deník – lesní koupaliště Rudka",
+        "puzzle": "P5",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "owner": "Lesní koupaliště Rudka",
+          "date": "květen – červenec 2026"
+        },
+        "copies": 1,
+        "order": 4
+      },
+      "file": "documents/D27.md",
+      "body_html": "<p>12. 5. – přijelo 6 sudů chloru od Kočího bratra. Uskladněno ve sklepě. Převzal Bláha.</p>\n<p>20. 5. – napuštění bazénu, rozbor vody v pořádku.</p>\n<p>16. 6. – celý den bouřka, areál zavřený. Nikdo nepřijel, sklep beze změny (6 sudů, z toho 2 načaté). J. B.</p>\n<p>1. 7. – rozbor vody v pořádku. Ve sklepě 3 plné sudy.</p>\n<p>21. 7. – sucho, plno lidí. Dovoz chloru žádný. Došel nám, půjčili jsme si sud z Kunštátu. J. B.</p>\n<p>5. 8. – ve sklepě 0 plných sudů, objednat! Radim říká, že to vyřídí.</p>\n<div class=\"mf-note\">\n<p>Kolik korun celkem zaplatil Bořek za chlor, který do Rudky nikdy nedorazil? Napište jen číslo bez mezer. – J. H.</p>\n</div>\n",
+      "text": "12. 5. – přijelo 6 sudů chloru od Kočího bratra. Uskladněno ve sklepě. Převzal Bláha.\n\n20. 5. – napuštění bazénu, rozbor vody v pořádku.\n\n16. 6. – celý den bouřka, areál zavřený. Nikdo nepřijel, sklep beze změny (6 sudů, z toho 2 načaté). J. B.\n\n1. 7. – rozbor vody v pořádku. Ve sklepě 3 plné sudy.\n\n21. 7. – sucho, plno lidí. Dovoz chloru žádný. Došel nám, půjčili jsme si sud z Kunštátu. J. B.\n\n5. 8. – ve sklepě 0 plných sudů, objednat! Radim říká, že to vyřídí.\n\nKolik korun celkem zaplatil Bořek za chlor, který do Rudky nikdy nedorazil? Napište jen číslo bez mezer. – J. H."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D28",
+        "kind": "email",
+        "stage": "D",
+        "title": "E-mail účetní",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "from": "dana.krejci@ucetnictvi-krejci.example",
+          "to": "bory@hospodanahrazi.example",
+          "date": "21. 8. 2026 16:04",
+          "subject": "Re: Rudka – kontrola faktur"
+        },
+        "copies": 1,
+        "order": 5
+      },
+      "file": "documents/D28.md",
+      "body_html": "<p>Dobrý den, pane Vítku,</p>\n<p>potvrzuji pondělí 24. 8. v 9:00 u vás v hospodě. Přinesu výpisy z účtu společnosti za celou sezónu. Přeji si,\nabyste pana Kočího pozval až na desátou, jak jste psal, ať si to nejdřív projdeme sami.</p>\n<p>Faktury, které jste mi poslal, jsou formálně v pořádku. Jestli zboží opravdu přišlo, z nich ale nepoznám.</p>\n<p>S pozdravem</p>\n<p>Dana Krejčí, účetní</p>\n<blockquote>\n<p>Paní Krejčí, v pondělí potřebuju projít Rudku. Něco tam nesedí a nechci to řešit po telefonu. B. Vítek</p>\n</blockquote>\n",
+      "text": "Dobrý den, pane Vítku,\n\npotvrzuji pondělí 24. 8. v 9:00 u vás v hospodě. Přinesu výpisy z účtu společnosti za celou sezónu. Přeji si, abyste pana Kočího pozval až na desátou, jak jste psal, ať si to nejdřív projdeme sami.\n\nFaktury, které jste mi poslal, jsou formálně v pořádku. Jestli zboží opravdu přišlo, z nich ale nepoznám.\n\nS pozdravem\n\nDana Krejčí, účetní\n\nPaní Krejčí, v pondělí potřebuju projít Rudku. Něco tam nesedí a nechci to řešit po telefonu. B. Vítek"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D29",
+        "kind": "note",
+        "stage": "A",
+        "title": "Lísteček z nástěnky v kanceláři",
+        "puzzle": "P6",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "signature": "B.",
+          "date": "červenec"
+        },
+        "copies": 1,
+        "order": 12
+      },
+      "file": "documents/D29.md",
+      "body_html": "<p>Lenko, kód od trezoru jsem změnil. Je to jako vždycky z našich věcí: vezmi počet koupališť, co spolu\nprovozujeme, vynásob ho rokem, kdy jsme otevřeli Rudku, a odečti počet drah tady v bazénu.</p>\n<p>⟦artifact:P6⟧</p>\n<div class=\"mf-note\">\n<p>Trezor v kanceláři je zamčený. Jaký je kód od trezoru? Čtyři číslice. – J. H.</p>\n</div>\n",
+      "text": "Lenko, kód od trezoru jsem změnil. Je to jako vždycky z našich věcí: vezmi počet koupališť, co spolu provozujeme, vynásob ho rokem, kdy jsme otevřeli Rudku, a odečti počet drah tady v bazénu.\n\nA combination lock with 4 digit dials.\n\nTrezor v kanceláři je zamčený. Jaký je kód od trezoru? Čtyři číslice. – J. H."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D30",
+        "kind": "person-photo",
+        "stage": "A",
+        "title": "Monika Vítková",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "name": "Monika Vítková",
+          "role": "manželka zemřelého",
+          "case_number": "KRPB-2318/TČ-2026",
+          "date": "23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 70
+      },
+      "file": "documents/D30.md",
+      "body_html": "<p>⟦image:portrait-monika-vitkova|⟧</p>\n",
+      "text": "[Image. It shows: Portrét: Monika Vítková, žena kolem čtyřiceti s vlasy po ramena. Kresba místo fotografie.]"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D31",
+        "kind": "transcript",
+        "stage": "C",
+        "title": "Výslech Ivety Kočové",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "case_number": "KRPB-2318/TČ-2026",
+          "subject": "Iveta Kočová, manželka Radima Kočího",
+          "interviewer": "nprap. Petr Hála",
+          "place": "Rudka 112",
+          "date": "25. 8. 2026, 14:30"
+        },
+        "copies": 1,
+        "order": 6
+      },
+      "file": "documents/D31.md",
+      "body_html": "<p>HÁLA: Kdy jste v sobotu šla spát?\nKOČOVÁ: Kolem jedenácté. Radim už ležel, díval se do telefonu.\nHÁLA: Spal celou noc vedle vás?\nKOČOVÁ: Určitě. Já mám po noční těžký spánek, ale kdyby odešel, vím o tom. Asi.\nHÁLA: Užíváte nějaké léky na spaní?\nKOČOVÁ: Občas, po nočních. Doktorka mi je předepisuje. Mám je v kuchyni v šuplíku.\nHÁLA: Kdo k nim má přístup?\nKOČOVÁ: No... kdokoli z nás. Proč se ptáte?\nHÁLA: Stál ráno váš vůz na stejném místě jako večer?\nKOČOVÁ: Radim parkuje na ulici. Ráno tam byla, jen byla nějaká mokrá, v noci ale nepršelo. Myslela jsem, že ji umýval.</p>\n",
+      "text": "HÁLA: Kdy jste v sobotu šla spát? KOČOVÁ: Kolem jedenácté. Radim už ležel, díval se do telefonu. HÁLA: Spal celou noc vedle vás? KOČOVÁ: Určitě. Já mám po noční těžký spánek, ale kdyby odešel, vím o tom. Asi. HÁLA: Užíváte nějaké léky na spaní? KOČOVÁ: Občas, po nočních. Doktorka mi je předepisuje. Mám je v kuchyni v šuplíku. HÁLA: Kdo k nim má přístup? KOČOVÁ: No... kdokoli z nás. Proč se ptáte? HÁLA: Stál ráno váš vůz na stejném místě jako večer? KOČOVÁ: Radim parkuje na ulici. Ráno tam byla, jen byla nějaká mokrá, v noci ale nepršelo. Myslela jsem, že ji umýval."
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D32",
+        "kind": "person-photo",
+        "stage": "A",
+        "title": "Radim Kočí",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "name": "Radim Kočí",
+          "role": "společník, koupaliště Rudka",
+          "case_number": "KRPB-2318/TČ-2026",
+          "date": "23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 72
+      },
+      "file": "documents/D32.md",
+      "body_html": "<p>⟦image:portrait-radim-koci|⟧</p>\n",
+      "text": "[Image. It shows: Portrét: Radim Kočí, muž kolem čtyřiceti s krátkým plnovousem. Kresba místo fotografie.]"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D33",
+        "kind": "person-photo",
+        "stage": "A",
+        "title": "Lenka Šimková",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "name": "Lenka Šimková",
+          "role": "plavčice, nálezkyně",
+          "case_number": "KRPB-2318/TČ-2026",
+          "date": "23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 73
+      },
+      "file": "documents/D33.md",
+      "body_html": "<p>⟦image:portrait-lenka-simkova|⟧</p>\n",
+      "text": "[Image. It shows: Portrét: Lenka Šimková, mladá žena s culíkem. Kresba místo fotografie.]"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D34",
+        "kind": "person-photo",
+        "stage": "A",
+        "title": "Tomáš Pešek",
+        "puzzle": null,
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "name": "Tomáš Pešek",
+          "role": "DJ Tommy",
+          "case_number": "KRPB-2318/TČ-2026",
+          "date": "23. 8. 2026"
+        },
+        "copies": 1,
+        "order": 74
+      },
+      "file": "documents/D34.md",
+      "body_html": "<p>⟦image:portrait-tomas-pesek|⟧</p>\n",
+      "text": "[Image. It shows: Portrét: Tomáš Pešek, mladý muž s kšiltovkou. Kresba místo fotografie.]"
+    },
+    {
+      "meta": {
+        "format_version": 1,
+        "id": "D35",
+        "kind": "note",
+        "stage": "D",
+        "title": "Vzkaz kapitánky Horákové k lékům",
+        "puzzle": "P7",
+        "print": {
+          "cut": false,
+          "fold": false,
+          "note": ""
+        },
+        "fields": {
+          "signature": "J. H.",
+          "date": "středa"
+        },
+        "copies": 1,
+        "order": 6
+      },
+      "file": "documents/D35.md",
+      "body_html": "<p>Spočítejte to, co lékárna vydala, minus to, co jsme našli doma, minus to, co majitelka podle svých slov sama snědla.\nZbytek někdo vzal.</p>\n<p>⟦artifact:P7⟧</p>\n<p>Kolik miligramů somnaxinu z Ivetina balení chybí? Dvě číslice.</p>\n",
+      "text": "Spočítejte to, co lékárna vydala, minus to, co jsme našli doma, minus to, co majitelka podle svých slov sama snědla. Zbytek někdo vzal.\n\nA combination lock with 2 digit dials.\n\nKolik miligramů somnaxinu z Ivetina balení chybí? Dvě číslice."
+    }
+  ],
+  "images": {
+    "portrait-borek-vitek": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 150\"><title>Portrét: Bořek Vítek, muž kolem padesáti s krátkými šedivými vlasy a sluchátky na krku. Kresba místo fotografie.</title><rect width=\"120\" height=\"150\" fill=\"none\"/><circle cx=\"60\" cy=\"52\" r=\"24\" fill=\"currentColor\" opacity=\"0.55\"/><path d=\"M14 150c0-34 20-54 46-54s46 20 46 54z\" fill=\"currentColor\" opacity=\"0.55\"/></svg>",
+    "portrait-lenka-simkova": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 150\"><title>Portrét: Lenka Šimková, mladá žena s culíkem. Kresba místo fotografie.</title><rect width=\"120\" height=\"150\" fill=\"none\"/><circle cx=\"60\" cy=\"52\" r=\"24\" fill=\"currentColor\" opacity=\"0.55\"/><path d=\"M14 150c0-34 20-54 46-54s46 20 46 54z\" fill=\"currentColor\" opacity=\"0.55\"/></svg>",
+    "portrait-monika-vitkova": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 150\"><title>Portrét: Monika Vítková, žena kolem čtyřiceti s vlasy po ramena. Kresba místo fotografie.</title><rect width=\"120\" height=\"150\" fill=\"none\"/><circle cx=\"60\" cy=\"52\" r=\"24\" fill=\"currentColor\" opacity=\"0.55\"/><path d=\"M14 150c0-34 20-54 46-54s46 20 46 54z\" fill=\"currentColor\" opacity=\"0.55\"/></svg>",
+    "portrait-radim-koci": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 150\"><title>Portrét: Radim Kočí, muž kolem čtyřiceti s krátkým plnovousem. Kresba místo fotografie.</title><rect width=\"120\" height=\"150\" fill=\"none\"/><circle cx=\"60\" cy=\"52\" r=\"24\" fill=\"currentColor\" opacity=\"0.55\"/><path d=\"M14 150c0-34 20-54 46-54s46 20 46 54z\" fill=\"currentColor\" opacity=\"0.55\"/></svg>",
+    "portrait-tomas-pesek": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 150\"><title>Portrét: Tomáš Pešek, mladý muž s kšiltovkou. Kresba místo fotografie.</title><rect width=\"120\" height=\"150\" fill=\"none\"/><circle cx=\"60\" cy=\"52\" r=\"24\" fill=\"currentColor\" opacity=\"0.55\"/><path d=\"M14 150c0-34 20-54 46-54s46 20 46 54z\" fill=\"currentColor\" opacity=\"0.55\"/></svg>"
+  },
+  "salt": "3f02f50d4a00cb08",
+  "music": null,
+  "investigation": {
+    "format_version": 1,
+    "narrator": {
+      "name": "kpt. Jana Horáková",
+      "role": "vedoucí vyšetřování, SKPV Brno"
+    },
+    "chapters": [
+      {
+        "id": "kap-a1",
+        "stage": "A",
+        "after": null,
+        "title": "Ticho po poslední písničce",
+        "text": "Telefon zazvonil v osm ráno. Na svatbách Bořka Vítka jsem nikdy netančila, ale znala jsem ho, jako ho znal\ncelý kraj. DJ Bory, chlap, který na dětském dni pouštěl Kačera Donalda a o půlnoci na svatbě Olympic.\n\nKoupaliště Pod Hradem bylo ráno tiché tím zvláštním tichem, které mají jen prázdné bazény. Voda se ještě\nleskla, na dlažbě ležela tyč na sběr listí a v kanceláři svítila žárovka, jako by si tam někdo jen na chvíli\nodskočil.\n\nKolegové z obvodu už měli verzi hotovou. Opilý muž po akci, kluzká dlažba, nešťastná náhoda. Jenže Bory\npodle všech celou noc pil kofolu. A v kanceláři stály dvě sklenky.\n\nSedněte si, rozložte papíry a nevěřte ničemu, co nejde ověřit. Já začnu tím číslem, které nemá v telefonu jméno.\n"
+      },
+      {
+        "id": "kap-a2",
+        "stage": "A",
+        "after": "P6",
+        "title": "Co si schovával",
+        "text": "Trezor v kanceláři neobsahoval jen tržby. Bořek si v něm něco schovával a nechtěl to mít v hospodě, kde\nse pohybuje Monika, ani v Rudce. Přemýšlela jsem, komu na koupališti věřil. A komu přestal.\n"
+      },
+      {
+        "id": "kap-b1",
+        "stage": "B",
+        "after": null,
+        "title": "Soudní lékařka mluví",
+        "text": "Věra Kalinová dělá pitvy dvacet let a nikdy nespěchá. Tentokrát poslala protokol ještě ten večer. To dělá,\njen když si je jistá, že jde o něco víc.\n\nÚder do hlavy ho nezabil. Utopil se. Ale do vody nepadl sám a nebránil se. Někdo ho nejdřív uspal a pak mu\npomohl. Na zádech má oděrky, jako by ho někdo táhl po dlažbě.\n\nTeď je to vražda. A já mám na stole čtyři lidi, kteří mají důvod se Bořkovi mstít. Žena, kterou podváděl.\nMilenka, které lhal. Konkurent, kterému bral práci. A kamarád, se kterým se hádal o peníze.\n"
+      },
+      {
+        "id": "kap-b2",
+        "stage": "B",
+        "after": "P3",
+        "title": "Zelené šaty",
+        "text": "Monika na nás při výslechu křičela, že si nic nepamatuje. Fotky ale nelžou. Kdo chce zabít manžela na\nkoupališti devět kilometrů od svatby, netančí ve stejnou chvíli kolečko s nevěstou.\n"
+      },
+      {
+        "id": "kap-c1",
+        "stage": "C",
+        "after": null,
+        "title": "Telefon, který jezdil",
+        "text": "Kdo chce mít alibi, nechá telefon doma. To vědí i děti z detektivek. Jenže v Rudce nebyl jen jeden telefon.\n\nOperátor nám vydal výpis služebního mobilu a benzinka na výjezdu z Kunštátu poslala záběry z noci. Kamera\ntam visí kvůli zlodějům nafty. Tentokrát chytila něco jiného.\n\nProjděte, kdo si ten mobil vzal, kudy jezdil a kdo projížděl kolem pumpy. A vzpomeňte si, co nám kdo\ntvrdil u výslechu.\n"
+      },
+      {
+        "id": "kap-d1",
+        "stage": "D",
+        "after": null,
+        "title": "Šanon s fakturami",
+        "text": "V hospodě Na Hrázi jsme v kuchyni našli šanon nadepsaný „Rudka 2026“. Monika řekla, že ho Bory poslední\ntýden nosil všude s sebou, i na záchod. Na deskách byla jeho poznámka.\n\nPeníze jsou nejstarší motiv na světě. Pokud chceme vědět proč, musíme spočítat, kolik.\n\nAž budete mít jasno, vyplňte obvinění. Kdo, jak, proč a čím. Chci to mít tak pevné, aby to u soudu\nneshodil žádný advokát.\n"
+      }
+    ],
+    "voice_messages": [
+      {
+        "id": "hz-hala-a",
+        "stage": "A",
+        "after": null,
+        "sender": "nprap. Petr Hála",
+        "role": "obvodní oddělení Kunštát",
+        "voice": "male",
+        "text": "Paní kapitánko, Hála. Jsem pořád na koupáku. Ta plavčice se třese, nechal jsem ji v kanceláři s čajem. V dodávce jsem našel ještě jeden jeho telefon, starší, ten funguje. Zprávy z něj jste dostala. A v kanceláři je zamčenej trezor, kód nikdo neví."
+      },
+      {
+        "id": "hz-dostal-a",
+        "stage": "A",
+        "after": "P1",
+        "sender": "por. Karel Dostál",
+        "role": "technik výjezdové skupiny",
+        "voice": "male",
+        "text": "Šéfová, Dostál. To číslo z Rudky nikomu osobně nepatří, je to firemní karta. Zjistím od operátora, kde se v noci pohyboval. A ještě něco: na dlažbě u bazénu jsou šmouhy, jako by tam někdo něco táhl. Nafotil jsem to."
+      },
+      {
+        "id": "hz-kalinova-b",
+        "stage": "B",
+        "after": null,
+        "sender": "MUDr. Věra Kalinová",
+        "role": "soudní lékařka",
+        "voice": "female",
+        "text": "Jano, Kalinová. Protokol máš v poště. Ten člověk byl v hlubokém útlumu, když šel pod vodu. Somnaxin, a ne málo. Na svatbě by takovou dávku nevydržel stát za pultem, takže to dostal až potom. Hledej, co pil po jedné hodině."
+      },
+      {
+        "id": "hz-ortova-b",
+        "stage": "B",
+        "after": "P2",
+        "sender": "Mgr. Tereza Ortová",
+        "role": "laboratoř",
+        "voice": "female",
+        "text": "Dobrý den, tady Ortová z laborky. Doplním jednu věc, co se do tabulky nevešla. Prášky byly v láhvi rozpuštěné dopředu, ne nasypané do sklenky. Kdo to připravil, věděl, že Bořek z té láhve bude pít."
+      },
+      {
+        "id": "hz-kratochvil-c",
+        "stage": "C",
+        "after": null,
+        "sender": "npor. Filip Kratochvíl",
+        "role": "analytik telefonů",
+        "voice": "male",
+        "text": "Kratochvíl, analytika. Ten služební mobil z Rudky v noci cestoval. Pošlu vám přesný výpis. Upozorňuju, že osobní telefony podezřelých stály celou noc na místě. Telefon ale není člověk."
+      },
+      {
+        "id": "hz-hala-c",
+        "stage": "C",
+        "after": "P4",
+        "sender": "nprap. Petr Hála",
+        "role": "obvodní oddělení Kunštát",
+        "voice": "male",
+        "text": "Šéfová, ještě Hála. Byl jsem se podívat v Rudce, jak jste chtěla. Ráno pár lidí vidělo auto, jak stojí u domu mokré. A soused tvrdí, že slyšel ve tři ráno bouchnout dveře od auta. Prý se divil, kdo jezdí v takovou dobu."
+      },
+      {
+        "id": "hz-krejci-d",
+        "stage": "D",
+        "after": null,
+        "sender": "Ing. Dana Krejčí",
+        "role": "účetní",
+        "voice": "female",
+        "text": "Dobrý den, tady Krejčí, účetní. Pan Vítek mi v pátek volal, byl rozrušený. Říkal, že to v Rudce nesedí s chlorem a že v pondělí přinese provozní deník. Faktury jsem kontrolovala, formálně byly v pořádku. Jestli zboží přišlo, jsem neviděla."
+      }
+    ]
+  },
+  "audio": {}
+}

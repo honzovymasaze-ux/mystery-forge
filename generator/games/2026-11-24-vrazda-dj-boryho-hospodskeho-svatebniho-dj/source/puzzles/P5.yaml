@@ -1,0 +1,68 @@
+format_version: 1
+id: P5
+title: Chlor, který nepřišel
+stage: D
+mechanic: anachronism-hunt
+difficulty: hard
+depends_on:
+- P4
+in_world_reason: Podvod je vidět jen tehdy, když vedle sebe položíte faktury a provozní deník.
+reveals: Bořek zaplatil 48 600 Kč za dvě dodávky chloru do Rudky, které nikdy nepřišly.
+reveal_text: Dvě ze tří faktur jsou na zboží, které nikdy nepřijelo. A obě převzetí podepsal stejný člověk. Bořek to v pondělí chtěl ukázat účetní.
+answer: '48600'
+accepted:
+- 48 600
+answer_format:
+  kind: number
+  label: částka v Kč bez mezer
+question: Kolik korun celkem zaplatil Bořek za chlor, který do Rudky nikdy nedorazil? Napište jen číslo bez mezer.
+params: {}
+clues:
+- id: p5-faktura2
+  document: D24
+  quote: 2026/032  16. 6. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí
+- id: p5-faktura3
+  document: D24
+  quote: 2026/033  21. 7. 2026  chlornan sodný, sudy 60 l  6 sudů  24 300 Kč  R. Kočí
+- id: p5-bourka
+  document: D27
+  quote: 16. 6. – celý den bouřka, areál zavřený. Nikdo nepřijel, sklep beze změny (6 sudů, z toho 2 načaté). J. B.
+- id: p5-sucho
+  document: D27
+  quote: 21. 7. – sucho, plno lidí. Dovoz chloru žádný. Došel nám, půjčili jsme si sud z Kunštátu. J. B.
+- id: p5-bory
+  document: D25
+  quote: Faktury od bratra R. sedí na korunu, jenže kolik toho opravdu přivezli? Projít deník!
+solution:
+- text: Bořek sám napsal, že je potřeba porovnat faktury s provozním deníkem.
+  uses:
+  - p5-bory
+- text: Podle deníku 16. 6. nikdo nepřijel a sklep byl beze změny, takže dodávka z faktury 2026/032 nepřišla.
+  uses:
+  - p5-faktura2
+  - p5-bourka
+- text: 21. 7. deník výslovně píše, že dovoz chloru žádný nebyl, takže ani faktura 2026/033 neplatí.
+  uses:
+  - p5-faktura3
+  - p5-sucho
+- text: Dvě nedodané dodávky po 24 300 Kč dělají 48 600 Kč.
+  uses:
+  - p5-faktura2
+  - p5-faktura3
+hints:
+- level: 1
+  text: Položte vedle sebe faktury a provozní deník a porovnejte data dodání.
+  points_to:
+  - p5-faktura2
+  - p5-bourka
+- level: 2
+  text: Ke každému datu dodání z faktur najděte v deníku stejný den. Co se ten den v Rudce dělo?
+  points_to:
+  - p5-bourka
+  - p5-sucho
+- level: 3
+  text: 16. 6. a 21. 7. žádný chlor nepřišel. Sečtěte částky těch dvou faktur.
+  points_to:
+  - p5-faktura2
+  - p5-faktura3
+canary: canary-bory-p5-sudy

@@ -1,0 +1,471 @@
+{
+  "tone": {
+    "id": "dramatic",
+    "name": "Dramatic",
+    "description": "High stakes and strong feelings. Family secrets, betrayal, and hard choices. Also covers melancholy and thriller stories."
+  },
+  "settings": [
+    {
+      "id": "canal-city-carnival",
+      "name": "Canal city in carnival week",
+      "era_hints": [
+        "renaissance",
+        "age-of-sail",
+        "present-day"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "adventure",
+        "noir",
+        "dramatic"
+      ]
+    },
+    {
+      "id": "archaeological-dig",
+      "name": "Archaeological dig in the desert",
+      "era_hints": [
+        "nineteen-twenties",
+        "present-day"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "adventure",
+        "spooky",
+        "dramatic"
+      ]
+    },
+    {
+      "id": "ranger-station",
+      "name": "Wildlife reserve ranger station",
+      "era_hints": [
+        "nineteen-eighties",
+        "present-day"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "adventure",
+        "cozy",
+        "dramatic"
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "id": "uncover-spy",
+      "name": "Uncover a spy",
+      "description": "Secrets leak from a closed group. Find the spy before the next leak.",
+      "formats": [
+        "envelopes",
+        "case_file"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "prevent-heist",
+      "name": "Prevent a heist",
+      "description": "A gang plans a robbery. Find the target, the time, and the inside person.",
+      "formats": [
+        "envelopes",
+        "case_file"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "twists": [
+    {
+      "id": "two-culprits",
+      "name": "Two culprits acting apart",
+      "description": "Two people each did part of it, without knowing about the other.",
+      "formats": [
+        "case_file"
+      ],
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "wrong-victim",
+      "name": "The wrong victim",
+      "description": "The culprit targeted someone else, and the victim was a mistake.",
+      "formats": [
+        "case_file"
+      ],
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "identity-swap",
+      "name": "Identity swap",
+      "description": "Two people traded places, and the documents show small slips.",
+      "formats": [
+        "envelopes",
+        "case_file"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "jury-room",
+      "name": "The jury room",
+      "description": "You are the jury, and you review the exhibits of a trial.",
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "smart-house-logs",
+      "name": "The smart house logs",
+      "description": "You read the logs of a home assistant from the night in question.",
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "motifs": [
+    {
+      "id": "music",
+      "name": "Music",
+      "puzzle_skins": "Note letters on a staff, rhythm as Morse, and concert programs as timetables."
+    },
+    {
+      "id": "birds",
+      "name": "Birds",
+      "puzzle_skins": "Bird ring numbers as codes, migration maps as routes, and bird songs as Morse transcripts."
+    }
+  ],
+  "cliches": {
+    "names": [
+      "Elara",
+      "Silas",
+      "Thorne",
+      "Blackwood",
+      "Voss",
+      "Ravenwood",
+      "Hawthorne",
+      "Whitmore",
+      "Aris",
+      "Kael",
+      "Lyra",
+      "Seraphina",
+      "Vance",
+      "Ashford",
+      "Marlowe",
+      "Evangeline",
+      "Isadora",
+      "Cassius",
+      "Zephyr",
+      "Thaddeus",
+      "Barnaby",
+      "Mortimer",
+      "Lucian",
+      "Ophelia",
+      "Montgomery"
+    ],
+    "phrases": [
+      "a tapestry of",
+      "whispers of",
+      "shadows danced",
+      "little did they know",
+      "testament to",
+      "a chill ran down",
+      "the air was thick with",
+      "delve into",
+      "a symphony of",
+      "palpable tension",
+      "a web of lies",
+      "the plot thickens",
+      "time stood still",
+      "an eerie silence",
+      "the game is afoot",
+      "every shadow held a secret",
+      "hung heavy in the air",
+      "a sense of foreboding",
+      "nestled",
+      "in the dead of night"
+    ],
+    "plots": [
+      "A stormy night in a gothic mansion, with a butler.",
+      "A rich old man poisoned at the reading of his will.",
+      "The butler did it.",
+      "The greedy nephew who inherits.",
+      "Poison in the wine glass at a dinner party.",
+      "The culprit is an evil twin that nobody mentioned.",
+      "It was all a dream.",
+      "The culprit has amnesia and did it without knowing.",
+      "The detective's long-lost relative is the culprit.",
+      "The famous riddle with a changed answer.",
+      "A secret passage that the floor plan never shows."
+    ]
+  },
+  "audience_rule": {
+    "max_words_per_document": 600,
+    "allow_murder": true,
+    "themes_to_avoid": [
+      "gratuitous gore",
+      "sexual violence"
+    ],
+    "decoders_preprinted": false,
+    "notes": "Murder, fraud, and espionage. Easy to expert puzzles. Dense documents are fine. Gore only when the config asks for horror."
+  },
+  "mechanics": [
+    {
+      "id": "phone-keypad",
+      "name": "Phone Keypad",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "Digits stand for the letters on an old phone keypad.",
+      "minutes": 9
+    },
+    {
+      "id": "anachronism-hunt",
+      "name": "Anachronism Hunt",
+      "category": "observation",
+      "player_action": "observation",
+      "verification": "panel",
+      "summary": "A document holds impossible details that expose it as a forgery.",
+      "minutes": 11
+    },
+    {
+      "id": "hidden-every-nth",
+      "name": "Every Nth Letter",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "verified",
+      "summary": "Every Nth letter of an ordinary text spells the hidden message.",
+      "minutes": 11
+    },
+    {
+      "id": "cut-strips",
+      "name": "Shredded Document Strips",
+      "category": "spatial",
+      "player_action": "physical",
+      "verification": "built",
+      "summary": "A message cut into strips goes back into order.",
+      "minutes": 10
+    },
+    {
+      "id": "book-cipher",
+      "name": "Book Cipher Over Kit Documents",
+      "category": "cipher",
+      "player_action": "cross-reference",
+      "verification": "built",
+      "summary": "Number triples point to a document, a line, and a word in the kit.",
+      "minutes": 12
+    },
+    {
+      "id": "arithmetic-lock",
+      "name": "Arithmetic Lock",
+      "category": "math",
+      "player_action": "arithmetic",
+      "verification": "verified",
+      "summary": "Numbers found in several documents combine by a stated formula into the lock code.",
+      "minutes": 9
+    },
+    {
+      "id": "word-search",
+      "name": "Word Search With Leftover Message",
+      "category": "wordplay",
+      "player_action": "search",
+      "verification": "built",
+      "summary": "Find the theme words, then the unused letters spell a message.",
+      "minutes": 12
+    },
+    {
+      "id": "maze",
+      "name": "Maze With Letters on the Path",
+      "category": "spatial",
+      "player_action": "spatial",
+      "verification": "built",
+      "summary": "Solve a maze, and the letters on the true path spell the answer.",
+      "minutes": 9
+    },
+    {
+      "id": "deduction",
+      "name": "Whodunit Deduction",
+      "category": "deduction",
+      "player_action": "deduction",
+      "verification": "panel",
+      "summary": "Players use all the evidence to name the culprit, the method, and the motive.",
+      "minutes": 18
+    },
+    {
+      "id": "timeline-order",
+      "name": "Timeline Reconstruction",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Order events from several sources, then find the gap or the impossible event.",
+      "minutes": 14
+    },
+    {
+      "id": "vigenere-cipher",
+      "name": "Vigenere With a Found Key",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "A keyword shifts each letter by a different amount, with a printed table to help.",
+      "minutes": 14
+    },
+    {
+      "id": "observation",
+      "name": "Detail Observation",
+      "category": "observation",
+      "player_action": "observation",
+      "verification": "panel",
+      "summary": "A small detail in a document or picture (a price, a reflection, a stain) holds the answer.",
+      "minutes": 8
+    },
+    {
+      "id": "anagram",
+      "name": "Anagram",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "verified",
+      "summary": "The letters of a phrase rearrange into the answer.",
+      "minutes": 10
+    },
+    {
+      "id": "overlay-mask",
+      "name": "Cut-Out Mask (Cardan Grille)",
+      "category": "cipher",
+      "player_action": "physical",
+      "verification": "built",
+      "summary": "A card with holes, laid over an innocent letter, shows only the letters of the message.",
+      "minutes": 10
+    },
+    {
+      "id": "logic-grid",
+      "name": "Logic Grid",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Clue statements fix one unique assignment of people to attributes, such as who wore what.",
+      "minutes": 14
+    },
+    {
+      "id": "atbash-cipher",
+      "name": "Atbash Mirror Alphabet",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "The alphabet is flipped, so A becomes Z and B becomes Y.",
+      "minutes": 8
+    },
+    {
+      "id": "clock-faces",
+      "name": "Clock Hands Code",
+      "category": "spatial",
+      "player_action": "observation",
+      "verification": "built",
+      "summary": "Clock times encode digits, letters, or numbers to add.",
+      "minutes": 8
+    },
+    {
+      "id": "rebus",
+      "name": "Rebus Picture Word",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "panel",
+      "summary": "Pictures and letters combine by sound, so EYE plus LAND is ISLAND.",
+      "minutes": 9
+    },
+    {
+      "id": "nonogram",
+      "name": "Nonogram",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Number clues for each row and column reveal a picture of a digit, letter, or object.",
+      "minutes": 14
+    },
+    {
+      "id": "braille",
+      "name": "Braille Dots",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "Groups of dots in a 2 by 3 cell spell letters in Braille.",
+      "minutes": 9
+    },
+    {
+      "id": "recontextualized-document",
+      "name": "Re-Read With New Eyes",
+      "category": "meta",
+      "player_action": "observation",
+      "verification": "panel",
+      "summary": "A document read early gains a new meaning after a later discovery.",
+      "minutes": 12
+    },
+    {
+      "id": "acrostic",
+      "name": "Acrostic Letter or Poem",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "verified",
+      "summary": "The first letters of the sentences, lines, or paragraphs spell the answer.",
+      "minutes": 7
+    },
+    {
+      "id": "riddle",
+      "name": "Riddle",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "panel",
+      "summary": "A \"what am I\" verse whose answer is a word, often an object that unlocks the next step.",
+      "minutes": 8
+    },
+    {
+      "id": "cryptogram",
+      "name": "Keyword Substitution Cryptogram",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "Each letter is always replaced by the same other letter, as in a newspaper cryptogram.",
+      "minutes": 15
+    }
+  ]
+}

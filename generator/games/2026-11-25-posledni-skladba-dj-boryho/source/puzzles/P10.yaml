@@ -1,0 +1,85 @@
+format_version: 1
+id: P10
+title: Poslední kontrola důkazního řetězce
+stage: E
+mechanic: recontextualized-document
+difficulty: hard
+
+in_world_reason: |
+  Před formulací závěrečného obvinění musí tým
+  sestavit úplný důkazní řetězec ze všech obálek.
+
+  Vedoucí vyšetřování potřebuje především přesné
+  evidenční označení materiálové stopy, kterou lze
+  propojit s později vydanou expertizou.
+
+  Otázka nevyžaduje uvedení majitele předmětu ani
+  jména pachatele.
+
+reveals: |
+  Potvrzení totožnosti materiálové stopy napříč
+  původním protokolem, provozní evidencí a expertizou.
+
+reveal_text: |
+  Materiálová stopa byla správně identifikována.
+
+  Samotný fragment nestačí k prokázání viny.
+  Musíte zohlednit jeho původ, časové zařazení,
+  okolnosti přenosu, osobní alibi a finanční motiv.
+
+  Máte všechny potřebné podklady.
+
+  Nyní sestavte závěrečné obvinění.
+
+answer: "F-17"
+accepted: ["F17", "F 17", "f-17", "17"]
+
+answer_format:
+  kind: phrase
+  label: Evidenční označení zajištěné stopy
+
+question: Jaké původní evidenční označení nese kovový fragment zajištěný při ohledání místa nálezu?
+
+params: {}
+
+clues:
+  - id: p10-nalez
+    document: D2
+    quote: "Na přední části oděvu oběti byl zajištěn drobný kovový fragment označený F-17."
+
+  - id: p10-serie
+    document: D29
+    quote: "Při inventuře byla použita číselná série přívěsků 701 až 708."
+
+  - id: p10-expertiza
+    document: D53
+    quote: "Lomová plocha fragmentu F-17 je individuálně shodná s lomovou plochou poškozeného přívěsku číslo 706."
+
+  - id: p10-kontext
+    document: D54
+    quote: "Fragment byl zachycen v čerstvě poškozené části oděvu související s fyzickým konfliktem."
+
+solution:
+  - text: Vraťte se k původnímu protokolu o ohledání.
+    uses: [p10-nalez]
+
+  - text: Odlište evidenční čísla celých přívěsků od označení samostatného zajištěného fragmentu.
+    uses: [p10-serie, p10-expertiza]
+
+  - text: Ověřte, že původní fragment odpovídá stopě zkoumané v závěrečné expertize.
+    uses: [p10-nalez, p10-expertiza, p10-kontext]
+
+  - text: Uveďte původní evidenční označení F-17.
+    uses: [p10-nalez]
+
+hints:
+  - level: 1
+    text: Hledaný údaj jste měli k dispozici už v první obálce.
+
+  - level: 2
+    text: Nezaměňujte číslo celého předmětu s evidenčním označením zajištěné stopy.
+
+  - level: 3
+    text: Označení začíná písmenem F a obsahuje číslo 17.
+
+canary: canary-p10-obsidian

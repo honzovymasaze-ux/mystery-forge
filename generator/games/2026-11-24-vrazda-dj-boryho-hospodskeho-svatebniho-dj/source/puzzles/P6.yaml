@@ -1,0 +1,66 @@
+format_version: 1
+id: P6
+title: Kód od trezoru
+stage: A
+mechanic: arithmetic-lock
+difficulty: medium
+in_world_reason: Bořek nechával kód od trezoru v kanceláři jako počty z věcí, které zná jen personál.
+reveals: V trezoru v kanceláři ležela obálka s kopiemi faktur z Rudky a s poznámkou o pondělní schůzce s účetní.
+reveal_text: 'Trezor cvakl. Kromě tržeb z pokladny v něm leží obálka nadepsaná Bořkovou rukou: „Rudka – kopie faktur. Pondělí 9:00 Krejčová.“ Bořek si něco schovával mimo hospodu.'
+answer: '4032'
+answer_format:
+  kind: digits
+  label: čtyři číslice
+  length: 4
+question: Jaký je kód od trezoru? Čtyři číslice.
+params:
+  steps:
+  - label: koupaliste
+    value: 2
+  - label: rok
+    value: 2019
+  - label: drahy
+    value: 6
+  expression: koupaliste * rok - drahy
+  digits: 4
+clues:
+- id: p6-dve
+  document: D1
+  quote: se společníkem provozoval dvě koupaliště
+- id: p6-rok
+  document: D3
+  quote: tam to s Radimem otevřeli v roce 2019
+- id: p6-drahy
+  document: D2
+  quote: Koupaliště má jeden šestidráhový pětadvacetimetrový bazén
+- id: p6-vzorec
+  document: D29
+  quote: vynásob ho rokem, kdy jsme otevřeli Rudku, a odečti počet drah tady v bazénu
+solution:
+- text: Bořek se společníkem provozoval dvě koupaliště.
+  uses:
+  - p6-dve
+- text: Rudku otevřeli v roce 2019.
+  uses:
+  - p6-rok
+- text: Bazén v Kunštátě má šest drah.
+  uses:
+  - p6-drahy
+- text: 'Podle lístečku: 2 × 2019 − 6 = 4032.'
+  uses:
+  - p6-vzorec
+hints:
+- level: 1
+  text: Každá část vzorce na lístečku je fakt z jiného papíru obálky A.
+  points_to:
+  - p6-vzorec
+- level: 2
+  text: Kolik koupališť Bořek provozoval, říká úvod spisu. Rok otevření Rudky zmínila plavčice při výslechu.
+  points_to:
+  - p6-dve
+  - p6-rok
+- level: 3
+  text: Počet drah je v úředním záznamu o nálezu. Spočítejte 2 × 2019 a odečtěte počet drah.
+  points_to:
+  - p6-drahy
+canary: canary-bory-p6-trezor

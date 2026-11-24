@@ -1,0 +1,71 @@
+format_version: 1
+structure: linear
+
+stages:
+  - id: A
+    label: Město, které ho znalo
+    opens_with: start
+    opening_text: |
+      Otevřete obálku A.
+
+      Seznamte se s místem nálezu, prvními výpověďmi
+      a základními okolnostmi případu. Založte společnou
+      časovou osu a samostatnou kartu každého podezřelého.
+
+  - id: B
+    label: Každý něco skrývá
+    opens_with: P2
+    opening_text: |
+      Otevřete obálku B.
+
+      Výsledky zdravotnických vyšetření a první
+      doplňující materiály jsou připraveny.
+
+      Některé osoby vám neřekly celou pravdu.
+      Zatím však nevíme, proč.
+
+  - id: C
+    label: Osm minut rozdílu
+    opens_with: P4
+    opening_text: |
+      Otevřete obálku C.
+
+      Technické oddělení dokončilo první analýzu
+      kamerových systémů, provozních evidencí
+      a dalších časových podkladů.
+
+      Vraťte se také k důkazům z obálky A.
+      Některé z nich nyní získají nový význam.
+
+  - id: D
+    label: Účet za minulost
+    opens_with: P6
+    opening_text: |
+      Otevřete obálku D.
+
+      Hospodářská kriminalita předala výsledky
+      mimořádné kontroly.
+
+      Ne každá chybějící koruna souvisí s vraždou.
+      Rozlišujte jednotlivé skupiny plateb a nespojujte
+      je bez prokazatelné souvislosti.
+
+      Před otevřením této obálky je vhodný okamžik
+      pro přestávku.
+
+  - id: E
+    label: Pravda mezi řádky
+    opens_with: P8
+    opening_text: |
+      Otevřete poslední obálku.
+
+      Máte k dispozici závěrečné expertizy,
+      konfrontační výpovědi a výsledky prověření
+      dosud neúplných alibi.
+
+      Nehledejte jeden zázračný důkaz. Vaším úkolem
+      je propojit skutečnosti ze všech pěti obálek
+      do jedné souvislé a prokazatelné rekonstrukce.
+
+final_puzzle: P10
+accusation: true

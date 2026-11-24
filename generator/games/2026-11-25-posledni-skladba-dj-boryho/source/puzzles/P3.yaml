@@ -1,0 +1,60 @@
+format_version: 1
+id: P3
+title: Nehoda, nebo násilí?
+stage: B
+mechanic: deduction
+difficulty: medium
+
+in_world_reason: |
+  Vyšetřovací tým potřebuje před další rekonstrukcí
+  stanovit, která část těla utrpěla smrtelné poranění.
+
+reveals: Zdravotnický základ vyšetřovací verze.
+
+reveal_text: |
+  Správně. Zásadní je poranění hlavy.
+  Výsledky nepodporují prvotní hypotézu otravy ani
+  prostého nešťastného pádu.
+
+answer: hlava
+accepted: ["hlavy", "hlavě", "poranění hlavy", "tupé poranění hlavy"]
+
+answer_format:
+  kind: word
+  label: Část těla
+
+question: Která část těla utrpěla poranění, jež bylo bezprostřední příčinou smrti?
+
+params: {}
+
+clues:
+  - id: p3-pitva
+    document: D14
+    quote: "Bezprostřední příčinou smrti bylo tupé poranění hlavy způsobené působením vnější síly."
+
+  - id: p3-pad
+    document: D14
+    quote: "Celkový soubor nálezů není slučitelný s prostým nešťastným pádem v místě nálezu."
+
+  - id: p3-toxikologie
+    document: D15
+    quote: "Zjištěné látky ani jejich koncentrace nevysvětlují smrt vyšetřované osoby."
+
+solution:
+  - text: Vyhledejte bezprostřední příčinu smrti v pitevním protokolu.
+    uses: [p3-pitva]
+
+  - text: Porovnejte závěr s toxikologií a posouzením možnosti nešťastného pádu.
+    uses: [p3-pad, p3-toxikologie]
+
+hints:
+  - level: 1
+    text: Předměty nalezené vedle těla nemusejí souviset s úmrtím.
+
+  - level: 2
+    text: Rozhodující je závěr soudní lékařky.
+
+  - level: 3
+    text: Nejde o hrudník, břicho ani končetiny.
+
+canary: canary-p3-koruna
