@@ -44,6 +44,33 @@ public class MainActivity extends Activity {
         + "a.src=list[0];a.play().catch(function(){stop();});"
         + "})();";
 
+    // Honza 25. 11.: „epický úvod, hudba podkres hlasu vypravěče, ale ať hraje po celou dobu vyšetřování“.
+    // Hudba na pozadí: úvodní skladba, pak smyčka dalších. Při jakékoli řeči (MP3 nebo TTS) se ztiší. Tlačítko ♪.
+    private static final String MUSIC_JS = "(function(){"
+        + "if(window.__mfMusic) return; window.__mfMusic=1;"
+        + "var O=window.Audio, voices=new Set(), tts=false;"
+        + "window.Audio=function(src){var a=new O(src);voices.add(a);['play','pause','ended','error'].forEach(function(ev){a.addEventListener(ev,duck);});return a;};"
+        + "window.Audio.prototype=O.prototype;"
+        + "window.__mfTtsStart=function(){tts=true;duck();};window.__mfTtsEnd=function(){tts=false;duck();};"
+        + "var on=true;try{on=localStorage.getItem('mf-music')!=='off';}catch(e){}"
+        + "var first=!sessionStorage.getItem('mf-intro');"
+        + "var list=first?['/audio/hudba-uvod.mp3','/audio/hudba-1.mp3','/audio/hudba-2.mp3','/audio/hudba-3.mp3']:['/audio/hudba-1.mp3','/audio/hudba-2.mp3','/audio/hudba-3.mp3'];"
+        + "var loopFrom=first?1:0,i=0,fails=0,bg=new O(),vol=0,target=0;"
+        + "function talking(){if(tts)return true;var t=false;voices.forEach(function(v){if(!v.paused&&!v.ended)t=true;});return t;}"
+        + "function duck(){target=!on?0:(talking()?0.06:(list[i]&&list[i].indexOf('uvod')>0?0.32:0.2));}"
+        + "setInterval(function(){vol+= (target-vol)*0.15;if(Math.abs(target-vol)<0.003)vol=target;bg.volume=Math.max(0,Math.min(1,vol));},100);"
+        + "function next(){i++;if(i>=list.length)i=loopFrom;play();}"
+        + "function play(){bg.src=list[i];duck();bg.play().then(function(){fails=0;}).catch(function(){if(++fails<list.length)next();});}"
+        + "bg.onended=next;bg.onerror=function(){if(++fails<list.length)next();};"
+        + "var b=document.createElement('button');b.id='mf-music';"
+        + "b.style.cssText='position:fixed;top:14px;right:230px;z-index:99999;background:rgba(20,16,12,.85);color:#c9a24a;"
+        + "border:1px solid #c9a24a;border-radius:8px;padding:2px 12px;font:600 18px system-ui;cursor:pointer';"
+        + "function label(){b.textContent=on?'\\u266A hudba':'\\u266A vyp.';}label();"
+        + "b.onclick=function(){on=!on;try{localStorage.setItem('mf-music',on?'on':'off');}catch(e){}label();duck();if(on&&bg.paused)bg.play().catch(function(){});};"
+        + "document.body.appendChild(b);"
+        + "play();"
+        + "})();";
+
     // Honza 25. 11.: na TV je všechno moc velké a při návratu nahoru na nástěnce se fotky zaříznou pod lištou.
     // Celou stránku zmenšíme a fokusovaným prvkům dáme odstup od pevné horní lišty (podle její skutečné výšky).
     private static final String TV_LAYOUT_JS = "(function(){"
@@ -90,6 +117,7 @@ public class MainActivity extends Activity {
             public void onPageFinished(WebView view, String url) {
                 // Honza: „hned po otevření pustit příběh“ – úvod a první kapitola se přehrají samy, OK přeskočí.
                 if (isTelevision()) view.evaluateJavascript(TV_LAYOUT_JS, null);
+                view.evaluateJavascript(MUSIC_JS, null);
                 view.evaluateJavascript(INTRO_JS, null);
             }
 
@@ -133,7 +161,7 @@ public class MainActivity extends Activity {
     private void notifyDone(String id) {
         String safeId = id.replace("\\", "").replace("'", "");
         webView.post(() -> webView.evaluateJavascript(
-            "window.MysteryForgeTtsDone && window.MysteryForgeTtsDone('" + safeId + "')", null));
+            "window.__mfTtsEnd && window.__mfTtsEnd(); window.MysteryForgeTtsDone && window.MysteryForgeTtsDone('" + safeId + "')", null));
     }
 
     /** The speech voice that the page calls. Every method runs on a WebView thread. */
@@ -155,6 +183,7 @@ public class MainActivity extends Activity {
             }
             tts.setPitch(pitch);
             tts.setSpeechRate(rate);
+            webView.post(() -> webView.evaluateJavascript("window.__mfTtsStart && window.__mfTtsStart()", null));
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, id);
         }
 
