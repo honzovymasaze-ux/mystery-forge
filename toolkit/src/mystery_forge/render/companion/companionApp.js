@@ -311,6 +311,65 @@
     ]);
   }
 
+  /**
+   * Honza 25. 11.: „když se načte QR kód, dát možnost přidat aplikaci do mobilu, aby to člověk nemusel hledat,
+   * když potřebuje z případu ovládat telefon“. Stránka z TV jede po místní síti přes http, takže Chrome
+   * automatickou instalaci nenabídne – karta ukáže krátký návod „Přidat na plochu“ podle telefonu.
+   * Kdyby prohlížeč instalaci přece nabídl (beforeinstallprompt), je tu rovnou tlačítko.
+   */
+  function renderHomeScreen() {
+    const standalone =
+      window.matchMedia?.('(display-mode: standalone)').matches || /** @type {any} */ (navigator).standalone === true;
+    let hidden = false;
+    try {
+      hidden = window.localStorage.getItem('mf-home-hidden') === '1';
+    } catch {
+      hidden = false;
+    }
+    if (tvMode || standalone || hidden || !window.location.protocol.startsWith('http')) {
+      return null;
+    }
+    const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const steps = ios
+      ? ['Dole klepněte na Sdílet (čtvereček se šipkou nahoru).', 'Zvolte „Přidat na plochu“ a potvrďte „Přidat“.']
+      : ['V Chromu vpravo nahoře klepněte na ⋮ (tři tečky).', 'Zvolte „Přidat na plochu“ (nebo „Instalovat aplikaci“) a potvrďte.'];
+    const card = el('section', { className: 'paper home-card', attrs: { id: 'home-screen' } }, [
+      el('h2', { className: 'paper-title', text: '📲 Přidat hru na plochu' }),
+      el('p', { text: 'Příště hru otevřete jedním klepnutím z ikony „DJ Bory“, bez hledání a skenování.' }),
+      el(
+        'ol',
+        { className: 'home-steps' },
+        steps.map((step) => el('li', { text: step })),
+      ),
+      el('p', { className: 'home-note', text: 'Funguje, když je telefon na stejné Wi-Fi jako televize a hra v TV běží.' }),
+    ]);
+    const prompt = /** @type {any} */ (window).__mfInstallPrompt;
+    if (prompt) {
+      card.append(
+        button('Přidat na plochu', 'button button-primary', () => {
+          prompt.prompt();
+          /** @type {any} */ (window).__mfInstallPrompt = null;
+        }),
+      );
+    }
+    card.append(
+      button('Už ji mám na ploše', 'button button-link', () => {
+        try {
+          window.localStorage.setItem('mf-home-hidden', '1');
+        } catch {
+          // Bez úložiště se karta jen skryje do obnovení stránky.
+        }
+        card.remove();
+      }),
+    );
+    return card;
+  }
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    /** @type {any} */ (window).__mfInstallPrompt = event;
+    render();
+  });
+
   function renderHelp() {
     const steps = el('ol', { className: 'help-steps' });
     for (const name of ['help_1', 'help_2', 'help_3', 'help_4', 'help_5']) {
@@ -366,6 +425,7 @@
       renderEnding(),
       renderFinish(),
       renderConnect(),
+      renderHomeScreen(),
       renderIntro(),
       renderTimerCard(),
       renderEnvelopes(),

@@ -2451,3 +2451,18 @@ body.is-wall .main {
   font-family: var(--font-serif);
   font-size: 22px;
 }
+
+/* Karta „Přidat hru na plochu“ v mobilu. */
+.home-steps {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+
+.home-steps li {
+  margin: 4px 0;
+}
+
+.home-note {
+  color: var(--ink-muted);
+  font-size: 14px;
+}

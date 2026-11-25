@@ -180,10 +180,16 @@ final class GameServer {
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
-        } else if (path.matches("/(video|img)/[A-Za-z0-9-]+\\.(mp4|jpg)")) {
+        } else if (path.equals("/manifest.webmanifest")) {
+            // Honza 25. 11.: hra se dá z mobilu přidat na plochu – název a ikona pro zástupce.
+            String manifest = "{\"name\":\"DJ Bory – Poslední skladba\",\"short_name\":\"DJ Bory\",\"start_url\":\"/\","
+                + "\"display\":\"standalone\",\"background_color\":\"#16130f\",\"theme_color\":\"#16130f\","
+                + "\"icons\":[{\"src\":\"/img/ikona.png\",\"sizes\":\"512x512\",\"type\":\"image/png\",\"purpose\":\"any\"}]}";
+            send(output, 200, "application/manifest+json", manifest.getBytes(StandardCharsets.UTF_8));
+        } else if (path.matches("/(video|img)/[A-Za-z0-9-]+\\.(mp4|jpg|png)")) {
             // Úvodní video a obrázek pozadí (Kunštát), přibalené v assets/video a assets/img.
             try {
-                sendMedia(output, path.endsWith(".mp4") ? "video/mp4" : "image/jpeg", readAsset(path.substring(1)), range);
+                sendMedia(output, path.endsWith(".mp4") ? "video/mp4" : path.endsWith(".png") ? "image/png" : "image/jpeg", readAsset(path.substring(1)), range);
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
