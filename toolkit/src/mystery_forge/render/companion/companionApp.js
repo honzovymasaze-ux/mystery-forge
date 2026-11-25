@@ -1258,10 +1258,21 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       actions.push(button(ui('close'), 'button button-quiet', closeBoardMenu));
     }
     const title = documentEntry !== undefined ? documentEntry.title : /** @type {{name: string}} */ (person).name;
+    // Honza 25. 11.: po kliknutí na osobu se má hlavně zvětšit fotka a nabídka vyjet pod ní.
+    const photo =
+      person !== undefined && person.portrait
+        ? el('div', { className: 'board-menu-photo' }, [htmlBlock(person.portrait, 'person-picture')])
+        : null;
+    const role = person !== undefined && person.role ? el('p', { className: 'board-menu-role', text: person.role }) : null;
     const dialog = el(
       'div',
-      { className: 'dialog paper board-menu', attrs: { role: 'dialog', 'aria-modal': 'true', id: 'board-menu' } },
-      [el('p', { className: 'dialog-message', text: title }), el('div', { className: 'board-menu-actions' }, actions)],
+      {
+        className: `dialog paper board-menu${photo ? ' is-person' : ''}`,
+        attrs: { role: 'dialog', 'aria-modal': 'true', id: 'board-menu' },
+      },
+      [photo, el('p', { className: 'dialog-message', text: title }), role, el('div', { className: 'board-menu-actions' }, actions)].filter(
+        (node) => node !== null,
+      ),
     );
     const overlay = el('div', { className: 'overlay' }, [dialog]);
     overlay.addEventListener('click', (event) => {

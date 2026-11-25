@@ -2178,6 +2178,52 @@ body.has-viewer {
   text-align: left;
 }
 
+/* Menu osoby: velká fotka nahoře, nabídka pod ní (Honza 25. 11.). */
+.board-menu.is-person {
+  max-width: 760px;
+  width: 92vw;
+  text-align: center;
+}
+
+.board-menu-photo {
+  display: flex;
+  justify-content: center;
+  height: 34vh;
+  margin: 6px 0 8px;
+}
+
+.board-menu.is-person {
+  max-height: 94vh;
+}
+
+.board-menu.is-person .board-menu-actions .button {
+  min-height: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.board-menu-photo .person-picture,
+.board-menu-photo img,
+.board-menu-photo svg {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+.board-menu-role {
+  margin: -6px 0 12px;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.board-menu.is-person .board-menu-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .sticky-button {
   background: #fbe58a;
   color: #2a2018;
