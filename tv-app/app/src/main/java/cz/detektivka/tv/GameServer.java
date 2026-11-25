@@ -184,7 +184,8 @@ final class GameServer {
             // Honza 25. 11.: hra se dá z mobilu přidat na plochu – název a ikona pro zástupce.
             String manifest = "{\"name\":\"DJ Bory – Poslední skladba\",\"short_name\":\"DJ Bory\",\"start_url\":\"/\","
                 + "\"display\":\"standalone\",\"background_color\":\"#16130f\",\"theme_color\":\"#16130f\","
-                + "\"icons\":[{\"src\":\"/img/ikona.png\",\"sizes\":\"512x512\",\"type\":\"image/png\",\"purpose\":\"any\"}]}";
+                + "\"icons\":[{\"src\":\"/img/ikona-192.png\",\"sizes\":\"192x192\",\"type\":\"image/png\",\"purpose\":\"any\"},"
+                + "{\"src\":\"/img/ikona.png\",\"sizes\":\"512x512\",\"type\":\"image/png\",\"purpose\":\"any\"}]}";
             send(output, 200, "application/manifest+json", manifest.getBytes(StandardCharsets.UTF_8));
         } else if (path.matches("/(video|img)/[A-Za-z0-9-]+\\.(mp4|jpg|png)")) {
             // Úvodní video a obrázek pozadí (Kunštát), přibalené v assets/video a assets/img.
