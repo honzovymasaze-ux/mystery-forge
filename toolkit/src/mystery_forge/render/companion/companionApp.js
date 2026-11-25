@@ -668,6 +668,20 @@
     document.getElementById('viewer-close')?.focus();
   }
 
+  /** @param {number} step */
+  function moveViewerFocus(step) {
+    const buttons = /** @type {HTMLElement[]} */ ([...document.querySelectorAll('.viewer-bar button')]).filter(
+      (b) => !(/** @type {HTMLButtonElement} */ (b).disabled),
+    );
+    if (buttons.length === 0) {
+      moveViewer(step);
+      return;
+    }
+    const at = buttons.indexOf(/** @type {HTMLElement} */ (document.activeElement));
+    const next = at === -1 ? buttons.length - 1 : (at + step + buttons.length) % buttons.length;
+    buttons[next].focus();
+  }
+
   function closeViewer() {
     if (String(playback.id ?? '').startsWith('vypoved-')) {
       stopPlayback();
@@ -2193,8 +2207,10 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       const keys = {
         Escape: closeViewer,
         Backspace: closeViewer,
-        ArrowLeft: () => moveViewer(-1),
-        ArrowRight: () => moveViewer(1),
+        // Honza 25. 11.: šipky do stran mají chodit po tlačítkách horní lišty (‹ › − + Výpověď Zavřít),
+        // jinak se na „▶ Výpověď“ ovladačem nedostane. Listování dokumenty je pod tlačítky ‹ ›.
+        ArrowLeft: () => moveViewerFocus(-1),
+        ArrowRight: () => moveViewerFocus(1),
         ArrowUp: () => scrollViewer(-240),
         ArrowDown: () => scrollViewer(240),
         PageUp: () => scrollViewer(-600),

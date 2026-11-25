@@ -75,6 +75,8 @@ public class MainActivity extends Activity {
         + "function label(){b.textContent=on?'\\u266A hudba':'\\u266A vyp.';}label();"
         + "b.onclick=function(){on=!on;try{localStorage.setItem('mf-music',on?'on':'off');}catch(e){}label();duck();if(on&&bg.paused)bg.play().catch(function(){});};"
         + "document.body.appendChild(b);"
+        // V otevřeném dokumentu by tlačítko překrylo lištu prohlížeče – schovat.
+        + "setInterval(function(){b.style.display=(document.getElementById('viewer')||document.getElementById('board-menu'))?'none':'';},400);"
         + "play();"
         + "})();";
 
