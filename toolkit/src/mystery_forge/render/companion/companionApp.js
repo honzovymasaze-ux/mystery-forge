@@ -669,6 +669,9 @@
   }
 
   function closeViewer() {
+    if (String(playback.id ?? '').startsWith('vypoved-')) {
+      stopPlayback();
+    }
     const id = viewer.list[viewer.index]?.id;
     viewer.index = -1;
     render();
@@ -916,6 +919,20 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
               render();
             },
             { id: 'viewer-toggle' },
+          )
+        : null,
+      // Namluvené výslechy (ElevenLabs): TV je servíruje z assets jako /audio/vypoved-<id>.mp3.
+      documentEntry.kind === 'transcript' && window.location.protocol.startsWith('http')
+        ? button(
+            playback.id === `vypoved-${documentEntry.id}` ? '■ Zastavit' : '▶ Výpověď',
+            'button button-quiet',
+            () =>
+              togglePlayback(
+                /** @type {MysteryForgeCompanionCaseEntry} */ (
+                  /** @type {unknown} */ ({ id: `vypoved-${documentEntry.id}`, type: 'chapter', audio: `/audio/vypoved-${documentEntry.id}.mp3`, text: '' })
+                ),
+              ),
+            { id: 'viewer-voice' },
           )
         : null,
       button(ui('close'), 'button button-primary', closeViewer, { id: 'viewer-close' }),

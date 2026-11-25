@@ -169,7 +169,7 @@ final class GameServer {
             send(output, 200, "application/json", "{}".getBytes(StandardCharsets.UTF_8));
         } else if (path.equals("/") || path.equals("/index.html")) {
             send(output, 200, "text/html; charset=utf-8", readAsset(PAGE));
-        } else if (path.matches("/audio/[a-z0-9-]+\\.mp3")) {
+        } else if (path.matches("/audio/[A-Za-z0-9-]+\\.mp3")) {
             // Namluvené kapitoly a hlasovky (ElevenLabs), přibalené v assets/audio.
             try {
                 send(output, 200, "audio/mpeg", readAsset(path.substring(1)));
