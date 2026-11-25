@@ -345,21 +345,13 @@ final class GameServer {
             }
         }
         int length = end - start + 1;
-        String head = "HTTP/1.1 " + (partial ? "206 Partial Content" : "200 OK") + "
-"
-            + "Content-Type: " + type + "
-"
-            + "Content-Length: " + length + "
-"
-            + "Accept-Ranges: bytes
-"
-            + (partial ? "Content-Range: bytes " + start + "-" + end + "/" + data.length + "
-" : "")
-            + "Cache-Control: no-store
-"
-            + "Connection: close
-
-";
+        String head = "HTTP/1.1 " + (partial ? "206 Partial Content" : "200 OK") + "\r\n"
+            + "Content-Type: " + type + "\r\n"
+            + "Content-Length: " + length + "\r\n"
+            + "Accept-Ranges: bytes\r\n"
+            + (partial ? "Content-Range: bytes " + start + "-" + end + "/" + data.length + "\r\n" : "")
+            + "Cache-Control: no-store\r\n"
+            + "Connection: close\r\n\r\n";
         output.write(head.getBytes(StandardCharsets.US_ASCII));
         output.write(data, start, length);
         output.flush();
