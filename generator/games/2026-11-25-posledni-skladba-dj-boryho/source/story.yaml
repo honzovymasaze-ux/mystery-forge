@@ -1,1650 +1,1680 @@
 format_version: 1
 title: DJ Bory – Poslední skladba
 tagline: Sedm lidí mělo důvod, aby už nikdy nepromluvil.
-premise: |
-  Nedělní noc. Říjnový déšť. Opuštěné koupaliště po skončení
+premise: 'Nedělní noc. Říjnový déšť. Opuštěné koupaliště po skončení
+
   letní sezóny.
 
+
   V pondělí ráno je v technickém zázemí koupaliště nalezen mrtvý
+
   místní hospodský, svatební DJ a provozovatel dvou rekreačních
+
   areálů, známý pod přezdívkou DJ Bory.
 
+
   Prvotní podezření na nešťastnou událost vystřídá vyšetřování
+
   násilného trestného činu. Postupně vycházejí najevo problémy
+
   v manželství, nevyrovnané dluhy, anonymní výhrůžky, podivné
+
   účetní operace a tajemství sahající několik let do minulosti.
 
+
   Sedm podezřelých. Jedenáct svědků. Desítky dokumentů.
+
   Někteří lidé lžou, aby ochránili sebe. Jiní, aby ochránili
+
   někoho dalšího.
+
 
   A jeden z nich lže, protože zavraždil člověka.
 
+  '
 setting: Kunštát, Rudka, Boskovice a okolí
-era: "2026"
+era: '2026'
 tone: temný, realistický, psychologický, maloměstský, pomalu gradující
 visual_style: noir
-
-truth: |
-  SKUTEČNÝ PRŮBĚH PŘÍPADU
-  Pouze pro interní vyhodnocení hry. Nikdy nezobrazovat hráčům
-  před dokončením závěrečného obvinění.
-
-  Pachatelkou je {{char:lenka-simkova}}, vedoucí koupaliště
-  v Kunštátu a osoba, která následujícího rána oznámila nález těla.
-
-  Její skutečný motiv není žárlivost ani nešťastná láska,
-  přestože s obětí skutečně udržovala krátký intimní vztah.
-
-  Během letní sezóny 2026 vzniklo v systému elektronických
-  permanentek celkem 47 neoprávněných refundací. Celková
-  škoda dosáhla 187600 Kč.
-
-  Refundace byly evidovány pod společným provozním účtem
-  a v prvotních účetních podkladech nebylo patrné, která
-  fyzická osoba byla jejich skutečným příjemcem.
-
-  Peníze byly připsány prostřednictvím platební služby
-  na zákaznický profil označený R-419.
-
-  Tento profil patřil {{char:lenka-simkova}}.
-
-  Jeho skutečnou vlastnici lze určit až porovnáním exportu
-  refundací, evidence platební služby a potvrzení banky.
-  Žádný z těchto dokumentů samostatně nevysvětluje celý
-  finanční tok.
-
-  {{char:borek-vitek}} nesrovnalosti objevil v pátek
-  16. října 2026. Zpočátku podezíral obchodního společníka
-  a externí účetní, protože oba měli přístup k provozním datům.
-
-  V neděli 18. října zjistil, že peníze směřovaly na soukromý
-  zákaznický profil. Na pondělí si sjednal mimořádnou účetní
-  kontrolu.
-
-  V neděli večer se na koupališti postupně vystřídalo několik
-  osob. Každá tam měla vlastní důvod být a každá mohla
-  zpočátku působit jako možný pachatel.
-
-  {{char:lenka-simkova}} tvrdila, že celý večer strávila
-  v Boskovicích u kamarádky. Ve skutečnosti odešla z jejího
-  bytu ve 20:52 a vrátila se až po 22. hodině.
-
-  Telefon zůstal v bytě kamarádky. Síťové a telefonní záznamy
-  proto zdánlivě potvrzovaly její alibi.
-
-  Kamarádka původně lhala, protože nevěděla, co se skutečně
-  stalo, a chtěla zakrýt jinou soukromou záležitost.
-
-  Její opravená výpověď je zpřístupněna až v obálce E.
-
-  Večer se {{char:lenka-simkova}} dostavila na koupaliště
-  kvůli rozhovoru s obětí. Oběť jí oznámila, že další den
-  předá účetní dokumentaci k nezávislé kontrole.
-
-  Následoval osobní konflikt. Pachatelka oběť úmyslně
-  fyzicky napadla. Následkem tupého poranění hlavy oběť zemřela.
-
-  Přesný úmyslný fyzický útok není podrobně rekonstruován.
-  Pro herní řešení je podstatná příčina smrti, časová osa,
-  totožnost přítomných osob a důkazní řetězec.
-
-  Na oděvu oběti byla nalezena drobná ulomená část nového
-  kovového přívěsku se specifickým lomem a částí evidenčního
-  označení.
-
-  Přívěsky tohoto typu byly vydávány zaměstnancům při
-  posezónní inventuře.
-
-  Z evidence výdeje vyplývá, že příslušný přívěsek byl
-  předán {{char:lenka-simkova}} v neděli v 19:46.
-
-  Od té doby až do rozhodného večera se s obětí podle
-  nezávislých podkladů nemohla setkat.
-
-  Ulomená část přívěsku je proto významná pro časové
-  zařazení jejich fyzického kontaktu.
-
-  Doplňující materiálová expertiza v obálce E potvrzuje,
-  že fragment nalezený na oděvu oběti přesně odpovídá
-  poškozenému přívěsku zajištěnému mezi osobními věcmi
-  pachatelky.
-
-  Identifikace samotného přívěsku vyžaduje porovnání
-  dokumentů z obálek A, C a E. Jeden dokument popisuje
-  místo nálezu fragmentu, druhý evidenci vydaných předmětů
-  a třetí vzájemnou shodu lomových ploch.
-
-  K tomuto důkazu se přidává vyvrácené alibi, časová osa
-  fyzického kontaktu, motiv a další nezávislé důkazy.
-
-  Pachatelka se v pondělí dostavila do zaměstnání a oznámila
-  nález mrtvého muže.
-
-  Během ranního oznámení uvedla jednu okolnost týkající se
-  oběti, kterou podle pozdější rekonstrukce nemohla znát
-  pouze z místa nálezu. Tato okolnost je podpůrným důkazem,
-  nikoli samostatným usvědčením.
-
-  OSTATNÍ PODEZŘELÍ
-
-  {{char:monika-vitkova}}:
-  Manželství bylo před rozpadem. Věděla o nevěře a obávala
-  se ztráty rodinného podniku. V neděli se s manželem
-  pohádala. Část večera neměla doloženou. Později se ukáže,
-  že navštívila právní poradkyni kvůli připravované dohodě
-  o odloučení. Během rozhodného fyzického konfliktu byla
-  prokazatelně přítomna na vzdálené provozovně.
-
-  {{char:radim-koci}}:
-  Zneužíval podnikové prostředky k úhradě soukromých výdajů.
-  Nešlo však o neoprávněné refundace. Oběť mu hrozila
-  ukončením obchodní spolupráce. Večer navštívil koupaliště,
-  ale v době smrtelného konfliktu řešil poruchu zařízení
-  v Rudce za přítomnosti technika.
-
-  {{char:tomas-pesek}}:
-  Vedl dlouhodobý profesní spor s obětí. Některé výhrůžné
-  zprávy jsou autentické. Večer měl přestávku mezi dvěma
-  hudebními vystoupeními, během které se s obětí skutečně
-  setkal. Následně odjel. Jeho přítomnost na druhém
-  vystoupení je ověřena nezávislými záznamy.
-
-  {{char:pavel-vitek}}:
-  Mladší bratr oběti. Dlužil bratrovi peníze a hrozilo mu,
-  že přijde o dílnu, kterou využíval. Večer se na koupališti
-  pokusil dohodnout odklad splatnosti dluhu. Zatajil cestu
-  taxíkem, protože následně navštívil člověka, před nímž
-  skrýval svou finanční situaci. V době útoku se nacházel
-  v jedoucím vozidle mimo areál.
-
-  {{char:eva-malikova}}:
-  Externí účetní obou koupališť. Kvůli vlastním chybám
-  přehlédla neoprávněné refundace a obávala se profesních
-  následků. Oběti poslala zprávu, kterou bylo možné chápat
-  jako výhrůžku. Večer přivezla účetní podklady. Později
-  se potvrdí, že její evidenční přístup neznamenal příjem
-  odcizených peněz. Rozhodnou dobu strávila s druhou osobou
-  na účetní konzultaci mimo koupaliště.
-
-  {{char:viktor-hruby}}:
-  Dodavatel občerstvení, který se s obětí soudil o neuhrazenou
-  fakturu. Měl přístup do areálu. Jeho vozidlo zachytila
-  kamera poblíž koupaliště. V rozhodné době však vozidlo
-  používal zaměstnanec. Samotný dodavatel byl osobně přítomen
-  u reklamace dodávky ve skladu v Boskovicích.
-
-  ČTYŘI HLAVNÍ FALEŠNÉ STOPY
-
-  1. Výhrůžky konkurenčního DJ.
-     Jsou pravé, ale časově neodpovídají spáchání vraždy.
-
-  2. Krize manželství a připravované odloučení.
-     Manželka skutečně lhala o jejich vztahu. Důkaz její
-     nepřítomnosti v rozhodné době však její vinu vylučuje.
-
-  3. Podezřelé účetní operace obchodního společníka.
-     Jde o jiné finanční pochybení než neoprávněné refundace.
-     Obě skupiny plateb jsou definitivně odděleny v obálce D.
-
-  4. Vozidlo dodavatele zachycené kamerou.
-     Vozidlo je identifikováno správně, jeho řidič nikoli.
-     Totožnost skutečného řidiče je potvrzena až v obálce E.
-
-  DALŠÍ ZAVÁDĚJÍCÍ OKOLNOSTI
-
-  5. Otisk prstu bratra oběti na hrnku.
-     Vysvětluje jej jeho skutečná dřívější návštěva.
-
-  6. Přítomnost telefonu pachatelky v Boskovicích.
-     Telefon byl skutečně v Boskovicích. Jeho majitelka ne.
-
-  7. Přihlášení prostřednictvím společného provozního účtu.
-     Uživatelské přihlášení samo neidentifikuje člověka,
-     který skutečně získal neoprávněně vyplacené peníze.
-
-  8. Domnělá otrava.
-     Podezření vznikne kvůli lékům nalezeným v místnosti.
-     Toxikologie prokáže, že nesouvisejí s příčinou smrti.
-
-  ZÁVĚREČNÝ DŮKAZNÍ ŘETĚZEC
-
-  D2: Nález fragmentu na oděvu oběti.
-  D29: Evidence předání nového přívěsku.
-  D53: Materiálová shoda fragmentu s poškozeným přívěskem.
-  D54: Upřesnění časového omezení možného kontaktu.
-  D55: Vyvrácení původního osobního alibi pachatelky.
-  D43, D44, D56: Propojení neoprávněných refundací s příjemcem.
-  D60: Potvrzení rozhodného časového okna fyzického konfliktu.
-  D61 a D62: Úplné vyloučení posledních alternativních verzí.
-
-  Teprve souhrn těchto dokumentů umožňuje spolehlivě
-  rekonstruovat celý případ.
-
-  Herní případ je zcela smyšlený. Skutečné názvy obcí
-  slouží pouze jako geografické zasazení. Všechny osoby,
-  podniky, konkrétní areály, instituce, kontaktní údaje,
-  identifikátory a popsané události jsou fiktivní.
-
+truth: "SKUTEČNÝ PRŮBĚH PŘÍPADU\nPouze pro interní vyhodnocení hry. Nikdy nezobrazovat hráčům\npřed dokončením závěrečného\
+  \ obvinění.\n\nPachatelkou je {{char:lenka-simkova}}, vedoucí koupaliště\nv Kunštátu a osoba, která následujícího\
+  \ rána oznámila nález těla.\n\nJejí skutečný motiv není žárlivost ani nešťastná láska,\npřestože s obětí skutečně\
+  \ udržovala krátký intimní vztah.\n\nBěhem letní sezóny 2026 vzniklo v systému elektronických\npermanentek celkem\
+  \ 47 neoprávněných refundací. Celková\nškoda dosáhla 187600 Kč.\n\nRefundace byly evidovány pod společným provozním\
+  \ účtem\na v prvotních účetních podkladech nebylo patrné, která\nfyzická osoba byla jejich skutečným příjemcem.\n\
+  \nPeníze byly připsány prostřednictvím platební služby\nna zákaznický profil označený R-419.\n\nTento profil patřil\
+  \ {{char:lenka-simkova}}.\n\nJeho skutečnou vlastnici lze určit až porovnáním exportu\nrefundací, evidence platební\
+  \ služby a potvrzení banky.\nŽádný z těchto dokumentů samostatně nevysvětluje celý\nfinanční tok.\n\n{{char:borek-vitek}}\
+  \ nesrovnalosti objevil v pátek\n16. října 2026. Zpočátku podezíral obchodního společníka\na externí účetní, protože\
+  \ oba měli přístup k provozním datům.\n\nV neděli 18. října zjistil, že peníze směřovaly na soukromý\nzákaznický\
+  \ profil. Na pondělí si sjednal mimořádnou účetní\nkontrolu.\n\nV neděli večer se na koupališti postupně vystřídalo\
+  \ několik\nosob. Každá tam měla vlastní důvod být a každá mohla\nzpočátku působit jako možný pachatel.\n\n{{char:lenka-simkova}}\
+  \ tvrdila, že celý večer strávila\nv Boskovicích u kamarádky. Ve skutečnosti odešla z jejího\nbytu ve 20:52 a\
+  \ vrátila se až po 22. hodině.\n\nTelefon zůstal v bytě kamarádky. Síťové a telefonní záznamy\nproto zdánlivě\
+  \ potvrzovaly její alibi.\n\nKamarádka původně lhala, protože nevěděla, co se skutečně\nstalo, a chtěla zakrýt\
+  \ jinou soukromou záležitost.\n\nJejí opravená výpověď je zpřístupněna až v obálce E.\n\nVečer se {{char:lenka-simkova}}\
+  \ dostavila na koupaliště\nkvůli rozhovoru s obětí. Oběť jí oznámila, že další den\npředá účetní dokumentaci k\
+  \ nezávislé kontrole.\n\nNásledoval osobní konflikt. Pachatelka oběť úmyslně\nfyzicky napadla. Následkem tupého\
+  \ poranění hlavy oběť zemřela.\n\nPřesný úmyslný fyzický útok není podrobně rekonstruován.\nPro herní řešení je\
+  \ podstatná příčina smrti, časová osa,\ntotožnost přítomných osob a důkazní řetězec.\n\nNa oděvu oběti byla nalezena\
+  \ drobná ulomená část nového\nkovového přívěsku se specifickým lomem a částí evidenčního\noznačení.\n\nPřívěsky\
+  \ tohoto typu byly vydávány zaměstnancům při\nposezónní inventuře.\n\nZ evidence výdeje vyplývá, že příslušný\
+  \ přívěsek byl\npředán {{char:lenka-simkova}} v neděli v 19:46.\n\nOd té doby až do rozhodného večera se s obětí\
+  \ podle\nnezávislých podkladů nemohla setkat.\n\nUlomená část přívěsku je proto významná pro časové\nzařazení\
+  \ jejich fyzického kontaktu.\n\nDoplňující materiálová expertiza v obálce E potvrzuje,\nže fragment nalezený na\
+  \ oděvu oběti přesně odpovídá\npoškozenému přívěsku zajištěnému mezi osobními věcmi\npachatelky.\n\nIdentifikace\
+  \ samotného přívěsku vyžaduje porovnání\ndokumentů z obálek A, C a E. Jeden dokument popisuje\nmísto nálezu fragmentu,\
+  \ druhý evidenci vydaných předmětů\na třetí vzájemnou shodu lomových ploch.\n\nK tomuto důkazu se přidává vyvrácené\
+  \ alibi, časová osa\nfyzického kontaktu, motiv a další nezávislé důkazy.\n\nPachatelka se v pondělí dostavila\
+  \ do zaměstnání a oznámila\nnález mrtvého muže.\n\nBěhem ranního oznámení uvedla jednu okolnost týkající se\n\
+  oběti, kterou podle pozdější rekonstrukce nemohla znát\npouze z místa nálezu. Tato okolnost je podpůrným důkazem,\n\
+  nikoli samostatným usvědčením.\n\nOSTATNÍ PODEZŘELÍ\n\n{{char:monika-vitkova}}:\nManželství bylo před rozpadem.\
+  \ Věděla o nevěře a obávala\nse ztráty rodinného podniku. V neděli se s manželem\npohádala. Část večera neměla\
+  \ doloženou. Později se ukáže,\nže navštívila právní poradkyni kvůli připravované dohodě\no odloučení. Během rozhodného\
+  \ fyzického konfliktu byla\nprokazatelně přítomna na vzdálené provozovně.\n\n{{char:radim-koci}}:\nZneužíval podnikové\
+  \ prostředky k úhradě soukromých výdajů.\nNešlo však o neoprávněné refundace. Oběť mu hrozila\nukončením obchodní\
+  \ spolupráce. Večer navštívil koupaliště,\nale v době smrtelného konfliktu řešil poruchu zařízení\nv Rudce za\
+  \ přítomnosti technika.\n\n{{char:tomas-pesek}}:\nVedl dlouhodobý profesní spor s obětí. Některé výhrůžné\nzprávy\
+  \ jsou autentické. Večer měl přestávku mezi dvěma\nhudebními vystoupeními, během které se s obětí skutečně\nsetkal.\
+  \ Následně odjel. Jeho přítomnost na druhém\nvystoupení je ověřena nezávislými záznamy.\n\n{{char:pavel-vitek}}:\n\
+  Mladší bratr oběti. Dlužil bratrovi peníze a hrozilo mu,\nže přijde o dílnu, kterou využíval. Večer se na koupališti\n\
+  pokusil dohodnout odklad splatnosti dluhu. Zatajil cestu\ntaxíkem, protože následně navštívil člověka, před nímž\n\
+  skrýval svou finanční situaci. V době útoku se nacházel\nv jedoucím vozidle mimo areál.\n\n{{char:eva-malikova}}:\n\
+  Externí účetní obou koupališť. Kvůli vlastním chybám\npřehlédla neoprávněné refundace a obávala se profesních\n\
+  následků. Oběti poslala zprávu, kterou bylo možné chápat\njako výhrůžku. Večer přivezla účetní podklady. Později\n\
+  se potvrdí, že její evidenční přístup neznamenal příjem\nodcizených peněz. Rozhodnou dobu strávila s druhou osobou\n\
+  na účetní konzultaci mimo koupaliště.\n\n{{char:viktor-hruby}}:\nDodavatel občerstvení, který se s obětí soudil\
+  \ o neuhrazenou\nfakturu. Měl přístup do areálu. Jeho vozidlo zachytila\nkamera poblíž koupaliště. V rozhodné\
+  \ době však vozidlo\npoužíval zaměstnanec. Samotný dodavatel byl osobně přítomen\nu reklamace dodávky ve skladu\
+  \ v Boskovicích.\n\nČTYŘI HLAVNÍ FALEŠNÉ STOPY\n\n1. Výhrůžky konkurenčního DJ.\n   Jsou pravé, ale časově neodpovídají\
+  \ spáchání vraždy.\n\n2. Krize manželství a připravované odloučení.\n   Manželka skutečně lhala o jejich vztahu.\
+  \ Důkaz její\n   nepřítomnosti v rozhodné době však její vinu vylučuje.\n\n3. Podezřelé účetní operace obchodního\
+  \ společníka.\n   Jde o jiné finanční pochybení než neoprávněné refundace.\n   Obě skupiny plateb jsou definitivně\
+  \ odděleny v obálce D.\n\n4. Vozidlo dodavatele zachycené kamerou.\n   Vozidlo je identifikováno správně, jeho\
+  \ řidič nikoli.\n   Totožnost skutečného řidiče je potvrzena až v obálce E.\n\nDALŠÍ ZAVÁDĚJÍCÍ OKOLNOSTI\n\n\
+  5. Otisk prstu bratra oběti na hrnku.\n   Vysvětluje jej jeho skutečná dřívější návštěva.\n\n6. Přítomnost telefonu\
+  \ pachatelky v Boskovicích.\n   Telefon byl skutečně v Boskovicích. Jeho majitelka ne.\n\n7. Přihlášení prostřednictvím\
+  \ společného provozního účtu.\n   Uživatelské přihlášení samo neidentifikuje člověka,\n   který skutečně získal\
+  \ neoprávněně vyplacené peníze.\n\n8. Domnělá otrava.\n   Podezření vznikne kvůli lékům nalezeným v místnosti.\n\
+  \   Toxikologie prokáže, že nesouvisejí s příčinou smrti.\n\nZÁVĚREČNÝ DŮKAZNÍ ŘETĚZEC\n\nD2: Nález fragmentu\
+  \ na oděvu oběti.\nD29: Evidence předání nového přívěsku.\nD53: Materiálová shoda fragmentu s poškozeným přívěskem.\n\
+  D54: Upřesnění časového omezení možného kontaktu.\nD55: Vyvrácení původního osobního alibi pachatelky.\nD43, D44,\
+  \ D56: Propojení neoprávněných refundací s příjemcem.\nD60: Potvrzení rozhodného časového okna fyzického konfliktu.\n\
+  D61 a D62: Úplné vyloučení posledních alternativních verzí.\n\nTeprve souhrn těchto dokumentů umožňuje spolehlivě\n\
+  rekonstruovat celý případ.\n\nHerní případ je zcela smyšlený. Skutečné názvy obcí\nslouží pouze jako geografické\
+  \ zasazení. Všechny osoby,\npodniky, konkrétní areály, instituce, kontaktní údaje,\nidentifikátory a popsané události\
+  \ jsou fiktivní.\n"
 characters:
-  - id: borek-vitek
-    name: Bořek Vítek
-    role: oběť, hospodský, svatební DJ Bory a provozovatel dvou koupališť
-    age: 47
-    is_victim: true
-    is_suspect: false
-    description: |
-      Výrazná osobnost místního společenského života.
-      Na svatbách dokázal bavit stovky lidí, v soukromí
-      však býval tvrdohlavý a obtížně přístupný kritice.
-      Vlastnil hospodu a podílel se na provozu dvou
-      sezónních koupališť. Zná velké množství místních
-      obyvatel a téměř s každým má nějakou minulost.
-    secret: |
-      Udržoval mimomanželský vztah, připravoval odloučení
-      od manželky a objevil rozsáhlé finanční nesrovnalosti.
+- id: borek-vitek
+  name: Bořek Vítek
+  role: oběť, hospodský, svatební DJ Bory a provozovatel dvou koupališť
+  age: 47
+  is_victim: true
+  is_suspect: false
+  description: 'Výrazná osobnost místního společenského života.
 
-  - id: monika-vitkova
-    name: Monika Vítková
-    role: manželka oběti, vedoucí kuchyně hospody
-    age: 44
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Praktická a pracovitá žena. Hospodu považuje za
-      výsledek dvaceti let vlastní práce. Navenek působí
-      klidně, v osobních otázkách je uzavřená.
-    secret: |
-      Připravovala se na rozchod. V neděli večer opustila
-      hospodu kvůli soukromé právní konzultaci a při prvním
-      výslechu zatajila část svého pohybu.
-    motive: Obava ze ztráty manžela, rodinného podniku a majetkového zázemí.
-    opportunity: |
-      Znala provozní prostory koupaliště a v části večera
-      nebyl její pohyb nezávisle ověřen.
+    Na svatbách dokázal bavit stovky lidí, v soukromí
 
-  - id: radim-koci
-    name: Radim Kočí
-    role: obchodní společník, provozovatel lesního koupaliště v Rudce
-    age: 41
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Technicky zdatný muž, který se stará především
-      o údržbu a provozní vybavení obou areálů.
-      V rozhovorech působí sebevědomě, ale při zmínkách
-      o účetnictví rychle mění téma.
-    secret: |
-      Z podnikového účtu uhradil soukromé výdaje v hodnotě
-      96000 Kč. Oběť to zjistila a požadovala nápravu.
-    motive: Hrozící ukončení obchodní spolupráce a finanční odpovědnost.
-    opportunity: |
-      Měl provozní oprávnění, znal místo činu a v neděli
-      večer koupaliště skutečně navštívil.
+    však býval tvrdohlavý a obtížně přístupný kritice.
 
-  - id: lenka-simkova
-    name: Lenka Šimková
-    role: plavčice, vedoucí koupaliště v Kunštátu, oznamovatelka nálezu
-    age: 28
-    is_suspect: true
-    is_culprit: true
-    description: |
-      Schopná a organizačně zdatná zaměstnankyně.
-      Má na starosti směny, zákaznické reklamace,
-      permanentky a běžnou administrativu koupaliště.
-      Zpočátku ochotně spolupracuje s vyšetřovateli.
-    secret: |
-      Získala 187600 Kč prostřednictvím neoprávněných
-      refundací. Udržovala krátký vztah s obětí.
-      Její tvrzení o celovečerním pobytu v Boskovicích
-      je nepravdivé.
-    motive: Zabránění odhalení finančního podvodu a ztrátě zaměstnání.
-    opportunity: |
-      Měla oprávnění k pohybu v areálu a její večerní
-      osobní alibi nebylo ve skutečnosti úplné.
+    Vlastnil hospodu a podílel se na provozu dvou
 
-  - id: tomas-pesek
-    name: Tomáš Pešek
-    role: DJ Tommy, konkurenční svatební DJ z Boskovic
-    age: 34
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Ambiciózní hudebník a příležitostný pořadatel akcí.
-      Profesní úspěch je pro něj osobní záležitostí.
-      V minulosti se s obětí několikrát veřejně pohádal.
-    secret: |
-      Pod falešným jménem publikoval negativní recenze
-      oběti a poškodil její pověst u několika klientů.
-      V neděli se s obětí skutečně setkal, ačkoli to
-      při prvním výslechu popřel.
-    motive: Ztráta svatebních zakázek a poškození vlastní pověsti.
-    opportunity: |
-      Mezi dvěma vystoupeními měl dostatek času dostavit
-      se do Kunštátu.
+    sezónních koupališť. Zná velké množství místních
 
-  - id: pavel-vitek
-    name: Pavel Vítek
-    role: mladší bratr oběti, automechanik
-    age: 42
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Muž se štíhlejší postavou, krátkými tmavě hnědými
-      vlasy a ustupující vlasovou linií. Má několikadenní
-      strniště a unavený výraz. Obléká se jednoduše,
-      většinou do pracovního oblečení.
-      Živí se drobnými opravami automobilů.
-    secret: |
-      Dluží bratrovi 320000 Kč. Další peníze si půjčil
-      bez vědomí své partnerky. Večer chtěl zabránit
-      vymáhání dluhu.
-    motive: Hrozící ztráta dílny a odhalení osobních dluhů.
-    opportunity: |
-      Měl s bratrem domluvenou večerní schůzku
-      a provozní prostory dobře znal.
+    obyvatel a téměř s každým má nějakou minulost.
 
-  - id: eva-malikova
-    name: Eva Malíková
-    role: externí účetní obou koupališť
-    age: 39
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Žena střední postavy s rovnými kaštanovými vlasy
-      po ramena a tenkými obdélníkovými brýlemi.
-      Působí profesionálně a pečlivě. Pod tlakem má
-      sklon odpovídat stroze a příliš technicky.
-    secret: |
-      Přehlédla závažné účetní nesrovnalosti. Některé
-      výstupy dodatečně opravovala bez dostatečné
-      dokumentace, aby zakryla vlastní profesní chybu.
-    motive: Obava ze ztráty klientů, profesní pověsti a náhrady škody.
-    opportunity: |
-      Večer osobně přivezla účetní dokumentaci
-      na koupaliště a měla sjednanou konzultaci s obětí.
+    '
+  secret: 'Udržoval mimomanželský vztah, připravoval odloučení
 
-  - id: viktor-hruby
-    name: Viktor Hrubý
-    role: dodavatel občerstvení a nápojů
-    age: 51
-    is_suspect: true
-    is_culprit: false
-    description: |
-      Robustní muž s krátkými prošedivělými vlasy,
-      širokým obličejem a výrazným obočím.
-      Nosí tmavé košile, pracovní vesty a jednoduché
-      kovové hodinky. V obchodních jednáních bývá
-      neústupný.
-    secret: |
-      Kvůli neuhrazené faktuře vystavil několik
-      neoprávněných smluvních pokut. Oběti vyhrožoval
-      ukončením dodávek a zveřejněním jejího dluhu.
-    motive: Neuhrazené pohledávky a hrozící ztráta významného odběratele.
-    opportunity: |
-      Znal areál z pravidelných dodávek a jeho vozidlo
-      bylo v neděli večer zachyceno poblíž koupaliště.
+    od manželky a objevil rozsáhlé finanční nesrovnalosti.
 
-  - id: marketa-novotna
-    name: Markéta Novotná
-    role: servírka v hospodě
-    age: 24
-    description: Pozorná zaměstnankyně, zná atmosféru mezi manželi.
-    secret: |
-      Občas si bez vědomí vedení zapisovala část spropitného
-      jinak, než odpovídalo pravidlům provozu. Proto při
-      prvním rozhovoru nechtěla poskytnout všechny účtenky.
+    '
+- id: monika-vitkova
+  name: Monika Vítková
+  role: manželka oběti, vedoucí kuchyně hospody
+  age: 44
+  is_suspect: true
+  is_culprit: false
+  description: 'Praktická a pracovitá žena. Hospodu považuje za
 
-  - id: roman-krejci
-    name: Roman Krejčí
-    role: rybář a pravidelný návštěvník okolí koupaliště
-    age: 63
-    description: Pamatuje si detaily prostředí, hůře přesné časy.
-    secret: |
-      V neděli byl u vody i v době, kdy tam podle dohody
-      s místním spolkem neměl být. Svůj čas odchodu
-      odhadl nesprávně podle rozladěných hodinek.
+    výsledek dvaceti let vlastní práce. Navenek působí
 
-  - id: helena-pospisilova
-    name: Helena Pospíšilová
-    role: obyvatelka domu poblíž koupaliště
-    age: 58
-    description: Pracuje z domova a dobře zná běžný provoz v okolí.
-    secret: |
-      Zpočátku zamění zvuk zavření kovových dveří za zvuk
-      související s konfliktem. Událost časově zpřesní
-      až při porovnání s televizním programem.
+    klidně, v osobních otázkách je uzavřená.
 
-  - id: michal-zeman
-    name: Michal Zeman
-    role: řidič dodavatelské společnosti
-    age: 31
-    description: Zaměstnanec, který rozváží zboží po regionu.
-    secret: |
-      V neděli použil služební vozidlo také k soukromé
-      zastávce. Obával se pracovních následků, a proto
-      svou jízdu při prvním dotazu nepopsal úplně.
+    '
+  secret: 'Připravovala se na rozchod. V neděli večer opustila
 
-  - id: jiri-havel
-    name: Jiří Havel
-    role: taxikář
-    age: 54
-    description: Dlouholetý místní řidič, vede evidenci jízd.
-    secret: |
-      Jednu soukromou jízdu zapsal do evidence se zpožděním.
-      Čas následně doloží nezávislými transakčními záznamy.
+    hospodu kvůli soukromé právní konzultaci a při prvním
 
-  - id: katerina-bilkova
-    name: Kateřina Bílková
-    role: kamarádka vedoucí koupaliště
-    age: 29
-    description: Zdravotnická administrativní pracovnice z Boskovic.
-    secret: |
-      Původně zatajila vlastní návštěvu a odchod kamarádky
-      z bytu. V závěrečné výpovědi tuto okolnost napraví.
-      Nevěděla, že její lež poskytuje alibi vražedkyni.
+    výslechu zatajila část svého pohybu.
 
-  - id: stanislav-prochazka
-    name: Stanislav Procházka
-    role: servisní technik
-    age: 46
-    description: Externí odborník na provozní zařízení koupališť.
-    secret: |
-      Některé dřívější servisní zakázky provedl bez
-      standardního písemného předávacího protokolu.
+    Motiv: Obava ze ztráty manžela, rodinného podniku a majetkového zázemí.
 
-  - id: alena-dvorakova
-    name: Alena Dvořáková
-    role: nezávislá účetní kontrolorka
-    age: 49
-    description: |
-      Měla v pondělí převzít dokumentaci od oběti.
-      Dokáže vysvětlit rozdíl mezi provozním účtem,
-      platebním profilem a konečným příjemcem peněz.
+    Příležitost: Znala provozní prostory koupaliště a v části večera
 
-  - id: ondrej-benes
-    name: Ondřej Beneš
-    role: zvukař a organizátor hudebních akcí
-    age: 36
-    description: Dlouhodobě spolupracuje s oběma místními DJ.
-    secret: |
-      Občas používal předtočené hudební bloky mezi
-      jednotlivými živými vystoupeními. Část prvotního
-      časového záznamu proto není osobním alibi účinkujícího.
+    nebyl její pohyb nezávisle ověřen.'
+- id: radim-koci
+  name: Radim Kočí
+  role: obchodní společník, provozovatel lesního koupaliště v Rudce
+  age: 41
+  is_suspect: true
+  is_culprit: false
+  description: 'Technicky zdatný muž, který se stará především
 
-  - id: lucie-kralova
-    name: Lucie Králová
-    role: bývalá zákaznice, nevěsta z letní svatby
-    age: 32
-    description: |
-      Objednala si hudební produkci oběti a později
-      podávala reklamaci souvisejících služeb.
-    secret: |
-      Obdržela anonymní zprávy zpochybňující spolehlivost
-      oběti. Některé z nich přeposlala dalším zákazníkům.
+    o údržbu a provozní vybavení obou areálů.
 
-  - id: marcela-svobodova
-    name: Marcela Svobodová
-    role: právní poradkyně
-    age: 45
-    description: |
-      Poskytovala manželce oběti soukromou konzultaci.
-      Část údajů může předat pouze v nezbytném rozsahu
-      na základě zproštění mlčenlivosti.
+    V rozhovorech působí sebevědomě, ale při zmínkách
 
-  - id: jan-horak
-    name: Jan Horák
-    role: kapitán, vedoucí vyšetřování
-    description: |
-      Hlavní vypravěč případu. Věcný, zkušený
-      a citlivý k lidským vztahům. Odmítá ukvapené závěry.
+    o účetnictví rychle mění téma.
 
-  - id: petr-hala
-    name: Petr Hála
-    role: nadpraporčík, kriminalista
-    description: Vede výslechy a operativní prověřování.
+    '
+  secret: 'Z podnikového účtu uhradil soukromé výdaje v hodnotě
 
-  - id: vera-kalinova
-    name: Věra Kalinová
-    role: soudní lékařka
-    description: Odpovídá za pitevní a zdravotnické závěry.
+    96000 Kč. Oběť to zjistila a požadovala nápravu.
 
-  - id: david-kolar
-    name: David Kolář
-    role: kriminalistický technik
-    description: Zpracovává materiálové a biologické stopy.
+    Motiv: Hrozící ukončení obchodní spolupráce a finanční odpovědnost.
 
-  - id: klara-vesela
-    name: Klára Veselá
-    role: analytička digitálních důkazů
-    description: Zkoumá kamerové záznamy, telefony a elektronické systémy.
+    Příležitost: Měl provozní oprávnění, znal místo činu a v neděli
 
-  - id: martin-simek
-    name: Martin Šimek
-    role: kriminalista hospodářské kriminality
-    description: Prověřuje pohyby finančních prostředků.
+    večer koupaliště skutečně navštívil.'
+- id: lenka-simkova
+  name: Lenka Šimková
+  role: plavčice, vedoucí koupaliště v Kunštátu, oznamovatelka nálezu
+  age: 28
+  is_suspect: true
+  is_culprit: true
+  description: 'Schopná a organizačně zdatná zaměstnankyně.
 
+    Má na starosti směny, zákaznické reklamace,
+
+    permanentky a běžnou administrativu koupaliště.
+
+    Zpočátku ochotně spolupracuje s vyšetřovateli.
+
+    '
+  secret: 'Získala 187600 Kč prostřednictvím neoprávněných
+
+    refundací. Udržovala krátký vztah s obětí.
+
+    Její tvrzení o celovečerním pobytu v Boskovicích
+
+    je nepravdivé.
+
+    Motiv: Zabránění odhalení finančního podvodu a ztrátě zaměstnání.
+
+    Příležitost: Měla oprávnění k pohybu v areálu a její večerní
+
+    osobní alibi nebylo ve skutečnosti úplné.'
+- id: tomas-pesek
+  name: Tomáš Pešek
+  role: DJ Tommy, konkurenční svatební DJ z Boskovic
+  age: 34
+  is_suspect: true
+  is_culprit: false
+  description: 'Ambiciózní hudebník a příležitostný pořadatel akcí.
+
+    Profesní úspěch je pro něj osobní záležitostí.
+
+    V minulosti se s obětí několikrát veřejně pohádal.
+
+    '
+  secret: 'Pod falešným jménem publikoval negativní recenze
+
+    oběti a poškodil její pověst u několika klientů.
+
+    V neděli se s obětí skutečně setkal, ačkoli to
+
+    při prvním výslechu popřel.
+
+    Motiv: Ztráta svatebních zakázek a poškození vlastní pověsti.
+
+    Příležitost: Mezi dvěma vystoupeními měl dostatek času dostavit
+
+    se do Kunštátu.'
+- id: pavel-vitek
+  name: Pavel Vítek
+  role: mladší bratr oběti, automechanik
+  age: 42
+  is_suspect: true
+  is_culprit: false
+  description: 'Muž se štíhlejší postavou, krátkými tmavě hnědými
+
+    vlasy a ustupující vlasovou linií. Má několikadenní
+
+    strniště a unavený výraz. Obléká se jednoduše,
+
+    většinou do pracovního oblečení.
+
+    Živí se drobnými opravami automobilů.
+
+    '
+  secret: 'Dluží bratrovi 320000 Kč. Další peníze si půjčil
+
+    bez vědomí své partnerky. Večer chtěl zabránit
+
+    vymáhání dluhu.
+
+    Motiv: Hrozící ztráta dílny a odhalení osobních dluhů.
+
+    Příležitost: Měl s bratrem domluvenou večerní schůzku
+
+    a provozní prostory dobře znal.'
+- id: eva-malikova
+  name: Eva Malíková
+  role: externí účetní obou koupališť
+  age: 39
+  is_suspect: true
+  is_culprit: false
+  description: 'Žena střední postavy s rovnými kaštanovými vlasy
+
+    po ramena a tenkými obdélníkovými brýlemi.
+
+    Působí profesionálně a pečlivě. Pod tlakem má
+
+    sklon odpovídat stroze a příliš technicky.
+
+    '
+  secret: 'Přehlédla závažné účetní nesrovnalosti. Některé
+
+    výstupy dodatečně opravovala bez dostatečné
+
+    dokumentace, aby zakryla vlastní profesní chybu.
+
+    Motiv: Obava ze ztráty klientů, profesní pověsti a náhrady škody.
+
+    Příležitost: Večer osobně přivezla účetní dokumentaci
+
+    na koupaliště a měla sjednanou konzultaci s obětí.'
+- id: viktor-hruby
+  name: Viktor Hrubý
+  role: dodavatel občerstvení a nápojů
+  age: 51
+  is_suspect: true
+  is_culprit: false
+  description: 'Robustní muž s krátkými prošedivělými vlasy,
+
+    širokým obličejem a výrazným obočím.
+
+    Nosí tmavé košile, pracovní vesty a jednoduché
+
+    kovové hodinky. V obchodních jednáních bývá
+
+    neústupný.
+
+    '
+  secret: 'Kvůli neuhrazené faktuře vystavil několik
+
+    neoprávněných smluvních pokut. Oběti vyhrožoval
+
+    ukončením dodávek a zveřejněním jejího dluhu.
+
+    Motiv: Neuhrazené pohledávky a hrozící ztráta významného odběratele.
+
+    Příležitost: Znal areál z pravidelných dodávek a jeho vozidlo
+
+    bylo v neděli večer zachyceno poblíž koupaliště.'
+- id: marketa-novotna
+  name: Markéta Novotná
+  role: servírka v hospodě
+  age: 24
+  description: Pozorná zaměstnankyně, zná atmosféru mezi manželi.
+  secret: 'Občas si bez vědomí vedení zapisovala část spropitného
+
+    jinak, než odpovídalo pravidlům provozu. Proto při
+
+    prvním rozhovoru nechtěla poskytnout všechny účtenky.
+
+    '
+- id: roman-krejci
+  name: Roman Krejčí
+  role: rybář a pravidelný návštěvník okolí koupaliště
+  age: 63
+  description: Pamatuje si detaily prostředí, hůře přesné časy.
+  secret: 'V neděli byl u vody i v době, kdy tam podle dohody
+
+    s místním spolkem neměl být. Svůj čas odchodu
+
+    odhadl nesprávně podle rozladěných hodinek.
+
+    '
+- id: helena-pospisilova
+  name: Helena Pospíšilová
+  role: obyvatelka domu poblíž koupaliště
+  age: 58
+  description: Pracuje z domova a dobře zná běžný provoz v okolí.
+  secret: 'Zpočátku zamění zvuk zavření kovových dveří za zvuk
+
+    související s konfliktem. Událost časově zpřesní
+
+    až při porovnání s televizním programem.
+
+    '
+- id: michal-zeman
+  name: Michal Zeman
+  role: řidič dodavatelské společnosti
+  age: 31
+  description: Zaměstnanec, který rozváží zboží po regionu.
+  secret: 'V neděli použil služební vozidlo také k soukromé
+
+    zastávce. Obával se pracovních následků, a proto
+
+    svou jízdu při prvním dotazu nepopsal úplně.
+
+    '
+- id: jiri-havel
+  name: Jiří Havel
+  role: taxikář
+  age: 54
+  description: Dlouholetý místní řidič, vede evidenci jízd.
+  secret: 'Jednu soukromou jízdu zapsal do evidence se zpožděním.
+
+    Čas následně doloží nezávislými transakčními záznamy.
+
+    '
+- id: katerina-bilkova
+  name: Kateřina Bílková
+  role: kamarádka vedoucí koupaliště
+  age: 29
+  description: Zdravotnická administrativní pracovnice z Boskovic.
+  secret: 'Původně zatajila vlastní návštěvu a odchod kamarádky
+
+    z bytu. V závěrečné výpovědi tuto okolnost napraví.
+
+    Nevěděla, že její lež poskytuje alibi vražedkyni.
+
+    '
+- id: stanislav-prochazka
+  name: Stanislav Procházka
+  role: servisní technik
+  age: 46
+  description: Externí odborník na provozní zařízení koupališť.
+  secret: 'Některé dřívější servisní zakázky provedl bez
+
+    standardního písemného předávacího protokolu.
+
+    '
+- id: alena-dvorakova
+  name: Alena Dvořáková
+  role: nezávislá účetní kontrolorka
+  age: 49
+  description: 'Měla v pondělí převzít dokumentaci od oběti.
+
+    Dokáže vysvětlit rozdíl mezi provozním účtem,
+
+    platebním profilem a konečným příjemcem peněz.
+
+    '
+- id: ondrej-benes
+  name: Ondřej Beneš
+  role: zvukař a organizátor hudebních akcí
+  age: 36
+  description: Dlouhodobě spolupracuje s oběma místními DJ.
+  secret: 'Občas používal předtočené hudební bloky mezi
+
+    jednotlivými živými vystoupeními. Část prvotního
+
+    časového záznamu proto není osobním alibi účinkujícího.
+
+    '
+- id: lucie-kralova
+  name: Lucie Králová
+  role: bývalá zákaznice, nevěsta z letní svatby
+  age: 32
+  description: 'Objednala si hudební produkci oběti a později
+
+    podávala reklamaci souvisejících služeb.
+
+    '
+  secret: 'Obdržela anonymní zprávy zpochybňující spolehlivost
+
+    oběti. Některé z nich přeposlala dalším zákazníkům.
+
+    '
+- id: marcela-svobodova
+  name: Marcela Svobodová
+  role: právní poradkyně
+  age: 45
+  description: 'Poskytovala manželce oběti soukromou konzultaci.
+
+    Část údajů může předat pouze v nezbytném rozsahu
+
+    na základě zproštění mlčenlivosti.
+
+    '
+- id: jan-horak
+  name: Jan Horák
+  role: kapitán, vedoucí vyšetřování
+  description: 'Hlavní vypravěč případu. Věcný, zkušený
+
+    a citlivý k lidským vztahům. Odmítá ukvapené závěry.
+
+    '
+- id: petr-hala
+  name: Petr Hála
+  role: nadpraporčík, kriminalista
+  description: Vede výslechy a operativní prověřování.
+- id: vera-kalinova
+  name: Věra Kalinová
+  role: soudní lékařka
+  description: Odpovídá za pitevní a zdravotnické závěry.
+- id: david-kolar
+  name: David Kolář
+  role: kriminalistický technik
+  description: Zpracovává materiálové a biologické stopy.
+- id: klara-vesela
+  name: Klára Veselá
+  role: analytička digitálních důkazů
+  description: Zkoumá kamerové záznamy, telefony a elektronické systémy.
+- id: martin-simek
+  name: Martin Šimek
+  role: kriminalista hospodářské kriminality
+  description: Prověřuje pohyby finančních prostředků.
 locations:
-  - id: kunstat
-    name: Kunštát
-    description: Moravské městečko, centrum případu.
+- id: kunstat
+  name: Kunštát
+  description: Moravské městečko, centrum případu.
+- id: rudka
+  name: Rudka
+  description: Místní část Kunštátu s okolními lesy.
+- id: boskovice
+  name: Boskovice
+  description: Nedaleké město, centrum služeb a kulturního života.
+- id: koupaliste-kunstat
+  name: Koupaliště Na Stráni
+  description: 'Fiktivní sezónní koupaliště v Kunštátu. Areál
 
-  - id: rudka
-    name: Rudka
-    description: Místní část Kunštátu s okolními lesy.
+    zahrnuje bazén, občerstvení, sklad a provozní budovu.
 
-  - id: boskovice
-    name: Boskovice
-    description: Nedaleké město, centrum služeb a kulturního života.
+    '
+- id: koupaliste-rudka
+  name: Lesní koupaliště U Borovic
+  description: Fiktivní rekreační areál v Rudce.
+- id: technicka-mistnost
+  name: Technická místnost T-04
+  description: Místnost, ve které bylo nalezeno tělo oběti.
+- id: hospoda
+  name: Hostinec U Starého Reproduktoru
+  description: 'Fiktivní hospoda provozovaná obětí a jeho manželkou.
 
-  - id: koupaliste-kunstat
-    name: Koupaliště Na Stráni
-    description: |
-      Fiktivní sezónní koupaliště v Kunštátu. Areál
-      zahrnuje bazén, občerstvení, sklad a provozní budovu.
+    Součástí je kuchyně, výčep, společenský sál a kancelář.
 
-  - id: koupaliste-rudka
-    name: Lesní koupaliště U Borovic
-    description: Fiktivní rekreační areál v Rudce.
-
-  - id: technicka-mistnost
-    name: Technická místnost T-04
-    description: Místnost, ve které bylo nalezeno tělo oběti.
-
-  - id: hospoda
-    name: Hostinec U Starého Reproduktoru
-    description: |
-      Fiktivní hospoda provozovaná obětí a jeho manželkou.
-      Součástí je kuchyně, výčep, společenský sál a kancelář.
-
-  - id: klub
-    name: Hudební klub Druhá Strana
-    description: Fiktivní kulturní klub v Boskovicích.
-
-  - id: sal
-    name: Společenský sál Pod Lipami
-    description: Fiktivní místo prvního nedělního hudebního vystoupení.
-
-  - id: byt-kateriny
-    name: Byt kamarádky v Boskovicích
-    description: Soukromý byt bez uvedení skutečné adresy.
-
-  - id: poradna
-    name: Poradna Nový List
-    description: Fiktivní právní a rodinná poradna v Boskovicích.
-
-  - id: sklad
-    name: Distribuční sklad Sever
-    description: Fiktivní sklad nápojů a občerstvení v Boskovicích.
-
-  - id: dilna
-    name: Autoservis U Dvou Klíčů
-    description: Fiktivní automobilová dílna bratra oběti.
-
-  - id: kancelar
-    name: Účetní kancelář Bilance
-    description: Fiktivní kancelář v Kunštátu.
-
-  - id: cerpaci-stanice
-    name: Čerpací stanice Javor
-    description: Fiktivní provozovna na Boskovicku.
-
-  - id: rybnik
-    name: Rybník Pod Strání
-    description: Fiktivní vodní plocha poblíž koupaliště.
-
-  - id: sluzebna
-    name: Oblastní vyšetřovací oddělení Boskovicko
-    description: Fiktivní policejní pracoviště.
-
-  - id: parkoviste
-    name: Provozní parkoviště koupaliště
-    description: Fiktivní parkovací plocha pro zaměstnance a zásobování.
-
+    '
+- id: klub
+  name: Hudební klub Druhá Strana
+  description: Fiktivní kulturní klub v Boskovicích.
+- id: sal
+  name: Společenský sál Pod Lipami
+  description: Fiktivní místo prvního nedělního hudebního vystoupení.
+- id: byt-kateriny
+  name: Byt kamarádky v Boskovicích
+  description: Soukromý byt bez uvedení skutečné adresy.
+- id: poradna
+  name: Poradna Nový List
+  description: Fiktivní právní a rodinná poradna v Boskovicích.
+- id: sklad
+  name: Distribuční sklad Sever
+  description: Fiktivní sklad nápojů a občerstvení v Boskovicích.
+- id: dilna
+  name: Autoservis U Dvou Klíčů
+  description: Fiktivní automobilová dílna bratra oběti.
+- id: kancelar
+  name: Účetní kancelář Bilance
+  description: Fiktivní kancelář v Kunštátu.
+- id: cerpaci-stanice
+  name: Čerpací stanice Javor
+  description: Fiktivní provozovna na Boskovicku.
+- id: rybnik
+  name: Rybník Pod Strání
+  description: Fiktivní vodní plocha poblíž koupaliště.
+- id: sluzebna
+  name: Oblastní vyšetřovací oddělení Boskovicko
+  description: Fiktivní policejní pracoviště.
+- id: parkoviste
+  name: Provozní parkoviště koupaliště
+  description: Fiktivní parkovací plocha pro zaměstnance a zásobování.
 objects:
-  - id: fragment-f17
-    name: Kovový fragment F-17
-    description: |
-      Drobná část kovového přívěsku zajištěná na oděvu oběti.
-      Nese část evidenčního označení a nepravidelnou lomovou plochu.
+- id: fragment-f17
+  name: Kovový fragment F-17
+  description: 'Drobná část kovového přívěsku zajištěná na oděvu oběti.
 
-  - id: privesek
-    name: Inventurní přívěsek
-    description: |
-      Kovový identifikační přívěsek ze série 701 až 708,
-      vydávaný zaměstnancům při posezónní inventuře.
+    Nese část evidenčního označení a nepravidelnou lomovou plochu.
 
-  - id: hrnek
-    name: Bílý keramický hrnek
-    description: |
-      Předmět nalezený na stole v místě činu.
-      Obsahuje použitelný otisk prstu jedné prověřované osoby.
+    '
+- id: privesek
+  name: Inventurní přívěsek
+  description: 'Kovový identifikační přívěsek ze série 701 až 708,
 
-  - id: leky
-    name: Balení běžných léků
-    description: |
-      Léky nalezené mezi osobními věcmi oběti.
-      Nemají příčinnou souvislost s úmrtím.
+    vydávaný zaměstnancům při posezónní inventuře.
 
-  - id: modra-slozka
-    name: Modrá účetní složka
-    description: |
-      Dokumentace připravená k pondělní mimořádné kontrole.
+    '
+- id: hrnek
+  name: Bílý keramický hrnek
+  description: 'Předmět nalezený na stole v místě činu.
 
-  - id: telefon-obeti
-    name: Mobilní telefon oběti
-    description: Obsahuje komunikaci, provozní poznámky a zvukový záznam.
+    Obsahuje použitelný otisk prstu jedné prověřované osoby.
 
-  - id: telefon-lenky
-    name: Mobilní telefon vedoucí koupaliště
-    description: |
-      Zařízení připojené v rozhodném období k síti v Boskovicích.
+    '
+- id: leky
+  name: Balení běžných léků
+  description: 'Léky nalezené mezi osobními věcmi oběti.
 
-  - id: hodinky
-    name: Chytré hodinky oběti
-    description: |
-      Obsahují podpůrné pohybové a senzorové záznamy.
-      Nejsou samostatným důkazem okamžiku smrti.
+    Nemají příčinnou souvislost s úmrtím.
 
-  - id: refundace
-    name: Export neoprávněných refundací
-    description: Seznam 47 plateb s celkovou hodnotou 187600 Kč.
+    '
+- id: modra-slozka
+  name: Modrá účetní složka
+  description: 'Dokumentace připravená k pondělní mimořádné kontrole.
 
-  - id: platebni-profil
-    name: Platební profil R-419
-    description: |
-      Anonymizované označení příjemce refundovaných peněz.
-      K jeho identifikaci je nutné propojit několik evidencí.
+    '
+- id: telefon-obeti
+  name: Mobilní telefon oběti
+  description: Obsahuje komunikaci, provozní poznámky a zvukový záznam.
+- id: telefon-lenky
+  name: Mobilní telefon vedoucí koupaliště
+  description: 'Zařízení připojené v rozhodném období k síti v Boskovicích.
 
-  - id: soukrome-vydaje
-    name: Přehled soukromých provozních výdajů
-    description: |
-      Oddělená skupina účetních nesrovnalostí v hodnotě 96000 Kč.
+    '
+- id: hodinky
+  name: Chytré hodinky oběti
+  description: 'Obsahují podpůrné pohybové a senzorové záznamy.
 
-  - id: dodavka
-    name: Dodavatelské vozidlo FIK-3107
-    description: |
-      Bílé užitkové vozidlo zachycené na kamerových záznamech.
-      FIK-3107 je smyšlené provozní označení.
+    Nejsou samostatným důkazem okamžiku smrti.
 
-  - id: dluzni-upis
-    name: Uznání dluhu
-    description: Dokument potvrzující dluh bratra oběti ve výši 320000 Kč.
+    '
+- id: refundace
+  name: Export neoprávněných refundací
+  description: Seznam 47 plateb s celkovou hodnotou 187600 Kč.
+- id: platebni-profil
+  name: Platební profil R-419
+  description: 'Anonymizované označení příjemce refundovaných peněz.
 
-  - id: kamera-cas
-    name: Kamerový systém K-02
-    description: |
-      Provozní kamera s dodatečně zjištěným časovým posunem
-      o osm minut.
+    K jeho identifikaci je nutné propojit několik evidencí.
 
-  - id: zaznam-konfliktu
-    name: Obnovený zvukový záznam
-    description: |
-      Částečně zachycená událost, umožňující společně s dalšími
-      údaji stanovit rozhodný čas fyzického konfliktu.
+    '
+- id: soukrome-vydaje
+  name: Přehled soukromých provozních výdajů
+  description: 'Oddělená skupina účetních nesrovnalostí v hodnotě 96000 Kč.
 
+    '
+- id: dodavka
+  name: Dodavatelské vozidlo FIK-3107
+  description: 'Bílé užitkové vozidlo zachycené na kamerových záznamech.
+
+    FIK-3107 je smyšlené provozní označení.
+
+    '
+- id: dluzni-upis
+  name: Uznání dluhu
+  description: Dokument potvrzující dluh bratra oběti ve výši 320000 Kč.
+- id: kamera-cas
+  name: Kamerový systém K-02
+  description: 'Provozní kamera s dodatečně zjištěným časovým posunem
+
+    o osm minut.
+
+    '
+- id: zaznam-konfliktu
+  name: Obnovený zvukový záznam
+  description: 'Částečně zachycená událost, umožňující společně s dalšími
+
+    údaji stanovit rozhodný čas fyzického konfliktu.
+
+    '
 timeline:
-  - id: puvodni-pujcka
-    start: "2024-04-12 10:00"
-    location: hospoda
-    participants: [borek-vitek, pavel-vitek]
-    description: Oběť poskytuje bratrovi finanční půjčku.
-    known_to_players: false
-
-  - id: spor-dodavatel
-    start: "2026-08-21 09:30"
-    location: hospoda
-    participants: [borek-vitek, viktor-hruby]
-    description: Vzniká závažný spor o neuhrazenou dodávku.
-    known_to_players: false
-
-  - id: vztah
-    start: "2026-08-01 00:00"
-    end: "2026-10-10 23:59"
-    location: kunstat
-    participants: [borek-vitek, lenka-simkova]
-    description: Krátký mimomanželský vztah.
-    known_to_players: false
-
-  - id: nesrovnalosti
-    start: "2026-06-05 00:00"
-    end: "2026-09-27 23:59"
-    location: koupaliste-kunstat
-    participants: [lenka-simkova]
-    description: V provozním systému vzniká 47 neoprávněných refundací.
-    known_to_players: false
-
-  - id: rozchod
-    start: "2026-10-12 18:30"
-    location: hospoda
-    participants: [borek-vitek, monika-vitkova]
-    description: Manželé diskutují o odloučení.
-    known_to_players: false
-
-  - id: odhaleni
-    start: "2026-10-16 15:10"
-    location: hospoda
-    participants: [borek-vitek]
-    description: Oběť zjišťuje závažné nesrovnalosti v hospodaření.
-    known_to_players: false
-
-  - id: domluva-kontroly
-    start: "2026-10-18 16:35"
-    location: hospoda
-    participants: [borek-vitek, alena-dvorakova]
-    description: Je sjednána mimořádná účetní kontrola na pondělní ráno.
-    known_to_players: false
-
-  - id: manzelska-hadka
-    start: "2026-10-18 17:40"
-    end: "2026-10-18 18:05"
-    location: hospoda
-    participants: [borek-vitek, monika-vitkova, marketa-novotna]
-    description: Hádka manželů, kterou částečně zaslechne servírka.
-    known_to_players: false
-
-  - id: odchod-obeti
-    start: "2026-10-18 19:15"
-    location: hospoda
-    participants: [borek-vitek]
-    description: Oběť odchází vyřídit provozní a osobní záležitosti.
-    known_to_players: true
-
-  - id: prvni-vystoupeni
-    start: "2026-10-18 18:30"
-    end: "2026-10-18 19:40"
-    location: sal
-    participants: [tomas-pesek]
-    description: První nedělní hudební vystoupení.
-    known_to_players: true
-
-  - id: inventura
-    start: "2026-10-18 19:46"
-    location: koupaliste-kunstat
-    participants: [lenka-simkova, stanislav-prochazka]
-    description: Předání nového inventurního přívěsku vedoucí koupaliště.
-    known_to_players: false
-
-  - id: navsteva-bratra
-    start: "2026-10-18 19:55"
-    end: "2026-10-18 20:13"
-    location: technicka-mistnost
-    participants: [borek-vitek, pavel-vitek]
-    description: Rozhovor týkající se neuhrazeného dluhu.
-    known_to_players: false
-
-  - id: navsteva-spolecnika
-    start: "2026-10-18 20:16"
-    end: "2026-10-18 20:35"
-    location: koupaliste-kunstat
-    participants: [borek-vitek, radim-koci]
-    description: Spor o soukromé výdaje a další fungování společnosti.
-    known_to_players: false
-
-  - id: navsteva-dj
-    start: "2026-10-18 20:38"
-    end: "2026-10-18 20:48"
-    location: koupaliste-kunstat
-    participants: [borek-vitek, tomas-pesek]
-    description: Osobní rozhovor obou DJ týkající se svatebních zakázek.
-    known_to_players: false
-
-  - id: lenka-byt
-    start: "2026-10-18 20:10"
-    end: "2026-10-18 20:52"
-    location: byt-kateriny
-    participants: [lenka-simkova, katerina-bilkova]
-    description: Návštěva kamarádky v Boskovicích.
-    known_to_players: false
-
-  - id: telefon-v-byte
-    start: "2026-10-18 20:12"
-    end: "2026-10-18 22:17"
-    location: byt-kateriny
-    participants: []
-    description: Telefon vedoucí koupaliště je evidován v místní síti.
-    known_to_players: false
-
-  - id: ucetni-navsteva
-    start: "2026-10-18 20:50"
-    end: "2026-10-18 21:02"
-    location: koupaliste-kunstat
-    participants: [borek-vitek, eva-malikova]
-    description: Předání účetní složky.
-    known_to_players: false
-
-  - id: servis-rudka
-    start: "2026-10-18 20:57"
-    end: "2026-10-18 21:48"
-    location: koupaliste-rudka
-    participants: [radim-koci, stanislav-prochazka]
-    description: Společná servisní kontrola zařízení.
-    known_to_players: false
-
-  - id: pravni-konzultace
-    start: "2026-10-18 21:08"
-    end: "2026-10-18 21:51"
-    location: poradna
-    participants: [monika-vitkova, marcela-svobodova]
-    description: Soukromá konzultace k majetkovému vypořádání.
-    known_to_players: false
-
-  - id: ucetni-konzultace
-    start: "2026-10-18 21:15"
-    end: "2026-10-18 22:00"
-    location: kancelar
-    participants: [eva-malikova, alena-dvorakova]
-    description: Konzultace chyb v předané účetní dokumentaci.
-    known_to_players: false
-
-  - id: druhe-vystoupeni
-    start: "2026-10-18 21:15"
-    end: "2026-10-18 22:30"
-    location: klub
-    participants: [tomas-pesek, ondrej-benes]
-    description: Druhý hudební program, zahrnující předtočený blok.
-    known_to_players: true
-
-  - id: dodavka-u-arealu
-    start: "2026-10-18 21:18"
-    end: "2026-10-18 21:35"
-    location: parkoviste
-    participants: [michal-zeman]
-    description: Soukromá zastávka zaměstnance dodavatelské společnosti.
-    known_to_players: false
-
-  - id: reklamace-sklad
-    start: "2026-10-18 21:11"
-    end: "2026-10-18 21:47"
-    location: sklad
-    participants: [viktor-hruby]
-    description: Osobní účast dodavatele při řešení reklamace zboží.
-    known_to_players: false
-
-  - id: jizda-taxikem
-    start: "2026-10-18 21:18"
-    end: "2026-10-18 21:43"
-    location: boskovice
-    participants: [pavel-vitek, jiri-havel]
-    description: Jízda mimo koupaliště, doložená až pozdějšími podklady.
-    known_to_players: false
-
-  - id: zivy-hudebni-blok
-    start: "2026-10-18 21:24"
-    end: "2026-10-18 22:30"
-    location: klub
-    participants: [tomas-pesek, ondrej-benes]
-    description: Osobní přítomnost konkurenčního DJ při živém vystoupení.
-    known_to_players: false
-
-  - id: posledni-rozhovor
-    start: "2026-10-18 21:24"
-    end: "2026-10-18 21:32"
-    location: technicka-mistnost
-    participants: [borek-vitek, lenka-simkova]
-    description: Konfrontace týkající se neoprávněných refundací a násilné úmrtí.
-    known_to_players: false
-
-  - id: navrat-kamaradka
-    start: "2026-10-18 22:08"
-    location: byt-kateriny
-    participants: [lenka-simkova, katerina-bilkova]
-    description: Návrat vedoucí koupaliště do bytu kamarádky.
-    known_to_players: false
-
-  - id: nalez-tela
-    start: "2026-10-19 06:42"
-    location: technicka-mistnost
-    participants: [lenka-simkova, borek-vitek]
-    description: Nález těla.
-    known_to_players: true
-
-  - id: oznameni
-    start: "2026-10-19 06:47"
-    location: koupaliste-kunstat
-    participants: [lenka-simkova]
-    description: Přijetí oznámení operační službou.
-    known_to_players: true
-
+- id: puvodni-pujcka
+  start: 2024-04-12 10:00
+  location: hospoda
+  participants:
+  - borek-vitek
+  - pavel-vitek
+  description: Oběť poskytuje bratrovi finanční půjčku.
+  known_to_players: false
+- id: spor-dodavatel
+  start: 2026-08-21 09:30
+  location: hospoda
+  participants:
+  - borek-vitek
+  - viktor-hruby
+  description: Vzniká závažný spor o neuhrazenou dodávku.
+  known_to_players: false
+- id: vztah
+  start: 2026-08-01 00:00
+  end: 2026-10-10 23:59
+  location: kunstat
+  participants:
+  - borek-vitek
+  - lenka-simkova
+  description: Krátký mimomanželský vztah.
+  known_to_players: false
+- id: nesrovnalosti
+  start: 2026-06-05 00:00
+  end: 2026-09-27 23:59
+  location: koupaliste-kunstat
+  participants:
+  - lenka-simkova
+  description: V provozním systému vzniká 47 neoprávněných refundací.
+  known_to_players: false
+- id: rozchod
+  start: 2026-10-12 18:30
+  location: hospoda
+  participants:
+  - borek-vitek
+  - monika-vitkova
+  description: Manželé diskutují o odloučení.
+  known_to_players: false
+- id: odhaleni
+  start: 2026-10-16 15:10
+  location: hospoda
+  participants:
+  - borek-vitek
+  description: Oběť zjišťuje závažné nesrovnalosti v hospodaření.
+  known_to_players: false
+- id: domluva-kontroly
+  start: 2026-10-18 16:35
+  location: hospoda
+  participants:
+  - borek-vitek
+  - alena-dvorakova
+  description: Je sjednána mimořádná účetní kontrola na pondělní ráno.
+  known_to_players: false
+- id: manzelska-hadka
+  start: 2026-10-18 17:40
+  end: 2026-10-18 18:05
+  location: hospoda
+  participants:
+  - borek-vitek
+  - monika-vitkova
+  - marketa-novotna
+  description: Hádka manželů, kterou částečně zaslechne servírka.
+  known_to_players: false
+- id: odchod-obeti
+  start: 2026-10-18 19:15
+  location: hospoda
+  participants:
+  - borek-vitek
+  description: Oběť odchází vyřídit provozní a osobní záležitosti.
+  known_to_players: true
+- id: prvni-vystoupeni
+  start: 2026-10-18 18:30
+  end: 2026-10-18 19:40
+  location: sal
+  participants:
+  - tomas-pesek
+  description: První nedělní hudební vystoupení.
+  known_to_players: true
+- id: inventura
+  start: 2026-10-18 19:46
+  location: koupaliste-kunstat
+  participants:
+  - lenka-simkova
+  - stanislav-prochazka
+  description: Předání nového inventurního přívěsku vedoucí koupaliště.
+  known_to_players: false
+- id: navsteva-bratra
+  start: 2026-10-18 19:55
+  end: 2026-10-18 20:13
+  location: technicka-mistnost
+  participants:
+  - borek-vitek
+  - pavel-vitek
+  description: Rozhovor týkající se neuhrazeného dluhu.
+  known_to_players: false
+- id: navsteva-spolecnika
+  start: 2026-10-18 20:16
+  end: 2026-10-18 20:35
+  location: koupaliste-kunstat
+  participants:
+  - borek-vitek
+  - radim-koci
+  description: Spor o soukromé výdaje a další fungování společnosti.
+  known_to_players: false
+- id: navsteva-dj
+  start: 2026-10-18 20:38
+  end: 2026-10-18 20:48
+  location: koupaliste-kunstat
+  participants:
+  - borek-vitek
+  - tomas-pesek
+  description: Osobní rozhovor obou DJ týkající se svatebních zakázek.
+  known_to_players: false
+- id: lenka-byt
+  start: 2026-10-18 20:10
+  end: 2026-10-18 20:52
+  location: byt-kateriny
+  participants:
+  - lenka-simkova
+  - katerina-bilkova
+  description: Návštěva kamarádky v Boskovicích.
+  known_to_players: false
+- id: telefon-v-byte
+  start: 2026-10-18 20:12
+  end: 2026-10-18 22:17
+  location: byt-kateriny
+  participants: []
+  description: Telefon vedoucí koupaliště je evidován v místní síti.
+  known_to_players: false
+- id: ucetni-navsteva
+  start: 2026-10-18 20:50
+  end: 2026-10-18 21:02
+  location: koupaliste-kunstat
+  participants:
+  - borek-vitek
+  - eva-malikova
+  description: Předání účetní složky.
+  known_to_players: false
+- id: servis-rudka
+  start: 2026-10-18 20:57
+  end: 2026-10-18 21:48
+  location: koupaliste-rudka
+  participants:
+  - radim-koci
+  - stanislav-prochazka
+  description: Společná servisní kontrola zařízení.
+  known_to_players: false
+- id: pravni-konzultace
+  start: 2026-10-18 21:08
+  end: 2026-10-18 21:51
+  location: poradna
+  participants:
+  - monika-vitkova
+  - marcela-svobodova
+  description: Soukromá konzultace k majetkovému vypořádání.
+  known_to_players: false
+- id: ucetni-konzultace
+  start: 2026-10-18 21:15
+  end: 2026-10-18 22:00
+  location: kancelar
+  participants:
+  - eva-malikova
+  - alena-dvorakova
+  description: Konzultace chyb v předané účetní dokumentaci.
+  known_to_players: false
+- id: druhe-vystoupeni
+  start: 2026-10-18 21:15
+  end: 2026-10-18 22:30
+  location: klub
+  participants:
+  - tomas-pesek
+  - ondrej-benes
+  description: Druhý hudební program, zahrnující předtočený blok.
+  known_to_players: true
+- id: dodavka-u-arealu
+  start: 2026-10-18 21:18
+  end: 2026-10-18 21:35
+  location: parkoviste
+  participants:
+  - michal-zeman
+  description: Soukromá zastávka zaměstnance dodavatelské společnosti.
+  known_to_players: false
+- id: reklamace-sklad
+  start: 2026-10-18 21:11
+  end: 2026-10-18 21:47
+  location: sklad
+  participants:
+  - viktor-hruby
+  description: Osobní účast dodavatele při řešení reklamace zboží.
+  known_to_players: false
+- id: jizda-taxikem
+  start: 2026-10-18 21:18
+  end: 2026-10-18 21:43
+  location: boskovice
+  participants:
+  - pavel-vitek
+  - jiri-havel
+  description: Jízda mimo koupaliště, doložená až pozdějšími podklady.
+  known_to_players: false
+- id: zivy-hudebni-blok
+  start: 2026-10-18 21:24
+  end: 2026-10-18 22:30
+  location: klub
+  participants:
+  - tomas-pesek
+  - ondrej-benes
+  description: Osobní přítomnost konkurenčního DJ při živém vystoupení.
+  known_to_players: false
+- id: posledni-rozhovor
+  start: 2026-10-18 21:24
+  end: 2026-10-18 21:32
+  location: technicka-mistnost
+  participants:
+  - borek-vitek
+  - lenka-simkova
+  description: Konfrontace týkající se neoprávněných refundací a násilné úmrtí.
+  known_to_players: false
+- id: navrat-kamaradka
+  start: 2026-10-18 22:08
+  location: byt-kateriny
+  participants:
+  - lenka-simkova
+  - katerina-bilkova
+  description: Návrat vedoucí koupaliště do bytu kamarádky.
+  known_to_players: false
+- id: nalez-tela
+  start: 2026-10-19 06:42
+  location: technicka-mistnost
+  participants:
+  - lenka-simkova
+  - borek-vitek
+  description: Nález těla.
+  known_to_players: true
+- id: oznameni
+  start: 2026-10-19 06:47
+  location: koupaliste-kunstat
+  participants:
+  - lenka-simkova
+  description: Přijetí oznámení operační službou.
+  known_to_players: true
 clues:
-  - id: nalez-mistnost
-    document: D2
-    quote: "Tělo bylo nalezeno v provozní místnosti T-04."
+- id: nalez-mistnost
+  document: D2
+  quote: Tělo bylo nalezeno v provozní místnosti T-04.
+- id: nalez-cas
+  document: D2
+  quote: Oznámení bylo přijato dne 19. 10. 2026 v 06:47.
+- id: fragment-nalez
+  document: D2
+  quote: Na přední části oděvu oběti byl zajištěn drobný kovový fragment označený F-17.
+- id: modra-slozka
+  document: D2
+  quote: Na pracovním stole ležela otevřená modrá složka s účetními dokumenty.
+- id: mistnost-plan
+  document: D3
+  quote: T-04 – technická místnost a provozní zázemí.
+- id: posledni-odchod
+  document: D13
+  quote: Odchod majitele z hospody byl potvrzen v 19:15.
+- id: pricina-smrti
+  document: D14
+  quote: Bezprostřední příčinou smrti bylo tupé poranění hlavy způsobené působením vnější síly.
+- id: vylouceni-padu
+  document: D14
+  quote: Celkový soubor nálezů není slučitelný s prostým nešťastným pádem v místě nálezu.
+- id: sirsi-interval
+  document: D14
+  quote: Pro další prověřování doporučuji pracovat s předběžným časovým intervalem 21:20–21:45.
+- id: toxikologie
+  document: D15
+  quote: Zjištěné látky ani jejich koncentrace nevysvětlují smrt vyšetřované osoby.
+- id: hodinky-omezeni
+  document: D16
+  quote: Ukončení použitelného senzorového záznamu nelze bez dalších podkladů ztotožnit s okamžikem smrti.
+- id: manzelka-pocatecni
+  document: D7
+  quote: Od začátku večerní směny jsem byla pořád v hospodě.
+- id: spolecnik-pocatecni
+  document: D8
+  quote: V neděli večer jsem na koupališti v Kunštátu vůbec nebyl.
+- id: lenka-pocatecni
+  document: D9
+  quote: Od osmi večer jsem byla u kamarádky a nikam jsem od ní neodcházela.
+- id: dj-pocatecni
+  document: D10
+  quote: V neděli jsem se s ním osobně vůbec nepotkal.
+- id: bratr-pocatecni
+  document: D11
+  quote: Večer jsem nikam taxíkem nejel.
+- id: ucetni-pocatecni
+  document: D12
+  quote: Účetní složku jsem nechala v hospodě už v pátek.
+- id: dodavatel-pocatecni
+  document: D17
+  quote: Dodávku jsem ten den používal jen já.
+- id: dj-vyhruzka
+  document: D18
+  quote: Jestli mě ještě jednou připravíš o zakázku, budeš litovat.
+- id: dluh-bratra
+  document: D19
+  quote: Dlužník uznává závazek ve výši 320000 Kč.
+- id: hrnek-otisk
+  document: D20
+  quote: Použitelný otisk na hrnku odpovídá referenčnímu otisku osoby Pavel Vítek.
+- id: manzelka-rozpor
+  document: D21
+  quote: Mezi 20:39 a 22:06 není její přítomnost v hospodě doložena.
+- id: spolecnik-rozpor
+  document: D22
+  quote: Ano, v neděli jsem se s ním na koupališti pohádal.
+- id: telefon-boskovice
+  document: D23
+  quote: Zařízení TEL-028 bylo v intervalu 20:12–22:17 evidováno v síti v Boskovicích.
+- id: telefon-omezeni
+  document: D23
+  quote: Síťová evidence neumožňuje určit, zda se vlastník po celou dobu nacházel v bezprostřední blízkosti zařízení.
+- id: osobni-vztah
+  document: D24
+  quote: Už nechci být někdo, koho schováváš před vlastní ženou.
+- id: soukrome-vydaje-castka
+  document: D25
+  quote: Souhrnná hodnota předběžně identifikovaných soukromých výdajů činí 96000 Kč.
+- id: kamera-posun
+  document: D27
+  quote: Čas zobrazovaný kamerou K-02 byl o osm minut napřed oproti skutečnému místnímu času.
+- id: kamera-udalost
+  document: D28
+  quote: Na snímku s časovým údajem 21:26 je zachyceno bílé vozidlo s provozním označením FIK-3107.
+- id: privesky-serie
+  document: D29
+  quote: Při inventuře byla použita číselná série přívěsků 701 až 708.
+- id: privesek-vydej
+  document: D29
+  quote: Přívěsek číslo 706 byl předán osobě Lenka Šimková dne 18. 10. 2026 v 19:46.
+- id: dj-mezera
+  document: D30
+  quote: Hudební blok od 21:15 do 21:24 byl přehráván ze záznamu.
+- id: dj-konfrontace
+  document: D31
+  quote: Byl jsem za ním na koupališti, ale ještě před devátou jsem odjel.
+- id: dj-alibi
+  document: D32
+  quote: Od 21:24 do 22:30 je účinkující Tomáš Pešek souvisle zachycen při živém vystoupení v Boskovicích.
+- id: hrnek-vysvetleni
+  document: D33
+  quote: Při našem rozhovoru kolem osmé večer jsem z toho hrnku pil kávu.
+- id: spolecnik-servis
+  document: D34
+  quote: V intervalu 20:57–21:48 jsme servisní kontrolu prováděli společně.
+- id: servis-overeni
+  document: D35
+  quote: Souvislá servisní videodokumentace potvrzuje osobní přítomnost obou pracovníků v Rudce.
+- id: dodavka-prideleni
+  document: D36
+  quote: Vozidlo FIK-3107 bylo evidováno jako služební vozidlo dodavatelské společnosti.
+- id: svedek-hodinky
+  document: D37
+  quote: Moje náramkové hodinky byly při následné kontrole o jedenáct minut napřed.
+- id: hlas-schuzka
+  document: D38
+  quote: Zítra ráno už nebude možné tu kontrolu zastavit.
+- id: kontrola-termin
+  document: D40
+  quote: Mimořádná kontrola je sjednána na pondělí 19. 10. 2026 v 08:30.
+- id: oddelene-platby
+  document: D41
+  quote: Soukromé výdaje ve výši 96000 Kč a neoprávněné refundace představují dvě samostatné skupiny transakcí.
+- id: spolecnik-finance
+  document: D42
+  quote: Peníze jsem použil na vlastní závazky a chtěl jsem je postupně vrátit.
+- id: refundace-pocet
+  document: D43
+  quote: Kontrolou bylo potvrzeno 47 neoprávněných refundací.
+- id: refundace-castka
+  document: D43
+  quote: Celková hodnota neoprávněných refundací činí 187600 Kč.
+- id: refundace-kod
+  document: D43
+  quote: Všechny neoprávněné refundace směřovaly k příjemci označenému R-419.
+- id: profil-bankovni-token
+  document: D44
+  quote: Platební profil R-419 byl v rozhodném období spojen s bankovním tokenem BT-552.
+- id: ucetni-priznani
+  document: D45
+  quote: Výstupy jsem upravovala, protože jsem při předchozím zpracování udělala chybu.
+- id: ucetni-alibi
+  document: D46
+  quote: Od 21:15 do 22:00 jsme společně procházely účetní podklady v kanceláři.
+- id: ucetni-overeni
+  document: D47
+  quote: Souvislý obrazový záznam konzultace potvrzuje přítomnost obou účastnic po celou uvedenou dobu.
+- id: manzelka-priznani
+  document: D48
+  quote: Nechtěla jsem přiznat, že jsme už řešili rozdělení majetku.
+- id: manzelka-alibi
+  document: D49
+  quote: Osobní konzultace probíhala od 21:08 do 21:51 v Boskovicích.
+- id: manzelka-overeni
+  document: D50
+  quote: Přítomnost klientky po celý uvedený interval potvrzuje souvislý zvukový záznam konzultace a výpověď poradkyně.
+- id: dodavatel-dluh
+  document: D51
+  quote: Celková sporná pohledávka za dodané zboží činí 138400 Kč.
+- id: fragment-shoda
+  document: D53
+  quote: Lomová plocha fragmentu F-17 je individuálně shodná s lomovou plochou poškozeného přívěsku číslo 706.
+- id: fragment-zajisteni
+  document: D53
+  quote: Přívěsek číslo 706 byl zajištěn mezi osobními věcmi jeho evidované držitelky.
+- id: fragment-stari
+  document: D54
+  quote: Při předání v 19:46 byl přívěsek nepoškozený a jeho označení bylo úplné.
+- id: fragment-kontext
+  document: D54
+  quote: Záznamy a nezávislá svědectví vylučují osobní setkání držitelky přívěsku s obětí mezi jeho vydáním a 20:52.
+- id: fragment-prenos
+  document: D54
+  quote: Fragment byl zachycen v čerstvě poškozené části oděvu související s fyzickým konfliktem.
+- id: kamaradka-priznani
+  document: D55
+  quote: Odešla ve 20:52 a zpátky přišla až ve 22:08.
+- id: kamaradka-telefon
+  document: D55
+  quote: Její telefon zůstal celou dobu v mém bytě.
+- id: bankovni-token
+  document: D56
+  quote: Konečným příjemcem plateb směrovaných prostřednictvím tokenu BT-552 byla osoba Lenka Šimková.
+- id: bratr-konfrontace
+  document: D57
+  quote: O té jízdě jsem lhal, protože jsem nechtěl vysvětlovat, za kým jsem jel.
+- id: taxik-alibi
+  document: D58
+  quote: Cestující Pavel Vítek neopustil vozidlo mezi 21:18 a 21:43.
+- id: taxik-overeni
+  document: D58
+  quote: Časový průběh jízdy byl potvrzen souvislou provozní evidencí vozidla a nezávislým záznamem přepravní služby.
+- id: dodavatel-konfrontace
+  document: D59
+  quote: Nevěděl jsem, že zaměstnanec použil dodávku i k soukromé zastávce.
+- id: rozhodny-interval
+  document: D60
+  quote: Vzájemná korelace nezávislých záznamů vymezuje rozhodný fyzický konflikt do intervalu 21:24–21:32.
+- id: rozhodny-interval-delka
+  document: D60
+  quote: Pro porovnání alibi je rozhodující interval o délce osmi minut.
+- id: rozhodny-konflikt
+  document: D60
+  quote: Záznamy podporují závěr, že smrtelné poranění vzniklo při fyzickém konfliktu v tomto intervalu.
+- id: ridic-dodavky
+  document: D61
+  quote: Řidičem vozidla FIK-3107 byl v uvedeném časovém období zaměstnanec Michal Zeman.
+- id: dodavatel-alibi
+  document: D62
+  quote: Osoba Viktor Hrubý je od 21:11 do 21:47 souvisle zachycena při osobním řešení reklamace ve skladu v Boskovicích.
+- id: lenka-konfrontace
+  document: D63
+  quote: Dobře, od kamarádky jsem na chvíli odešla.
+- id: lenka-privesek
+  document: D63
+  quote: Ten přívěsek byl večer ještě celý, nevím, kdy se poškodil.
+- id: lenka-popreni
+  document: D63
+  quote: V neděli večer jsem se s ním osobně nesetkala.
+- id: znalost-okolnosti
+  document: D64
+  quote: Oznamovatelka uvedla, že oběť předchozího večera řešila vracení peněz za permanentky, přestože tato okolnost
+    tehdy nebyla z místa nálezu zjistitelná.
+intro: 'Je pondělí 19. října 2026.
 
-  - id: nalez-cas
-    document: D2
-    quote: "Oznámení bylo přijato dne 19. 10. 2026 v 06:47."
-
-  - id: fragment-nalez
-    document: D2
-    quote: "Na přední části oděvu oběti byl zajištěn drobný kovový fragment označený F-17."
-
-  - id: modra-slozka
-    document: D2
-    quote: "Na pracovním stole ležela otevřená modrá složka s účetními dokumenty."
-
-  - id: mistnost-plan
-    document: D3
-    quote: "T-04 – technická místnost a provozní zázemí."
-
-  - id: posledni-odchod
-    document: D13
-    quote: "Odchod majitele z hospody byl potvrzen v 19:15."
-
-  - id: pricina-smrti
-    document: D14
-    quote: "Bezprostřední příčinou smrti bylo tupé poranění hlavy způsobené působením vnější síly."
-
-  - id: vylouceni-padu
-    document: D14
-    quote: "Celkový soubor nálezů není slučitelný s prostým nešťastným pádem v místě nálezu."
-
-  - id: sirsi-interval
-    document: D14
-    quote: "Pro další prověřování doporučuji pracovat s předběžným časovým intervalem 21:20–21:45."
-
-  - id: toxikologie
-    document: D15
-    quote: "Zjištěné látky ani jejich koncentrace nevysvětlují smrt vyšetřované osoby."
-
-  - id: hodinky-omezeni
-    document: D16
-    quote: "Ukončení použitelného senzorového záznamu nelze bez dalších podkladů ztotožnit s okamžikem smrti."
-
-  - id: manzelka-pocatecni
-    document: D7
-    quote: "Od začátku večerní směny jsem byla pořád v hospodě."
-
-  - id: spolecnik-pocatecni
-    document: D8
-    quote: "V neděli večer jsem na koupališti v Kunštátu vůbec nebyl."
-
-  - id: lenka-pocatecni
-    document: D9
-    quote: "Od osmi večer jsem byla u kamarádky a nikam jsem od ní neodcházela."
-
-  - id: dj-pocatecni
-    document: D10
-    quote: "V neděli jsem se s ním osobně vůbec nepotkal."
-
-  - id: bratr-pocatecni
-    document: D11
-    quote: "Večer jsem nikam taxíkem nejel."
-
-  - id: ucetni-pocatecni
-    document: D12
-    quote: "Účetní složku jsem nechala v hospodě už v pátek."
-
-  - id: dodavatel-pocatecni
-    document: D17
-    quote: "Dodávku jsem ten den používal jen já."
-
-  - id: dj-vyhruzka
-    document: D18
-    quote: "Jestli mě ještě jednou připravíš o zakázku, budeš litovat."
-
-  - id: dluh-bratra
-    document: D19
-    quote: "Dlužník uznává závazek ve výši 320000 Kč."
-
-  - id: hrnek-otisk
-    document: D20
-    quote: "Použitelný otisk na hrnku odpovídá referenčnímu otisku osoby {{char:pavel-vitek}}."
-
-  - id: manzelka-rozpor
-    document: D21
-    quote: "Mezi 20:39 a 22:06 není její přítomnost v hospodě doložena."
-
-  - id: spolecnik-rozpor
-    document: D22
-    quote: "Ano, v neděli jsem se s ním na koupališti pohádal."
-
-  - id: telefon-boskovice
-    document: D23
-    quote: "Zařízení TEL-028 bylo v intervalu 20:12–22:17 evidováno v síti v Boskovicích."
-
-  - id: telefon-omezeni
-    document: D23
-    quote: "Síťová evidence neumožňuje určit, zda se vlastník po celou dobu nacházel v bezprostřední blízkosti zařízení."
-
-  - id: osobni-vztah
-    document: D24
-    quote: "Už nechci být někdo, koho schováváš před vlastní ženou."
-
-  - id: soukrome-vydaje-castka
-    document: D25
-    quote: "Souhrnná hodnota předběžně identifikovaných soukromých výdajů činí 96000 Kč."
-
-  - id: kamera-posun
-    document: D27
-    quote: "Čas zobrazovaný kamerou K-02 byl o osm minut napřed oproti skutečnému místnímu času."
-
-  - id: kamera-udalost
-    document: D28
-    quote: "Na snímku s časovým údajem 21:26 je zachyceno bílé vozidlo s provozním označením FIK-3107."
-
-  - id: privesky-serie
-    document: D29
-    quote: "Při inventuře byla použita číselná série přívěsků 701 až 708."
-
-  - id: privesek-vydej
-    document: D29
-    quote: "Přívěsek číslo 706 byl předán osobě {{char:lenka-simkova}} dne 18. 10. 2026 v 19:46."
-
-  - id: dj-mezera
-    document: D30
-    quote: "Hudební blok od 21:15 do 21:24 byl přehráván ze záznamu."
-
-  - id: dj-konfrontace
-    document: D31
-    quote: "Byl jsem za ním na koupališti, ale ještě před devátou jsem odjel."
-
-  - id: dj-alibi
-    document: D32
-    quote: "Od 21:24 do 22:30 je účinkující {{char:tomas-pesek}} souvisle zachycen při živém vystoupení v Boskovicích."
-
-  - id: hrnek-vysvetleni
-    document: D33
-    quote: "Při našem rozhovoru kolem osmé večer jsem z toho hrnku pil kávu."
-
-  - id: spolecnik-servis
-    document: D34
-    quote: "V intervalu 20:57–21:48 jsme servisní kontrolu prováděli společně."
-
-  - id: servis-overeni
-    document: D35
-    quote: "Souvislá servisní videodokumentace potvrzuje osobní přítomnost obou pracovníků v Rudce."
-
-  - id: dodavka-prideleni
-    document: D36
-    quote: "Vozidlo FIK-3107 bylo evidováno jako služební vozidlo dodavatelské společnosti."
-
-  - id: svedek-hodinky
-    document: D37
-    quote: "Moje náramkové hodinky byly při následné kontrole o jedenáct minut napřed."
-
-  - id: hlas-schuzka
-    document: D38
-    quote: "Zítra ráno už nebude možné tu kontrolu zastavit."
-
-  - id: kontrola-termin
-    document: D40
-    quote: "Mimořádná kontrola je sjednána na pondělí 19. 10. 2026 v 08:30."
-
-  - id: oddelene-platby
-    document: D41
-    quote: "Soukromé výdaje ve výši 96000 Kč a neoprávněné refundace představují dvě samostatné skupiny transakcí."
-
-  - id: spolecnik-finance
-    document: D42
-    quote: "Peníze jsem použil na vlastní závazky a chtěl jsem je postupně vrátit."
-
-  - id: refundace-pocet
-    document: D43
-    quote: "Kontrolou bylo potvrzeno 47 neoprávněných refundací."
-
-  - id: refundace-castka
-    document: D43
-    quote: "Celková hodnota neoprávněných refundací činí 187600 Kč."
-
-  - id: refundace-kod
-    document: D43
-    quote: "Všechny neoprávněné refundace směřovaly k příjemci označenému R-419."
-
-  - id: profil-bankovni-token
-    document: D44
-    quote: "Platební profil R-419 byl v rozhodném období spojen s bankovním tokenem BT-552."
-
-  - id: ucetni-priznani
-    document: D45
-    quote: "Výstupy jsem upravovala, protože jsem při předchozím zpracování udělala chybu."
-
-  - id: ucetni-alibi
-    document: D46
-    quote: "Od 21:15 do 22:00 jsme společně procházely účetní podklady v kanceláři."
-
-  - id: ucetni-overeni
-    document: D47
-    quote: "Souvislý obrazový záznam konzultace potvrzuje přítomnost obou účastnic po celou uvedenou dobu."
-
-  - id: manzelka-priznani
-    document: D48
-    quote: "Nechtěla jsem přiznat, že jsme už řešili rozdělení majetku."
-
-  - id: manzelka-alibi
-    document: D49
-    quote: "Osobní konzultace probíhala od 21:08 do 21:51 v Boskovicích."
-
-  - id: manzelka-overeni
-    document: D50
-    quote: "Přítomnost klientky po celý uvedený interval potvrzuje souvislý zvukový záznam konzultace a výpověď poradkyně."
-
-  - id: dodavatel-dluh
-    document: D51
-    quote: "Celková sporná pohledávka za dodané zboží činí 138400 Kč."
-
-  - id: fragment-shoda
-    document: D53
-    quote: "Lomová plocha fragmentu F-17 je individuálně shodná s lomovou plochou poškozeného přívěsku číslo 706."
-
-  - id: fragment-zajisteni
-    document: D53
-    quote: "Přívěsek číslo 706 byl zajištěn mezi osobními věcmi jeho evidované držitelky."
-
-  - id: fragment-stari
-    document: D54
-    quote: "Při předání v 19:46 byl přívěsek nepoškozený a jeho označení bylo úplné."
-
-  - id: fragment-kontext
-    document: D54
-    quote: "Záznamy a nezávislá svědectví vylučují osobní setkání držitelky přívěsku s obětí mezi jeho vydáním a 20:52."
-
-  - id: fragment-prenos
-    document: D54
-    quote: "Fragment byl zachycen v čerstvě poškozené části oděvu související s fyzickým konfliktem."
-
-  - id: kamaradka-priznani
-    document: D55
-    quote: "Odešla ve 20:52 a zpátky přišla až ve 22:08."
-
-  - id: kamaradka-telefon
-    document: D55
-    quote: "Její telefon zůstal celou dobu v mém bytě."
-
-  - id: bankovni-token
-    document: D56
-    quote: "Konečným příjemcem plateb směrovaných prostřednictvím tokenu BT-552 byla osoba {{char:lenka-simkova}}."
-
-  - id: bratr-konfrontace
-    document: D57
-    quote: "O té jízdě jsem lhal, protože jsem nechtěl vysvětlovat, za kým jsem jel."
-
-  - id: taxik-alibi
-    document: D58
-    quote: "Cestující {{char:pavel-vitek}} neopustil vozidlo mezi 21:18 a 21:43."
-
-  - id: taxik-overeni
-    document: D58
-    quote: "Časový průběh jízdy byl potvrzen souvislou provozní evidencí vozidla a nezávislým záznamem přepravní služby."
-
-  - id: dodavatel-konfrontace
-    document: D59
-    quote: "Nevěděl jsem, že zaměstnanec použil dodávku i k soukromé zastávce."
-
-  - id: rozhodny-interval
-    document: D60
-    quote: "Vzájemná korelace nezávislých záznamů vymezuje rozhodný fyzický konflikt do intervalu 21:24–21:32."
-
-  - id: rozhodny-interval-delka
-    document: D60
-    quote: "Pro porovnání alibi je rozhodující interval o délce osmi minut."
-
-  - id: rozhodny-konflikt
-    document: D60
-    quote: "Záznamy podporují závěr, že smrtelné poranění vzniklo při fyzickém konfliktu v tomto intervalu."
-
-  - id: ridic-dodavky
-    document: D61
-    quote: "Řidičem vozidla FIK-3107 byl v uvedeném časovém období zaměstnanec {{char:michal-zeman}}."
-
-  - id: dodavatel-alibi
-    document: D62
-    quote: "Osoba {{char:viktor-hruby}} je od 21:11 do 21:47 souvisle zachycena při osobním řešení reklamace ve skladu v Boskovicích."
-
-  - id: lenka-konfrontace
-    document: D63
-    quote: "Dobře, od kamarádky jsem na chvíli odešla."
-
-  - id: lenka-privesek
-    document: D63
-    quote: "Ten přívěsek byl večer ještě celý, nevím, kdy se poškodil."
-
-  - id: lenka-popreni
-    document: D63
-    quote: "V neděli večer jsem se s ním osobně nesetkala."
-
-  - id: znalost-okolnosti
-    document: D64
-    quote: "Oznamovatelka uvedla, že oběť předchozího večera řešila vracení peněz za permanentky, přestože tato okolnost tehdy nebyla z místa nálezu zjistitelná."
-
-intro: |
-  Je pondělí 19. října 2026.
 
   V okolí {{place:kunstat}} prší už druhý den. Koupaliště
+
   jsou zavřená, turisté odjeli a v hospodách se pomalu
+
   začíná topit.
 
+
   V 06:47 přijímá operační služba oznámení od vedoucí
+
   místního koupaliště. V technické místnosti našla muže,
+
   který nereaguje.
 
+
   Jmenuje se {{char:borek-vitek}}. Většina lidí ho zná
+
   jako DJ Boryho.
 
+
   Hrál na svatbách, provozoval hospodu a staral se
+
   o dvě koupaliště. Byl člověkem, kterého jste mohli
+
   potkat skoro kdekoliv. A kterého téměř každý nějak
+
   znal.
 
+
   První telefonáty naznačují nehodu. První výpovědi
+
   ale obsahují rozpory.
 
+
   Během několika hodin se objeví sedm lidí, kteří měli
+
   s mrtvým nevyřešené záležitosti.
 
+
   Rozdělím vám práci do pěti částí. Každá další obálka
+
   bude obsahovat nové důkazy, které mohou změnit význam
+
   těch předchozích.
 
+
   Nikdy nepovažujte případ za vyřešený jen proto,
+
   že jste našli člověka, který měl důvod lhát.
 
+
   Jmenuji se {{char:jan-horak}}. Od této chvíle
+
   jste součástí mého vyšetřovacího týmu.
+
 
   Otevřete obálku A.
 
+  '
 deduction:
   culprit: lenka-simkova
-
   questions:
-    - id: kdo
-      prompt: Kdo zavraždil {{char:borek-vitek}}?
-      options:
-        - {id: monika, text: "{{char:monika-vitkova}}"}
-        - {id: radim, text: "{{char:radim-koci}}"}
-        - {id: lenka, text: "{{char:lenka-simkova}}"}
-        - {id: tomas, text: "{{char:tomas-pesek}}"}
-        - {id: pavel, text: "{{char:pavel-vitek}}"}
-        - {id: eva, text: "{{char:eva-malikova}}"}
-        - {id: viktor, text: "{{char:viktor-hruby}}"}
-      correct: lenka
-      points: 40
-      proven_by:
-        - fragment-nalez
-        - privesek-vydej
-        - fragment-shoda
-        - fragment-zajisteni
-        - fragment-stari
-        - fragment-kontext
-        - fragment-prenos
-        - kamaradka-priznani
-        - kamaradka-telefon
-        - lenka-popreni
-        - rozhodny-interval
-        - refundace-kod
-        - profil-bankovni-token
-        - bankovni-token
-
-    - id: jak
-      prompt: Jakým způsobem byla způsobena smrt oběti?
-      options:
-        - id: otrava
-          text: Otrava léky nalezenými v technické místnosti
-        - id: nehoda
-          text: Nešťastný pád při kontrole technického vybavení
-        - id: napadeni
-          text: Fyzické napadení s následným tupým poraněním hlavy
-        - id: prirozena-smrt
-          text: Náhlé přirozené úmrtí následkem zdravotních komplikací
-      correct: napadeni
-      points: 20
-      proven_by:
-        - pricina-smrti
-        - vylouceni-padu
-        - toxikologie
-        - rozhodny-konflikt
-        - fragment-prenos
-
-    - id: proc
-      prompt: Jaký byl hlavní motiv vraždy?
-      options:
-        - id: zarlivost
-          text: Žárlivost a ukončení mimomanželského vztahu
-        - id: soukrome-vydaje
-          text: Zakrytí soukromých výdajů obchodního společníka ve výši 96000 Kč
-        - id: refundace
-          text: Zabránění odhalení neoprávněných refundací v hodnotě 187600 Kč
-        - id: pujcka
-          text: Zabránění vymáhání rodinného dluhu ve výši 320000 Kč
-        - id: konkurence
-          text: Pomsta za ztracené hudební zakázky
-        - id: dodavky
-          text: Spor o neuhrazené dodávky občerstvení
-        - id: ucetni-chyba
-          text: Zakrytí profesních chyb při vedení účetnictví
-      correct: refundace
-      points: 20
-      proven_by:
-        - modra-slozka
-        - kontrola-termin
-        - oddelene-platby
-        - refundace-pocet
-        - refundace-castka
-        - refundace-kod
-        - profil-bankovni-token
-        - bankovni-token
-        - hlas-schuzka
-
-    - id: dukaz
-      prompt: Který důkazní řetězec nejlépe prokazuje osobní kontakt pachatele s obětí v souvislosti s násilným konfliktem?
-      options:
-        - id: telefon
-          text: Telefonní výpis D23 a původní výpověď kamarádky
-        - id: vozidlo
-          text: Kamerový snímek D28 a evidence služebních vozidel D36
-        - id: otisk
-          text: Otisk prstu na hrnku D20 a uznání dluhu D19
-        - id: fragment
-          text: Nález fragmentu D2, evidence jeho vydání D29, materiálová expertiza D53, časové zařazení D54 a vyvrácení alibi D55
-        - id: finance
-          text: Přehled soukromých výdajů D25 a přiznání obchodního společníka D42
-      correct: fragment
-      points: 20
-      proven_by:
-        - fragment-nalez
-        - privesek-vydej
-        - fragment-shoda
-        - fragment-zajisteni
-        - fragment-stari
-        - fragment-kontext
-        - fragment-prenos
-        - kamaradka-priznani
-        - rozhodny-interval
-
+  - id: kdo
+    prompt: Kdo zavraždil {{char:borek-vitek}}?
+    options:
+    - id: monika
+      text: '{{char:monika-vitkova}}'
+    - id: radim
+      text: '{{char:radim-koci}}'
+    - id: lenka
+      text: '{{char:lenka-simkova}}'
+    - id: tomas
+      text: '{{char:tomas-pesek}}'
+    - id: pavel
+      text: '{{char:pavel-vitek}}'
+    - id: eva
+      text: '{{char:eva-malikova}}'
+    - id: viktor
+      text: '{{char:viktor-hruby}}'
+    correct: lenka
+    points: 40
+    proven_by:
+    - fragment-nalez
+    - privesek-vydej
+    - fragment-shoda
+    - fragment-zajisteni
+    - fragment-stari
+    - fragment-kontext
+    - fragment-prenos
+    - kamaradka-priznani
+    - kamaradka-telefon
+    - lenka-popreni
+    - rozhodny-interval
+    - refundace-kod
+    - profil-bankovni-token
+    - bankovni-token
+  - id: jak
+    prompt: Jakým způsobem byla způsobena smrt oběti?
+    options:
+    - id: otrava
+      text: Otrava léky nalezenými v technické místnosti
+    - id: nehoda
+      text: Nešťastný pád při kontrole technického vybavení
+    - id: napadeni
+      text: Fyzické napadení s následným tupým poraněním hlavy
+    - id: prirozena-smrt
+      text: Náhlé přirozené úmrtí následkem zdravotních komplikací
+    correct: napadeni
+    points: 20
+    proven_by:
+    - pricina-smrti
+    - vylouceni-padu
+    - toxikologie
+    - rozhodny-konflikt
+    - fragment-prenos
+  - id: proc
+    prompt: Jaký byl hlavní motiv vraždy?
+    options:
+    - id: zarlivost
+      text: Žárlivost a ukončení mimomanželského vztahu
+    - id: soukrome-vydaje
+      text: Zakrytí soukromých výdajů obchodního společníka ve výši 96000 Kč
+    - id: refundace
+      text: Zabránění odhalení neoprávněných refundací v hodnotě 187600 Kč
+    - id: pujcka
+      text: Zabránění vymáhání rodinného dluhu ve výši 320000 Kč
+    - id: konkurence
+      text: Pomsta za ztracené hudební zakázky
+    - id: dodavky
+      text: Spor o neuhrazené dodávky občerstvení
+    - id: ucetni-chyba
+      text: Zakrytí profesních chyb při vedení účetnictví
+    correct: refundace
+    points: 20
+    proven_by:
+    - modra-slozka
+    - kontrola-termin
+    - oddelene-platby
+    - refundace-pocet
+    - refundace-castka
+    - refundace-kod
+    - profil-bankovni-token
+    - bankovni-token
+    - hlas-schuzka
+  - id: dukaz
+    prompt: Který důkazní řetězec nejlépe prokazuje osobní kontakt pachatele s obětí v souvislosti s násilným konfliktem?
+    options:
+    - id: telefon
+      text: Telefonní výpis D23 a původní výpověď kamarádky
+    - id: vozidlo
+      text: Kamerový snímek D28 a evidence služebních vozidel D36
+    - id: otisk
+      text: Otisk prstu na hrnku D20 a uznání dluhu D19
+    - id: fragment
+      text: Nález fragmentu D2, evidence jeho vydání D29, materiálová expertiza D53, časové zařazení D54 a vyvrácení
+        alibi D55
+    - id: finance
+      text: Přehled soukromých výdajů D25 a přiznání obchodního společníka D42
+    correct: fragment
+    points: 20
+    proven_by:
+    - fragment-nalez
+    - privesek-vydej
+    - fragment-shoda
+    - fragment-zajisteni
+    - fragment-stari
+    - fragment-kontext
+    - fragment-prenos
+    - kamaradka-priznani
+    - rozhodny-interval
   exclusions:
-    - suspect: tomas-pesek
-      clues:
-        - dj-vyhruzka
-        - dj-pocatecni
-        - dj-mezera
-        - dj-konfrontace
-        - dj-alibi
-        - rozhodny-interval
-      explanation: |
-        Autentické výhrůžky a utajená návštěva koupaliště
-        prokazují profesní konflikt. Po vyjasnění předtočeného
-        hudebního bloku je potvrzena osobní přítomnost
-        v Boskovicích během rozhodného fyzického konfliktu.
+  - suspect: tomas-pesek
+    clues:
+    - dj-vyhruzka
+    - dj-pocatecni
+    - dj-mezera
+    - dj-konfrontace
+    - dj-alibi
+    - rozhodny-interval
+    explanation: 'Autentické výhrůžky a utajená návštěva koupaliště
 
-    - suspect: radim-koci
-      clues:
-        - spolecnik-pocatecni
-        - spolecnik-rozpor
-        - spolecnik-servis
-        - servis-overeni
-        - soukrome-vydaje-castka
-        - oddelene-platby
-        - spolecnik-finance
-      explanation: |
-        Obchodní společník zatajil návštěvu koupaliště
-        i neoprávněné soukromé výdaje. Jeho finanční
-        pochybení však představuje jiný případ.
-        Během rozhodného období byl nezávisle doložen
-        jeho osobní pobyt v Rudce.
+      prokazují profesní konflikt. Po vyjasnění předtočeného
 
-    - suspect: eva-malikova
-      clues:
-        - ucetni-pocatecni
-        - ucetni-priznani
-        - ucetni-alibi
-        - ucetni-overeni
-        - rozhodny-interval
-        - bankovni-token
-      explanation: |
-        Účetní zatajila pozdní předání složky a dodatečné
-        opravy dokumentace. Její osobní přítomnost na
-        konzultaci byla potvrzena po celý rozhodný interval.
-        Nebyla konečným příjemcem neoprávněných refundací.
+      hudebního bloku je potvrzena osobní přítomnost
 
-    - suspect: monika-vitkova
-      clues:
-        - manzelka-pocatecni
-        - manzelka-rozpor
-        - manzelka-priznani
-        - manzelka-alibi
-        - manzelka-overeni
-        - rozhodny-interval
-      explanation: |
-        Manželka měla skutečný osobní a majetkový motiv.
-        Její původní alibi nebylo pravdivé, protože zatajila
-        soukromou konzultaci. Dokumentace této konzultace
-        však potvrzuje, že se fyzického konfliktu nemohla účastnit.
+      v Boskovicích během rozhodného fyzického konfliktu.
 
-    - suspect: pavel-vitek
-      clues:
-        - dluh-bratra
-        - hrnek-otisk
-        - hrnek-vysvetleni
-        - bratr-pocatecni
-        - bratr-konfrontace
-        - taxik-alibi
-        - taxik-overeni
-        - rozhodny-interval
-      explanation: |
-        Otisk prstu na hrnku pochází z dřívější skutečné
-        návštěvy. Bratr oběti zatajil své dluhy i jízdu
-        taxíkem. Opravená výpověď a nezávislé záznamy
-        přepravní služby potvrzují jeho nepřítomnost.
+      '
+  - suspect: radim-koci
+    clues:
+    - spolecnik-pocatecni
+    - spolecnik-rozpor
+    - spolecnik-servis
+    - servis-overeni
+    - soukrome-vydaje-castka
+    - oddelene-platby
+    - spolecnik-finance
+    explanation: 'Obchodní společník zatajil návštěvu koupaliště
 
-    - suspect: viktor-hruby
-      clues:
-        - dodavatel-pocatecni
-        - kamera-udalost
-        - dodavka-prideleni
-        - dodavatel-dluh
-        - dodavatel-konfrontace
-        - ridic-dodavky
-        - dodavatel-alibi
-        - rozhodny-interval
-      explanation: |
-        Dodavatel měl závažný finanční spor s obětí.
-        Jeho vozidlo se skutečně nacházelo poblíž koupaliště.
-        Samotné vozidlo však nebylo důkazem jeho přítomnosti.
-        Skutečný řidič byl identifikován a osobní alibi
-        dodavatele nezávisle potvrzeno.
+      i neoprávněné soukromé výdaje. Jeho finanční
 
+      pochybení však představuje jiný případ.
+
+      Během rozhodného období byl nezávisle doložen
+
+      jeho osobní pobyt v Rudce.
+
+      '
+  - suspect: eva-malikova
+    clues:
+    - ucetni-pocatecni
+    - ucetni-priznani
+    - ucetni-alibi
+    - ucetni-overeni
+    - rozhodny-interval
+    - bankovni-token
+    explanation: 'Účetní zatajila pozdní předání složky a dodatečné
+
+      opravy dokumentace. Její osobní přítomnost na
+
+      konzultaci byla potvrzena po celý rozhodný interval.
+
+      Nebyla konečným příjemcem neoprávněných refundací.
+
+      '
+  - suspect: monika-vitkova
+    clues:
+    - manzelka-pocatecni
+    - manzelka-rozpor
+    - manzelka-priznani
+    - manzelka-alibi
+    - manzelka-overeni
+    - rozhodny-interval
+    explanation: 'Manželka měla skutečný osobní a majetkový motiv.
+
+      Její původní alibi nebylo pravdivé, protože zatajila
+
+      soukromou konzultaci. Dokumentace této konzultace
+
+      však potvrzuje, že se fyzického konfliktu nemohla účastnit.
+
+      '
+  - suspect: pavel-vitek
+    clues:
+    - dluh-bratra
+    - hrnek-otisk
+    - hrnek-vysvetleni
+    - bratr-pocatecni
+    - bratr-konfrontace
+    - taxik-alibi
+    - taxik-overeni
+    - rozhodny-interval
+    explanation: 'Otisk prstu na hrnku pochází z dřívější skutečné
+
+      návštěvy. Bratr oběti zatajil své dluhy i jízdu
+
+      taxíkem. Opravená výpověď a nezávislé záznamy
+
+      přepravní služby potvrzují jeho nepřítomnost.
+
+      '
+  - suspect: viktor-hruby
+    clues:
+    - dodavatel-pocatecni
+    - kamera-udalost
+    - dodavka-prideleni
+    - dodavatel-dluh
+    - dodavatel-konfrontace
+    - ridic-dodavky
+    - dodavatel-alibi
+    - rozhodny-interval
+    explanation: 'Dodavatel měl závažný finanční spor s obětí.
+
+      Jeho vozidlo se skutečně nacházelo poblíž koupaliště.
+
+      Samotné vozidlo však nebylo důkazem jeho přítomnosti.
+
+      Skutečný řidič byl identifikován a osobní alibi
+
+      dodavatele nezávisle potvrzeno.
+
+      '
 epilogues:
-  - id: dokonale
-    min_score_percent: 100
-    title: Poslední skladba dohrála
-    text: |
-      Když jsem poprvé otevřela tento spis, měla jsem
-      před sebou mrtvého člověka a sedm lidí, kteří mi
-      každý něco zatajovali.
+- id: dokonale
+  min_score_percent: 100
+  title: Poslední skladba dohrála
+  text: 'Když jsem poprvé otevřela tento spis, měla jsem
 
-      Vy jste dokázali rozlišit jejich tajemství od vraždy.
+    před sebou mrtvého člověka a sedm lidí, kteří mi
 
-      Nezastavili jste se u prvního podezřelého.
-      Nezaměnili jste automobil za řidiče ani telefon
-      za člověka. A všimli jste si předmětu, který mohl
-      na první pohled působit naprosto bezvýznamně.
+    každý něco zatajovali.
 
-      Vyšetřování končí předáním úplného spisu.
 
-      Hospoda po několika týdnech znovu otevře.
-      Nad výčepem zůstane stará fotografie z jedné svatby.
+    Vy jste dokázali rozlišit jejich tajemství od vraždy.
 
-      Na jaře se snad znovu napustí bazény.
 
-      Jen člověk, jehož hlas si pamatuje půl městečka,
-      už nikdy žádnou další skladbu nepustí.
+    Nezastavili jste se u prvního podezřelého.
 
-      Dobrá práce, týme.
+    Nezaměnili jste automobil za řidiče ani telefon
 
-  - id: vyreseno
-    min_score_percent: 80
-    title: Případ uzavřen
-    text: |
-      Určili jste pachatele a podstatnou část skutečného
-      průběhu událostí.
+    za člověka. A všimli jste si předmětu, který mohl
 
-      Některé závěry ještě vyžadují upřesnění, ale hlavní
-      důkazní řetězec obstál.
+    na první pohled působit naprosto bezvýznamně.
 
-      Spis předávám k dalšímu trestnímu řízení.
 
-      Vraťte se nyní k úplné rekonstrukci a zjistěte,
-      které souvislosti vám při vyšetřování unikly.
+    Vyšetřování končí předáním úplného spisu.
 
-  - id: castecne
-    min_score_percent: 40
-    title: Spis se vrací
-    text: |
-      Část případu jste rozpletli správně.
 
-      Předložené závěry však neodpovídají všem dostupným
-      důkazům. Některá ověřená alibi jste nedocenili,
-      případně jste spojili nesouvisející motivy.
+    Hospoda po několika týdnech znovu otevře.
 
-      Státní zástupce požaduje doplnění vyšetřování.
+    Nad výčepem zůstane stará fotografie z jedné svatby.
 
-      Projdeme společně úplnou rekonstrukci případu.
 
-  - id: nevyreseno
-    min_score_percent: 0
-    title: Pravda zůstala mezi řádky
-    text: |
-      Předložená rekonstrukce neobstála.
+    Na jaře se snad znovu napustí bazény.
 
-      Našli jste lži, konflikty a finanční nesrovnalosti,
-      ale nedokázali jste je správně spojit s násilným
-      úmrtím oběti.
 
-      Případ přebírá jiný vyšetřovací tým.
+    Jen člověk, jehož hlas si pamatuje půl městečka,
 
-      Všechny podstatné důkazy jste přitom měli
-      před sebou.
+    už nikdy žádnou další skladbu nepustí.
 
+
+    Dobrá práce, týme.
+
+    '
+- id: vyreseno
+  min_score_percent: 80
+  title: Případ uzavřen
+  text: 'Určili jste pachatele a podstatnou část skutečného
+
+    průběhu událostí.
+
+
+    Některé závěry ještě vyžadují upřesnění, ale hlavní
+
+    důkazní řetězec obstál.
+
+
+    Spis předávám k dalšímu trestnímu řízení.
+
+
+    Vraťte se nyní k úplné rekonstrukci a zjistěte,
+
+    které souvislosti vám při vyšetřování unikly.
+
+    '
+- id: castecne
+  min_score_percent: 40
+  title: Spis se vrací
+  text: 'Část případu jste rozpletli správně.
+
+
+    Předložené závěry však neodpovídají všem dostupným
+
+    důkazům. Některá ověřená alibi jste nedocenili,
+
+    případně jste spojili nesouvisející motivy.
+
+
+    Státní zástupce požaduje doplnění vyšetřování.
+
+
+    Projdeme společně úplnou rekonstrukci případu.
+
+    '
+- id: nevyreseno
+  min_score_percent: 0
+  title: Pravda zůstala mezi řádky
+  text: 'Předložená rekonstrukce neobstála.
+
+
+    Našli jste lži, konflikty a finanční nesrovnalosti,
+
+    ale nedokázali jste je správně spojit s násilným
+
+    úmrtím oběti.
+
+
+    Případ přebírá jiný vyšetřovací tým.
+
+
+    Všechny podstatné důkazy jste přitom měli
+
+    před sebou.
+
+    '
 reveal:
-  - text: |
-      Oběť byla nalezena v technické místnosti T-04.
-      Vedle účetních dokumentů byl zajištěn nenápadný
-      fragment kovového předmětu. Jeho význam tehdy
-      ještě nebylo možné určit.
-    clues: [nalez-mistnost, fragment-nalez, modra-slozka]
+- text: 'Oběť byla nalezena v technické místnosti T-04.
 
-  - text: |
-      Pitevní a toxikologické výsledky nepodpořily
-      hypotézu nehody ani otravy. Smrt způsobilo
-      tupé poranění hlavy při fyzickém konfliktu.
-    clues: [pricina-smrti, vylouceni-padu, toxikologie]
+    Vedle účetních dokumentů byl zajištěn nenápadný
 
-  - text: |
-      První výpovědi nebyly spolehlivým popisem večera.
-      Několik osob zatajilo vlastní návštěvu koupaliště
-      nebo skutečné důvody svého jednání.
-    clues:
-      - manzelka-pocatecni
-      - spolecnik-pocatecni
-      - dj-pocatecni
-      - ucetni-pocatecni
-      - bratr-pocatecni
+    fragment kovového předmětu. Jeho význam tehdy
 
-  - text: |
-      Kamerový čas bylo nutné opravit o osm minut.
-      Správně identifikované vozidlo ještě neznamenalo
-      správně identifikovaného řidiče.
-    clues: [kamera-posun, kamera-udalost, ridic-dodavky]
+    ještě nebylo možné určit.
 
-  - text: |
-      Konkurenční DJ měl skutečný konflikt s obětí.
-      Výhrůžky však nebyly důkazem vraždy. Během
-      rozhodného fyzického konfliktu vystupoval živě
-      před publikem v Boskovicích.
-    clues: [dj-vyhruzka, dj-mezera, dj-alibi, rozhodny-interval]
+    '
+  clues:
+  - nalez-mistnost
+  - fragment-nalez
+  - modra-slozka
+- text: 'Pitevní a toxikologické výsledky nepodpořily
 
-  - text: |
-      Obchodní společník neoprávněně použil podnikové
-      prostředky. Jeho soukromé výdaje však nebyly
-      totožné s neoprávněnými refundacemi. Jeho osobní
-      alibi bylo nezávisle potvrzeno.
-    clues:
-      - soukrome-vydaje-castka
-      - oddelene-platby
-      - spolecnik-finance
-      - servis-overeni
+    hypotézu nehody ani otravy. Smrt způsobilo
 
-  - text: |
-      Externí účetní zakrývala vlastní profesní chyby.
-      Manželka oběti tajila majetkové jednání. Obě měly
-      důvod obávat se následků odhalení svých tajemství,
-      ale obě byly v rozhodné době jinde.
-    clues:
-      - ucetni-priznani
-      - ucetni-overeni
-      - manzelka-priznani
-      - manzelka-overeni
+    tupé poranění hlavy při fyzickém konfliktu.
 
-  - text: |
-      Otisk prstu bratra oběti dokazoval pouze jeho
-      kontakt s hrnkem. Neprokazoval účast na vraždě.
-      Teprve záznam skutečné jízdy vyřešil jeho
-      chybějící alibi.
-    clues:
-      - hrnek-otisk
-      - hrnek-vysvetleni
-      - taxik-alibi
-      - taxik-overeni
+    '
+  clues:
+  - pricina-smrti
+  - vylouceni-padu
+  - toxikologie
+- text: 'První výpovědi nebyly spolehlivým popisem večera.
 
-  - text: |
-      Vozidlo dodavatelské společnosti používal její
-      zaměstnanec. Dodavatel sám byl ve skladu
-      v Boskovicích. Tím byla vyvrácena další
-      zdánlivě přesvědčivá stopa.
-    clues: [ridic-dodavky, dodavatel-alibi]
+    Několik osob zatajilo vlastní návštěvu koupaliště
 
-  - text: |
-      Rozhodný interval fyzického konfliktu byl
-      nezávisle omezen na období 21:24–21:32.
-      Tím bylo možné definitivně vyhodnotit všechna
-      osobní alibi.
-    clues: [rozhodny-interval, rozhodny-interval-delka]
+    nebo skutečné důvody svého jednání.
 
-  - text: |
-      Telefon vedoucí koupaliště skutečně zůstal
-      v Boskovicích. Jeho majitelka však v rozhodné
-      době v bytě kamarádky nebyla.
-    clues: [telefon-boskovice, telefon-omezeni, kamaradka-priznani, kamaradka-telefon]
+    '
+  clues:
+  - manzelka-pocatecni
+  - spolecnik-pocatecni
+  - dj-pocatecni
+  - ucetni-pocatecni
+  - bratr-pocatecni
+- text: 'Kamerový čas bylo nutné opravit o osm minut.
 
-  - text: |
-      Fragment F-17 pocházel z přívěsku číslo 706.
-      Evidence jeho vydání určila držitelku.
-      Materiálová expertiza a stav fragmentu propojily
-      předmět s fyzickým konfliktem.
-    clues:
-      - fragment-nalez
-      - privesek-vydej
-      - fragment-shoda
-      - fragment-stari
-      - fragment-kontext
-      - fragment-prenos
+    Správně identifikované vozidlo ještě neznamenalo
 
-  - text: |
-      Export refundací identifikoval platební profil
-      R-419. Evidence platební služby jej spojila
-      s bankovním tokenem BT-552. Banka potvrdila
-      konečného příjemce peněz.
-    clues: [refundace-kod, profil-bankovni-token, bankovni-token]
+    správně identifikovaného řidiče.
 
-  - text: |
-      Pondělní kontrola měla odhalit neoprávněné
-      refundace v hodnotě 187600 Kč. Pachatelka měla
-      skutečný finanční motiv zabránit jejímu provedení.
-    clues: [refundace-castka, kontrola-termin, bankovni-token]
+    '
+  clues:
+  - kamera-posun
+  - kamera-udalost
+  - ridic-dodavky
+- text: 'Konkurenční DJ měl skutečný konflikt s obětí.
 
-  - text: |
-      Propojením materiálové stopy, nepravdivého alibi,
-      časového intervalu, finančního motivu a vyloučením
-      ostatních podezřelých je možné určit jedinou osobu.
+    Výhrůžky však nebyly důkazem vraždy. Během
 
-      Pachatelkou je {{char:lenka-simkova}}.
-    clues:
-      - fragment-shoda
-      - privesek-vydej
-      - fragment-prenos
-      - kamaradka-priznani
-      - lenka-popreni
-      - rozhodny-interval
-      - refundace-castka
-      - bankovni-token
+    rozhodného fyzického konfliktu vystupoval živě
+
+    před publikem v Boskovicích.
+
+    '
+  clues:
+  - dj-vyhruzka
+  - dj-mezera
+  - dj-alibi
+  - rozhodny-interval
+- text: 'Obchodní společník neoprávněně použil podnikové
+
+    prostředky. Jeho soukromé výdaje však nebyly
+
+    totožné s neoprávněnými refundacemi. Jeho osobní
+
+    alibi bylo nezávisle potvrzeno.
+
+    '
+  clues:
+  - soukrome-vydaje-castka
+  - oddelene-platby
+  - spolecnik-finance
+  - servis-overeni
+- text: 'Externí účetní zakrývala vlastní profesní chyby.
+
+    Manželka oběti tajila majetkové jednání. Obě měly
+
+    důvod obávat se následků odhalení svých tajemství,
+
+    ale obě byly v rozhodné době jinde.
+
+    '
+  clues:
+  - ucetni-priznani
+  - ucetni-overeni
+  - manzelka-priznani
+  - manzelka-overeni
+- text: 'Otisk prstu bratra oběti dokazoval pouze jeho
+
+    kontakt s hrnkem. Neprokazoval účast na vraždě.
+
+    Teprve záznam skutečné jízdy vyřešil jeho
+
+    chybějící alibi.
+
+    '
+  clues:
+  - hrnek-otisk
+  - hrnek-vysvetleni
+  - taxik-alibi
+  - taxik-overeni
+- text: 'Vozidlo dodavatelské společnosti používal její
+
+    zaměstnanec. Dodavatel sám byl ve skladu
+
+    v Boskovicích. Tím byla vyvrácena další
+
+    zdánlivě přesvědčivá stopa.
+
+    '
+  clues:
+  - ridic-dodavky
+  - dodavatel-alibi
+- text: 'Rozhodný interval fyzického konfliktu byl
+
+    nezávisle omezen na období 21:24–21:32.
+
+    Tím bylo možné definitivně vyhodnotit všechna
+
+    osobní alibi.
+
+    '
+  clues:
+  - rozhodny-interval
+  - rozhodny-interval-delka
+- text: 'Telefon vedoucí koupaliště skutečně zůstal
+
+    v Boskovicích. Jeho majitelka však v rozhodné
+
+    době v bytě kamarádky nebyla.
+
+    '
+  clues:
+  - telefon-boskovice
+  - telefon-omezeni
+  - kamaradka-priznani
+  - kamaradka-telefon
+- text: 'Fragment F-17 pocházel z přívěsku číslo 706.
+
+    Evidence jeho vydání určila držitelku.
+
+    Materiálová expertiza a stav fragmentu propojily
+
+    předmět s fyzickým konfliktem.
+
+    '
+  clues:
+  - fragment-nalez
+  - privesek-vydej
+  - fragment-shoda
+  - fragment-stari
+  - fragment-kontext
+  - fragment-prenos
+- text: 'Export refundací identifikoval platební profil
+
+    R-419. Evidence platební služby jej spojila
+
+    s bankovním tokenem BT-552. Banka potvrdila
+
+    konečného příjemce peněz.
+
+    '
+  clues:
+  - refundace-kod
+  - profil-bankovni-token
+  - bankovni-token
+- text: 'Pondělní kontrola měla odhalit neoprávněné
+
+    refundace v hodnotě 187600 Kč. Pachatelka měla
+
+    skutečný finanční motiv zabránit jejímu provedení.
+
+    '
+  clues:
+  - refundace-castka
+  - kontrola-termin
+  - bankovni-token
+- text: 'Propojením materiálové stopy, nepravdivého alibi,
+
+    časového intervalu, finančního motivu a vyloučením
+
+    ostatních podezřelých je možné určit jedinou osobu.
+
+
+    Pachatelkou je {{char:lenka-simkova}}.
+
+    '
+  clues:
+  - fragment-shoda
+  - privesek-vydej
+  - fragment-prenos
+  - kamaradka-priznani
+  - lenka-popreni
+  - rozhodny-interval
+  - refundace-castka
+  - bankovni-token

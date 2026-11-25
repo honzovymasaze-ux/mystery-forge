@@ -27,7 +27,6 @@ answer_format:
 question: Kolik minut trvá předběžný časový interval určený soudní lékařkou pro další prověřování?
 
 params: {}
-unlocks: C
 
 clues:
   - id: p4-interval

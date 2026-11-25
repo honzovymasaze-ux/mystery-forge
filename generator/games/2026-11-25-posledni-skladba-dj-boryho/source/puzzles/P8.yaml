@@ -28,7 +28,6 @@ answer_format:
 question: Jaký bankovní token odpovídá platebnímu profilu, na který směřovaly všechny neoprávněné refundace?
 
 params: {}
-unlocks: E
 
 clues:
   - id: p8-profil
@@ -54,7 +53,7 @@ hints:
     text: Provozní účet, platební profil a bankovní token jsou tři různé údaje.
 
   - level: 2
-    text: Nejprve najděte profil R-419 a potom jeho odpovídající řádek v D44.
+    text: Nejprve najděte profil R-419 a potom jeho odpovídající řádek v „Potvrzení identifikátorů platební služby“.
 
   - level: 3
     text: Token začíná BT a obsahuje číslice 552.

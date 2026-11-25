@@ -61,7 +61,7 @@ hints:
     text: Původních 25 minut již není konečným rozhodným intervalem.
 
   - level: 2
-    text: Hledejte závěrečnou korelaci časových údajů v D60.
+    text: Hledejte závěrečnou korelaci časových údajů v „Závěrečná časová korelace fyzického konfliktu“.
 
   - level: 3
     text: Odečtěte 24 od 32.

@@ -26,7 +26,6 @@ answer_format:
 question: V kolik hodin oběť prokazatelně odešla z hospody?
 
 params: {}
-unlocks: B
 
 clues:
   - id: p2-odhad
