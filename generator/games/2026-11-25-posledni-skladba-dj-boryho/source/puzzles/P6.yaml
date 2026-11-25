@@ -29,7 +29,6 @@ answer_format:
 question: Od kolika hodin je osobní přítomnost účinkujícího při druhém hudebním vystoupení nezávisle potvrzena?
 
 params: {}
-unlocks: D
 
 clues:
   - id: p6-program

@@ -28,7 +28,6 @@ answer_format:
 question: Jaký bankovní token odpovídá platebnímu profilu, na který směřovaly všechny neoprávněné refundace?
 
 params: {}
-unlocks: E
 
 clues:
   - id: p8-profil

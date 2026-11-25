@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
     // The page comes from the game server, so the TV and the phones share one state (GameServer).
     private static final String PAGE = "http://127.0.0.1:" + GameServer.PORT + "/";
     // A TV is read from a sofa: the page text is larger there.
-    private static final int TV_TEXT_ZOOM = 150;
+    private static final int TV_TEXT_ZOOM = 100;
 
     private WebView webView;
     private GameServer server;

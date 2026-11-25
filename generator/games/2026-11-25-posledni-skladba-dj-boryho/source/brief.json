@@ -1,0 +1,16 @@
+{
+  "puzzle_count": 10,
+  "stage_count": 5,
+  "parallel_width": 2,
+  "solver_count": 5,
+  "reading_words": 17640,
+  "printed_pages": 46,
+  "generation_minutes": 212,
+  "minutes_per_puzzle": 9,
+  "seed": 656522790,
+  "language": "cs",
+  "audience": "adults",
+  "format": "case_file",
+  "difficulty": "medium",
+  "players": 4
+}

@@ -258,10 +258,10 @@ characters:
       Připravovala se na rozchod. V neděli večer opustila
       hospodu kvůli soukromé právní konzultaci a při prvním
       výslechu zatajila část svého pohybu.
-    motive: Obava ze ztráty manžela, rodinného podniku a majetkového zázemí.
-    opportunity: |
-      Znala provozní prostory koupaliště a v části večera
-      nebyl její pohyb nezávisle ověřen.
+    # motive: Obava ze ztráty manžela, rodinného podniku a majetkového zázemí.
+    # opportunity: |
+    #   Znala provozní prostory koupaliště a v části večera
+    #   nebyl její pohyb nezávisle ověřen.
 
   - id: radim-koci
     name: Radim Kočí
@@ -277,10 +277,10 @@ characters:
     secret: |
       Z podnikového účtu uhradil soukromé výdaje v hodnotě
       96000 Kč. Oběť to zjistila a požadovala nápravu.
-    motive: Hrozící ukončení obchodní spolupráce a finanční odpovědnost.
-    opportunity: |
-      Měl provozní oprávnění, znal místo činu a v neděli
-      večer koupaliště skutečně navštívil.
+    # motive: Hrozící ukončení obchodní spolupráce a finanční odpovědnost.
+    # opportunity: |
+    #   Měl provozní oprávnění, znal místo činu a v neděli
+    #   večer koupaliště skutečně navštívil.
 
   - id: lenka-simkova
     name: Lenka Šimková
@@ -298,10 +298,10 @@ characters:
       refundací. Udržovala krátký vztah s obětí.
       Její tvrzení o celovečerním pobytu v Boskovicích
       je nepravdivé.
-    motive: Zabránění odhalení finančního podvodu a ztrátě zaměstnání.
-    opportunity: |
-      Měla oprávnění k pohybu v areálu a její večerní
-      osobní alibi nebylo ve skutečnosti úplné.
+    # motive: Zabránění odhalení finančního podvodu a ztrátě zaměstnání.
+    # opportunity: |
+    #   Měla oprávnění k pohybu v areálu a její večerní
+    #   osobní alibi nebylo ve skutečnosti úplné.
 
   - id: tomas-pesek
     name: Tomáš Pešek
@@ -318,10 +318,10 @@ characters:
       oběti a poškodil její pověst u několika klientů.
       V neděli se s obětí skutečně setkal, ačkoli to
       při prvním výslechu popřel.
-    motive: Ztráta svatebních zakázek a poškození vlastní pověsti.
-    opportunity: |
-      Mezi dvěma vystoupeními měl dostatek času dostavit
-      se do Kunštátu.
+    # motive: Ztráta svatebních zakázek a poškození vlastní pověsti.
+    # opportunity: |
+    #   Mezi dvěma vystoupeními měl dostatek času dostavit
+    #   se do Kunštátu.
 
   - id: pavel-vitek
     name: Pavel Vítek
@@ -339,10 +339,10 @@ characters:
       Dluží bratrovi 320000 Kč. Další peníze si půjčil
       bez vědomí své partnerky. Večer chtěl zabránit
       vymáhání dluhu.
-    motive: Hrozící ztráta dílny a odhalení osobních dluhů.
-    opportunity: |
-      Měl s bratrem domluvenou večerní schůzku
-      a provozní prostory dobře znal.
+    # motive: Hrozící ztráta dílny a odhalení osobních dluhů.
+    # opportunity: |
+    #   Měl s bratrem domluvenou večerní schůzku
+    #   a provozní prostory dobře znal.
 
   - id: eva-malikova
     name: Eva Malíková
@@ -359,10 +359,10 @@ characters:
       Přehlédla závažné účetní nesrovnalosti. Některé
       výstupy dodatečně opravovala bez dostatečné
       dokumentace, aby zakryla vlastní profesní chybu.
-    motive: Obava ze ztráty klientů, profesní pověsti a náhrady škody.
-    opportunity: |
-      Večer osobně přivezla účetní dokumentaci
-      na koupaliště a měla sjednanou konzultaci s obětí.
+    # motive: Obava ze ztráty klientů, profesní pověsti a náhrady škody.
+    # opportunity: |
+    #   Večer osobně přivezla účetní dokumentaci
+    #   na koupaliště a měla sjednanou konzultaci s obětí.
 
   - id: viktor-hruby
     name: Viktor Hrubý
@@ -380,10 +380,10 @@ characters:
       Kvůli neuhrazené faktuře vystavil několik
       neoprávněných smluvních pokut. Oběti vyhrožoval
       ukončením dodávek a zveřejněním jejího dluhu.
-    motive: Neuhrazené pohledávky a hrozící ztráta významného odběratele.
-    opportunity: |
-      Znal areál z pravidelných dodávek a jeho vozidlo
-      bylo v neděli večer zachyceno poblíž koupaliště.
+    # motive: Neuhrazené pohledávky a hrozící ztráta významného odběratele.
+    # opportunity: |
+    #   Znal areál z pravidelných dodávek a jeho vozidlo
+    #   bylo v neděli večer zachyceno poblíž koupaliště.
 
   - id: marketa-novotna
     name: Markéta Novotná
