@@ -759,7 +759,12 @@
   function moveViewer(step) {
     const next = viewer.index + step;
     if (next >= 0 && next < viewer.list.length) {
+      // Focus zůstane na šipce, kterou se listuje – další stisk OK listuje dál (na TV ovladačem).
+      const stay = document.activeElement instanceof HTMLElement ? document.activeElement.id : '';
       openViewer(viewer.list, next);
+      if (stay === 'viewer-prev' || stay === 'viewer-next') {
+        document.getElementById(stay)?.focus();
+      }
     }
   }
 
@@ -1012,7 +1017,9 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
         : null,
       button(ui('close'), 'button button-primary', closeViewer, { id: 'viewer-close' }),
     ]);
-    return el('div', { className: 'viewer', attrs: { role: 'dialog', 'aria-modal': 'true', id: 'viewer' } }, [
+    // Klíč dokumentu: render() podle něj pozná, že stačí vyměnit lištu a dokument (rámeček) nechat, jak je.
+    const viewerKey = `${documentEntry.id}|${showPaper}|${viewer.zoom}`;
+    return el('div', { className: 'viewer', attrs: { role: 'dialog', 'aria-modal': 'true', id: 'viewer', 'data-key': viewerKey } }, [
       bar,
       el('div', { className: 'viewer-body', attrs: { id: 'viewer-body', tabindex: '-1' } }, [body]),
     ]);
@@ -2218,12 +2225,35 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
   }
 
   function render() {
+    // Honza 25. 11.: po „▶ Výpověď“ se lišta překreslila, focus z ovladače zmizel a dokument (iframe) se načetl
+    // znovu od začátku – na TV pak „nejde ovládat ani posouvat“. Stejný otevřený dokument se proto nepřekresluje,
+    // vymění se jen jeho lišta, a focus se vrátí na tlačítko se stejným id.
+    const focusId = document.activeElement instanceof HTMLElement ? document.activeElement.id : '';
+    const oldViewer = document.getElementById('viewer');
     const main = el('main', { className: `main main-${session.tab}`, attrs: { id: 'main' } }, [VIEWS[session.tab]()]);
-    appElement.replaceChildren(renderTopBar(), main, renderNav());
     connection.renderWaiting = false;
     const shown = renderViewer();
-    if (shown !== null) {
-      appElement.append(shown);
+    const keep =
+      shown !== null && oldViewer !== null && oldViewer.parentElement === appElement && oldViewer.dataset.key === shown.dataset.key
+        ? oldViewer
+        : null;
+    if (keep !== null) {
+      [...appElement.children].forEach((child) => {
+        if (child !== keep) {
+          child.remove();
+        }
+      });
+      appElement.prepend(renderTopBar(), main, renderNav());
+      const oldBar = keep.querySelector('.viewer-bar');
+      const newBar = shown?.querySelector('.viewer-bar');
+      if (oldBar && newBar) {
+        oldBar.replaceWith(newBar);
+      }
+    } else {
+      appElement.replaceChildren(renderTopBar(), main, renderNav());
+      if (shown !== null) {
+        appElement.append(shown);
+      }
     }
     const menu = renderBoardMenu();
     if (menu !== null) {
@@ -2236,6 +2266,9 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       document.getElementById('confirm-no')?.focus();
     }
     document.body.classList.toggle('has-dialog', overlay !== null);
+    if (focusId && (document.activeElement === document.body || document.activeElement === null)) {
+      document.getElementById(focusId)?.focus({ preventScroll: true });
+    }
     updateTimers();
   }
 
