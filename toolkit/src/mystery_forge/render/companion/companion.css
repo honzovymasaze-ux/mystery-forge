@@ -1901,6 +1901,139 @@ body.has-viewer {
   word-break: break-all;
 }
 
+/* Spisová deska s QR kódem na úvodní obrazovce. */
+.connect-card.dossier {
+  position: relative;
+  display: block;
+  margin-top: 34px;
+  padding: 0;
+  text-align: left;
+  background: linear-gradient(160deg, #cfae6e, #b8914f);
+  border-radius: 4px 12px 12px 12px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(60, 40, 15, 0.35);
+}
+
+.dossier-tab {
+  position: absolute;
+  left: 0;
+  top: -30px;
+  max-width: 80%;
+  padding: 6px 18px 6px 14px;
+  background: #cfae6e;
+  border-radius: 8px 14px 0 0;
+  color: #3b2a14;
+  font-family: var(--font-type);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dossier-inner {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  padding: 22px;
+}
+
+.dossier-photo {
+  position: relative;
+  flex: 1 1 55%;
+  margin: 0;
+  padding: 10px 10px 34px;
+  background: #f7f2e6;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  transform: rotate(-2deg);
+}
+
+.dossier-photo-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  filter: grayscale(0.35) contrast(1.05);
+}
+
+.dossier-caption {
+  position: absolute;
+  left: 14px;
+  bottom: 8px;
+  color: #5a4630;
+  font-family: var(--font-type);
+  font-size: 14px;
+}
+
+.dossier-clip {
+  position: absolute;
+  top: -16px;
+  left: 28px;
+  width: 22px;
+  height: 52px;
+  border: 3px solid #9aa0a6;
+  border-radius: 12px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.dossier-card {
+  position: relative;
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 16px 14px;
+  background: repeating-linear-gradient(#fbf7ee 0 27px, #d9cdb3 27px 28px);
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  transform: rotate(1deg);
+}
+
+.dossier-title {
+  margin: 0 0 10px;
+  font-family: var(--font-type);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dossier-stamp {
+  position: absolute;
+  right: 12px;
+  bottom: 6px;
+  background: rgba(247, 242, 230, 0.85);
+  margin: 0;
+  padding: 3px 8px;
+  border: 3px solid var(--stamp);
+  border-radius: 6px;
+  color: var(--stamp);
+  font-family: var(--font-type);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transform: rotate(-6deg);
+}
+
+.dossier .qr-code {
+  width: 200px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #d9cdb3;
+}
+
+@media (max-width: 640px) {
+  .dossier-inner {
+    flex-direction: column;
+  }
+
+  .dossier-stamp {
+    display: none;
+  }
+}
+
 /* A TV is read from a sofa: wider screens get larger targets and a visible focus everywhere. */
 @media (min-width: 900px) {
   .evidence-list {
@@ -2270,4 +2403,13 @@ body.has-viewer {
   .tab {
     font-size: 16px;
   }
+}
+
+/* Tisk obálek z mobilu (krycí list + dokumenty). */
+.print-row {
+  margin: 0 0 12px;
+}
+
+.print-stage {
+  margin-top: 6px;
 }

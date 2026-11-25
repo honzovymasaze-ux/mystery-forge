@@ -38,11 +38,12 @@ public class MainActivity extends Activity {
         + "document.body.appendChild(ov);window.__mfVideo=true;"
         // Po úvodu rovnou video kapitoly A1; teprve když video chybí, přehraje se jen nahrávka.
         + "var stage=0;"
-        + "function finish(){window.__mfVideo=false;v.pause();ov.remove();document.removeEventListener('keydown',vkey,true);sessionStorage.setItem('mf-intro','1');}"
+        + "var ctl=null;"
+        + "function finish(){window.__mfVideo=false;v.pause();ov.remove();if(ctl)ctl();document.removeEventListener('keydown',vkey,true);sessionStorage.setItem('mf-intro','1');}"
         + "function endVideo(){if(!window.__mfVideo)return;if(stage===0){stage=1;v.src='/video/kap-a1.mp4';v.play().catch(function(){});}else finish();}"
         + "function vkey(e){if(e.key==='Enter'||e.keyCode===13||e.key==='Escape'){e.preventDefault();e.stopPropagation();endVideo();}}"
-        + "document.addEventListener('keydown',vkey,true);v.onended=endVideo;"
-        + "v.onerror=function(){window.__mfVideo=false;ov.remove();document.removeEventListener('keydown',vkey,true);if(stage===0)list.unshift('/audio/intro.mp3');startAudio();};"
+        + "if(window.MysteryForgeVideoControls){hint.remove();ctl=window.MysteryForgeVideoControls(ov,v,endVideo);}else{document.addEventListener('keydown',vkey,true);}v.onended=endVideo;"
+        + "v.onerror=function(){window.__mfVideo=false;ov.remove();if(ctl)ctl();document.removeEventListener('keydown',vkey,true);if(stage===0)list.unshift('/audio/intro.mp3');startAudio();};"
         + "v.play().catch(function(){});"
         + "function startAudio(){"
         + "var i=0,a=new Audio();"
@@ -114,6 +115,9 @@ public class MainActivity extends Activity {
         + "'.tabs ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs),.topbar ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs){zoom:.8}'"
         // Lišta se záložkami musí zůstat nad posouvaným obsahem (obsah pod ní přejížděl).
         // …ale pod otevřeným dokumentem a nabídkami (z 900 utopilo lištu prohlížeče – Honza 25. 11.).
+        // Honza 25. 11.: „lítají velikosti – nápovědy, odpovědi v kapitole a obvinění jsou na TV malá okna“.
+        // Sloupec je dělaný pro mobil (720 px) a zmenšení výše ho na TV smrsklo – textové záložky větší a širší.
+        + "+'.main.main-case,.main.main-evidence,.main.main-check,.main.main-hints,.main.main-accuse{zoom:1.1 !important;width:860px !important;max-width:860px !important}'"
         + "+'.topbar,.tabs{z-index:15 !important;background:#15120e !important}'"
         + "+'.viewer,.overlay{z-index:2000 !important}'"
         // Podkresový obrázek Kunštátu za celou hrou (Honza 25. 11.), ztmavený, aby text zůstal čitelný.
@@ -242,7 +246,7 @@ public class MainActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             webView.evaluateJavascript(
-                "window.MysteryForgeBack ? window.MysteryForgeBack() : false",
+                "(window.__mfBack && window.__mfBack()) || (window.MysteryForgeBack ? window.MysteryForgeBack() : false)",
                 handled -> {
                     if (!"true".equals(handled)) {
                         askToQuit();

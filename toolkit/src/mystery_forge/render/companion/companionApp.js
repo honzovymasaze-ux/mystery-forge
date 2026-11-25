@@ -450,7 +450,109 @@
     }
   }
 
-  /** @param {MysteryForgeCompanionCaseEntry} entry */
+  /**
+   * Ovládání videa přes celou obrazovku. Honza 25. 11.: „nejde to pauznout a ve chvíli, kdy do toho někdo hrábne,
+   * video zmizí“. OK = pauza/pokračovat, šipky do stran = posun o 10 s, Zpět = přeskočit. Ostatní klávesy video
+   * jen spolkne, aby se nehýbalo nic pod ním. Na mobilu stejná tlačítka dotykem, klepnutí do videa = pauza.
+   * @param {HTMLElement} overlay
+   * @param {HTMLMediaElement} media
+   * @param {() => void} skip
+   * @returns {() => void} odpojení ovládání
+   */
+  function mediaControls(overlay, media, skip) {
+    const bar = document.createElement('div');
+    bar.style.cssText =
+      'position:absolute;left:0;right:0;bottom:0;display:flex;gap:10px;justify-content:center;align-items:center;' +
+      'padding:14px 16px 18px;background:linear-gradient(transparent,rgba(0,0,0,.75));transition:opacity .4s';
+    const big = document.createElement('div');
+    big.textContent = '❚❚';
+    big.style.cssText =
+      'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 72px system-ui;color:#f0e6d2;' +
+      'background:rgba(0,0,0,.55);border:2px solid #c9a24a;border-radius:50%;width:140px;height:140px;display:none;' +
+      'align-items:center;justify-content:center;pointer-events:none';
+    /** @param {string} label @param {() => void} action */
+    const make = (label, action) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.tabIndex = -1;
+      b.textContent = label;
+      b.style.cssText =
+        'background:rgba(20,16,12,.85);color:#f0e6d2;border:1px solid #c9a24a;border-radius:10px;padding:10px 20px;' +
+        'font:600 20px system-ui;cursor:pointer';
+      b.addEventListener('click', (event) => {
+        event.stopPropagation();
+        action();
+        wake();
+      });
+      bar.append(b);
+      return b;
+    };
+    const seek = (/** @type {number} */ d) => {
+      const end = Number.isFinite(media.duration) ? media.duration - 0.5 : media.currentTime + d;
+      media.currentTime = Math.max(0, Math.min(end, media.currentTime + d));
+    };
+    const toggle = () => {
+      if (media.paused) {
+        void media.play().catch(() => {});
+      } else {
+        media.pause();
+      }
+    };
+    make('◀◀ 10 s', () => seek(-10));
+    const pauseButton = make('❚❚ Pauza', toggle);
+    make('10 s ▶▶', () => seek(10));
+    make('Přeskočit ▶▏', skip);
+    const hint = document.createElement('span');
+    hint.textContent = tvMode ? 'OK = pauza · ◀ ▶ = posun · Zpět = přeskočit' : '';
+    hint.style.cssText = 'margin-left:14px;color:#c9a24a;font:600 17px system-ui;opacity:.9';
+    bar.append(hint);
+    overlay.append(big, bar);
+    const sync = () => {
+      pauseButton.textContent = media.paused ? '▶ Pokračovat' : '❚❚ Pauza';
+      big.style.display = media.paused && !media.ended ? 'flex' : 'none';
+      if (media.paused) wake();
+    };
+    media.addEventListener('play', sync);
+    media.addEventListener('pause', sync);
+    /** @type {number | undefined} */
+    let fade;
+    const wake = () => {
+      bar.style.opacity = '1';
+      window.clearTimeout(fade);
+      fade = window.setTimeout(() => {
+        if (!media.paused) bar.style.opacity = '0';
+      }, 4000);
+    };
+    wake();
+    media.addEventListener('click', () => {
+      toggle();
+      wake();
+    });
+    /** @param {KeyboardEvent} event */
+    const key = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.repeat && (event.key === 'Enter' || event.key === ' ')) return;
+      wake();
+      if (event.key === 'Enter' || event.key === ' ' || event.key === 'MediaPlayPause') toggle();
+      else if (event.key === 'ArrowLeft' || event.key === 'MediaRewind') seek(-10);
+      else if (event.key === 'ArrowRight' || event.key === 'MediaFastForward') seek(10);
+      else if (event.key === 'Escape' || event.key === 'Backspace' || event.key === 'MediaStop') skip();
+    };
+    document.addEventListener('keydown', key, true);
+    // Tlačítko Zpět na ovladači TV jde přes appku (MainActivity), ne jako klávesa – přeskočí video.
+    /** @type {any} */ (window).__mfBack = () => {
+      skip();
+      return true;
+    };
+    return () => {
+      document.removeEventListener('keydown', key, true);
+      window.clearTimeout(fade);
+      /** @type {any} */ (window).__mfBack = null;
+    };
+  }
+  /** @type {any} */ (window).MysteryForgeVideoControls = mediaControls;
+
   /**
    * Honza 25. 11.: každá kapitola má video (hlas vypravěče, fotky, hudba). Na TV/přes server se pustí přes celou
    * obrazovku; když video chybí, přehraje se jen nahrávka.
@@ -468,29 +570,22 @@
     video.src = `/video/${entry.id}.mp4`;
     video.autoplay = true;
     video.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#000';
-    const hint = document.createElement('div');
-    hint.textContent = 'OK = zavřít';
-    hint.style.cssText = 'position:absolute;right:28px;bottom:22px;color:#c9a24a;font:600 16px system-ui;opacity:.7';
-    overlay.append(video, hint);
+    overlay.append(video);
     document.body.append(overlay);
     /** @type {any} */ (window).__mfVideo = true;
+    /** @type {() => void} */
+    let detach = () => {};
     const close = () => {
       if (!overlay.isConnected) return;
       video.pause();
       overlay.remove();
+      detach();
       /** @type {any} */ (window).__mfVideo = false;
-      document.removeEventListener('keydown', key, true);
       render();
+      // Ovladač TV: focus zpět na tlačítko, kterým se video pustilo.
+      /** @type {HTMLElement | null} */ (document.querySelector(`[data-play="${entry.id}"]`))?.focus();
     };
-    /** @param {KeyboardEvent} event */
-    const key = (event) => {
-      if (event.key === 'Enter' || event.key === 'Escape' || event.key === 'Backspace' || event.key === ' ') {
-        event.preventDefault();
-        event.stopPropagation();
-        close();
-      }
-    };
-    document.addEventListener('keydown', key, true);
+    detach = mediaControls(overlay, video, close);
     video.addEventListener('ended', close);
     video.addEventListener('error', () => {
       close();
@@ -510,6 +605,15 @@
 
   /** @param {MysteryForgeCompanionCaseEntry} entry */
   function togglePlayback(entry) {
+    if (playback.id === entry.id && playback.audio && String(entry.id).startsWith('vypoved-')) {
+      if (playback.audio.paused) {
+        void playback.audio.play().catch(() => {});
+      } else {
+        playback.audio.pause();
+      }
+      render();
+      return;
+    }
     if (playback.id !== entry.id && playChapterVideo(entry)) {
       return;
     }
@@ -794,11 +898,108 @@
       : null;
   }
 
+  /** @param {string} text */
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] ?? c);
+  }
+
+  /**
+   * Honza 25. 11.: „v telefonu dát možnost vytisknout všechny důkazy po jednotlivých kapitolách, aby to bylo
+   * nachystané, ale aby se to nezamíchalo – i se seznamem důkazů a požadavkem splnění úkolu na kapitolu“.
+   * Každá obálka = krycí list (seznam důkazů, úkoly obálky, co otevře další obálku) + její dokumenty v pořadí.
+   * Tisknout jde jen otevřené obálky – zapečetěné jsou zašifrované, dokud skupina nevyřeší úkol.
+   * @param {string[]} stageIds
+   */
+  function printEnvelopes(stageIds) {
+    const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+    const parts = [];
+    for (const stage of archive.stages) {
+      if (!stageIds.includes(stage.id)) continue;
+      const content = archiveContent(stage);
+      if (content === null) continue;
+      const info = data.stages.find((candidate) => candidate.id === stage.id);
+      const puzzles = data.puzzles.filter((puzzle) => puzzle.stage === stage.id);
+      const solved = solvedCodes();
+      const rows = content.documents
+        .map(
+          (doc, index) =>
+            `<tr><td>${index + 1}.</td><td class="c-id">${escapeHtml(doc.id === 'characters' ? '—' : doc.id)}</td>` +
+            `<td>${escapeHtml(doc.title)}</td><td class="c-n">${doc.sheets.length}</td><td class="c-box">☐</td></tr>`,
+        )
+        .join('');
+      const tasks = puzzles
+        .map((puzzle) => {
+          const next = puzzle.unlocks ? data.stages.find((candidate) => candidate.id === puzzle.unlocks) : null;
+          return (
+            `<li><b>${escapeHtml(puzzle.code)} · ${escapeHtml(puzzle.title)}</b>${solved.includes(puzzle.code) ? ' <span class="c-ok">✓ vyřešeno</span>' : ''}` +
+            `<br><span class="c-muted">Hledaná odpověď: ${escapeHtml(puzzle.answer_format)}</span>` +
+            (next ? `<br><span class="c-key">Po vyřešení se otevře ${escapeHtml(next.envelope)} – ${escapeHtml(next.label)}.</span>` : '') +
+            '</li>'
+          );
+        })
+        .join('');
+      const opens = info && info.opens_with && info.opens_with !== 'start' ? `Otevírá se po vyřešení úkolu ${escapeHtml(info.opens_with)}.` : 'Otevírá se na začátku hry.';
+      const waiting = content.waiting.length > 0 ? `<p class="c-muted">Další ${content.waiting.length} dokument(y) této obálky se odemknou až po vyřešení dalšího úkolu – vytiskněte je pak zvlášť.</p>` : '';
+      const total = content.documents.reduce((sum, doc) => sum + doc.sheets.length, 0);
+      parts.push(
+        `<section class="mf-cover"><p class="c-kicker">${escapeHtml(data.title)} · spis</p>` +
+          `<h1>${escapeHtml(stage.envelope)}</h1><h2>${escapeHtml(content.label || info?.label || '')}</h2>` +
+          `<p class="c-muted">${opens} Dokumentů: ${content.documents.length}, listů: ${total}.</p>` +
+          `<h3>Seznam důkazů v obálce</h3><table><thead><tr><th>#</th><th>Ozn.</th><th>Dokument</th><th>Listů</th><th>✓</th></tr></thead><tbody>${rows}</tbody></table>` +
+          waiting +
+          `<h3>Úkoly této obálky</h3><ol class="c-tasks">${tasks}</ol>` +
+          `<p class="c-stamp">${escapeHtml(stage.envelope)}</p></section>` +
+          content.documents.map((doc) => doc.sheets.join('')).join(''),
+      );
+    }
+    if (parts.length === 0) return;
+    const html =
+      `<!doctype html><html lang="cs"><head><meta charset="utf-8"><title>${escapeHtml(data.title)} – tisk obálek</title><style>${archive.css}` +
+      `@page{size:A4;margin:10mm}body{background:#fff}.sheet{margin:0 auto;break-after:page}` +
+      `.mf-cover{break-after:page;break-before:page;position:relative;max-width:180mm;margin:0 auto;padding:6mm 2mm;font-family:Georgia,'Times New Roman',serif;color:#222}` +
+      `.mf-cover h1{font-size:30pt;margin:2mm 0 0;letter-spacing:.04em;text-transform:uppercase}.mf-cover h2{font-size:16pt;margin:0 0 4mm;font-weight:400;font-style:italic}` +
+      `.mf-cover h3{font-size:12pt;margin:7mm 0 2mm;text-transform:uppercase;letter-spacing:.08em;border-bottom:1.5pt solid #222;padding-bottom:1mm}` +
+      `.mf-cover table{width:100%;border-collapse:collapse;font-size:10.5pt}.mf-cover th,.mf-cover td{border-bottom:.5pt solid #999;padding:1.6mm 2mm;text-align:left;vertical-align:top}` +
+      `.mf-cover .c-id{font-family:'Courier New',monospace;font-weight:700;white-space:nowrap}.mf-cover .c-n,.mf-cover .c-box{text-align:center;width:12mm}` +
+      `.c-kicker{font-family:'Courier New',monospace;font-size:9pt;letter-spacing:.15em;text-transform:uppercase;margin:0}.c-muted{color:#555;font-size:10pt}` +
+      `.c-tasks li{margin:0 0 3mm;font-size:11pt}.c-key{color:#8e2a1e;font-size:10pt}.c-ok{color:#2f7a4c}` +
+      `.c-stamp{position:absolute;right:4mm;top:6mm;margin:0;border:2.5pt solid #b33a2b;color:#b33a2b;padding:1mm 4mm;font:700 14pt 'Courier New',monospace;text-transform:uppercase;transform:rotate(6deg);opacity:.85}` +
+      `@media screen{body{background:#555}.mf-cover{background:#fff;margin:8mm auto;padding:10mm}}</style></head>` +
+      `<body class="${archive.body_class} output-materials">${parts.join('')}<script>window.addEventListener('load',function(){setTimeout(function(){window.print()},600)})<\/script></body></html>`;
+    const win = window.open('', '_blank');
+    if (win) {
+      win.document.open();
+      win.document.write(html);
+      win.document.close();
+      return;
+    }
+    // Zablokované okno: tisk přes skrytý rámeček.
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+    frame.srcdoc = html.replace(/<script>[\s\S]*?<\/script>/, '');
+    frame.addEventListener('load', () => {
+      frame.contentWindow?.print();
+      window.setTimeout(() => frame.remove(), 60000);
+    });
+    document.body.append(frame);
+  }
+
   function renderEvidence() {
     const archive = /** @type {MysteryForgeArchive} */ (data.archive);
     const view = el('div', { className: 'view view-evidence' }, [
       el('h2', { className: 'view-title', text: ui('evidence_heading') }),
     ]);
+    // Tisk z mobilu – na TV nemá smysl.
+    const printable = archive.stages.filter((stage) => archiveContent(stage) !== null).map((stage) => stage.id);
+    if (!tvMode && printable.length > 0) {
+      view.append(
+        el('p', { className: 'print-row' }, [
+          button(`🖨 Vytisknout všechny otevřené obálky (${printable.length})`, 'button button-quiet print-all', () =>
+            printEnvelopes(printable),
+          ),
+        ]),
+      );
+    }
     /** @type {MysteryForgeArchiveDocument[]} */
     const all = [];
     for (const stage of archive.stages) {
@@ -835,6 +1036,9 @@
           }),
           list,
           waitingNote(content),
+          tvMode
+            ? null
+            : button(`🖨 Vytisknout ${stage.envelope.replace(/^Obálka/, "obálku")}`, 'button button-link print-stage', () => printEnvelopes([stage.id])),
         ]),
       );
     }
@@ -1004,7 +1208,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       // Namluvené výslechy (ElevenLabs): TV je servíruje z assets jako /audio/vypoved-<id>.mp3.
       documentEntry.kind === 'transcript' && window.location.protocol.startsWith('http')
         ? button(
-            playback.id === `vypoved-${documentEntry.id}` ? '■ Zastavit' : '▶ Výpověď',
+            playback.id === `vypoved-${documentEntry.id}` ? (playback.audio?.paused ? '▶ Pokračovat' : '❚❚ Pauza') : '▶ Výpověď',
             'button button-quiet',
             () =>
               togglePlayback(
@@ -1592,11 +1796,27 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     const picture = el('div', { className: 'qr-code', attrs: { 'aria-hidden': 'true' } });
     // The vendored encoder builds this SVG from the URL alone.
     picture.innerHTML = code.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
-    return el('section', { className: 'paper connect-card', attrs: { id: 'connect' } }, [
-      el('h2', { className: 'paper-title', text: ui('connect_heading') }),
-      picture,
-      el('p', { className: 'connect-text', text: ui('connect_text') }),
-      el('p', { className: 'connect-url', text: connection.url }),
+    // Honza 25. 11.: „nad QR kódem chybí fotka, celý QR kód bych udělal ve spisovém stylu“ – otevřená spisová
+    // deska: vlevo fotka se sponkou (TV ji servíruje jako /img/titul.jpg, bez ní se nezobrazí), vpravo lístek s QR.
+    const photo = el('img', { className: 'dossier-photo-img', attrs: { src: 'img/titul.jpg', alt: '' } });
+    const figure = el('figure', { className: 'dossier-photo' }, [
+      el('span', { className: 'dossier-clip', attrs: { 'aria-hidden': 'true' } }),
+      photo,
+      el('figcaption', { className: 'dossier-caption', text: 'Příloha č. 1' }),
+      el('p', { className: 'dossier-stamp', text: 'Vyšetřování zahájeno', attrs: { 'aria-hidden': 'true' } }),
+    ]);
+    photo.addEventListener('error', () => figure.remove());
+    return el('section', { className: 'connect-card dossier', attrs: { id: 'connect' } }, [
+      el('div', { className: 'dossier-tab', text: `Spis · ${data.title}` }),
+      el('div', { className: 'dossier-inner' }, [
+        figure,
+        el('div', { className: 'dossier-card' }, [
+          el('h2', { className: 'dossier-title', text: ui('connect_heading') }),
+          picture,
+          el('p', { className: 'connect-text', text: ui('connect_text') }),
+          el('p', { className: 'connect-url', text: connection.url }),
+        ]),
+      ]),
     ]);
   }
 

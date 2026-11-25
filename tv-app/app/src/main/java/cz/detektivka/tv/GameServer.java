@@ -124,7 +124,11 @@ final class GameServer {
             String method = parts.length > 0 ? parts[0] : "";
             String path = parts.length > 1 ? parts[1].split("\\?")[0] : "/";
             int length = 0;
+            String range = null;
             for (String header : lines) {
+                if (header.toLowerCase(Locale.ROOT).startsWith("range:")) {
+                    range = header.substring(6).trim();
+                }
                 if (header.toLowerCase(Locale.ROOT).startsWith("content-length:")) {
                     length = Math.min(MAX_BODY, Integer.parseInt(header.substring(15).trim()));
                 }
@@ -138,13 +142,13 @@ final class GameServer {
                 }
                 read += count;
             }
-            respond(connection.getOutputStream(), method, path, new String(body, 0, read, StandardCharsets.UTF_8));
+            respond(connection.getOutputStream(), method, path, new String(body, 0, read, StandardCharsets.UTF_8), range);
         } catch (Exception ignored) {
             // A broken request from one device must not stop the server.
         }
     }
 
-    private void respond(OutputStream output, String method, String path, String body) throws IOException {
+    private void respond(OutputStream output, String method, String path, String body, String range) throws IOException {
         if (path.equals("/api/info")) {
             JSONObject info = new JSONObject();
             try {
@@ -172,14 +176,14 @@ final class GameServer {
         } else if (path.matches("/audio/[A-Za-z0-9-]+\\.mp3")) {
             // Namluvené kapitoly a hlasovky (ElevenLabs), přibalené v assets/audio.
             try {
-                send(output, 200, "audio/mpeg", readAsset(path.substring(1)));
+                sendMedia(output, "audio/mpeg", readAsset(path.substring(1)), range);
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
         } else if (path.matches("/(video|img)/[A-Za-z0-9-]+\\.(mp4|jpg)")) {
             // Úvodní video a obrázek pozadí (Kunštát), přibalené v assets/video a assets/img.
             try {
-                send(output, 200, path.endsWith(".mp4") ? "video/mp4" : "image/jpeg", readAsset(path.substring(1)));
+                sendMedia(output, path.endsWith(".mp4") ? "video/mp4" : "image/jpeg", readAsset(path.substring(1)), range);
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
@@ -187,7 +191,7 @@ final class GameServer {
             // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into assets/audio.
             String name = "audio/" + path.substring("/media/".length());
             try {
-                send(output, 200, mediaType(name), readAsset(name));
+                sendMedia(output, mediaType(name), readAsset(name), range);
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
@@ -309,6 +313,56 @@ final class GameServer {
             }
             return buffer.toByteArray();
         }
+    }
+
+    /**
+     * Nahrávky a videa s podporou Range (Honza 25. 11.: pauza a posun ve videu). Bez 206 WebView ve videu neskočí
+     * a posun vrátí přehrávání na začátek.
+     */
+    private static void sendMedia(OutputStream output, String type, byte[] data, String range) throws IOException {
+        int start = 0;
+        int end = data.length - 1;
+        boolean partial = false;
+        if (range != null && range.startsWith("bytes=") && data.length > 0) {
+            String spec = range.substring(6).split(",")[0].trim();
+            int dash = spec.indexOf('-');
+            try {
+                if (dash == 0) {
+                    start = Math.max(0, data.length - Integer.parseInt(spec.substring(1)));
+                } else if (dash > 0) {
+                    start = Integer.parseInt(spec.substring(0, dash));
+                    if (dash < spec.length() - 1) {
+                        end = Math.min(end, Integer.parseInt(spec.substring(dash + 1)));
+                    }
+                }
+                partial = start <= end && start < data.length;
+            } catch (NumberFormatException ignored) {
+                partial = false;
+            }
+            if (!partial) {
+                start = 0;
+                end = data.length - 1;
+            }
+        }
+        int length = end - start + 1;
+        String head = "HTTP/1.1 " + (partial ? "206 Partial Content" : "200 OK") + "
+"
+            + "Content-Type: " + type + "
+"
+            + "Content-Length: " + length + "
+"
+            + "Accept-Ranges: bytes
+"
+            + (partial ? "Content-Range: bytes " + start + "-" + end + "/" + data.length + "
+" : "")
+            + "Cache-Control: no-store
+"
+            + "Connection: close
+
+";
+        output.write(head.getBytes(StandardCharsets.US_ASCII));
+        output.write(data, start, length);
+        output.flush();
     }
 
     private static void send(OutputStream output, int status, String type, byte[] body) throws IOException {
