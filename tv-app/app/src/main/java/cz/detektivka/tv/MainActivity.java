@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
         + "var loopFrom=0,i=0,fails=0,bg=new O(),vol=0,target=0;"
         + "function talking(){if(tts)return true;var t=false;voices.forEach(function(v){if(!v.paused&&!v.ended)t=true;});return t;}"
         + "var fin=false;"
-        + "function duck(){target=(!on||window.__mfVideo)?0:(talking()?0.06:(fin?0.28:0.2));}"
+        + "function duck(){target=(!on||window.__mfVideo)?0:(talking()?0.03:(fin?0.15:0.1));}"
         + "setInterval(duck,500);"
         // Vrchol vyšetřování (Honza: „ve špičce“): na záložce Obvinění hraje gradující finálová skladba ve smyčce.
         + "function accusing(){var t=document.querySelector('.tabs [aria-selected=\"true\"],.tabs [aria-current=\"page\"],.tabs .active,.tabs .is-active');"

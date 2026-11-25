@@ -913,6 +913,11 @@
   function printEnvelopes(stageIds) {
     const archive = /** @type {MysteryForgeArchive} */ (data.archive);
     const parts = [];
+    const blank = '<section class="sheet mf-blank" aria-hidden="true"></section>';
+    // Listy karet osob mají jednu neuzavřenou sekci – v jednom dokumentu by se vnořily a slily do jedné stránky.
+    /** @param {string} sheet */
+    const closedSheet = (sheet) =>
+      sheet + '</section>'.repeat(Math.max(0, (sheet.match(/<section\b/g) || []).length - (sheet.match(/<\/section>/g) || []).length));
     for (const stage of archive.stages) {
       if (!stageIds.includes(stage.id)) continue;
       const content = archiveContent(stage);
@@ -949,14 +954,17 @@
           waiting +
           `<h3>Úkoly této obálky</h3><ol class="c-tasks">${tasks}</ol>` +
           `<p class="c-stamp">${escapeHtml(stage.envelope)}</p></section>` +
-          content.documents.map((doc) => doc.sheets.join('')).join(''),
+          // Oboustranný tisk: krycí list i dokument s lichým počtem stran dostanou prázdnou zadní stranu,
+          // aby každý dokument začínal na novém papíře.
+          blank +
+          content.documents.map((doc) => doc.sheets.map(closedSheet).join('') + (doc.sheets.length % 2 === 1 ? blank : '')).join(''),
       );
     }
     if (parts.length === 0) return;
     const html =
       `<!doctype html><html lang="cs"><head><meta charset="utf-8"><title>${escapeHtml(data.title)} – tisk obálek</title><style>${archive.css}` +
-      `@page{size:A4;margin:10mm}body{background:#fff}.sheet{margin:0 auto;break-after:page}` +
-      `.mf-cover{break-after:page;break-before:page;position:relative;max-width:180mm;margin:0 auto;padding:6mm 2mm;font-family:Georgia,'Times New Roman',serif;color:#222}` +
+      `@page{size:210mm 297mm;margin:0}body{background:#fff}.sheet{margin:0 auto;break-after:page}@media screen{.mf-blank{display:none}}` +
+      `.mf-cover{break-after:page;break-before:page;position:relative;width:210mm;height:297mm;box-sizing:border-box;overflow:hidden;margin:0 auto;padding:14mm 16mm;font-family:Georgia,'Times New Roman',serif;color:#222}` +
       `.mf-cover h1{font-size:30pt;margin:2mm 0 0;letter-spacing:.04em;text-transform:uppercase}.mf-cover h2{font-size:16pt;margin:0 0 4mm;font-weight:400;font-style:italic}` +
       `.mf-cover h3{font-size:12pt;margin:7mm 0 2mm;text-transform:uppercase;letter-spacing:.08em;border-bottom:1.5pt solid #222;padding-bottom:1mm}` +
       `.mf-cover table{width:100%;border-collapse:collapse;font-size:10.5pt}.mf-cover th,.mf-cover td{border-bottom:.5pt solid #999;padding:1.6mm 2mm;text-align:left;vertical-align:top}` +
@@ -1625,9 +1633,43 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
     return overlay;
   }
 
+  /**
+   * Honza 25. 11.: „velkou nástěnku na pevno – lidi se přes QR přepnou do mobilu, zapnou si nástěnku a můžou si
+   * přímo z mobilu přidat důkazy na plochu obrazovky TV“. TV se přepne na nástěnku přes celou obrazovku (bez lišt
+   * a zásobníku nepřipnutých karet); nástěnka se sdílí přes server TV, takže co kdo připne v mobilu, objeví se tu
+   * do pár sekund. Režim drží i po restartu appky; Zpět ho vypne.
+   */
+  const wall = {
+    on: (() => {
+      try {
+        return window.localStorage.getItem('mf-wall') === '1';
+      } catch {
+        return false;
+      }
+    })(),
+  };
+
+  /** @param {boolean} on */
+  function setWall(on) {
+    wall.on = on;
+    try {
+      window.localStorage.setItem('mf-wall', on ? '1' : '0');
+    } catch {
+      // Bez úložiště režim platí jen do zavření.
+    }
+    if (on) {
+      session.tab = 'board';
+    }
+    render();
+    if (!on) {
+      document.getElementById('wall-toggle')?.focus();
+    }
+  }
+
   function renderBoard() {
     const archive = /** @type {MysteryForgeArchive} */ (data.archive);
     const board = logic.boardOf(state);
+    const onWall = tvMode && wall.on;
     const people = el('div', { className: 'board-people' }, archive.people.map(personCard));
     const columns = el('div', { className: 'board-columns' });
     /** @type {MysteryForgeArchiveDocument[]} */
@@ -1653,11 +1695,23 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
         ]),
       );
     }
-    return el('div', { className: 'view view-board' }, [
+    return el('div', { className: `view view-board${onWall ? ' is-wall' : ''}` }, [
+      tvMode && !onWall
+        ? el('p', { className: 'wall-row' }, [
+            button('⛶ Nástěnka přes celou obrazovku', 'button button-primary', () => setWall(true), { id: 'wall-toggle' }),
+            el('span', { className: 'wall-note', text: 'Důkazy pak přidávejte z mobilů: Nástěnka → karta → Připnout.' }),
+          ])
+        : null,
+      onWall
+        ? el('p', { className: 'wall-hint' }, [
+            el('b', { text: 'Nástěnka vyšetřování' }),
+            el('span', { text: ' · důkazy přidávejte z mobilu (Nástěnka → karta → Připnout) · Zpět = konec zobrazení' }),
+          ])
+        : null,
       el('div', { className: 'board' }, [
         people,
         columns,
-        unpinned.length > 0
+        !onWall && unpinned.length > 0
           ? el('section', { className: 'board-tray' }, [
               el('div', { className: 'board-tray-head' }, [
                 el('h3', { className: 'board-heading', text: ui('board_tray') }),
@@ -1682,7 +1736,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
               ),
             ])
           : null,
-        el('p', { className: 'board-help', text: ui('board_help') }),
+        onWall ? null : el('p', { className: 'board-help', text: ui('board_help') }),
       ]),
     ]);
   }
@@ -1864,6 +1918,10 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
   window.MysteryForgeBack = () => {
     if (boardSession.menu !== null) {
       closeBoardMenu();
+      return true;
+    }
+    if (tvMode && wall.on && !viewerOpen()) {
+      setWall(false);
       return true;
     }
     if (viewerOpen()) {
@@ -2480,6 +2538,7 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       appElement.append(menu);
     }
     document.body.classList.toggle('has-viewer', shown !== null);
+    document.body.classList.toggle('is-wall', tvMode && wall.on && session.tab === 'board');
     const overlay = renderConfirm();
     if (overlay !== null) {
       appElement.append(overlay);
@@ -2564,5 +2623,9 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
   }
   window.setInterval(updateTimers, 1000);
   loadLocalHistory();
+  // Nástěnka na pevno: TV po spuštění rovnou ukazuje nástěnku přes celou obrazovku.
+  if (tvMode && wall.on) {
+    session.tab = 'board';
+  }
   render();
 })();

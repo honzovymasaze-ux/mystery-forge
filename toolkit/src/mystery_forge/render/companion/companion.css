@@ -2413,3 +2413,41 @@ body.has-viewer {
 .print-stage {
   margin-top: 6px;
 }
+
+/* TV: nástěnka přes celou obrazovku (`body.is-wall`). */
+.wall-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 14px;
+}
+
+.wall-note {
+  color: var(--on-desk-muted);
+}
+
+body.is-wall .topbar,
+body.is-wall .tabs,
+body.is-wall .nav,
+body.is-wall #mf-music {
+  display: none !important;
+}
+
+body.is-wall .main {
+  max-width: none !important;
+  width: auto !important;
+  padding: 12px 18px 18px !important;
+}
+
+.wall-hint {
+  margin: 0 0 10px;
+  color: var(--on-desk-muted);
+  font-size: 15px;
+}
+
+.wall-hint b {
+  color: var(--brass-bright);
+  font-family: var(--font-serif);
+  font-size: 22px;
+}
