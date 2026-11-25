@@ -12,12 +12,24 @@ android {
         applicationId project.findProperty("gameId") ?: "cz.detektivka.tv"
         minSdk 21
         targetSdk 34
-        versionCode 1
+        // Minutes since 2026: every build has a higher version code, so it installs over the one before.
+        versionCode Math.toIntExact((long) ((System.currentTimeMillis() - 1767225600000L) / 60000L))
         versionName "1.0"
         // The title comes from a UTF-8 file: a command-line property would lose the Czech letters.
         def titleFile = project.findProperty("gameTitleFile")
         def title = titleFile ? new File(titleFile.toString()).getText("UTF-8").trim() : "Detektivka"
         resValue "string", "app_name", title.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
+    }
+
+    // Every build signs with the same debug key from the repository, so a newer APK installs over an older one and
+    // keeps its data (the board, the progress). It is a debug key with the public password "android": not a secret.
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("signing/detektivka-debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
     }
 
     compileOptions {
