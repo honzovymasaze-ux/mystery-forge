@@ -26,7 +26,7 @@ import java.util.Locale;
  * accusation, and the evidence board. Every device merges that state into its own (companionLogic.js,
  * mergeSharedState).
  *
- * It serves the page, api/state (GET and POST), api/reset (POST), api/history (GET and POST, the record of
+ * It serves the page, the recordings (media/), api/state (GET and POST), api/reset (POST), api/history (GET and POST, the record of
  * finished games), and api/info (the address for the QR code). Nothing leaves the local network.
  */
 final class GameServer {
@@ -168,15 +168,19 @@ final class GameServer {
             }
             send(output, 200, "application/json", "{}".getBytes(StandardCharsets.UTF_8));
         } else if (path.equals("/") || path.equals("/index.html")) {
-            send(output, 200, "text/html; charset=utf-8", readAsset());
+            send(output, 200, "text/html; charset=utf-8", readAsset(PAGE));
         } else if (path.matches("/audio/[a-z0-9-]+\\.mp3")) {
             // Namluvené kapitoly a hlasovky (ElevenLabs), přibalené v assets/audio.
-            try (InputStream asset = context.getAssets().open(path.substring(1))) {
-                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-                byte[] chunk = new byte[16384];
-                int count;
-                while ((count = asset.read(chunk)) > 0) buffer.write(chunk, 0, count);
-                send(output, 200, "audio/mpeg", buffer.toByteArray());
+            try {
+                send(output, 200, "audio/mpeg", readAsset(path.substring(1)));
+            } catch (IOException missing) {
+                send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
+            }
+        } else if (path.startsWith("/media/") && path.matches("/media/[A-Za-z0-9._-]+")) {
+            // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into assets/audio.
+            String name = "audio/" + path.substring("/media/".length());
+            try {
+                send(output, 200, mediaType(name), readAsset(name));
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
@@ -268,8 +272,28 @@ final class GameServer {
         }
     }
 
-    private byte[] readAsset() throws IOException {
-        try (InputStream asset = context.getAssets().open(PAGE)) {
+    private static String mediaType(String name) {
+        String lower = name.toLowerCase(Locale.ROOT);
+        if (lower.endsWith(".mp3")) {
+            return "audio/mpeg";
+        }
+        if (lower.endsWith(".m4a")) {
+            return "audio/mp4";
+        }
+        if (lower.endsWith(".ogg")) {
+            return "audio/ogg";
+        }
+        if (lower.endsWith(".wav")) {
+            return "audio/wav";
+        }
+        if (lower.endsWith(".mp4")) {
+            return "video/mp4";
+        }
+        return "application/octet-stream";
+    }
+
+    private byte[] readAsset(String name) throws IOException {
+        try (InputStream asset = context.getAssets().open(name)) {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             byte[] chunk = new byte[16384];
             int count;

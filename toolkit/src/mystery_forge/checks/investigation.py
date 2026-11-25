@@ -1,7 +1,8 @@
 """The investigator's story and the voice messages (`investigation.yaml`): each entry must belong to a real envelope.
 
 An entry with `after` waits for a puzzle. That puzzle must exist and sit in the entry's own envelope, so the entry
-never appears before players hold the envelope. A recording in `source/audio/` must belong to a voice message.
+never appears before players hold the envelope. A recording in `source/audio/` must belong to a voice message, a
+chapter, the intro (`intro`), or an ending (`epilog-<ending id>`).
 """
 
 from collections.abc import Sequence
@@ -11,14 +12,24 @@ from mystery_forge.game import Game
 from mystery_forge.spec.loader import AUDIO_FOLDER, INVESTIGATION_FILE
 from mystery_forge.spec.models import Chapter, VoiceMessage
 
+INTRO_AUDIO: str = "intro"
+EPILOGUE_AUDIO_PREFIX: str = "epilog-"
+
+
+def audio_ids(game: Game) -> set[str]:
+    """The names that a recording in `source/audio/` may have: a voice message, a chapter, the intro, an ending."""
+    ids: set[str] = {INTRO_AUDIO, *(f"{EPILOGUE_AUDIO_PREFIX}{epilogue.id}" for epilogue in game.story.epilogues)}
+    if game.investigation is not None:
+        ids |= {message.id for message in game.investigation.voice_messages}
+        ids |= {chapter.id for chapter in game.investigation.chapters}
+    return ids
+
 
 def check_investigation(game: Game) -> list[Finding]:
     findings: list[Finding] = []
-    message_ids: set[str] = set()
     if game.investigation is not None:
         stage_ids: set[str] = {stage.id for stage in game.flow.stages}
         puzzle_stages: dict[str, str] = {puzzle.source.id: puzzle.source.stage for puzzle in game.puzzles}
-        message_ids = {message.id for message in game.investigation.voice_messages}
         groups: tuple[tuple[str, Sequence[Chapter | VoiceMessage]], ...] = (
             ("chapters", game.investigation.chapters),
             ("voice_messages", game.investigation.voice_messages),
@@ -57,16 +68,18 @@ def check_investigation(game: Game) -> list[Finding]:
                             f"envelope {entry.stage}.",
                         )
                     )
+    known: set[str] = audio_ids(game)
     findings.extend(
         Finding(
             severity="warning",
             rule="investigation.audio_unused",
-            message=f"The recording '{audio_id}' belongs to no voice message.",
+            message=f"The recording '{audio_id}' belongs to no voice message, chapter, intro, or ending.",
             file=f"{AUDIO_FOLDER}/{audio_id}",
-            fix_hint="Name the file after the id of a voice message in investigation.yaml, or delete it.",
+            fix_hint="Name the file after a voice message or a chapter id of investigation.yaml, 'intro', or "
+            "'epilog-<ending id>', or delete it.",
         )
         for audio_id in sorted(game.audio)
-        if audio_id not in message_ids
+        if audio_id not in known
     )
     return findings
 
