@@ -176,6 +176,13 @@ final class GameServer {
             } catch (IOException missing) {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
+        } else if (path.matches("/(video|img)/[A-Za-z0-9-]+\\.(mp4|jpg)")) {
+            // Úvodní video a obrázek pozadí (Kunštát), přibalené v assets/video a assets/img.
+            try {
+                send(output, 200, path.endsWith(".mp4") ? "video/mp4" : "image/jpeg", readAsset(path.substring(1)));
+            } catch (IOException missing) {
+                send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
+            }
         } else if (path.startsWith("/media/") && path.matches("/media/[A-Za-z0-9._-]+")) {
             // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into assets/audio.
             String name = "audio/" + path.substring("/media/".length());

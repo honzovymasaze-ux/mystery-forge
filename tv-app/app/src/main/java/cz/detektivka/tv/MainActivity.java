@@ -28,7 +28,21 @@ public class MainActivity extends Activity {
     private static final int TV_TEXT_ZOOM = 100;
     private static final String INTRO_JS = "(function(){"
         + "if(window.__mfIntro||sessionStorage.getItem('mf-intro')) return; window.__mfIntro=1;"
-        + "var list=['/audio/intro.mp3','/audio/kap-a1.mp3'],i=0,a=new Audio();"
+        + "var list=['/audio/kap-a1.mp3'];"
+        // Honza 25. 11.: úvod = video (epická hudba + jeho hlas + fotky) přes celou obrazovku, pak kapitola A1. OK přeskočí.
+        + "var ov=document.createElement('div');ov.style.cssText='position:fixed;inset:0;z-index:100000;background:#000';"
+        + "var v=document.createElement('video');v.src='/video/intro.mp4';v.autoplay=true;v.playsInline=true;"
+        + "v.style.cssText='width:100%;height:100%;object-fit:contain;background:#000';ov.appendChild(v);"
+        + "var hint=document.createElement('div');hint.textContent='OK = p\\u0159esko\\u010dit';"
+        + "hint.style.cssText='position:absolute;right:28px;bottom:22px;color:#c9a24a;font:600 16px system-ui;opacity:.7';ov.appendChild(hint);"
+        + "document.body.appendChild(ov);window.__mfVideo=true;"
+        + "function endVideo(){if(!window.__mfVideo)return;window.__mfVideo=false;v.pause();ov.remove();document.removeEventListener('keydown',vkey,true);startAudio();}"
+        + "function vkey(e){if(e.key==='Enter'||e.keyCode===13||e.key==='Escape'){e.preventDefault();e.stopPropagation();endVideo();}}"
+        + "document.addEventListener('keydown',vkey,true);v.onended=endVideo;"
+        + "v.onerror=function(){window.__mfVideo=false;ov.remove();document.removeEventListener('keydown',vkey,true);list.unshift('/audio/intro.mp3');startAudio();};"
+        + "v.play().catch(function(){});"
+        + "function startAudio(){"
+        + "var i=0,a=new Audio();"
         + "var bar=document.createElement('div');"
         // Malý štítek v pravém dolním rohu – nesmí překrýt QR kód uprostřed.
         + "bar.style.cssText='position:fixed;right:48px;top:300px;z-index:99999;"
@@ -42,6 +56,7 @@ public class MainActivity extends Activity {
         + "a.onended=function(){i++;if(i<list.length){a.src=list[i];a.play();}else stop();};"
         + "a.onerror=function(){stop();};"
         + "a.src=list[0];a.play().catch(function(){stop();});"
+        + "}"
         + "})();";
 
     // Honza 25. 11.: „epický úvod, hudba podkres hlasu vypravěče, ale ať hraje po celou dobu vyšetřování“.
@@ -54,11 +69,13 @@ public class MainActivity extends Activity {
         + "window.__mfTtsStart=function(){tts=true;duck();};window.__mfTtsEnd=function(){tts=false;duck();};"
         + "var on=true;try{on=localStorage.getItem('mf-music')!=='off';}catch(e){}"
         + "var first=!sessionStorage.getItem('mf-intro');"
-        + "var list=first?['/audio/hudba-uvod.mp3','/audio/hudba-1.mp3','/audio/hudba-2.mp3','/audio/hudba-3.mp3']:['/audio/hudba-1.mp3','/audio/hudba-2.mp3','/audio/hudba-3.mp3'];"
-        + "var loopFrom=first?1:0,i=0,fails=0,bg=new O(),vol=0,target=0;"
+        // Epická úvodní skladba je přímo ve videu úvodu – na pozadí se střídají podkresy.
+        + "var list=['/audio/hudba-1.mp3','/audio/hudba-2.mp3','/audio/hudba-3.mp3'];"
+        + "var loopFrom=0,i=0,fails=0,bg=new O(),vol=0,target=0;"
         + "function talking(){if(tts)return true;var t=false;voices.forEach(function(v){if(!v.paused&&!v.ended)t=true;});return t;}"
         + "var fin=false;"
-        + "function duck(){target=!on?0:(talking()?0.06:(fin?0.28:(list[i]&&list[i].indexOf('uvod')>0?0.32:0.2)));}"
+        + "function duck(){target=(!on||window.__mfVideo)?0:(talking()?0.06:(fin?0.28:0.2));}"
+        + "setInterval(duck,500);"
         // Vrchol vyšetřování (Honza: „ve špičce“): na záložce Obvinění hraje gradující finálová skladba ve smyčce.
         + "function accusing(){var t=document.querySelector('.tabs [aria-selected=\"true\"],.tabs [aria-current=\"page\"],.tabs .active,.tabs .is-active');"
         + "return !!t&&/Obvin/.test(t.textContent);}"
@@ -93,7 +110,12 @@ public class MainActivity extends Activity {
         + "var cz=document.createElement('style');cz.textContent="
         + "'.tabs ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs),.topbar ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs){zoom:.8}'"
         // Lišta se záložkami musí zůstat nad posouvaným obsahem (obsah pod ní přejížděl).
-        + "+'.topbar,.tabs{z-index:900 !important;background:#15120e !important}';"
+        + "+'.topbar,.tabs{z-index:900 !important;background:#15120e !important}'"
+        // Podkresový obrázek Kunštátu za celou hrou (Honza 25. 11.), ztmavený, aby text zůstal čitelný.
+        + "+'body{background:#0d0b09 !important}'"
+        + "+'body::before{content:\"\";position:fixed;inset:0;z-index:-1;pointer-events:none;'"
+        + "+'background:linear-gradient(rgba(13,11,9,.72),rgba(13,11,9,.86)),url(/img/pozadi.jpg) center/cover no-repeat;}'"
+        + "+'#app,.app{background:transparent !important}';"
         + "document.head.appendChild(cz);"
         + "var st=document.createElement('style');document.head.appendChild(st);"
         + "function apply(){var h=head()+24;st.textContent='html,body,*{scroll-padding-top:'+h+'px;scroll-padding-bottom:32px}'"
