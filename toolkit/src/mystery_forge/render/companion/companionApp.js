@@ -337,6 +337,12 @@
       el('p', { className: 'paper-kicker', text: ui('read_aloud') }),
       el('p', { className: 'intro-text', text: data.intro }),
       more,
+      data.intro_audio || canSpeak()
+        ? playButton(
+            { type: 'chapter', id: 'intro', stage: '', after: null, text: data.intro, audio: data.intro_audio },
+            ui('read_for_me'),
+          )
+        : null,
     ]);
   }
 
@@ -419,6 +425,31 @@
     return voices.find((candidate) => hint.test(candidate.name)) ?? voices[0] ?? null;
   }
 
+  /** @type {AudioContext | null} */
+  let audioContext = null;
+
+  /**
+   * Make a recording sound like a phone call: a band from 300 to 3400 Hz, as a phone line carries it. It works only
+   * when the page and the recording share an origin (the TV app); elsewhere the recording plays as it is.
+   * @param {HTMLAudioElement} audio
+   */
+  function phoneFilter(audio) {
+    try {
+      audioContext = audioContext ?? new AudioContext();
+      const source = audioContext.createMediaElementSource(audio);
+      const low = audioContext.createBiquadFilter();
+      low.type = 'highpass';
+      low.frequency.value = 300;
+      const high = audioContext.createBiquadFilter();
+      high.type = 'lowpass';
+      high.frequency.value = 3400;
+      source.connect(low).connect(high).connect(audioContext.destination);
+      void audioContext.resume();
+    } catch {
+      // No Web Audio here: the recording plays without the filter.
+    }
+  }
+
   /** @param {MysteryForgeCompanionCaseEntry} entry */
   function togglePlayback(entry) {
     const wasPlaying = playback.id === entry.id;
@@ -433,6 +464,10 @@
       };
       if (entry.audio) {
         const audio = new Audio(entry.audio);
+        // From file:// a filtered recording can turn silent, so the filter runs only when the TV serves the page.
+        if (entry.type === 'voice' && window.location.protocol.startsWith('http')) {
+          phoneFilter(audio);
+        }
         audio.addEventListener('ended', done);
         playback.id = entry.id;
         playback.audio = audio;
@@ -1891,6 +1926,19 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
           : null,
         score.epilogue
           ? el('p', { className: 'epilogue-text', text: score.epilogue.text, attrs: { id: 'accuse-epilogue' } })
+          : null,
+        score.epilogue && (score.epilogue.audio || canSpeak())
+          ? playButton(
+              {
+                type: 'chapter',
+                id: 'epilogue',
+                stage: '',
+                after: null,
+                text: score.epilogue.text,
+                audio: score.epilogue.audio ?? '',
+              },
+              ui('read_for_me'),
+            )
           : null,
       ]),
       answersList,

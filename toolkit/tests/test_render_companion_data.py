@@ -123,6 +123,7 @@ def test_epilogues_come_from_the_highest_threshold_down_and_reveal_steps_keep_th
         "min_score_percent": 75,
         "title": "Case closed",
         "text": "Felix confesses. The lens is back in the lamp room before the next storm.",
+        "audio": "",
     }
     assert data["reveal"][0] == "The thief came by water at night, so it was someone with a boat."
 

@@ -15,6 +15,7 @@ from typing import Any, Final
 from jinja2 import Environment, StrictUndefined
 
 from mystery_forge.answers import answer_hash, normalize_answer
+from mystery_forge.checks.investigation import EPILOGUE_AUDIO_PREFIX, INTRO_AUDIO
 from mystery_forge.game import AssembledPuzzle, Game
 from mystery_forge.i18n import STRINGS, known_language, text, text_direction
 from mystery_forge.render.archive import build_archive
@@ -62,6 +63,7 @@ def build_companion_data(game: Game) -> dict[str, Any]:
         "title": game.story.title,
         "tagline": game.story.tagline,
         "intro": game.story.intro,
+        "intro_audio": game.audio.get(INTRO_AUDIO, ""),
         "language": game.config.language,
         "salt": game.salt,
         "duration_minutes": game.config.duration_minutes,
@@ -82,7 +84,12 @@ def build_companion_data(game: Game) -> dict[str, Any]:
         "puzzles": [puzzle_data(puzzle, unlocks.get(puzzle.source.id), game) for puzzle in puzzles],
         "deduction": deduction_data(game.story.deduction, game.salt),
         "epilogues": [
-            {"min_score_percent": epilogue.min_score_percent, "title": epilogue.title, "text": epilogue.text}
+            {
+                "min_score_percent": epilogue.min_score_percent,
+                "title": epilogue.title,
+                "text": epilogue.text,
+                "audio": game.audio.get(f"{EPILOGUE_AUDIO_PREFIX}{epilogue.id}", ""),
+            }
             for epilogue in sorted(game.story.epilogues, key=lambda epilogue: -epilogue.min_score_percent)
         ],
         "reveal": [step.text for step in game.story.reveal],
@@ -150,6 +157,7 @@ def investigation_data(game: Game, codes: dict[str, str]) -> dict[str, Any] | No
             "after": codes.get(chapter.after) if chapter.after is not None else None,
             "title": chapter.title,
             "text": chapter.text,
+            "audio": game.audio.get(chapter.id, ""),
         }
         entries.append((entry_order(entry, stage_order, 0, index), entry))
     for index, message in enumerate(investigation.voice_messages):
@@ -243,8 +251,37 @@ def board_art_css(folder: Traversable) -> str:
     return f":root{{{';'.join(declarations)}}}" if declarations else ""
 
 
+MEDIA_FOLDER: Final[str] = "media"
+MEDIA_SUFFIXES: Final[dict[str, str]] = {
+    "audio/mpeg": ".mp3",
+    "audio/mp4": ".m4a",
+    "audio/ogg": ".ogg",
+    "audio/wav": ".wav",
+}
+
+
+def media_files(game: Game) -> dict[str, bytes]:
+    """The recordings of the game as files of the media folder, by file name. The player companion links to them,
+    so a large recording does not swell the page that every phone loads."""
+    media: dict[str, bytes] = {}
+    for audio_id, uri in game.audio.items():
+        head, _, encoded = uri.partition(";base64,")
+        media[f"{audio_id}{MEDIA_SUFFIXES.get(head.removeprefix('data:'), '.mp3')}"] = base64.b64decode(encoded)
+    return media
+
+
+def with_media_links(game: Game) -> Game:
+    """The game with each recording as a relative link into the media folder instead of a data URI."""
+    links: dict[str, str] = {name.rsplit(".", 1)[0]: f"{MEDIA_FOLDER}/{name}" for name in media_files(game)}
+    return game.model_copy(update={"audio": links})
+
+
 def build_player_companion_html(game: Game, art_folder: Traversable | None = None) -> str:
-    """Return the player companion: the page for the TV app and the phones, with the archive and no solutions."""
+    """Return the player companion: the page for the TV app and the phones, with the archive and no solutions.
+
+    The recordings stay out of the page: `media_files` gives them, and the page links to `media/<name>`.
+    """
+    game = with_media_links(game)
     archive: dict[str, Any] = build_archive(game, style_settings(game, None))
     folder: Traversable = art_folder or files("mystery_forge.render").joinpath(COMPANION_FOLDER, BOARD_ART_FOLDER)
     return companion_html(game, build_player_companion_data(game, archive), board_art_css(folder))

@@ -2198,3 +2198,30 @@ body.has-viewer {
   color: var(--ink);
   font: inherit;
 }
+
+/* A TV or a wide screen: the tabs sit on top with the icon beside the label, so the labels never get cut off. */
+@media (min-width: 900px) {
+  .tab {
+    flex-direction: row;
+    gap: 6px;
+    padding: 6px 4px;
+    font-size: 13px;
+  }
+
+  .tab-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+  }
+
+  .tab-label {
+    overflow: visible;
+    text-overflow: clip;
+  }
+}
+
+@media (min-width: 1400px) {
+  .tab {
+    font-size: 16px;
+  }
+}

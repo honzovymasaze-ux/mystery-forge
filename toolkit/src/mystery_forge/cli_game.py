@@ -61,7 +61,12 @@ from mystery_forge.plan import (
     relied_on_evidence_findings,
     stale_title_findings,
 )
-from mystery_forge.render.companion_data import build_companion_html, build_player_companion_html
+from mystery_forge.render.companion_data import (
+    MEDIA_FOLDER,
+    build_companion_html,
+    build_player_companion_html,
+    media_files,
+)
 from mystery_forge.render.game_renderer import PREVIEW_FOLDER, RenderReport, render_game
 from mystery_forge.render.pdf import BrowserNotFoundError, open_sheet_browser
 from mystery_forge.render.sheets import output_file_names
@@ -656,6 +661,11 @@ def render_and_report(
         companion.write_text(build_companion_html(game), encoding="utf-8")
         player: Path = render_dir / output_file_names(game.config.language).player_companion
         player.write_text(build_player_companion_html(game), encoding="utf-8")
+        media: Path = render_dir / MEDIA_FOLDER
+        shutil.rmtree(media, ignore_errors=True)
+        for name, content in media_files(game).items():
+            media.mkdir(exist_ok=True)
+            (media / name).write_bytes(content)
     # Without a browser nothing was read back from the pages, so only the HTML was written and nothing can be checked.
     rendered_findings: list[Finding] = [] if html_only else check_rendered(game, report, all_implementations())
     findings: list[Finding] = options.selected([*report.findings, *rendered_findings])

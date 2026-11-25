@@ -11,7 +11,12 @@ from test_spec_loader import GOLDEN_SOURCE
 from mystery_forge.checks.investigation import check_investigation
 from mystery_forge.checks.leaks import check_leaks
 from mystery_forge.game import Game
-from mystery_forge.render.companion_data import build_companion_data
+from mystery_forge.render.companion_data import (
+    build_companion_data,
+    build_player_companion_html,
+    media_files,
+    with_media_links,
+)
 from mystery_forge.render.materials import (
     ChapterBlock,
     ChaptersPage,
@@ -212,3 +217,34 @@ def test_a_paragraph_taller_than_a_page_splits_into_pieces() -> None:
     assert len(pieces) > 1
     assert all(not piece.heading for piece in pieces)
     assert split_chapter_block(ChapterBlock(text="Title", heading=True), 200) == [ChapterBlock("Title", True)]
+
+
+def test_a_recording_may_belong_to_a_chapter_the_intro_or_an_ending() -> None:
+    game = golden_game()
+    epilogue = game.story.epilogues[0].id
+    recordings = {name: "data:audio/mpeg;base64,AA==" for name in ("ch-a", "intro", f"epilog-{epilogue}")}
+    assert check_investigation(with_investigation(game, investigation([chapter("ch-a")]), recordings)) == []
+
+
+def test_the_companion_data_carries_the_recordings_of_chapters_the_intro_and_the_endings() -> None:
+    game = golden_game()
+    epilogue = game.story.epilogues[0]
+    recordings = {"ch-a": "data:audio/mpeg;base64,AQ==", "intro": "data:audio/mpeg;base64,Ag==",
+                  f"epilog-{epilogue.id}": "data:audio/mpeg;base64,Aw=="}  # fmt: skip
+    data = build_companion_data(with_investigation(game, investigation([chapter("ch-a")]), recordings))
+    assert data["intro_audio"] == "data:audio/mpeg;base64,Ag=="
+    assert data["investigation"]["entries"][0]["audio"] == "data:audio/mpeg;base64,AQ=="
+    assert next(item for item in data["epilogues"] if item["title"] == epilogue.title)["audio"].endswith("Aw==")
+    assert build_companion_data(game)["intro_audio"] == ""
+
+
+def test_the_player_version_links_recordings_as_media_files() -> None:
+    game = with_investigation(golden_game(), investigation([], [message("vm-a")]),
+                              {"vm-a": "data:audio/mpeg;base64,SUQz", "intro": "data:audio/ogg;base64,T2dn",
+                               "odd": "data:audio/x-unknown;base64,AA=="})  # fmt: skip
+    assert media_files(game) == {"vm-a.mp3": b"ID3", "intro.ogg": b"Ogg", "odd.mp3": b"\x00"}
+    linked = with_media_links(game)
+    assert linked.audio == {"vm-a": "media/vm-a.mp3", "intro": "media/intro.ogg", "odd": "media/odd.mp3"}
+    html = build_player_companion_html(game)
+    assert '"audio": "media/vm-a.mp3"' in html
+    assert "SUQz" not in html

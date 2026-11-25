@@ -339,6 +339,16 @@ def test_render_without_a_companion_page(game_dir: Path) -> None:
     assert not (game_dir / "render" / "Game companion.html").exists()
 
 
+def test_render_writes_the_recordings_next_to_the_player_companion(game_dir: Path) -> None:
+    audio = game_dir / "source" / "audio"
+    audio.mkdir()
+    (audio / "intro.mp3").write_bytes(b"ID3")
+    assert run(["render", "--game", str(game_dir), "--html-only"])["ok"] is True
+    assert (game_dir / "render" / "media" / "intro.mp3").read_bytes() == b"ID3"
+    player = (game_dir / "render" / "Player companion (TV and phones).html").read_text(encoding="utf-8")
+    assert '"intro_audio": "media/intro.mp3"' in player
+
+
 def test_render_and_export_name_the_files_in_the_game_language(game_dir: Path, tmp_path: Path) -> None:
     set_config(game_dir, language="es")
     assert run(["render", "--game", str(game_dir), "--html-only"])["ok"] is True

@@ -272,6 +272,8 @@ interface MysteryForgeCompanionEpilogue {
   min_score_percent: number;
   title: string;
   text: string;
+  /** The recording of the ending (a data URI, or a media/ link in the player version), or an empty text. */
+  audio?: string;
 }
 
 interface MysteryForgeCompanionData {
@@ -279,6 +281,8 @@ interface MysteryForgeCompanionData {
   title: string;
   tagline: string;
   intro: string;
+  /** The recording of the intro, or an empty text: the page then reads the intro with the speech voice. */
+  intro_audio: string;
   language: string;
   salt: string;
   duration_minutes: number;
