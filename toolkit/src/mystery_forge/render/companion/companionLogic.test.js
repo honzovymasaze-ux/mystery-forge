@@ -27,6 +27,7 @@ function sampleData() {
     title: 'The Lens of Gull Rock',
     tagline: 'The light went dark.',
     intro: 'Read me aloud.',
+    intro_audio: '',
     language: 'en',
     salt: SALT,
     duration_minutes: 30,

@@ -1,661 +1,985 @@
 format_version: 1
-
 narrator:
-  name: "kpt. {{char:jan-horak}}"
+  name: kpt. Jan Horák
   role: vedoucí vyšetřování
-
-# Produkční poznámky:
-# Kapitoly bez after se zobrazují při otevření příslušné obálky.
-# Kapitoly s after se zobrazují po úspěšném splnění daného úkolu.
-# Vypravěč ani kolegové nesdělují odpovědi před splněním úkolů.
-# Vyhodnocení viny probíhá výhradně prostřednictvím závěrečného obvinění.
-# Dokumenty se při kompletaci třídí podle pole stage, nikoli podle čísla.
-# D65–D69 proto patří do obálky A.
-# D70 obsahuje později doplněnou fotografii a závěrečný pokyn.
-# Cílová délka hry je 5–6 hodin; skutečná délka vyžaduje ověření playtestem.
-
 chapters:
-  - id: kap-a1
-    stage: A
-    title: Pondělní ráno
-    text: |
-      Do služby jsem nastoupil krátce před sedmou. Ještě jsem si
-      ani nestihl udělat kávu, když mi kolega oznámil nález těla
-      na koupališti v {{place:kunstat}}.
+- id: kap-a1
+  stage: A
+  title: Pondělní ráno
+  text: 'Do služby jsem nastoupil krátce před sedmou. Ještě jsem si
 
-      Takové telefonáty člověk po letech služby pozná. Na začátku
-      nikdo neví skoro nic, ale všichni už mají nějakou představu
-      o tom, co se asi stalo.
+    ani nestihl udělat kávu, když mi kolega oznámil nález těla
 
-      Když jsem dorazil na místo, pršelo. Bazén byl prázdný,
-      občerstvení zavřené a na plotě pořád visela vybledlá cedule
-      s letní otevírací dobou. U provozní budovy stála hlídka.
-      Uvnitř pracoval technik.
+    na koupališti v Kunštát.
 
-      Mrtvého muže znalo v tomhle regionu překvapivě mnoho lidí.
-      Pro někoho byl hospodský, pro někoho obchodní partner,
-      pro jiné člověk, který jim hrál na svatbě.
 
-      V průběhu dopoledne jsme začali mluvit s jeho nejbližšími.
-      Postupně se ukazovalo, že předchozí večer nebyl zdaleka tak
-      obyčejný, jak se zpočátku zdálo.
-
-      Před vámi leží první část spisu. Zatím nemáte výsledky
-      pitvy ani většinu technických podkladů.
+    Takové telefonáty člověk po letech služby pozná. Na začátku
 
-      Chci, abyste se seznámili se všemi prověřovanými osobami.
-      Zapisujte si, co tvrdí, ale také to, na co neodpověděly.
-
-      A pamatujte, že první výpověď je jen začátek vyšetřování.
+    nikdo neví skoro nic, ale všichni už mají nějakou představu
 
-  - id: kap-a2
-    stage: A
-    after: P1
-    title: Lidé za jmény
-    text: |
-      Místo nálezu už máme správně přiřazené. Teď potřebuji,
-      abychom se od samotné místnosti na chvíli vzdálili
-      a podívali se na lidi, kteří se kolem oběti pohybovali.
-
-      Když jsem poprvé četl výpověď jeho manželky, připadala
-      mi jako výpověď člověka, kterému se během několika hodin
-      rozpadl celý dosavadní život.
+    o tom, co se asi stalo.
 
-      Obchodní společník mluvil hlavně o technice a provozu.
-      Zaměstnankyně popisovala ranní nález. Konkurenční DJ se
-      vracel k zakázkám. Bratr mluvil o rodině a účetní se
-      držela odborných výrazů.
 
-      Každý z nich znal jinou část života stejného člověka.
+    Když jsem dorazil na místo, pršelo. Bazén byl prázdný,
 
-      Jenže žádná z těch částí zatím netvoří celý obraz.
+    občerstvení zavřené a na plotě pořád visela vybledlá cedule
 
-      Při vyšetřování podobných případů si zakládám jednoduchou
-      časovou osu. Nejdřív do ní vkládám jen události, které
-      dokážu nějakým způsobem nezávisle potvrdit. Teprve potom
-      přidávám výpovědi a neověřené časové odhady.
-
-      Zkuste postupovat stejně.
-
-      V prvních dokumentech najdete několik údajů o tom,
-      kdy oběť opustila svůj běžný pracovní režim a začala
-      vyřizovat nedělní večerní záležitosti.
-
-      Potřebuji jeden pevný bod, od kterého budeme pokračovat.
+    s letní otevírací dobou. U provozní budovy stála hlídka.
 
-      Nepřebírejte automaticky první čas, který najdete.
-      Podívejte se, odkud pochází a kdo ho může skutečně potvrdit.
-
-  - id: kap-b1
-    stage: B
-    title: Každý něco skrývá
-    text: |
-      V úterý dopoledne jsem dostal první souhrn zdravotnických
-      výsledků. Zároveň se nám začaly vracet odpovědi na žádosti
-      o provozní dokumentaci.
+    Uvnitř pracoval technik.
 
-      Podobné vyšetřování málokdy postupuje rovně. Spíš připomíná
-      situaci, kdy člověk otevře několik zásuvek a zjistí, že
-      každá obsahuje jiný nedokončený příběh.
 
-      Na jednom stole jsem měl osobní zprávy. Na druhém účetní
-      podklady. Kolega přinesl dokumenty k rodinnému dluhu
-      a technik mi oznámil, že na jednom zajištěném předmětu
-      máme použitelnou stopu.
+    Mrtvého muže znalo v tomhle regionu překvapivě mnoho lidí.
 
-      Bylo lákavé začít si okamžitě vytvářet vlastní teorii.
+    Pro někoho byl hospodský, pro někoho obchodní partner,
 
-      Nedovolil jsem si to.
+    pro jiné člověk, který jim hrál na svatbě.
 
-      Potřebuji totiž vědět, které skutečnosti mají přímý vztah
-      ke smrti oběti a které pouze vysvětlují, proč se některé
-      osoby chovají při výslechu nepřirozeně.
 
-      Dostáváte zdravotnické výsledky, první telefonní výpisy
-      a několik dokumentů, které nebyly při počátečním šetření
-      k dispozici.
+    V průběhu dopoledne jsme začali mluvit s jeho nejbližšími.
 
-      Podívejte se také znovu na první výpovědi. Některé věty
-      v nich nyní mohou působit jinak.
+    Postupně se ukazovalo, že předchozí večer nebyl zdaleka tak
 
-      Začněte tím, co dokážeme určit odborně, bez ohledu na
-      sympatie nebo antipatie k jednotlivým podezřelým.
+    obyčejný, jak se zpočátku zdálo.
 
-      Jakmile budeme mít jasno v základních zdravotnických
-      závěrech, můžeme se věnovat času a příležitosti.
 
-      Teprve potom začnou mít jednotlivá alibi skutečný význam.
+    Před vámi leží první část spisu. Zatím nemáte výsledky
 
-  - id: kap-b2
-    stage: B
-    after: P3
-    title: Co nám neřekli
-    text: |
-      Zdravotnické výsledky nám dovolují zúžit počet možných
-      vyšetřovacích verzí. Pořád ale máme před sebou stejnou
-      skupinu lidí a jejich nedělní večer.
+    pitvy ani většinu technických podkladů.
 
-      Při konfrontaci s dokumenty se někteří začali vracet ke
-      svým původním slovům. Jeden připustil návštěvu, o které
-      předtím nemluvil. Jiný nedokázal doložit část večera,
-      přestože si byl původně svým alibi naprosto jistý.
 
-      Vím, že takové rozpory mohou působit přesvědčivě.
+    Chci, abyste se seznámili se všemi prověřovanými osobami.
 
-      Jenže nepravdivá výpověď není automaticky přiznání vraždy.
-      Někdy člověk zatajuje vlastní dluh. Někdy nevěru. Někdy
-      se jen bojí, že pravdivé vysvětlení bude znít ještě hůř
-      než lež, kterou si předem připravil.
+    Zapisujte si, co tvrdí, ale také to, na co neodpověděly.
 
-      Chci, abyste si u každého člověka vedli dva oddělené
-      záznamy. První bude obsahovat možné motivy. Druhý skutečně
-      ověřené údaje o jeho pohybu.
 
-      Nezapočítávejte do osobního alibi elektronickou událost,
-      pokud nevíte, kdo ji opravdu provedl.
+    A pamatujte, že první výpověď je jen začátek vyšetřování.
 
-      A nezaměňujte pouhou možnost návštěvy za prokázanou
-      přítomnost v konkrétním okamžiku.
+    '
+- id: kap-a2
+  stage: A
+  after: P1
+  title: Lidé za jmény
+  text: 'Místo nálezu už máme správně přiřazené. Teď potřebuji,
 
-      Máme také několik záznamů, které nám pomáhají určit
-      časové období důležité pro další vyšetřování.
+    abychom se od samotné místnosti na chvíli vzdálili
 
-      Projděte zdravotnickou dokumentaci a zaznamenejte
-      předběžné časové mantinely.
+    a podívali se na lidi, kteří se kolem oběti pohybovali.
 
-      Je možné, že je později ještě upravíme. Teď ale musíme
-      pracovat s nejlepším podkladem, který máme k dispozici.
 
-  - id: kap-c1
-    stage: C
-    title: Hodiny nelžou. Ale mohou ukazovat špatný čas.
-    text: |
-      Ve středu jsem strávil skoro celé dopoledne s kolegyní
-      z digitální kriminalistiky. Na obrazovce jsme měli
-      několik kamerových záznamů, provozní výpisy a časové
-      údaje, které spolu na první pohled nesouhlasily.
+    Když jsem poprvé četl výpověď jeho manželky, připadala
 
-      Člověk má tendenci věřit tomu, co je napsané přímo
-      na snímku. Zvlášť když vidí datum, hodiny a minuty
-      v rohu obrazu.
+    mi jako výpověď člověka, kterému se během několika hodin
 
-      Jenže i přesně vypadající údaj může být nepřesný.
+    rozpadl celý dosavadní život.
 
-      Současně jsme začali prověřovat dokumentaci, kterou nám
-      poskytli organizátoři nedělních hudebních akcí. Ani tam
-      nebylo všechno tak jednoduché, jak znělo při prvním
-      výslechu.
 
-      Dostal se nám do rukou také inventurní protokol.
-      Je to jeden z těch obyčejných provozních formulářů,
-      jakých má každá firma plné šanony.
+    Obchodní společník mluvil hlavně o technice a provozu.
 
-      V tuto chvíli ještě nevíme, které z jeho údajů budou
-      pro případ skutečně důležité.
+    Zaměstnankyně popisovala ranní nález. Konkurenční DJ se
 
-      Proto vás žádám, abyste nevyřazovali žádnou evidenci
-      jen proto, že vám její význam zatím uniká.
+    vracel k zakázkám. Bratr mluvil o rodině a účetní se
 
-      V této obálce najdete časové podklady, svědecké výpovědi,
-      servisní dokumentaci a výsledky technického prověřování.
+    držela odborných výrazů.
 
-      Vaším úkolem je dostat všechny údaje na jednu společnou
-      časovou osu.
 
-      Pokud se dva dokumenty rozcházejí, nejdřív zjistěte
-      důvod. Teprve potom rozhodujte, který čas je správný.
+    Každý z nich znal jinou část života stejného člověka.
 
-  - id: kap-c2
-    stage: C
-    after: P5
-    title: Obraz bez kontextu
-    text: |
-      Právě jste opravili jeden z důležitých časových údajů.
-      Stejnou pozornost teď věnujte i ostatním záznamům.
 
-      Když mi kolegové poprvé přinesli snímky z parkoviště,
-      bylo velmi snadné přiřadit vozidlo člověku, který ho
-      běžně používal.
+    Jenže žádná z těch částí zatím netvoří celý obraz.
 
-      Takové přiřazení ale obsahuje předpoklad.
 
-      A předpoklad musím umět oddělit od toho, co skutečně
-      vidím na záznamu.
+    Při vyšetřování podobných případů si zakládám jednoduchou
 
-      Totéž platí o telefonu, přístupové kartě, pracovním účtu
-      nebo předem připraveném programu kulturní akce. Všechny
-      tyto věci vytvářejí záznamy. Ne všechny dokládají osobní
-      přítomnost svého majitele.
+    časovou osu. Nejdřív do ní vkládám jen události, které
 
-      Některé výpovědi se nám už podařilo doplnit nezávislými
-      podklady. Jiné mají stále významné mezery.
+    dokážu nějakým způsobem nezávisle potvrdit. Teprve potom
 
-      Všimněte si také, že několik svědků popsalo různé části
-      stejného večera. Neshodují se ve všech detailech a jejich
-      osobní časové odhady se liší.
+    přidávám výpovědi a neověřené časové odhady.
 
-      To nemusí znamenat, že všichni úmyslně lžou.
 
-      Když budu po člověku chtít přesný čas obyčejné nedělní
-      události, kterou v danou chvíli nepovažoval za důležitou,
-      nemohu očekávat dokonalou paměť.
+    Zkuste postupovat stejně.
 
-      Proto se znovu podívejte na nezávislé zdroje.
 
-      Další kontrolní otázka se týká rozdílu mezi událostí,
-      která byla pouze zaznamenána, a událostí, při které
-      dokážeme potvrdit přítomnost konkrétního člověka.
+    V prvních dokumentech najdete několik údajů o tom,
 
-  - id: kap-d1
-    stage: D
-    title: Cena mlčení
-    text: |
-      Čtvrtek jsme začali na hospodářském oddělení.
+    kdy oběť opustila svůj běžný pracovní režim a začala
 
-      Kolega měl před sebou vytištěné účetní výstupy, faktury,
-      potvrzení a několik tabulek. Na první pohled to celé
-      působilo jako velmi nepřehledný obchodní spor.
+    vyřizovat nedělní večerní záležitosti.
 
-      Jenže peníze mají jednu užitečnou vlastnost. Pokud je
-      jejich pohyb dostatečně zdokumentovaný, dají se jednotlivé
-      události od sebe poměrně přesně oddělit.
 
-      V tomto případě jsme od začátku věděli o několika
-      různých finančních problémech.
+    Potřebuji jeden pevný bod, od kterého budeme pokračovat.
 
-      Někdo dlužil oběti. Oběť dlužila někomu jinému.
-      V podnikové evidenci byly soukromé výdaje a současně
-      se objevovaly rozdíly v zákaznických platbách.
 
-      Nechtěl jsem, aby se nám všechny tyto skutečnosti
-      slily do jednoho neurčitého podezření.
+    Nepřebírejte automaticky první čas, který najdete.
 
-      Proto jsme jednotlivé skupiny začali prověřovat zvlášť.
+    Podívejte se, odkud pochází a kdo ho může skutečně potvrdit.
 
-      Současně jsme dokončovali další konfrontační výslechy
-      a získávali podklady k večernímu pohybu osob, u kterých
-      dosud chybělo spolehlivé alibi.
+    '
+- id: kap-b1
+  stage: B
+  title: Každý něco skrývá
+  text: 'V úterý dopoledne jsem dostal první souhrn zdravotnických
 
-      Před vámi je nyní hospodářská část spisu.
+    výsledků. Zároveň se nám začaly vracet odpovědi na žádosti
 
-      Některé dokumenty jsou delší a obsahují více čísel.
-      Doporučuji, abyste si rozdělili práci a následně si
-      jednotlivá zjištění navzájem vysvětlili.
+    o provozní dokumentaci.
 
-      Není potřeba rozumět účetnictví jako profesionál.
 
-      Potřebujete především rozlišit, o jakou platbu jde,
-      kdo ji evidoval a ke komu peníze ve skutečnosti směřovaly.
+    Podobné vyšetřování málokdy postupuje rovně. Spíš připomíná
 
-  - id: kap-d2
-    stage: D
-    after: P7
-    title: Za čísly jsou lidé
-    text: |
-      Výše jednotlivých finančních nesrovnalostí už začíná být
-      mnohem přehlednější.
+    situaci, kdy člověk otevře několik zásuvek a zjistí, že
 
-      Z vlastní zkušenosti vím, že velká částka může v člověku
-      vyvolat silnější podezření než malá. Při vyšetřování ale
-      samotná velikost částky nerozhoduje.
+    každá obsahuje jiný nedokončený příběh.
 
-      Potřebuji vědět, komu konkrétně hrozilo odhalení, čeho
-      se měl obávat a zda existuje souvislost mezi touto obavou
-      a událostmi nedělního večera.
 
-      Máme před sebou několik různých identifikátorů.
-      Některé označují provozní subjekt. Jiné konkrétní
-      platební profil nebo bankovní cíl.
+    Na jednom stole jsem měl osobní zprávy. Na druhém účetní
 
-      Není správné je zaměňovat.
+    podklady. Kolega přinesl dokumenty k rodinnému dluhu
 
-      Zkuste si představit, že zkoumáte zásilku. Jeden údaj
-      označuje odesílatele, druhý přepravní službu a třetí
-      člověka, kterému nakonec skutečně dorazila.
+    a technik mi oznámil, že na jednom zajištěném předmětu
 
-      Teprve propojením všech potřebných údajů získáte
-      úplný obraz její cesty.
+    máme použitelnou stopu.
 
-      Podobně budeme postupovat i u finančních dokumentů.
 
-      Mezitím si znovu projděte časovou osu. Několik původních
-      výpovědí už bylo změněno, další stále čekají na úplné
-      prověření.
+    Bylo lákavé začít si okamžitě vytvářet vlastní teorii.
 
-      Nechci, abyste se při práci s penězi přestali věnovat
-      ostatním důkazům.
 
-      Finanční motiv může vysvětlit, proč někdo jednal.
-      Nemůže sám o sobě prokázat, že byl na místě činu.
+    Nedovolil jsem si to.
 
-      Potřebujeme obojí. A pokud možno ještě něco, co obě
-      části příběhu spojí.
 
-  - id: kap-e1
-    stage: E
-    title: Poslední obálka
-    text: |
-      Je pátek odpoledne.
+    Potřebuji totiž vědět, které skutečnosti mají přímý vztah
 
-      Od prvního oznámení uplynulo pět dní. Na stole mám
-      závěrečné materiálové expertizy, další potvrzení,
-      dokončenou časovou analýzu a poslední konfrontační
-      výpovědi.
+    ke smrti oběti a které pouze vysvětlují, proč se některé
 
-      Když jsme v pondělí začínali, nikdo z nás nevěděl,
-      jestli se případ podaří objasnit.
+    osoby chovají při výslechu nepřirozeně.
 
-      Postupně jsme objevovali věci, které se smrtí oběti
-      souvisely přímo, i věci, které by za jiných okolností
-      zůstaly jen soukromým nebo obchodním problémem.
 
-      Některé osoby přišly o naši důvěru, když jsme zjistili,
-      že nám neříkaly pravdu. U dalších jsme museli změnit
-      původní představu o tom, co jejich výpověď znamenala.
+    Dostáváte zdravotnické výsledky, první telefonní výpisy
 
-      Teď ale potřebujeme přestat hodnotit jednotlivé
-      dokumenty odděleně.
+    a několik dokumentů, které nebyly při počátečním šetření
 
-      Vraťte se k prvnímu ohledání. Připomeňte si, jaké
-      předměty byly zajištěny. Projděte inventurní evidenci,
-      laboratorní výsledky, telefonní údaje a všechny
-      pozdější změny výpovědí.
+    k dispozici.
 
-      U každého důkazu si položte otázku, co opravdu
-      prokazuje a co už by bylo jen vaším předpokladem.
 
-      Závěrečná obálka obsahuje vše, co jsme dosud postrádali.
+    Podívejte se také znovu na první výpovědi. Některé věty
 
-      Nedám vám žádné jméno ani hotovou teorii.
+    v nich nyní mohou působit jinak.
 
-      Chci, abyste dokázali sestavit rekonstrukci sami.
 
-      Až ji budete mít, musí dávat smysl nejen vám, ale
-      také člověku, který celý případ dosud vůbec neznal.
+    Začněte tím, co dokážeme určit odborně, bez ohledu na
 
-  - id: kap-e2
-    stage: E
-    after: P9
-    title: Od podezření k důkazu
-    text: |
-      Nyní máte přesnější časové vymezení fyzického konfliktu.
-      Je načase znovu otevřít vlastní poznámky z předchozích
-      obálek.
+    sympatie nebo antipatie k jednotlivým podezřelým.
 
-      U některých osob se možná váš názor změní. Alibi,
-      které dříve nepokrývalo celé pracovní období,
-      může mít po zpřesnění času jinou důkazní hodnotu.
 
-      Stejně tak záznam přístroje, který dříve vypadal jako
-      přesvědčivé potvrzení výpovědi, nemusí po získání
-      dalších podkladů znamenat totéž.
+    Jakmile budeme mít jasno v základních zdravotnických
 
-      Teď už nechci žádné nové domněnky.
+    závěrech, můžeme se věnovat času a příležitosti.
 
-      Chci, abyste systematicky prošli všech sedm osob.
-      U každé určete motiv, původní tvrzení, změněnou
-      výpověď a skutečně ověřenou přítomnost.
 
-      Potom se soustřeďte na fyzické stopy.
+    Teprve potom začnou mít jednotlivá alibi skutečný význam.
 
-      Materiálová expertiza může velmi přesně určit původ
-      zkoumaného předmětu. Sama ale nemusí vysvětlit jeho
-      cestu na místo nálezu.
+    '
+- id: kap-b2
+  stage: B
+  after: P3
+  title: Co nám neřekli
+  text: 'Zdravotnické výsledky nám dovolují zúžit počet možných
 
-      Tu musíte rekonstruovat pomocí dalších dokumentů.
+    vyšetřovacích verzí. Pořád ale máme před sebou stejnou
 
-      Zvlášť důležité je rozlišit evidenční označení
-      zajištěné stopy od označení celého předmětu a údaje
-      o jeho původním držiteli.
+    skupinu lidí a jejich nedělní večer.
 
-      Právě proto jsem vám ponechal všechny materiály
-      z předchozích částí případu.
 
-      Než otevřeme závěrečné obvinění, ověřte si, že
-      pracujete se správnou stopou a že její význam
-      dokážete vysvětlit bez jakéhokoli neprokázaného
-      předpokladu.
+    Při konfrontaci s dokumenty se někteří začali vracet ke
 
-      To je rozdíl mezi podezřením a důkazním řetězcem.
+    svým původním slovům. Jeden připustil návštěvu, o které
 
-  - id: kap-e3
-    stage: E
-    after: P10
-    title: Rozhodnutí je na vás
-    text: |
-      Tímto končí předávání důkazů.
+    předtím nemluvil. Jiný nedokázal doložit část večera,
 
-      V průběhu vyšetřování jste dostali sedmdesát dokumentů.
-      Některé vám poskytly zásadní zjištění. Jiné pomohly
-      vysvětlit okolnosti, které původně vypadaly podezřele.
+    přestože si byl původně svým alibi naprosto jistý.
 
-      Teď už před sebou nemáte neznámého člověka nalezeného
-      v prázdném rekreačním areálu.
 
-      Znáte jeho rodinné vztahy, podnikatelské problémy,
-      pracovní spory i některá tajemství, která se snažil
-      před okolím uchovat.
+    Vím, že takové rozpory mohou působit přesvědčivě.
 
-      Stejně tak znáte mnohem lépe lidi, které jsme
-      v souvislosti s jeho smrtí prověřovali.
 
-      Potřebuji od vás čtyři závěrečné odpovědi.
+    Jenže nepravdivá výpověď není automaticky přiznání vraždy.
 
-      Než je potvrdíte, doporučuji, aby každý člen týmu
-      stručně vysvětlil vlastní pohled na případ. Pokud se
-      v něčem neshodnete, vraťte se k příslušným dokumentům.
+    Někdy člověk zatajuje vlastní dluh. Někdy nevěru. Někdy
 
-      Nehlasujte podle toho, kdo vám připadá nejméně
-      sympatický nebo kdo během výslechu nejvíce lhal.
+    se jen bojí, že pravdivé vysvětlení bude znít ještě hůř
 
-      Zkuste si představit, že vaše závěrečná rekonstrukce
-      bude zítra předložena někomu, kdo má povinnost
-      prověřit každý její jednotlivý krok.
+    než lež, kterou si předem připravil.
 
-      Dokážete vysvětlit příčinu smrti?
 
-      Dokážete spojit motiv s konkrétním člověkem?
+    Chci, abyste si u každého člověka vedli dva oddělené
 
-      Dokážete prokázat jeho spojení s fyzickým konfliktem
-      a současně vysvětlit, proč za něj neodpovídají ostatní?
+    záznamy. První bude obsahovat možné motivy. Druhý skutečně
 
-      Pokud ano, přejděte k závěrečnému obvinění.
+    ověřené údaje o jeho pohybu.
 
-      Tentokrát už nebudeme hledat správné číslo ani čas.
 
-      Tentokrát rozhodujete o celém případu.
+    Nezapočítávejte do osobního alibi elektronickou událost,
 
+    pokud nevíte, kdo ji opravdu provedl.
+
+
+    A nezaměňujte pouhou možnost návštěvy za prokázanou
+
+    přítomnost v konkrétním okamžiku.
+
+
+    Máme také několik záznamů, které nám pomáhají určit
+
+    časové období důležité pro další vyšetřování.
+
+
+    Projděte zdravotnickou dokumentaci a zaznamenejte
+
+    předběžné časové mantinely.
+
+
+    Je možné, že je později ještě upravíme. Teď ale musíme
+
+    pracovat s nejlepším podkladem, který máme k dispozici.
+
+    '
+- id: kap-c1
+  stage: C
+  title: Hodiny nelžou. Ale mohou ukazovat špatný čas.
+  text: 'Ve středu jsem strávil skoro celé dopoledne s kolegyní
+
+    z digitální kriminalistiky. Na obrazovce jsme měli
+
+    několik kamerových záznamů, provozní výpisy a časové
+
+    údaje, které spolu na první pohled nesouhlasily.
+
+
+    Člověk má tendenci věřit tomu, co je napsané přímo
+
+    na snímku. Zvlášť když vidí datum, hodiny a minuty
+
+    v rohu obrazu.
+
+
+    Jenže i přesně vypadající údaj může být nepřesný.
+
+
+    Současně jsme začali prověřovat dokumentaci, kterou nám
+
+    poskytli organizátoři nedělních hudebních akcí. Ani tam
+
+    nebylo všechno tak jednoduché, jak znělo při prvním
+
+    výslechu.
+
+
+    Dostal se nám do rukou také inventurní protokol.
+
+    Je to jeden z těch obyčejných provozních formulářů,
+
+    jakých má každá firma plné šanony.
+
+
+    V tuto chvíli ještě nevíme, které z jeho údajů budou
+
+    pro případ skutečně důležité.
+
+
+    Proto vás žádám, abyste nevyřazovali žádnou evidenci
+
+    jen proto, že vám její význam zatím uniká.
+
+
+    V této obálce najdete časové podklady, svědecké výpovědi,
+
+    servisní dokumentaci a výsledky technického prověřování.
+
+
+    Vaším úkolem je dostat všechny údaje na jednu společnou
+
+    časovou osu.
+
+
+    Pokud se dva dokumenty rozcházejí, nejdřív zjistěte
+
+    důvod. Teprve potom rozhodujte, který čas je správný.
+
+    '
+- id: kap-c2
+  stage: C
+  after: P5
+  title: Obraz bez kontextu
+  text: 'Právě jste opravili jeden z důležitých časových údajů.
+
+    Stejnou pozornost teď věnujte i ostatním záznamům.
+
+
+    Když mi kolegové poprvé přinesli snímky z parkoviště,
+
+    bylo velmi snadné přiřadit vozidlo člověku, který ho
+
+    běžně používal.
+
+
+    Takové přiřazení ale obsahuje předpoklad.
+
+
+    A předpoklad musím umět oddělit od toho, co skutečně
+
+    vidím na záznamu.
+
+
+    Totéž platí o telefonu, přístupové kartě, pracovním účtu
+
+    nebo předem připraveném programu kulturní akce. Všechny
+
+    tyto věci vytvářejí záznamy. Ne všechny dokládají osobní
+
+    přítomnost svého majitele.
+
+
+    Některé výpovědi se nám už podařilo doplnit nezávislými
+
+    podklady. Jiné mají stále významné mezery.
+
+
+    Všimněte si také, že několik svědků popsalo různé části
+
+    stejného večera. Neshodují se ve všech detailech a jejich
+
+    osobní časové odhady se liší.
+
+
+    To nemusí znamenat, že všichni úmyslně lžou.
+
+
+    Když budu po člověku chtít přesný čas obyčejné nedělní
+
+    události, kterou v danou chvíli nepovažoval za důležitou,
+
+    nemohu očekávat dokonalou paměť.
+
+
+    Proto se znovu podívejte na nezávislé zdroje.
+
+
+    Další kontrolní otázka se týká rozdílu mezi událostí,
+
+    která byla pouze zaznamenána, a událostí, při které
+
+    dokážeme potvrdit přítomnost konkrétního člověka.
+
+    '
+- id: kap-d1
+  stage: D
+  title: Cena mlčení
+  text: 'Čtvrtek jsme začali na hospodářském oddělení.
+
+
+    Kolega měl před sebou vytištěné účetní výstupy, faktury,
+
+    potvrzení a několik tabulek. Na první pohled to celé
+
+    působilo jako velmi nepřehledný obchodní spor.
+
+
+    Jenže peníze mají jednu užitečnou vlastnost. Pokud je
+
+    jejich pohyb dostatečně zdokumentovaný, dají se jednotlivé
+
+    události od sebe poměrně přesně oddělit.
+
+
+    V tomto případě jsme od začátku věděli o několika
+
+    různých finančních problémech.
+
+
+    Někdo dlužil oběti. Oběť dlužila někomu jinému.
+
+    V podnikové evidenci byly soukromé výdaje a současně
+
+    se objevovaly rozdíly v zákaznických platbách.
+
+
+    Nechtěl jsem, aby se nám všechny tyto skutečnosti
+
+    slily do jednoho neurčitého podezření.
+
+
+    Proto jsme jednotlivé skupiny začali prověřovat zvlášť.
+
+
+    Současně jsme dokončovali další konfrontační výslechy
+
+    a získávali podklady k večernímu pohybu osob, u kterých
+
+    dosud chybělo spolehlivé alibi.
+
+
+    Před vámi je nyní hospodářská část spisu.
+
+
+    Některé dokumenty jsou delší a obsahují více čísel.
+
+    Doporučuji, abyste si rozdělili práci a následně si
+
+    jednotlivá zjištění navzájem vysvětlili.
+
+
+    Není potřeba rozumět účetnictví jako profesionál.
+
+
+    Potřebujete především rozlišit, o jakou platbu jde,
+
+    kdo ji evidoval a ke komu peníze ve skutečnosti směřovaly.
+
+    '
+- id: kap-d2
+  stage: D
+  after: P7
+  title: Za čísly jsou lidé
+  text: 'Výše jednotlivých finančních nesrovnalostí už začíná být
+
+    mnohem přehlednější.
+
+
+    Z vlastní zkušenosti vím, že velká částka může v člověku
+
+    vyvolat silnější podezření než malá. Při vyšetřování ale
+
+    samotná velikost částky nerozhoduje.
+
+
+    Potřebuji vědět, komu konkrétně hrozilo odhalení, čeho
+
+    se měl obávat a zda existuje souvislost mezi touto obavou
+
+    a událostmi nedělního večera.
+
+
+    Máme před sebou několik různých identifikátorů.
+
+    Některé označují provozní subjekt. Jiné konkrétní
+
+    platební profil nebo bankovní cíl.
+
+
+    Není správné je zaměňovat.
+
+
+    Zkuste si představit, že zkoumáte zásilku. Jeden údaj
+
+    označuje odesílatele, druhý přepravní službu a třetí
+
+    člověka, kterému nakonec skutečně dorazila.
+
+
+    Teprve propojením všech potřebných údajů získáte
+
+    úplný obraz její cesty.
+
+
+    Podobně budeme postupovat i u finančních dokumentů.
+
+
+    Mezitím si znovu projděte časovou osu. Několik původních
+
+    výpovědí už bylo změněno, další stále čekají na úplné
+
+    prověření.
+
+
+    Nechci, abyste se při práci s penězi přestali věnovat
+
+    ostatním důkazům.
+
+
+    Finanční motiv může vysvětlit, proč někdo jednal.
+
+    Nemůže sám o sobě prokázat, že byl na místě činu.
+
+
+    Potřebujeme obojí. A pokud možno ještě něco, co obě
+
+    části příběhu spojí.
+
+    '
+- id: kap-e1
+  stage: E
+  title: Poslední obálka
+  text: 'Je pátek odpoledne.
+
+
+    Od prvního oznámení uplynulo pět dní. Na stole mám
+
+    závěrečné materiálové expertizy, další potvrzení,
+
+    dokončenou časovou analýzu a poslední konfrontační
+
+    výpovědi.
+
+
+    Když jsme v pondělí začínali, nikdo z nás nevěděl,
+
+    jestli se případ podaří objasnit.
+
+
+    Postupně jsme objevovali věci, které se smrtí oběti
+
+    souvisely přímo, i věci, které by za jiných okolností
+
+    zůstaly jen soukromým nebo obchodním problémem.
+
+
+    Některé osoby přišly o naši důvěru, když jsme zjistili,
+
+    že nám neříkaly pravdu. U dalších jsme museli změnit
+
+    původní představu o tom, co jejich výpověď znamenala.
+
+
+    Teď ale potřebujeme přestat hodnotit jednotlivé
+
+    dokumenty odděleně.
+
+
+    Vraťte se k prvnímu ohledání. Připomeňte si, jaké
+
+    předměty byly zajištěny. Projděte inventurní evidenci,
+
+    laboratorní výsledky, telefonní údaje a všechny
+
+    pozdější změny výpovědí.
+
+
+    U každého důkazu si položte otázku, co opravdu
+
+    prokazuje a co už by bylo jen vaším předpokladem.
+
+
+    Závěrečná obálka obsahuje vše, co jsme dosud postrádali.
+
+
+    Nedám vám žádné jméno ani hotovou teorii.
+
+
+    Chci, abyste dokázali sestavit rekonstrukci sami.
+
+
+    Až ji budete mít, musí dávat smysl nejen vám, ale
+
+    také člověku, který celý případ dosud vůbec neznal.
+
+    '
+- id: kap-e2
+  stage: E
+  after: P9
+  title: Od podezření k důkazu
+  text: 'Nyní máte přesnější časové vymezení fyzického konfliktu.
+
+    Je načase znovu otevřít vlastní poznámky z předchozích
+
+    obálek.
+
+
+    U některých osob se možná váš názor změní. Alibi,
+
+    které dříve nepokrývalo celé pracovní období,
+
+    může mít po zpřesnění času jinou důkazní hodnotu.
+
+
+    Stejně tak záznam přístroje, který dříve vypadal jako
+
+    přesvědčivé potvrzení výpovědi, nemusí po získání
+
+    dalších podkladů znamenat totéž.
+
+
+    Teď už nechci žádné nové domněnky.
+
+
+    Chci, abyste systematicky prošli všech sedm osob.
+
+    U každé určete motiv, původní tvrzení, změněnou
+
+    výpověď a skutečně ověřenou přítomnost.
+
+
+    Potom se soustřeďte na fyzické stopy.
+
+
+    Materiálová expertiza může velmi přesně určit původ
+
+    zkoumaného předmětu. Sama ale nemusí vysvětlit jeho
+
+    cestu na místo nálezu.
+
+
+    Tu musíte rekonstruovat pomocí dalších dokumentů.
+
+
+    Zvlášť důležité je rozlišit evidenční označení
+
+    zajištěné stopy od označení celého předmětu a údaje
+
+    o jeho původním držiteli.
+
+
+    Právě proto jsem vám ponechal všechny materiály
+
+    z předchozích částí případu.
+
+
+    Než otevřeme závěrečné obvinění, ověřte si, že
+
+    pracujete se správnou stopou a že její význam
+
+    dokážete vysvětlit bez jakéhokoli neprokázaného
+
+    předpokladu.
+
+
+    To je rozdíl mezi podezřením a důkazním řetězcem.
+
+    '
+- id: kap-e3
+  stage: E
+  after: P10
+  title: Rozhodnutí je na vás
+  text: 'Tímto končí předávání důkazů.
+
+
+    V průběhu vyšetřování jste dostali sedmdesát dokumentů.
+
+    Některé vám poskytly zásadní zjištění. Jiné pomohly
+
+    vysvětlit okolnosti, které původně vypadaly podezřele.
+
+
+    Teď už před sebou nemáte neznámého člověka nalezeného
+
+    v prázdném rekreačním areálu.
+
+
+    Znáte jeho rodinné vztahy, podnikatelské problémy,
+
+    pracovní spory i některá tajemství, která se snažil
+
+    před okolím uchovat.
+
+
+    Stejně tak znáte mnohem lépe lidi, které jsme
+
+    v souvislosti s jeho smrtí prověřovali.
+
+
+    Potřebuji od vás čtyři závěrečné odpovědi.
+
+
+    Než je potvrdíte, doporučuji, aby každý člen týmu
+
+    stručně vysvětlil vlastní pohled na případ. Pokud se
+
+    v něčem neshodnete, vraťte se k příslušným dokumentům.
+
+
+    Nehlasujte podle toho, kdo vám připadá nejméně
+
+    sympatický nebo kdo během výslechu nejvíce lhal.
+
+
+    Zkuste si představit, že vaše závěrečná rekonstrukce
+
+    bude zítra předložena někomu, kdo má povinnost
+
+    prověřit každý její jednotlivý krok.
+
+
+    Dokážete vysvětlit příčinu smrti?
+
+
+    Dokážete spojit motiv s konkrétním člověkem?
+
+
+    Dokážete prokázat jeho spojení s fyzickým konfliktem
+
+    a současně vysvětlit, proč za něj neodpovídají ostatní?
+
+
+    Pokud ano, přejděte k závěrečnému obvinění.
+
+
+    Tentokrát už nebudeme hledat správné číslo ani čas.
+
+
+    Tentokrát rozhodujete o celém případu.
+
+    '
 voice_messages:
-  - id: hz-a1
-    stage: A
-    sender: "nprap. {{char:petr-hala}}"
-    role: kriminalista na místě nálezu
-    voice: male
-    text: |
-      Ahoj, týme. Máte tam první protokol z koupaliště.
-      Než se pustíte do výpovědí, projděte si pořádně
-      soupis zajištěných věcí. Zatím nevíme, co z toho
-      bude podstatné. Hlavně si nepleťte místo nálezu
-      s automaticky prokázaným místem vzniku všech stop.
+- id: hz-a1
+  stage: A
+  sender: nprap. Petr Hála
+  role: kriminalista na místě nálezu
+  voice: male
+  text: 'Ahoj, týme. Máte tam první protokol z koupaliště.
 
-  - id: hz-a2
-    stage: A
-    sender: "{{char:david-kolar}}"
-    role: kriminalistický technik
-    voice: male
-    text: |
-      Zdravím. Jen krátká poznámka k těm předmětům.
-      Některé jsou úplně běžné provozní věci, jiné
-      zatím neumíme nikam zařadit. Všechno jsme
-      zaevidovali samostatně. Nevyvozujte nic jen
-      z toho, že určitá věc ležela vedle těla.
+    Než se pustíte do výpovědí, projděte si pořádně
 
-  - id: hz-a3
-    stage: A
-    after: P1
-    sender: "{{char:klara-vesela}}"
-    role: analytička digitálních důkazů
-    voice: female
-    text: |
-      Povedlo se nám získat provozní záznamy z hospody.
-      Až budete řešit poslední potvrzený odchod,
-      porovnejte výpovědi s pokladnou a kamerovou
-      evidencí. Jeden čas je jen vzpomínka člověka,
-      jiný vychází z nezávislého záznamu.
+    soupis zajištěných věcí. Zatím nevíme, co z toho
 
-  - id: hz-b1
-    stage: B
-    sender: "MUDr. {{char:vera-kalinova}}"
-    role: soudní lékařka
-    voice: female
-    text: |
-      Dobrý den. První zdravotnické výsledky máte
-      před sebou. Doporučuji číst především závěrečná
-      stanoviska, nevytrhávat jednotlivé nálezy
-      z kontextu. Časové určení je zatím pracovní.
-      Samotná pitva nám neumí říct přesnou minutu
-      každé události.
+    bude podstatné. Hlavně si nepleťte místo nálezu
 
-  - id: hz-b2
-    stage: B
-    sender: "{{char:david-kolar}}"
-    role: kriminalistický technik
-    voice: male
-    text: |
-      Máme použitelný výsledek daktyloskopie.
-      Jen připomínám, že otisk prstu prokazuje
-      kontakt s předmětem. Neříká automaticky, kdy
-      k němu došlo. Podívejte se, co jednotliví lidé
-      uváděli o svých dřívějších návštěvách.
+    s automaticky prokázaným místem vzniku všech stop.
 
-  - id: hz-b3
-    stage: B
-    after: P3
-    sender: "{{char:klara-vesela}}"
-    role: analytička telefonních záznamů
-    voice: female
-    text: |
-      K telefonním výpisům jedna důležitá věc.
-      Datová relace neznamená, že někdo zrovna
-      držel telefon v ruce. Stejně tak buňka
-      mobilní sítě není přesná poloha člověka.
-      Berte ty údaje jako jednu část skládačky.
+    '
+- id: hz-a2
+  stage: A
+  sender: David Kolář
+  role: kriminalistický technik
+  voice: male
+  text: 'Zdravím. Jen krátká poznámka k těm předmětům.
 
-  - id: hz-c1
-    stage: C
-    sender: "{{char:klara-vesela}}"
-    role: analytička digitálních důkazů
-    voice: female
-    text: |
-      Máme hotovou kontrolu kamerových hodin.
-      U jednoho zařízení neseděl systémový čas.
-      Originální snímky jsme samozřejmě nechali
-      beze změny. Než je vložíte do časové osy,
-      podívejte se na kalibrační protokol a ověřte,
-      kterých záznamů se korekce opravdu týká.
+    Některé jsou úplně běžné provozní věci, jiné
 
-  - id: hz-c2
-    stage: C
-    sender: "nprap. {{char:petr-hala}}"
-    role: kriminalista
-    voice: male
-    text: |
-      Dělal jsem další rozhovory se svědky z okolí.
-      Někteří si dobře pamatují pořadí událostí,
-      ale s přesnými časy je to horší. Pokud vám
-      jejich výpovědi nesedí s kamerami, zkuste
-      nejdřív zjistit, podle čeho si ten čas určili.
+    zatím neumíme nikam zařadit. Všechno jsme
 
-  - id: hz-c3
-    stage: C
-    after: P5
-    sender: "{{char:klara-vesela}}"
-    role: analytička audiovizuálních záznamů
-    voice: female
-    text: |
-      U hudebního vystoupení jsme dostali kompletní
-      produkční záznam, nejen to, co viděli diváci.
-      Projděte si harmonogram, vyjádření zvukaře
-      a skutečný obrazový výstup. Pro osobní alibi
-      potřebujeme vědět, kdy byl účinkující opravdu
-      přítomen.
+    zaevidovali samostatně. Nevyvozujte nic jen
 
-  - id: hz-d1
-    stage: D
-    sender: "{{char:martin-simek}}"
-    role: kriminalista hospodářské kriminality
-    voice: male
-    text: |
-      Ahoj, tady hospodářské. Rozdělili jsme vám
-      finanční podklady podle jednotlivých skupin.
-      Nesčítejte automaticky všechno, co vypadá
-      jako dluh nebo chybějící peníze. Každá skupina
-      má vlastní původ, dokumentaci a možné
-      odpovědné osoby.
+    z toho, že určitá věc ležela vedle těla.
 
-  - id: hz-d2
-    stage: D
-    sender: "nprap. {{char:petr-hala}}"
-    role: kriminalista
-    voice: male
-    text: |
-      Dorazily další podklady k osobním alibi.
-      U některých lidí jsme konečně získali
-      konkrétnější vysvětlení jejich večerního
-      programu. Porovnejte nové výpovědi s těmi
-      původními. A hlavně zkontrolujte, jestli
-      máme i nezávislé potvrzení.
+    '
+- id: hz-a3
+  stage: A
+  after: P1
+  sender: Klára Veselá
+  role: analytička digitálních důkazů
+  voice: female
+  text: 'Povedlo se nám získat provozní záznamy z hospody.
 
-  - id: hz-d3
-    stage: D
-    after: P7
-    sender: "{{char:martin-simek}}"
-    role: finanční analytik
-    voice: male
-    text: |
-      Ještě k těm platbám. V exportu je interní
-      označení příjemce, ale banka používá jiný
-      identifikátor. Mezi těmito údaji existuje
-      samostatná evidence. Potřebujete najít
-      správnou návaznost. Samotné číslo profilu
-      vám skutečného majitele účtu neřekne.
+    Až budete řešit poslední potvrzený odchod,
 
-  - id: hz-e1
-    stage: E
-    sender: "{{char:david-kolar}}"
-    role: kriminalistický technik
-    voice: male
-    text: |
-      Konečně máme uzavřené materiálové zkoumání.
-      Výsledek porovnání je v laboratorním
-      protokolu. Ale budete potřebovat i původní
-      evidenci zajištění a inventurní dokumentaci.
-      Laboratoř umí určit původ předmětu. Jeho
-      konkrétní historii musíte sestavit vy.
+    porovnejte výpovědi s pokladnou a kamerovou
 
-  - id: hz-e2
-    stage: E
-    sender: "MUDr. {{char:vera-kalinova}}"
-    role: soudní lékařka
-    voice: female
-    text: |
-      S kolegyní z digitálního oddělení jsme dokončily
-      společné časové stanovisko. Pro hodnocení
-      jednotlivých alibi používejte jeho závěr.
-      Připomínám, že posuzujeme dobu vzniku smrtelného
-      poranění, nikoli přesnou minutu biologické
-      smrti.
+    evidencí. Jeden čas je jen vzpomínka člověka,
 
-  - id: hz-e3
-    stage: E
-    after: P9
-    sender: "nprap. {{char:petr-hala}}"
-    role: kriminalista
-    voice: male
-    text: |
-      Poslední výpovědi už máte všechny. U některých
-      lidí jsme si museli vyžádat opravdu hodně
-      doplňujících podkladů. Teď si dejte dohromady
-      celý řetězec. Pokud vaše teorie stojí jen
-      na jedné větě nebo jednom snímku, ještě
-      není dostatečně pevná.
+    jiný vychází z nezávislého záznamu.
+
+    '
+- id: hz-b1
+  stage: B
+  sender: MUDr. Věra Kalinová
+  role: soudní lékařka
+  voice: female
+  text: 'Dobrý den. První zdravotnické výsledky máte
+
+    před sebou. Doporučuji číst především závěrečná
+
+    stanoviska, nevytrhávat jednotlivé nálezy
+
+    z kontextu. Časové určení je zatím pracovní.
+
+    Samotná pitva nám neumí říct přesnou minutu
+
+    každé události.
+
+    '
+- id: hz-b2
+  stage: B
+  sender: David Kolář
+  role: kriminalistický technik
+  voice: male
+  text: 'Máme použitelný výsledek daktyloskopie.
+
+    Jen připomínám, že otisk prstu prokazuje
+
+    kontakt s předmětem. Neříká automaticky, kdy
+
+    k němu došlo. Podívejte se, co jednotliví lidé
+
+    uváděli o svých dřívějších návštěvách.
+
+    '
+- id: hz-b3
+  stage: B
+  after: P3
+  sender: Klára Veselá
+  role: analytička telefonních záznamů
+  voice: female
+  text: 'K telefonním výpisům jedna důležitá věc.
+
+    Datová relace neznamená, že někdo zrovna
+
+    držel telefon v ruce. Stejně tak buňka
+
+    mobilní sítě není přesná poloha člověka.
+
+    Berte ty údaje jako jednu část skládačky.
+
+    '
+- id: hz-c1
+  stage: C
+  sender: Klára Veselá
+  role: analytička digitálních důkazů
+  voice: female
+  text: 'Máme hotovou kontrolu kamerových hodin.
+
+    U jednoho zařízení neseděl systémový čas.
+
+    Originální snímky jsme samozřejmě nechali
+
+    beze změny. Než je vložíte do časové osy,
+
+    podívejte se na kalibrační protokol a ověřte,
+
+    kterých záznamů se korekce opravdu týká.
+
+    '
+- id: hz-c2
+  stage: C
+  sender: nprap. Petr Hála
+  role: kriminalista
+  voice: male
+  text: 'Dělal jsem další rozhovory se svědky z okolí.
+
+    Někteří si dobře pamatují pořadí událostí,
+
+    ale s přesnými časy je to horší. Pokud vám
+
+    jejich výpovědi nesedí s kamerami, zkuste
+
+    nejdřív zjistit, podle čeho si ten čas určili.
+
+    '
+- id: hz-c3
+  stage: C
+  after: P5
+  sender: Klára Veselá
+  role: analytička audiovizuálních záznamů
+  voice: female
+  text: 'U hudebního vystoupení jsme dostali kompletní
+
+    produkční záznam, nejen to, co viděli diváci.
+
+    Projděte si harmonogram, vyjádření zvukaře
+
+    a skutečný obrazový výstup. Pro osobní alibi
+
+    potřebujeme vědět, kdy byl účinkující opravdu
+
+    přítomen.
+
+    '
+- id: hz-d1
+  stage: D
+  sender: Martin Šimek
+  role: kriminalista hospodářské kriminality
+  voice: male
+  text: 'Ahoj, tady hospodářské. Rozdělili jsme vám
+
+    finanční podklady podle jednotlivých skupin.
+
+    Nesčítejte automaticky všechno, co vypadá
+
+    jako dluh nebo chybějící peníze. Každá skupina
+
+    má vlastní původ, dokumentaci a možné
+
+    odpovědné osoby.
+
+    '
+- id: hz-d2
+  stage: D
+  sender: nprap. Petr Hála
+  role: kriminalista
+  voice: male
+  text: 'Dorazily další podklady k osobním alibi.
+
+    U některých lidí jsme konečně získali
+
+    konkrétnější vysvětlení jejich večerního
+
+    programu. Porovnejte nové výpovědi s těmi
+
+    původními. A hlavně zkontrolujte, jestli
+
+    máme i nezávislé potvrzení.
+
+    '
+- id: hz-d3
+  stage: D
+  after: P7
+  sender: Martin Šimek
+  role: finanční analytik
+  voice: male
+  text: 'Ještě k těm platbám. V exportu je interní
+
+    označení příjemce, ale banka používá jiný
+
+    identifikátor. Mezi těmito údaji existuje
+
+    samostatná evidence. Potřebujete najít
+
+    správnou návaznost. Samotné číslo profilu
+
+    vám skutečného majitele účtu neřekne.
+
+    '
+- id: hz-e1
+  stage: E
+  sender: David Kolář
+  role: kriminalistický technik
+  voice: male
+  text: 'Konečně máme uzavřené materiálové zkoumání.
+
+    Výsledek porovnání je v laboratorním
+
+    protokolu. Ale budete potřebovat i původní
+
+    evidenci zajištění a inventurní dokumentaci.
+
+    Laboratoř umí určit původ předmětu. Jeho
+
+    konkrétní historii musíte sestavit vy.
+
+    '
+- id: hz-e2
+  stage: E
+  sender: MUDr. Věra Kalinová
+  role: soudní lékařka
+  voice: female
+  text: 'S kolegyní z digitálního oddělení jsme dokončily
+
+    společné časové stanovisko. Pro hodnocení
+
+    jednotlivých alibi používejte jeho závěr.
+
+    Připomínám, že posuzujeme dobu vzniku smrtelného
+
+    poranění, nikoli přesnou minutu biologické
+
+    smrti.
+
+    '
+- id: hz-e3
+  stage: E
+  after: P9
+  sender: nprap. Petr Hála
+  role: kriminalista
+  voice: male
+  text: 'Poslední výpovědi už máte všechny. U některých
+
+    lidí jsme si museli vyžádat opravdu hodně
+
+    doplňujících podkladů. Teď si dejte dohromady
+
+    celý řetězec. Pokud vaše teorie stojí jen
+
+    na jedné větě nebo jednom snímku, ještě
+
+    není dostatečně pevná.
+
+    '
