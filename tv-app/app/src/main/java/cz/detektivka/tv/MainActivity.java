@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         + "var list=['/audio/intro.mp3','/audio/kap-a1.mp3'],i=0,a=new Audio();"
         + "var bar=document.createElement('div');"
         // Malý štítek v pravém dolním rohu – nesmí překrýt QR kód uprostřed.
-        + "bar.style.cssText='position:fixed;right:20px;bottom:20px;z-index:99999;"
+        + "bar.style.cssText='position:fixed;right:48px;top:300px;z-index:99999;"
         + "background:rgba(20,16,12,.88);color:#f0e6d2;border:1px solid #c9a24a;border-radius:10px;"
         + "padding:8px 16px;font:600 15px system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.5)';"
         + "bar.textContent='\\u25B6 P\\u0159\\u00edb\\u011bh \\u00b7 OK = p\\u0159esko\\u010dit';"
