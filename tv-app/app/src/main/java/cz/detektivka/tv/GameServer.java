@@ -169,6 +169,13 @@ final class GameServer {
             send(output, 200, "application/json", "{}".getBytes(StandardCharsets.UTF_8));
         } else if (path.equals("/") || path.equals("/index.html")) {
             send(output, 200, "text/html; charset=utf-8", readAsset(PAGE));
+        } else if (path.matches("/audio/[a-z0-9-]+\\.mp3")) {
+            // Namluvené kapitoly a hlasovky (ElevenLabs), přibalené v assets/audio.
+            try {
+                send(output, 200, "audio/mpeg", readAsset(path.substring(1)));
+            } catch (IOException missing) {
+                send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
+            }
         } else if (path.startsWith("/media/") && path.matches("/media/[A-Za-z0-9._-]+")) {
             // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into the assets.
             String name = path.substring(1);

@@ -147,11 +147,7 @@ characters:
 
     výslechu zatajila část svého pohybu.
 
-    Motiv: Obava ze ztráty manžela, rodinného podniku a majetkového zázemí.
-
-    Příležitost: Znala provozní prostory koupaliště a v části večera
-
-    nebyl její pohyb nezávisle ověřen.'
+    '
 - id: radim-koci
   name: Radim Kočí
   role: obchodní společník, provozovatel lesního koupaliště v Rudce
@@ -171,11 +167,7 @@ characters:
 
     96000 Kč. Oběť to zjistila a požadovala nápravu.
 
-    Motiv: Hrozící ukončení obchodní spolupráce a finanční odpovědnost.
-
-    Příležitost: Měl provozní oprávnění, znal místo činu a v neděli
-
-    večer koupaliště skutečně navštívil.'
+    '
 - id: lenka-simkova
   name: Lenka Šimková
   role: plavčice, vedoucí koupaliště v Kunštátu, oznamovatelka nálezu
@@ -199,11 +191,7 @@ characters:
 
     je nepravdivé.
 
-    Motiv: Zabránění odhalení finančního podvodu a ztrátě zaměstnání.
-
-    Příležitost: Měla oprávnění k pohybu v areálu a její večerní
-
-    osobní alibi nebylo ve skutečnosti úplné.'
+    '
 - id: tomas-pesek
   name: Tomáš Pešek
   role: DJ Tommy, konkurenční svatební DJ z Boskovic
@@ -225,11 +213,7 @@ characters:
 
     při prvním výslechu popřel.
 
-    Motiv: Ztráta svatebních zakázek a poškození vlastní pověsti.
-
-    Příležitost: Mezi dvěma vystoupeními měl dostatek času dostavit
-
-    se do Kunštátu.'
+    '
 - id: pavel-vitek
   name: Pavel Vítek
   role: mladší bratr oběti, automechanik
@@ -253,11 +237,7 @@ characters:
 
     vymáhání dluhu.
 
-    Motiv: Hrozící ztráta dílny a odhalení osobních dluhů.
-
-    Příležitost: Měl s bratrem domluvenou večerní schůzku
-
-    a provozní prostory dobře znal.'
+    '
 - id: eva-malikova
   name: Eva Malíková
   role: externí účetní obou koupališť
@@ -279,11 +259,7 @@ characters:
 
     dokumentace, aby zakryla vlastní profesní chybu.
 
-    Motiv: Obava ze ztráty klientů, profesní pověsti a náhrady škody.
-
-    Příležitost: Večer osobně přivezla účetní dokumentaci
-
-    na koupaliště a měla sjednanou konzultaci s obětí.'
+    '
 - id: viktor-hruby
   name: Viktor Hrubý
   role: dodavatel občerstvení a nápojů
@@ -307,11 +283,7 @@ characters:
 
     ukončením dodávek a zveřejněním jejího dluhu.
 
-    Motiv: Neuhrazené pohledávky a hrozící ztráta významného odběratele.
-
-    Příležitost: Znal areál z pravidelných dodávek a jeho vozidlo
-
-    bylo v neděli večer zachyceno poblíž koupaliště.'
+    '
 - id: marketa-novotna
   name: Markéta Novotná
   role: servírka v hospodě

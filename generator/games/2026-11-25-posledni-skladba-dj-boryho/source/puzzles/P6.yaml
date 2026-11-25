@@ -4,61 +4,63 @@ title: Hudba bez hudebníka
 stage: C
 mechanic: deduction
 difficulty: hard
-in_world_reason: 'Existence přenosu hudebního vystoupení nemusí
 
+in_world_reason: |
+  Existence přenosu hudebního vystoupení nemusí
   znamenat, že je účinkující osobně přítomen.
-
   Tým musí odlišit živou produkci od předem
-
   připraveného záznamu.
 
-  '
 reveals: Skutečný začátek ověřeného živého vystoupení.
-reveal_text: 'Osobní přítomnost účinkujícího je doložena od 21:24.
 
+reveal_text: |
+  Osobní přítomnost účinkujícího je doložena od 21:24.
 
   Než toto alibi definitivně vyhodnotíte, budete
-
   potřebovat přesnější časové zařazení fyzického konfliktu.
 
-  '
-answer: '21:24'
-accepted:
-- '2124'
-- '21.24'
-- 21 24
-- '21:24:00'
+answer: "21:24"
+accepted: ["2124", "21.24", "21 24", "21:24:00"]
+
 answer_format:
   kind: phrase
   label: Čas HH:MM
+
 question: Od kolika hodin je osobní přítomnost účinkujícího při druhém hudebním vystoupení nezávisle potvrzena?
+
 params: {}
+
 clues:
-- id: p6-program
-  document: D30
-  quote: Hudební blok od 21:15 do 21:24 byl přehráván ze záznamu.
-- id: p6-vypoved
-  document: D31
-  quote: Byl jsem za ním na koupališti, ale ještě před devátou jsem odjel.
-- id: p6-overeni
-  document: D32
-  quote: Od 21:24 do 22:30 je účinkující Tomáš Pešek souvisle zachycen při živém vystoupení v Boskovicích.
+  - id: p6-program
+    document: D30
+    quote: "Hudební blok od 21:15 do 21:24 byl přehráván ze záznamu."
+
+  - id: p6-vypoved
+    document: D31
+    quote: "Byl jsem za ním na koupališti, ale ještě před devátou jsem odjel."
+
+  - id: p6-overeni
+    document: D32
+    quote: "Od 21:24 do 22:30 je účinkující {{char:tomas-pesek}} souvisle zachycen při živém vystoupení v Boskovicích."
+
 solution:
-- text: Zkontrolujte rozdíl mezi oficiálním začátkem programu a osobní přítomností účinkujícího.
-  uses:
-  - p6-program
-- text: Porovnejte konfrontační výpověď s nezávislým obrazovým záznamem.
-  uses:
-  - p6-vypoved
-  - p6-overeni
-- text: Jako počátek doloženého osobního alibi použijte 21:24.
-  uses:
-  - p6-overeni
+  - text: Zkontrolujte rozdíl mezi oficiálním začátkem programu a osobní přítomností účinkujícího.
+    uses: [p6-program]
+
+  - text: Porovnejte konfrontační výpověď s nezávislým obrazovým záznamem.
+    uses: [p6-vypoved, p6-overeni]
+
+  - text: Jako počátek doloženého osobního alibi použijte 21:24.
+    uses: [p6-overeni]
+
 hints:
-- level: 1
-  text: Přenos hudby může probíhat i bez osobní přítomnosti DJ.
-- level: 2
-  text: Porovnejte program vystoupení s odborným vyhodnocením záznamu.
-- level: 3
-  text: Skutečné živé vystoupení začalo devět minut po 21:15.
+  - level: 1
+    text: Přenos hudby může probíhat i bez osobní přítomnosti DJ.
+
+  - level: 2
+    text: Porovnejte program vystoupení s odborným vyhodnocením záznamu.
+
+  - level: 3
+    text: Skutečné živé vystoupení začalo devět minut po 21:15.
+
 canary: canary-p6-jantar
