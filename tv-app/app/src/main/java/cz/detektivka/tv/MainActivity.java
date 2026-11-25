@@ -43,6 +43,24 @@ public class MainActivity extends Activity {
         + "a.src=list[0];a.play().catch(function(){stop();});"
         + "})();";
 
+    // Honza 25. 11.: na TV je všechno moc velké a při návratu nahoru na nástěnce se fotky zaříznou pod lištou.
+    // Celou stránku zmenšíme a fokusovaným prvkům dáme odstup od pevné horní lišty (podle její skutečné výšky).
+    private static final String TV_LAYOUT_JS = "(function(){"
+        + "if(window.__mfTv) return; window.__mfTv=1;"
+        + "document.documentElement.style.zoom='0.8';"
+        + "function head(){var h=0;document.querySelectorAll('body *').forEach(function(e){var s=getComputedStyle(e);"
+        + "if((s.position==='sticky'||s.position==='fixed')&&e.getBoundingClientRect().top<=2&&e.offsetHeight<400){"
+        + "h=Math.max(h,e.getBoundingClientRect().bottom);}});return Math.ceil(h);}"
+        + "var st=document.createElement('style');document.head.appendChild(st);"
+        + "function apply(){var h=head()+24;st.textContent='html,body,*{scroll-padding-top:'+h+'px;scroll-padding-bottom:32px}'"
+        + "+'*{scroll-margin-top:'+h+'px;scroll-margin-bottom:32px}';}"
+        + "apply();setTimeout(apply,800);window.addEventListener('resize',apply);"
+        + "document.addEventListener('focusin',function(e){var t=e.target;if(!t||!t.getBoundingClientRect)return;"
+        + "var r=t.getBoundingClientRect(),h=head()+24;if(r.top<h){var p=t;while(p&&p!==document.body){"
+        + "if(p.scrollHeight>p.clientHeight+4&&/(auto|scroll)/.test(getComputedStyle(p).overflowY))break;p=p.parentElement;}"
+        + "if(p&&p!==document.body){p.scrollTop-= (h-r.top);}else{window.scrollBy(0,(r.top-h)/0.8);}}},true);"
+        + "})();";
+
     private WebView webView;
     private GameServer server;
     private TextToSpeech tts;
@@ -66,6 +84,7 @@ public class MainActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // Honza: „hned po otevření pustit příběh“ – úvod a první kapitola se přehrají samy, OK přeskočí.
+                if (isTelevision()) view.evaluateJavascript(TV_LAYOUT_JS, null);
                 view.evaluateJavascript(INTRO_JS, null);
             }
 
