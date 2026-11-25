@@ -35,51 +35,6 @@
   "kap-e3": {
     "voice": "narrator"
   },
-  "hz-a1": {
-    "voice": "male"
-  },
-  "hz-a2": {
-    "voice": "male"
-  },
-  "hz-a3": {
-    "voice": "female"
-  },
-  "hz-b1": {
-    "voice": "female"
-  },
-  "hz-b2": {
-    "voice": "male"
-  },
-  "hz-b3": {
-    "voice": "female"
-  },
-  "hz-c1": {
-    "voice": "female"
-  },
-  "hz-c2": {
-    "voice": "male"
-  },
-  "hz-c3": {
-    "voice": "female"
-  },
-  "hz-d1": {
-    "voice": "male"
-  },
-  "hz-d2": {
-    "voice": "male"
-  },
-  "hz-d3": {
-    "voice": "male"
-  },
-  "hz-e1": {
-    "voice": "male"
-  },
-  "hz-e2": {
-    "voice": "female"
-  },
-  "hz-e3": {
-    "voice": "male"
-  },
   "epilog-dokonale": {
     "voice": "narrator"
   },
