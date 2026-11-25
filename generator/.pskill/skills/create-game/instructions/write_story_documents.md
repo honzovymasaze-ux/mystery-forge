@@ -13,6 +13,8 @@ For each planned story document, write `source/documents/<id>.md` with the Write
 
 - When the config format is `case_file` or `both`, make the papers look like a real police file: follow section 15 of `uv run --project ../toolkit forge catalog rules` (autopsy and lab reports, phone records, invoices, interview transcripts, a `person-photo` for each suspect and key witness, camera stills).
 
+- On the TV and the phones, evidence can arrive step by step: give a document `after: P<n>` (a puzzle of its stage or an earlier one) when players should see it only after they solve that puzzle. The printed copy still travels in its envelope.
+
 Then write `source/investigation.yaml` with the Write tool (fields: `uv run --project ../toolkit forge schema investigation`; rules: section 15 of the catalog rules):
 - `narrator`: the lead investigator, with a name and a rank or role that fit the setting. Players are the investigator's team.
 - `chapters`: the investigator's story in the first person, in the game language. At least one chapter without `after` per envelope (it prints behind the STOP sheet), plus up to one chapter per envelope that waits for a puzzle of that envelope (`after: P<n>`, from `plan.yaml`).

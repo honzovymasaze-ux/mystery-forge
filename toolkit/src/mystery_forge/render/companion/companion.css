@@ -1496,3 +1496,705 @@ input {
   margin: 0;
   font-weight: 700;
 }
+
+/* ---------- Evidence archive ---------- */
+
+.evidence-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.evidence-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidence-item {
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 14px 12px 44px;
+  border: 1px solid var(--desk-line);
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(217, 164, 65, 0.16) 0 32px, transparent 32px), var(--desk-raised);
+  color: var(--on-desk);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.evidence-item::before {
+  content: '▤';
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--brass);
+}
+
+.evidence-item.is-digital::before {
+  content: '▯';
+}
+
+.evidence-item:hover,
+.evidence-item:focus-visible {
+  border-color: var(--brass);
+  outline: 3px solid var(--brass-bright);
+  outline-offset: 2px;
+}
+
+.evidence-stage.is-sealed .section-title {
+  color: var(--on-desk-muted);
+}
+
+/* ---------- Document viewer ---------- */
+
+body.has-viewer {
+  overflow: hidden;
+}
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background: #0d0b09;
+}
+
+.viewer-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--desk-line);
+  background: #15120e;
+}
+
+.viewer-title {
+  flex: 1 1 200px;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.viewer-count {
+  color: var(--on-desk-muted);
+  font-family: var(--font-type);
+}
+
+.viewer-button {
+  min-width: 48px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.viewer-body {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.viewer-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #2b2721;
+}
+
+.viewer-screen {
+  width: 100%;
+  max-width: 560px;
+  padding: 16px 12px 40px;
+}
+
+/* ---------- Device screens ---------- */
+
+.device {
+  border-radius: 28px;
+  overflow: hidden;
+  border: 10px solid #050505;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  font-family: var(--font-ui);
+}
+
+.phone {
+  background: #eae6df;
+  color: #1b1b1b;
+}
+
+.phone-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #1f5c4a;
+  color: #fff;
+}
+
+.phone-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8f2ee;
+  color: #1f5c4a;
+  font-weight: 700;
+}
+
+.phone-contact {
+  flex: 1;
+  font-weight: 700;
+}
+
+.phone-meta {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 12px 20px;
+}
+
+.chat-bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+
+.chat-bubble.is-in {
+  align-self: flex-start;
+  border-top-left-radius: 4px;
+}
+
+.chat-bubble.is-out {
+  align-self: flex-end;
+  border-top-right-radius: 4px;
+  background: #d6f5c9;
+}
+
+.chat-speaker {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f5c4a;
+}
+
+.chat-text p,
+.chat-note p {
+  margin: 2px 0 0;
+}
+
+.chat-note {
+  align-self: center;
+  padding: 4px 10px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 13px;
+}
+
+.call-header {
+  margin: 0;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.call-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #fff;
+}
+
+.call {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e3e0da;
+}
+
+.call-icon {
+  width: 28px;
+  text-align: center;
+  font-size: 20px;
+  color: #1f5c4a;
+}
+
+.call-out .call-icon {
+  color: #2f6fb5;
+}
+
+.call-main {
+  flex: 1;
+}
+
+.call-time {
+  font-family: var(--font-type);
+  font-weight: 700;
+}
+
+.mail {
+  background: #fff;
+  color: #1b1b1b;
+  border-radius: 12px;
+}
+
+.mail-head {
+  padding: 16px 18px;
+  border-bottom: 1px solid #ddd;
+  background: #f3f4f7;
+}
+
+.mail-subject {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.mail-line,
+.mail-date {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+.mail-body {
+  padding: 16px 18px 24px;
+  line-height: 1.55;
+}
+
+.mail-body blockquote {
+  margin: 10px 0 0;
+  padding-left: 12px;
+  border-left: 3px solid #ccc;
+  color: #555;
+}
+
+.camera {
+  background: #111;
+  color: #dfe9e0;
+  border-radius: 14px;
+}
+
+.camera-screen {
+  position: relative;
+  min-height: 260px;
+  padding: 36px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1f1d;
+  font-family: var(--font-type);
+}
+
+.camera-picture {
+  filter: grayscale(1) contrast(1.15);
+  text-align: center;
+}
+
+.camera-picture svg,
+.camera-picture img {
+  max-width: 100%;
+  height: auto;
+}
+
+.camera-rec,
+.camera-name,
+.camera-place,
+.camera-time {
+  position: absolute;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.camera-rec {
+  top: 10px;
+  left: 12px;
+  color: #e0483b;
+  font-weight: 700;
+}
+
+.camera-name {
+  top: 10px;
+  right: 12px;
+}
+
+.camera-place {
+  bottom: 10px;
+  left: 12px;
+}
+
+.camera-time {
+  bottom: 10px;
+  right: 12px;
+}
+
+.camera-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  font-family: var(--font-type);
+  font-size: 14px;
+}
+
+.camera-track {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #e0483b 62%, #444 62%);
+}
+
+/* ---------- Connect the phones ---------- */
+
+.connect-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.qr-code {
+  width: 220px;
+  max-width: 70vw;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.qr-code svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.connect-text {
+  margin: 12px 0 4px;
+}
+
+.connect-url {
+  margin: 0;
+  font-family: var(--font-type);
+  font-weight: 700;
+  word-break: break-all;
+}
+
+/* A TV is read from a sofa: wider screens get larger targets and a visible focus everywhere. */
+@media (min-width: 900px) {
+  .evidence-list {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 4px solid var(--brass-bright);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- Evidence board ----------
+   The look is plain on purpose: the board art (background, pin, sticky note, stamp) comes as image files in
+   board-art/, and companion_data.py fills these properties with them. Without art, the fallbacks below apply. */
+
+:root {
+  --board-background: none;
+  --board-pin: none;
+  --board-sticky: none;
+  --board-stamp-cleared: none;
+}
+
+.view-board {
+  max-width: none;
+}
+
+.main-board {
+  max-width: none;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 8px;
+  background:
+    var(--board-background) center / cover,
+    #3a2f22;
+  min-height: 70vh;
+}
+
+.board-people {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.board-person {
+  position: relative;
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 8px 12px;
+  border: 3px solid transparent;
+  border-radius: 6px;
+  background: #f4ecd9;
+  color: var(--ink);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.person-picture {
+  width: 96px;
+  height: 120px;
+  overflow: hidden;
+  background: #d9d2c3;
+  color: #7d7466;
+}
+
+.person-picture svg {
+  width: 100%;
+  height: 100%;
+}
+
+.person-name {
+  font-weight: 700;
+}
+
+.person-role,
+.person-links {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.board-person.status-suspect {
+  border-color: #b33a2b;
+}
+
+.board-person.status-unsure {
+  border-color: #d9a441;
+}
+
+.board-person.status-witness {
+  border-color: #2f6fb5;
+}
+
+.board-person.status-cleared {
+  opacity: 0.7;
+}
+
+.person-stamp {
+  position: absolute;
+  top: 46px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-14deg);
+  padding: 2px 8px;
+  border: 3px solid #b33a2b;
+  background: var(--board-stamp-cleared) center / contain no-repeat;
+  color: #b33a2b;
+  font-family: var(--font-type);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.board-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.board-column,
+.board-tray {
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.board-heading {
+  margin: 0 0 10px;
+  font-family: var(--font-type);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #f4ecd9;
+}
+
+.board-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.board-tray-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.board-card {
+  position: relative;
+  width: 190px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 10px 10px;
+  border: 3px solid transparent;
+  border-radius: 3px;
+  background: #fbf8f1;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+}
+
+.board-card:not(.is-pinned) {
+  opacity: 0.85;
+}
+
+.board-card .pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+  background:
+    var(--board-pin) center / contain no-repeat,
+    #b33a2b;
+}
+
+.card-picture {
+  height: 90px;
+  overflow: hidden;
+  background: #222;
+}
+
+.card-picture svg {
+  width: 100%;
+  height: 100%;
+}
+
+.card-glyph {
+  font-size: 26px;
+  color: var(--ink-muted);
+}
+
+.card-title {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.card-links {
+  font-size: 13px;
+  color: #8e2a1e;
+}
+
+.card-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.card-label {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #2a2018;
+  color: #f4ecd9;
+  font-size: 12px;
+}
+
+.sticky {
+  display: block;
+  padding: 6px 8px;
+  background:
+    var(--board-sticky) center / cover,
+    #fbe58a;
+  color: #2a2018;
+  font-size: 13px;
+  line-height: 1.3;
+  transform: rotate(-1.5deg);
+}
+
+.board-card:focus-visible,
+.board-person:focus-visible,
+.board-card:hover,
+.board-person:hover {
+  border-color: var(--brass-bright);
+  outline: 4px solid var(--brass-bright);
+  outline-offset: 3px;
+  transform: scale(1.04);
+}
+
+.board-empty,
+.board-help {
+  margin: 0;
+  color: #e6dac0;
+  font-style: italic;
+}
+
+.board-menu {
+  max-width: 520px;
+  max-height: 86vh;
+  overflow-y: auto;
+}
+
+.board-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board-menu-actions .button {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.sticky-button {
+  background: #fbe58a;
+  color: #2a2018;
+}
+
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--paper-line);
+  border-radius: 6px;
+  background: #fffbe6;
+  color: var(--ink);
+  font: inherit;
+}

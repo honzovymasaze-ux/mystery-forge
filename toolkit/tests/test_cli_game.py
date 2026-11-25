@@ -332,6 +332,7 @@ def test_judge_on_a_broken_game_reports_findings(game_dir: Path) -> None:
 def test_render_without_a_companion_page(game_dir: Path) -> None:
     run(["render", "--game", str(game_dir), "--html-only"])
     assert (game_dir / "render" / "Game companion.html").is_file()
+    assert (game_dir / "render" / "Player companion (TV and phones).html").is_file()
     set_config(game_dir, assistance__companion_page=False)
     result = run(["render", "--game", str(game_dir), "--html-only"])
     assert result["ok"] is True
@@ -351,6 +352,7 @@ def test_render_and_export_name_the_files_in_the_game_language(game_dir: Path, t
         "1 - EMPIEZA AQUÍ (manual).pdf",
         "2 - IMPRIME ESTO (materiales del juego).pdf",
         "Compañero de juego.html",
+        "Compañero para jugadores (tele y móviles).html",
         "SOLO ANFITRIÓN - spoilers/3 - Pistas.pdf",
         "SOLO ANFITRIÓN - spoilers/4 - Soluciones.pdf",
     ]

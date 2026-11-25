@@ -81,6 +81,7 @@ def export_game(render_dir: Path, root: Path, title: str, names: OutputFileNames
         (names.pdfs["manual"], names.exported_path("manual")),
         (names.pdfs["materials"], names.exported_path("materials")),
         (names.companion, names.companion),
+        (names.player_companion, names.player_companion),
         (names.pdfs["hints"], names.exported_path("hints")),
         (names.pdfs["solutions"], names.exported_path("solutions")),
     ]

@@ -111,7 +111,9 @@ def content_hash(content: dict[str, Any]) -> str:
 
 
 def document_content(document: AssembledDocument) -> dict[str, Any]:
-    return {"meta": document.meta.model_dump(mode="json"), "text": document.text}
+    # A document without `after` hashes as before the field existed, so the stored ledger of an older game stays fresh.
+    exclude: set[str] = {"after"} if document.meta.after is None else set()
+    return {"meta": document.meta.model_dump(mode="json", exclude=exclude), "text": document.text}
 
 
 def used_images(documents: list[AssembledDocument]) -> list[str]:

@@ -15,6 +15,7 @@ CS_STRINGS: Final[dict[str, str]] = {
     "file_hints": "3 - Nápovědy",
     "file_solutions": "4 - Řešení",
     "file_companion": "Průvodce hrou",
+    "file_player_companion": "Průvodce pro hráče (TV a mobil)",
     "folder_spoilers": "JEN PRO VEDOUCÍHO HRY - řešení",
     "file_export_warnings": "0 - PŘEČTĚTE NEJDŘÍV (upozornění)",
     "export_warnings_title": "Přečtěte si to před hrou",
@@ -380,6 +381,60 @@ CS_COMPANION_STRINGS: Final[dict[str, str]] = {
     "companion_no_speech": "Tento prohlížeč neumí číst nahlas. Text přečte někdo z vás.",
     "companion_new_entries": "Nové ve vyšetřování: {count}",
     "companion_new_entries_open": "Otevřít vyšetřování",
+    "companion_tab_evidence": "Důkazy",
+    "companion_evidence_heading": "Archiv důkazů",
+    "companion_evidence_sealed": "Zapečetěno. Otevře se, až vyřešíte úkol, který otevírá tuto obálku.",
+    "companion_viewer_prev": "Předchozí dokument",
+    "companion_viewer_next": "Další dokument",
+    "companion_viewer_zoom_in": "Přiblížit",
+    "companion_viewer_zoom_out": "Oddálit",
+    "companion_viewer_paper": "Tištěná podoba",
+    "companion_viewer_screen": "Na displeji",
+    "companion_connect_heading": "Připojte telefony",
+    "companion_connect_text": (
+        "Naskenujte kód telefonem připojeným ke stejné Wi-Fi jako televize. Všechny telefony uvidí stejné "
+        "vyřešené úkoly a důkazy."
+    ),
+    "companion_mail_from": "Od",
+    "companion_mail_to": "Komu",
+    "companion_tab_board": "Nástěnka",
+    "companion_board_tray": "Nepřipnuté důkazy",
+    "companion_board_pin_all": "Připnout vše",
+    "companion_board_empty": "Zatím nic připnutého.",
+    "companion_board_help": (
+        "Šipky přecházejí mezi kartami. OK kartu otevře. Dlouhý stisk OK (nebo tlačítko menu) ji připne, "
+        "přesune nebo označí štítkem."
+    ),
+    "companion_board_open": "Otevřít",
+    "companion_board_pin": "Připnout na nástěnku",
+    "companion_board_unpin": "Odepnout",
+    "companion_board_move_earlier": "Posunout dříve",
+    "companion_board_move_later": "Posunout později",
+    "companion_board_victim": "Oběť",
+    "companion_board_status_suspect": "Podezřelý",
+    "companion_board_status_unsure": "Nejistý",
+    "companion_board_status_cleared": "Vyloučen",
+    "companion_board_status_witness": "Svědek",
+    "companion_board_label_motive": "Má motiv",
+    "companion_board_label_alibi_ok": "Alibi ověřeno",
+    "companion_board_label_alibi_weak": "Alibi děravé",
+    "companion_board_label_lies": "Lže",
+    "companion_board_label_conflict": "Rozpor",
+    "companion_board_assign": "Přiřadit k osobě…",
+    "companion_board_labels": "Rychlé štítky…",
+    "companion_board_note_add": "Přidat poznámku",
+    "companion_board_note_save": "Uložit poznámku",
+    "companion_board_note_delete": "Smazat poznámku",
+    "companion_board_note_placeholder": "Napište poznámku…",
+    "companion_board_linked": "Přiřazené důkazy: {count}",
+    "companion_board_back": "Zpět",
+    "companion_evidence_waiting": "Další důkazy z této obálky přibudou, jak budete řešit její úkoly: {count}.",
+    "companion_done_heading": "Případ uzavřen",
+    "companion_done_button": "Zapsat jako dohráno a začít znovu",
+    "companion_done_confirm": (
+        "Zapsat případ jako dohraný a začít znovu od začátku? Postup i nástěnka se smažou, záznam o dohrání zůstane."
+    ),
+    "companion_done_summary": "Dohráno {count}x · naposledy {date} · {percent} %",
 }
 
 # Czech dates use the genitive month: "24. listopadu 2026".

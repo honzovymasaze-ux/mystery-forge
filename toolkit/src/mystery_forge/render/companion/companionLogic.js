@@ -240,7 +240,12 @@
    */
   function stepsLeft(data, state, code) {
     const puzzle = findPuzzle(data, code);
-    return puzzle === undefined ? 0 : puzzle.hints.length + 1 - (state.hintSteps[code] ?? 0);
+    if (puzzle === undefined) {
+      return 0;
+    }
+    // The player version has no solution, so its last step is the last hint, not the answer.
+    const answerStep = puzzle.solution === null ? 0 : 1;
+    return puzzle.hints.length + answerStep - (state.hintSteps[code] ?? 0);
   }
 
   /**
@@ -250,7 +255,9 @@
    * @returns {number | null}
    */
   function nextHintLevel(data, state, code) {
-    return stepsLeft(data, state, code) > 1 ? (state.hintSteps[code] ?? 0) + 1 : null;
+    const puzzle = findPuzzle(data, code);
+    const reserved = puzzle !== undefined && puzzle.solution === null ? 0 : 1;
+    return stepsLeft(data, state, code) > reserved ? (state.hintSteps[code] ?? 0) + 1 : null;
   }
 
   /**
@@ -272,7 +279,7 @@
    */
   function isAnswerShown(data, state, code) {
     const puzzle = findPuzzle(data, code);
-    return puzzle !== undefined && (state.hintSteps[code] ?? 0) > puzzle.hints.length;
+    return puzzle !== undefined && puzzle.solution !== null && (state.hintSteps[code] ?? 0) > puzzle.hints.length;
   }
 
   /**
@@ -338,6 +345,9 @@
       isTimer(value.timer) &&
       (value.accusation === null ||
         (isRecord(value.accusation) && Object.values(value.accusation).every((id) => typeof id === 'string'))) &&
+      (value.answers === undefined ||
+        (isRecord(value.answers) && Object.values(value.answers).every((answer) => typeof answer === 'string'))) &&
+      (value.board === undefined || isBoard(value.board)) &&
       // A state from before the case tab has no `seen` list; it stays valid.
       (value.seen === undefined || (Array.isArray(value.seen) && value.seen.every((id) => typeof id === 'string')))
     );
@@ -446,6 +456,383 @@
       .filter((part) => part !== '');
   }
 
+  /**
+   * Remember the normalized answer of a solved puzzle: it opens the sealed envelopes of the archive.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} code
+   * @param {string} normalizedAnswer
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withAnswer(state, code, normalizedAnswer) {
+    return { ...withSolved(state, code), answers: { ...(state.answers ?? {}), [code]: normalizedAnswer } };
+  }
+
+  /**
+   * Open one envelope of the archive with the answers that the group found, or return null while it stays sealed.
+   * A document that waits for a puzzle joins only when that puzzle is solved; `waiting` lists the puzzle codes.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeArchiveStage} stage
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeOpenStage | null}
+   */
+  function openArchiveStage(data, stage, state) {
+    const sealing = globalThis.MysteryForgeSealing;
+    const answers = Object.values(state.answers ?? {});
+    /** @type {MysteryForgeArchiveContent} */
+    let content;
+    if (stage.lock === null) {
+      content = { label: stage.label, documents: stage.documents ?? [] };
+    } else {
+      const text = sealing.openLock(stage.lock, data.salt, answers);
+      if (text === null) {
+        return null;
+      }
+      content = JSON.parse(text);
+    }
+    /** @type {MysteryForgeArchiveDocument[]} */
+    const documents = [];
+    /** @type {string[]} */
+    const waiting = [];
+    for (const entry of content.documents) {
+      if (!('lock' in entry)) {
+        documents.push(entry);
+        continue;
+      }
+      const text = sealing.openLock(entry.lock, data.salt, answers);
+      if (text === null) {
+        waiting.push(entry.after);
+      } else {
+        documents.push(JSON.parse(text));
+      }
+    }
+    return { label: content.label, documents, waiting };
+  }
+
+  /**
+   * Open the sealed endings of the player version with the accusation and the answers, or return null.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {{epilogues: MysteryForgeCompanionEpilogue[], reveal: string[]} | null}
+   */
+  function openEndings(data, state) {
+    if (data.ending_lock === null) {
+      return null;
+    }
+    const firstQuestion = data.deduction?.questions[0];
+    const keys = [
+      ...(firstQuestion !== undefined && state.accusation?.[firstQuestion.id]
+        ? [state.accusation[firstQuestion.id]]
+        : []),
+      ...Object.values(state.answers ?? {}),
+    ];
+    const text = globalThis.MysteryForgeSealing.openLock(data.ending_lock, data.salt, /** @type {string[]} */ (keys));
+    return text === null ? null : JSON.parse(text);
+  }
+
+  /**
+   * The data with the endings and the reveal that the group has opened, so the scoring code finds every ending.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeCompanionData}
+   */
+  function withOpenedEndings(data, state) {
+    const opened = openEndings(data, state);
+    if (opened === null) {
+      return data;
+    }
+    const epilogues = [...opened.epilogues, ...data.epilogues].sort(
+      (left, right) => right.min_score_percent - left.min_score_percent,
+    );
+    return { ...data, epilogues, reveal: opened.reveal };
+  }
+
+  /**
+   * Merge the state that the TV keeps for every device into this device's state: the solved puzzles and their
+   * answers join, and the accusation of either side wins over none. Hints, the clock, and the seen list stay local.
+   * @param {MysteryForgeCompanionState} local
+   * @param {unknown} remote
+   * @returns {MysteryForgeCompanionState}
+   */
+  function mergeSharedState(local, remote) {
+    if (!isRecord(remote)) {
+      return local;
+    }
+    const remoteAnswers = isRecord(remote.answers) ? remote.answers : {};
+    /** @type {Record<string, string>} */
+    const answers = { ...(local.answers ?? {}) };
+    for (const [code, answer] of Object.entries(remoteAnswers)) {
+      if (typeof answer === 'string' && answers[code] === undefined) {
+        answers[code] = answer;
+      }
+    }
+    const remoteSolved = Array.isArray(remote.solved) ? remote.solved.filter((code) => typeof code === 'string') : [];
+    const solved = [...local.solved, ...remoteSolved.filter((code) => !local.solved.includes(code))];
+    const remoteAccusation =
+      isRecord(remote.accusation) && Object.values(remote.accusation).every((id) => typeof id === 'string')
+        ? /** @type {Record<string, string>} */ (remote.accusation)
+        : null;
+    // The board has one layout for the whole group: the newest change wins.
+    const board = isBoard(remote.board) && remote.board.updated > boardOf(local).updated ? remote.board : local.board;
+    return { ...local, solved, answers, accusation: local.accusation ?? remoteAccusation, ...(board ? { board } : {}) };
+  }
+
+  /**
+   * The part of the state that the TV shares with every device.
+   * @param {MysteryForgeCompanionState} state
+   * @returns {{solved: string[], answers: Record<string, string>, accusation: Record<string, string> | null, board: MysteryForgeBoard}}
+   */
+  function sharedState(state) {
+    return { solved: state.solved, answers: state.answers ?? {}, accusation: state.accusation, board: boardOf(state) };
+  }
+
+  /** @returns {MysteryForgeBoard} */
+  function emptyBoard() {
+    return { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 };
+  }
+
+  /**
+   * @param {MysteryForgeCompanionState} state
+   * @returns {MysteryForgeBoard}
+   */
+  function boardOf(state) {
+    return state.board ?? emptyBoard();
+  }
+
+  /**
+   * @param {MysteryForgeCompanionState} state
+   * @param {Partial<MysteryForgeBoard>} change
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withBoard(state, change, nowMs) {
+    return { ...state, board: { ...boardOf(state), ...change, updated: nowMs } };
+  }
+
+  /**
+   * Pin documents to the evidence board, after the ones already there.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string[]} ids
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withPinned(state, ids, nowMs) {
+    const board = boardOf(state);
+    const added = ids.filter((id) => !board.pinned.includes(id));
+    return added.length === 0 ? state : withBoard(state, { pinned: [...board.pinned, ...added] }, nowMs);
+  }
+
+  /**
+   * Take a card off the board. Its labels, links, and notes stay, so pinning it again brings them back.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} id
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withUnpinned(state, id, nowMs) {
+    return withBoard(state, { pinned: boardOf(state).pinned.filter((pinned) => pinned !== id) }, nowMs);
+  }
+
+  /**
+   * Add a quick label (such as "has a motive" or "conflict") to a card or a person, or take it off again.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} target
+   * @param {string} label
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withLabel(state, target, label, nowMs) {
+    const labels = { ...boardOf(state).labels };
+    const current = labels[target] ?? [];
+    const next = current.includes(label) ? current.filter((item) => item !== label) : [...current, label];
+    if (next.length === 0) {
+      delete labels[target];
+    } else {
+      labels[target] = next;
+    }
+    return withBoard(state, { labels }, nowMs);
+  }
+
+  /**
+   * Set what the group thinks of a person (suspect, unsure, cleared, witness), or clear it with an empty status.
+   * The page never checks it: the board is the group's own work.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} person
+   * @param {string} status
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withPersonStatus(state, person, status, nowMs) {
+    const people = { ...boardOf(state).people };
+    if (status === '') {
+      delete people[person];
+    } else {
+      people[person] = status;
+    }
+    return withBoard(state, { people }, nowMs);
+  }
+
+  /**
+   * Link a piece of evidence to a person, or unlink it.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} documentId
+   * @param {string} person
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withLink(state, documentId, person, nowMs) {
+    const links = { ...boardOf(state).links };
+    const current = links[documentId] ?? [];
+    const next = current.includes(person) ? current.filter((item) => item !== person) : [...current, person];
+    if (next.length === 0) {
+      delete links[documentId];
+    } else {
+      links[documentId] = next;
+    }
+    return withBoard(state, { links }, nowMs);
+  }
+
+  /**
+   * Add, change, or remove a sticky note on a card or a person. A null note id adds a note; an empty text removes it.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} target
+   * @param {string | null} noteId
+   * @param {string} text
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withNote(state, target, noteId, text, nowMs) {
+    const notes = { ...boardOf(state).notes };
+    const current = notes[target] ?? [];
+    const clean = text.trim();
+    /** @type {{id: string, text: string}[]} */
+    let next;
+    if (noteId === null) {
+      next = clean === '' ? current : [...current, { id: `n${nowMs}`, text: clean }];
+    } else if (clean === '') {
+      next = current.filter((note) => note.id !== noteId);
+    } else {
+      next = current.map((note) => (note.id === noteId ? { ...note, text: clean } : note));
+    }
+    if (next.length === 0) {
+      delete notes[target];
+    } else {
+      notes[target] = next;
+    }
+    return withBoard(state, { notes }, nowMs);
+  }
+
+  /**
+   * The documents that the group linked to a person, in board order.
+   * @param {MysteryForgeBoard} board
+   * @param {string} person
+   * @returns {string[]}
+   */
+  function linkedDocuments(board, person) {
+    return Object.entries(board.links)
+      .filter(([, people]) => people.includes(person))
+      .map(([documentId]) => documentId);
+  }
+
+  /**
+   * Move a pinned card one place earlier (-1) or later (+1) among the pinned cards of its group.
+   * @param {MysteryForgeCompanionState} state
+   * @param {string} id
+   * @param {string[]} group
+   * @param {-1 | 1} step
+   * @param {number} nowMs
+   * @returns {MysteryForgeCompanionState}
+   */
+  function withMoved(state, id, group, step, nowMs) {
+    const board = boardOf(state);
+    const order = board.pinned.filter((pinned) => group.includes(pinned));
+    const position = order.indexOf(id);
+    const target = position + step;
+    if (position < 0 || target < 0 || target >= order.length) {
+      return state;
+    }
+    const other = /** @type {string} */ (order[target]);
+    const pinned = board.pinned.map((pinnedId) => (pinnedId === id ? other : pinnedId === other ? id : pinnedId));
+    return withBoard(state, { pinned }, nowMs);
+  }
+
+  /**
+   * @param {unknown} value
+   * @param {(item: unknown) => boolean} check
+   * @returns {boolean}
+   */
+  function isRecordOf(value, check) {
+    return isRecord(value) && Object.values(value).every(check);
+  }
+
+  /**
+   * @param {unknown} value
+   * @returns {boolean}
+   */
+  function isTextList(value) {
+    return Array.isArray(value) && value.every((item) => typeof item === 'string');
+  }
+
+  /**
+   * @param {unknown} value
+   * @returns {value is MysteryForgeBoard}
+   */
+  function isBoard(value) {
+    return (
+      isRecord(value) &&
+      isTextList(value.pinned) &&
+      isRecordOf(value.labels, isTextList) &&
+      isRecordOf(value.people, (status) => typeof status === 'string') &&
+      isRecordOf(value.links, isTextList) &&
+      isRecordOf(
+        value.notes,
+        (list) =>
+          Array.isArray(list) &&
+          list.every((note) => isRecord(note) && typeof note.id === 'string' && typeof note.text === 'string'),
+      ) &&
+      isCount(value.updated)
+    );
+  }
+
+  /**
+   * @param {string} salt
+   * @returns {string}
+   */
+  function historyKey(salt) {
+    return `mystery-forge-history:${salt}`;
+  }
+
+  /**
+   * Read the record of finished games. Broken text gives an empty record.
+   * @param {unknown} value
+   * @returns {MysteryForgeFinishedGame[]}
+   */
+  function readHistory(value) {
+    let parsed = value;
+    if (typeof value === 'string') {
+      try {
+        parsed = JSON.parse(value);
+      } catch {
+        return [];
+      }
+    }
+    return Array.isArray(parsed)
+      ? parsed.filter((entry) => isRecord(entry) && isCount(entry.at) && isCount(entry.percent))
+      : [];
+  }
+
+  /**
+   * The score of a finished game: the accusation percent, or 100 for a game without one.
+   * @param {MysteryForgeCompanionData} data
+   * @param {MysteryForgeCompanionState} state
+   * @returns {number | null} null while the game is not finished
+   */
+  function finishedPercent(data, state) {
+    if (data.deduction !== null) {
+      return state.accusation === null ? null : scoreAccusation(data, state.accusation).percent;
+    }
+    return isGameFinished(data, state.solved) ? 100 : null;
+  }
+
   globalThis.MysteryForgeCompanionLogic = {
     freshState,
     storageKey,
@@ -477,5 +864,23 @@
     withSeen,
     speechSettings,
     paragraphs,
+    withAnswer,
+    openArchiveStage,
+    openEndings,
+    withOpenedEndings,
+    mergeSharedState,
+    sharedState,
+    boardOf,
+    withPinned,
+    withUnpinned,
+    withLabel,
+    withPersonStatus,
+    withLink,
+    withNote,
+    linkedDocuments,
+    withMoved,
+    historyKey,
+    readHistory,
+    finishedPercent,
   };
 })();

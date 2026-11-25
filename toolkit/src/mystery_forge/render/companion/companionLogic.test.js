@@ -5,6 +5,7 @@ const path = require('node:path');
 
 // Classic browser scripts, not modules: load them for their side effect, by a computed path that tsc does not resolve.
 require(path.join(__dirname, 'answers.js'));
+require(path.join(__dirname, 'sealing.js'));
 require(path.join(__dirname, 'companionLogic.js'));
 const answers = globalThis.MysteryForgeAnswers;
 const logic = globalThis.MysteryForgeCompanionLogic;
@@ -108,6 +109,9 @@ function sampleData() {
     ],
     reveal: ['By boat.'],
     investigation: null,
+    player: false,
+    archive: null,
+    ending_lock: null,
   };
 }
 
@@ -389,4 +393,257 @@ test('a female voice speaks higher than a male voice', () => {
 
 test('a story text splits into its paragraphs', () => {
   assert.deepEqual(logic.paragraphs('One.\n\n  Two.  \n \n'), ['One.', 'Two.']);
+});
+
+const fs = require('node:fs');
+const sealingContract = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '..', '..', '..', '..', '..', 'contracts', 'sealing-vectors.json'), 'utf8'),
+);
+const sealedStage = sealingContract.vectors[0];
+
+/** @returns {MysteryForgeCompanionData} */
+function playerData() {
+  const data = sampleData();
+  return {
+    ...data,
+    salt: sealingContract.salt,
+    player: true,
+    puzzles: data.puzzles.map((puzzle) => ({ ...puzzle, solution: null })),
+    archive: {
+      css: '',
+      body_class: '',
+      people: [],
+      stages: [
+        { id: 'A', envelope: 'Envelope A', label: 'Desk', documents: [], lock: null },
+        { id: 'B', envelope: 'Envelope B', label: '', documents: null, lock: sealedStage.lock },
+      ],
+    },
+  };
+}
+
+test('the player version has no answer step: the last hint is the last step', () => {
+  const data = playerData();
+  let state = logic.freshState();
+  assert.equal(logic.nextHintLevel(data, state, 'A1'), 1);
+  state = logic.withHintStep(data, state, 'A1');
+  state = logic.withHintStep(data, state, 'A1');
+  assert.equal(logic.nextHintLevel(data, state, 'A1'), null);
+  assert.equal(logic.isAnswerShown(data, state, 'A1'), false);
+  assert.equal(logic.withHintStep(data, state, 'A1'), state);
+  assert.equal(logic.nextHintLevel(data, state, 'Z9'), null);
+});
+
+test('an archive envelope opens only with an answer that the group found', () => {
+  const data = playerData();
+  const archive = /** @type {MysteryForgeArchive} */ (data.archive);
+  const sealed = /** @type {MysteryForgeArchiveStage} */ (archive.stages[1]);
+  assert.deepEqual(
+    logic.openArchiveStage(data, /** @type {MysteryForgeArchiveStage} */ (archive.stages[0]), logic.freshState()),
+    {
+      label: 'Desk',
+      documents: [],
+      waiting: [],
+    },
+  );
+  assert.equal(logic.openArchiveStage(data, sealed, logic.freshState()), null);
+  const state = logic.withAnswer(logic.freshState(), 'A1', sealedStage.answers[1]);
+  assert.deepEqual(state.solved, ['A1']);
+  // The vector seals a plain text, so a JSON stage of its own checks the parse.
+  assert.throws(() => logic.openArchiveStage(data, sealed, state));
+  const noDocuments = { ...sealed, lock: null, documents: null, label: 'X' };
+  assert.deepEqual(logic.openArchiveStage(data, noDocuments, state), { label: 'X', documents: [], waiting: [] });
+});
+
+test('sealed endings open with the right accusation and join the readable ones', () => {
+  const ending = sealingContract.vectors.find((/** @type {{label: string}} */ vector) => vector.label === 'epilogue');
+  const data = { ...playerData(), ending_lock: ending.lock };
+  assert.equal(logic.openEndings({ ...data, ending_lock: null }, logic.freshState()), null);
+  assert.equal(logic.withOpenedEndings(data, logic.freshState()), data);
+  assert.equal(logic.openEndings(data, logic.withAccusation(logic.freshState(), { who: 'ana' })), null);
+  const noQuestions = { ...data, deduction: null };
+  assert.equal(logic.openEndings(noQuestions, logic.freshState()), null);
+  assert.throws(() => logic.openEndings(data, logic.withAccusation(logic.freshState(), { who: ending.answers[0] })));
+});
+
+test('opened endings are sorted with the readable ones', () => {
+  const lockText = JSON.stringify({
+    epilogues: [{ min_score_percent: 75, title: 'Top', text: 'All.' }],
+    reveal: ['R'],
+  });
+  const data = { ...playerData(), epilogues: [{ min_score_percent: 0, title: 'Low', text: 'None.' }] };
+  const sealingApi = globalThis.MysteryForgeSealing;
+  const original = sealingApi.openLock;
+  sealingApi.openLock = () => lockText;
+  try {
+    const opened = logic.withOpenedEndings({ ...data, ending_lock: sealedStage.lock }, logic.freshState());
+    assert.deepEqual(
+      opened.epilogues.map((epilogue) => epilogue.title),
+      ['Top', 'Low'],
+    );
+    assert.deepEqual(opened.reveal, ['R']);
+  } finally {
+    sealingApi.openLock = original;
+  }
+});
+
+test('the shared state of the TV merges into a device without losing anything local', () => {
+  let local = logic.withAnswer(logic.freshState(), 'A1', 'boathouse');
+  assert.equal(logic.mergeSharedState(local, null), local);
+  const merged = logic.mergeSharedState(local, {
+    solved: ['A1', 'A2', 7],
+    answers: { A1: 'other', A2: '0726', B1: 5 },
+    accusation: { who: 'felix' },
+  });
+  assert.deepEqual(merged.solved, ['A1', 'A2']);
+  assert.deepEqual(merged.answers, { A1: 'boathouse', A2: '0726' });
+  assert.deepEqual(merged.accusation, { who: 'felix' });
+  const odd = logic.mergeSharedState(logic.freshState(), { solved: 'x', answers: 'y', accusation: { who: 3 } });
+  assert.deepEqual(odd.solved, []);
+  assert.deepEqual(odd.answers, {});
+  assert.equal(odd.accusation, null);
+  local = logic.withAccusation(local, { who: 'ana' });
+  assert.deepEqual(logic.mergeSharedState(local, { accusation: { who: 'felix' } }).accusation, { who: 'ana' });
+  assert.deepEqual(logic.sharedState(logic.freshState()), {
+    solved: [],
+    answers: {},
+    accusation: null,
+    board: { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 },
+  });
+});
+
+test('stored answers must be texts for a saved state to load', () => {
+  const { seen, ...old } = logic.freshState();
+  assert.deepEqual(seen, []);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 'x' } })).answers, { A1: 'x' });
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, answers: { A1: 2 } })), logic.freshState());
+});
+
+test('the board pins, labels, moves, and unpins cards, and remembers when it changed', () => {
+  let state = logic.freshState();
+  assert.deepEqual(logic.boardOf(state), { pinned: [], labels: {}, people: {}, links: {}, notes: {}, updated: 0 });
+  state = logic.withPinned(state, ['D1', 'D2', 'D3'], 10);
+  assert.equal(logic.withPinned(state, ['D2'], 11), state);
+  state = logic.withLabel(state, 'D2', 'conflict', 12);
+  state = logic.withLabel(state, 'D2', 'motive', 12);
+  assert.deepEqual(logic.boardOf(state).labels, { D2: ['conflict', 'motive'] });
+  state = logic.withLabel(state, 'D2', 'conflict', 13);
+  state = logic.withLabel(state, 'D2', 'motive', 13);
+  assert.deepEqual(logic.boardOf(state).labels, {});
+  state = logic.withMoved(state, 'D3', ['D1', 'D3'], -1, 14);
+  assert.deepEqual(logic.boardOf(state).pinned, ['D3', 'D2', 'D1']);
+  assert.equal(logic.withMoved(state, 'D3', ['D1', 'D3'], -1, 15), state);
+  assert.equal(logic.withMoved(state, 'D9', ['D1'], 1, 15), state);
+  assert.equal(logic.withMoved(state, 'D1', ['D1', 'D3'], 1, 15), state);
+  state = logic.withUnpinned(state, 'D1', 17);
+  assert.deepEqual(logic.boardOf(state).pinned, ['D3', 'D2']);
+  assert.equal(logic.boardOf(state).updated, 17);
+});
+
+test('people get a status, linked evidence, and sticky notes', () => {
+  let state = logic.freshState();
+  state = logic.withPersonStatus(state, 'ana', 'cleared', 1);
+  assert.deepEqual(logic.boardOf(state).people, { ana: 'cleared' });
+  state = logic.withPersonStatus(state, 'ana', '', 2);
+  assert.deepEqual(logic.boardOf(state).people, {});
+  state = logic.withLink(state, 'D4', 'ana', 3);
+  state = logic.withLink(state, 'D4', 'felix', 3);
+  state = logic.withLink(state, 'D5', 'felix', 3);
+  assert.deepEqual(logic.linkedDocuments(logic.boardOf(state), 'felix'), ['D4', 'D5']);
+  state = logic.withLink(state, 'D5', 'felix', 4);
+  state = logic.withLink(state, 'D4', 'ana', 4);
+  state = logic.withLink(state, 'D4', 'felix', 4);
+  assert.deepEqual(logic.boardOf(state).links, {});
+  state = logic.withNote(state, 'ana', null, '  lies about the boat  ', 5);
+  state = logic.withNote(state, 'ana', null, '   ', 6);
+  state = logic.withNote(state, 'ana', null, 'second', 7);
+  assert.deepEqual(logic.boardOf(state).notes, {
+    ana: [
+      { id: 'n5', text: 'lies about the boat' },
+      { id: 'n7', text: 'second' },
+    ],
+  });
+  state = logic.withNote(state, 'ana', 'n5', 'checked', 8);
+  state = logic.withNote(state, 'ana', 'n7', '', 9);
+  assert.deepEqual(logic.boardOf(state).notes, { ana: [{ id: 'n5', text: 'checked' }] });
+  state = logic.withNote(state, 'ana', 'n5', '', 10);
+  assert.deepEqual(logic.boardOf(state).notes, {});
+});
+
+test('the newest board wins when the TV and a phone share the game', () => {
+  const local = logic.withPinned(logic.freshState(), ['D1'], 100);
+  const newer = {
+    pinned: ['D2'],
+    labels: { D2: ['conflict'] },
+    people: { ana: 'suspect' },
+    links: { D2: ['ana'] },
+    notes: { ana: [{ id: 'n1', text: 'x' }] },
+    updated: 200,
+  };
+  assert.deepEqual(logic.mergeSharedState(local, { board: newer }).board, newer);
+  assert.deepEqual(logic.mergeSharedState(local, { board: { ...newer, updated: 50 } }).board, logic.boardOf(local));
+  assert.deepEqual(
+    logic.mergeSharedState(local, { board: { pinned: [1], tags: {}, updated: 300 } }).board,
+    logic.boardOf(local),
+  );
+  assert.equal(logic.mergeSharedState(logic.freshState(), {}).board, undefined);
+  const { seen, ...old } = logic.freshState();
+  assert.deepEqual(seen, []);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: newer })).board, newer);
+  assert.deepEqual(logic.stateFromStorage(JSON.stringify({ ...old, board: { pinned: 'x' } })), logic.freshState());
+});
+
+test('a document that waits for a puzzle joins its open envelope when the puzzle is solved', () => {
+  const data = playerData();
+  const sealingApi = globalThis.MysteryForgeSealing;
+  const original = sealingApi.openLock;
+  const document = { id: 'D9', kind: 'letter', title: 'Late letter', sheets: [], screen: null };
+  sealingApi.openLock = (lock, salt, answers) => (answers.includes('boathouse') ? JSON.stringify(document) : null);
+  try {
+    /** @type {MysteryForgeArchiveStage} */
+    const stage = {
+      id: 'A',
+      envelope: 'Envelope A',
+      label: 'Desk',
+      documents: [
+        { id: 'D1', kind: 'letter', title: 'Open', sheets: [], screen: null },
+        { id: 'D9', after: 'A1', lock: sealedStage.lock },
+      ],
+      lock: null,
+    };
+    const before = logic.openArchiveStage(data, stage, logic.freshState());
+    assert.deepEqual(
+      before?.documents.map((entry) => entry.id),
+      ['D1'],
+    );
+    assert.deepEqual(before?.waiting, ['A1']);
+    const after = logic.openArchiveStage(data, stage, logic.withAnswer(logic.freshState(), 'A1', 'boathouse'));
+    assert.deepEqual(
+      after?.documents.map((entry) => entry.id),
+      ['D1', 'D9'],
+    );
+    assert.deepEqual(after?.waiting, []);
+  } finally {
+    sealingApi.openLock = original;
+  }
+});
+
+test('the record of finished games keeps valid entries only', () => {
+  assert.equal(logic.historyKey('s'), 'mystery-forge-history:s');
+  assert.deepEqual(logic.readHistory(null), []);
+  assert.deepEqual(logic.readHistory('{broken'), []);
+  assert.deepEqual(logic.readHistory('{"at": 1}'), []);
+  assert.deepEqual(logic.readHistory([{ at: 5, percent: 80 }, { at: 'x', percent: 1 }, 3]), [{ at: 5, percent: 80 }]);
+  assert.deepEqual(logic.readHistory('[{"at": 7, "percent": 100}]'), [{ at: 7, percent: 100 }]);
+});
+
+test('a game is finished after the accusation, or after the final puzzle without one', () => {
+  const data = sampleData();
+  assert.equal(logic.finishedPercent(data, logic.freshState()), null);
+  assert.equal(
+    logic.finishedPercent(data, logic.withAccusation(logic.freshState(), { who: 'felix', why: 'debt' })),
+    100,
+  );
+  const plain = { ...data, deduction: null };
+  assert.equal(logic.finishedPercent(plain, logic.freshState()), null);
+  assert.equal(logic.finishedPercent(plain, logic.withSolved(logic.freshState(), 'B1')), 100);
 });

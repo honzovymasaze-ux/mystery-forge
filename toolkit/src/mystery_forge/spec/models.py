@@ -371,6 +371,12 @@ class DocumentMeta(SourceModel):
     fields: dict[str, str] = {}
     copies: int = Field(default=1, ge=1, le=4)
     order: int = 0
+    after: PuzzleId | None = Field(
+        default=None,
+        description="A puzzle of this stage or an earlier one. On the TV and the phones, the document joins the "
+        "evidence archive only when players solve it, so the evidence of a chapter arrives step by step. The printed "
+        "copy still travels in the envelope of its stage.",
+    )
 
 
 class Stage(SourceModel):

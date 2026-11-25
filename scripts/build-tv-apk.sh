@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Build the TV app (tv-app/) around one game's companion page.
-#   scripts/build-tv-apk.sh "<path to Game companion.html>" "<game title>" [output.apk]
+#   scripts/build-tv-apk.sh "<path to the player companion .html>" "<game title>" [output.apk]
+# Use the player companion (forge render writes it next to the companion page): it has the evidence archive and no
+# readable solution. The app serves it to the phones on the same Wi-Fi, see tv-app/.../GameServer.java.
 # Needs Java 17+ and the Android SDK (ANDROID_HOME). The APK installs on Android TV, Google TV, and phones by sideload.
 set -euo pipefail
 companion="$1"

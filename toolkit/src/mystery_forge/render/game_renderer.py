@@ -125,7 +125,7 @@ def remove_stale_outputs(out_dir: Path) -> None:
         (out_dir / html_file).unlink(missing_ok=True)
     for language in LANGUAGES:
         names: OutputFileNames = output_file_names(language)
-        for name in (*names.pdfs.values(), names.companion):
+        for name in (*names.pdfs.values(), names.companion, names.player_companion):
             (out_dir / name).unlink(missing_ok=True)
 
 

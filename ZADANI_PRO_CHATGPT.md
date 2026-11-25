@@ -45,6 +45,8 @@ PRAVIDLA OBSAHU
   podezřelého a důležitého svědka), cctv-still (záběr z kamery), map (plánek), form (úřední formulář),
   case-briefing (úvodní zadání případu).
 - Tabulky piš v Markdownu (| sloupec | sloupec |).
+- Důkazy přicházejí postupně: dokument, který má hráč dostat až po vyřešení úkolu, dostane ve front matter
+  `after: P<číslo>` (úkol stejné nebo dřívější obálky). Na televizi se pak objeví až po vyřešení.
 - Na každém místě, kde se objeví jméno postavy, napiš {{char:id-postavy}}, místo {{place:id-mista}}.
   Nástroj tam doplní jméno.
 

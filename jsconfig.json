@@ -17,5 +17,6 @@
     "configurator/**/*.js",
     "toolkit/src/mystery_forge/render/companion/**/*.js",
     "scripts/**/*.js"
-  ]
+  ],
+  "exclude": ["toolkit/src/mystery_forge/render/companion/qrcode.js"]
 }

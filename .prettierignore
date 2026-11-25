@@ -16,3 +16,4 @@ tv-app/build/
 tv-app/app/build/
 tv-app/.gradle/
 tv-app/app/src/main/assets/
+toolkit/src/mystery_forge/render/companion/qrcode.js

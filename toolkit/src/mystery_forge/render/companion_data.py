@@ -6,6 +6,7 @@ page shows only after a confirm: answers, near misses, and the correct accusatio
 (`mystery_forge.answers.answer_hash`), and the page hashes what players type in the same way.
 """
 
+import base64
 import json
 from importlib.resources import files
 from importlib.resources.abc import Traversable
@@ -16,16 +17,36 @@ from jinja2 import Environment, StrictUndefined
 from mystery_forge.answers import answer_hash, normalize_answer
 from mystery_forge.game import AssembledPuzzle, Game
 from mystery_forge.i18n import STRINGS, known_language, text, text_direction
+from mystery_forge.render.archive import build_archive
+from mystery_forge.render.themes import style_settings
+from mystery_forge.sealing import lock_text
 from mystery_forge.spec.models import AccusationQuestion, Deduction, Investigation
 
 COMPANION_FOLDER: Final[str] = "companion"
 TEMPLATE_FILE: Final[str] = "companion.html.j2"
 # In the order that the page loads them: the logic files must exist before the app file runs.
 STYLE_FILE: Final[str] = "companion.css"
-SCRIPT_FILES: Final[tuple[str, ...]] = ("answers.js", "companionLogic.js", "companionApp.js")
+SCRIPT_FILES: Final[tuple[str, ...]] = ("answers.js", "sealing.js", "qrcode.js", "companionLogic.js", "companionApp.js")
 COMPANION_STATIC_FILES: Final[tuple[str, ...]] = (STYLE_FILE, *SCRIPT_FILES)
 COMPANION_TEXT_PREFIX: Final[str] = "companion_"
+BOARD_ART_FOLDER: Final[str] = "board-art"
+# The board art files and the CSS property that each one fills (companion/board-art/README.md).
+BOARD_ART: Final[dict[str, str]] = {
+    "background": "--board-background",
+    "pin": "--board-pin",
+    "sticky": "--board-sticky",
+    "stamp-cleared": "--board-stamp-cleared",
+}
+ART_MEDIA_TYPES: Final[dict[str, str]] = {
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".webp": "image/webp",
+    ".svg": "image/svg+xml",
+}
 DATA_FORMAT_VERSION: Final[int] = 1
+# The lock of the sealed endings: the correct option of the first accusation question opens it.
+ENDING_LOCK_LABEL: Final[str] = "accusation"
 
 
 def build_companion_data(game: Game) -> dict[str, Any]:
@@ -66,7 +87,47 @@ def build_companion_data(game: Game) -> dict[str, Any]:
         ],
         "reveal": [step.text for step in game.story.reveal],
         "investigation": investigation_data(game, codes),
+        "player": False,
+        "archive": None,
+        "ending_lock": None,
     }
+
+
+def build_player_companion_data(game: Game, archive: dict[str, Any]) -> dict[str, Any]:
+    """Return the data of the player companion: the archive of documents, and no solution in readable form.
+
+    The page on the TV and on the phones must not spoil the game for the players who run it. So it drops every
+    solution and the answer step of the hints, and it seals the endings and the reveal with the correct option of the
+    first accusation question (usually "who"), or with the answer of the final puzzle in a game without an accusation.
+    Only the lowest ending stays readable: a group that names the wrong person reads it. The full answers stay in
+    the spoiler PDF files for a host.
+    """
+    data: dict[str, Any] = build_companion_data(game)
+    for puzzle in data["puzzles"]:
+        puzzle["solution"] = None
+    endings: list[dict[str, Any]] = data["epilogues"]
+    sealed: dict[str, Any] = {"epilogues": endings[:-1], "reveal": data["reveal"]}
+    keys: list[str] = ending_keys(game)
+    if not keys:
+        return {**data, "archive": archive, "player": True}
+    data["epilogues"] = endings[-1:]
+    data["reveal"] = []
+    data["ending_lock"] = lock_text(
+        json.dumps(sealed, ensure_ascii=False), game.salt, ENDING_LOCK_LABEL, keys
+    ).as_json()
+    data["archive"] = archive
+    data["player"] = True
+    return data
+
+
+def ending_keys(game: Game) -> list[str]:
+    """The answers that open the sealed endings: the correct option of the first accusation question, or else the
+    accepted answers of the final puzzle. A game with neither keeps its endings readable."""
+    deduction: Deduction | None = game.story.deduction
+    if deduction is not None:
+        return [deduction.questions[0].correct]
+    final: list[AssembledPuzzle] = [puzzle for puzzle in game.puzzles if puzzle.source.id == game.flow.final_puzzle]
+    return final[0].accepted_normalized if final else []
 
 
 def investigation_data(game: Game, codes: dict[str, str]) -> dict[str, Any] | None:
@@ -167,8 +228,34 @@ def script_safe_json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False).replace("</", "<\\/").replace("<!--", "\\u003c!--")
 
 
+def board_art_css(folder: Traversable) -> str:
+    """Return the CSS that fills the board art properties with the image files of the folder, as data URIs."""
+    declarations: list[str] = []
+    if folder.is_dir():
+        entries: dict[str, Traversable] = {entry.name: entry for entry in folder.iterdir()}
+        for stem, prop in BOARD_ART.items():
+            for suffix, media_type in ART_MEDIA_TYPES.items():
+                entry: Traversable | None = entries.get(f"{stem}{suffix}")
+                if entry is not None:
+                    encoded: str = base64.b64encode(entry.read_bytes()).decode("ascii")
+                    declarations.append(f"{prop}:url(data:{media_type};base64,{encoded})")
+                    break
+    return f":root{{{';'.join(declarations)}}}" if declarations else ""
+
+
+def build_player_companion_html(game: Game, art_folder: Traversable | None = None) -> str:
+    """Return the player companion: the page for the TV app and the phones, with the archive and no solutions."""
+    archive: dict[str, Any] = build_archive(game, style_settings(game, None))
+    folder: Traversable = art_folder or files("mystery_forge.render").joinpath(COMPANION_FOLDER, BOARD_ART_FOLDER)
+    return companion_html(game, build_player_companion_data(game, archive), board_art_css(folder))
+
+
 def build_companion_html(game: Game) -> str:
     """Return the whole companion page as one self-contained HTML string."""
+    return companion_html(game, build_companion_data(game))
+
+
+def companion_html(game: Game, data: dict[str, Any], art_css: str = "") -> str:
     folder: Traversable = files("mystery_forge.render").joinpath(COMPANION_FOLDER)
     environment = Environment(autoescape=True, undefined=StrictUndefined, keep_trailing_newline=True)
     template = environment.from_string(folder.joinpath(TEMPLATE_FILE).read_text(encoding="utf-8"))
@@ -176,7 +263,7 @@ def build_companion_html(game: Game) -> str:
         language=game.config.language,
         direction=text_direction(game.config.language),
         title=game.story.title,
-        style=folder.joinpath(STYLE_FILE).read_text(encoding="utf-8"),
+        style=folder.joinpath(STYLE_FILE).read_text(encoding="utf-8") + art_css,
         scripts=[folder.joinpath(name).read_text(encoding="utf-8") for name in SCRIPT_FILES],
-        data_json=script_safe_json(build_companion_data(game)),
+        data_json=script_safe_json(data),
     )

@@ -22,17 +22,21 @@ import java.util.Locale;
  * TextToSpeech engine as window.MysteryForgeTts (see companionApp.js).
  */
 public class MainActivity extends Activity {
-    private static final String PAGE = "file:///android_asset/pruvodce.html";
+    // The page comes from the game server, so the TV and the phones share one state (GameServer).
+    private static final String PAGE = "http://127.0.0.1:" + GameServer.PORT + "/";
     // A TV is read from a sofa: the page text is larger there.
     private static final int TV_TEXT_ZOOM = 150;
 
     private WebView webView;
+    private GameServer server;
     private TextToSpeech tts;
     private boolean ttsReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        server = new GameServer(this);
+        server.start();
         webView = new WebView(this);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -42,7 +46,13 @@ public class MainActivity extends Activity {
         if (isTelevision()) {
             settings.setTextZoom(TV_TEXT_ZOOM);
         }
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                // The server thread may start a moment after the page asks: try again shortly.
+                view.postDelayed(() -> view.loadUrl(PAGE), 500);
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient());
         webView.setBackgroundColor(0xFF15120E);
         webView.addJavascriptInterface(new SpeechBridge(), "MysteryForgeTts");
@@ -110,18 +120,31 @@ public class MainActivity extends Activity {
         }
     }
 
-    /** The Back button asks first, so a stray press on the remote never closes the game. */
+    /**
+     * The Back button first closes what the page has open (a document, a dialog). Only then it asks before it closes
+     * the game, so a stray press on the remote never ends it.
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(this)
-                .setMessage("Ukončit hru? Postup zůstane uložený.")
-                .setPositiveButton("Ukončit", (dialog, which) -> finish())
-                .setNegativeButton("Zpět do hry", null)
-                .show();
+            webView.evaluateJavascript(
+                "window.MysteryForgeBack ? window.MysteryForgeBack() : false",
+                handled -> {
+                    if (!"true".equals(handled)) {
+                        askToQuit();
+                    }
+                });
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void askToQuit() {
+        new AlertDialog.Builder(this)
+            .setMessage("Ukončit hru? Postup zůstane uložený.")
+            .setPositiveButton("Ukončit", (dialog, which) -> finish())
+            .setNegativeButton("Zpět do hry", null)
+            .show();
     }
 
     @Override
@@ -144,6 +167,7 @@ public class MainActivity extends Activity {
             tts.shutdown();
         }
         webView.destroy();
+        server.stop();
         super.onDestroy();
     }
 }
