@@ -177,8 +177,8 @@ final class GameServer {
                 send(output, 404, "text/plain", "Not found".getBytes(StandardCharsets.UTF_8));
             }
         } else if (path.startsWith("/media/") && path.matches("/media/[A-Za-z0-9._-]+")) {
-            // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into the assets.
-            String name = path.substring(1);
+            // The recordings of the game: render/media/ that scripts/build-tv-apk.sh puts into assets/audio.
+            String name = "audio/" + path.substring("/media/".length());
             try {
                 send(output, 200, mediaType(name), readAsset(name));
             } catch (IOException missing) {

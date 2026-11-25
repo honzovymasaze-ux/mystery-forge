@@ -14,9 +14,10 @@ slug="$(python3 -c 'import sys, unicodedata, re; t = unicodedata.normalize("NFKD
 mkdir -p "$here/tv-app/app/src/main/assets"
 cp "$companion" "$here/tv-app/app/src/main/assets/pruvodce.html"
 # The recordings that forge render writes next to the player companion (render/media/), served as media/<name>.
-rm -rf "$here/tv-app/app/src/main/assets/media"
+# The recordings go to assets/audio once: the server serves them as media/<name> and as audio/<name> (MainActivity).
+rm -rf "$here/tv-app/app/src/main/assets/media" "$here/tv-app/app/src/main/assets/audio"
 if [ -d "$(dirname "$companion")/media" ]; then
-  cp -r "$(dirname "$companion")/media" "$here/tv-app/app/src/main/assets/media"
+  cp -r "$(dirname "$companion")/media" "$here/tv-app/app/src/main/assets/audio"
 fi
 cd "$here/tv-app"
 echo "sdk.dir=${ANDROID_HOME:?Set ANDROID_HOME to the Android SDK folder}" > local.properties
