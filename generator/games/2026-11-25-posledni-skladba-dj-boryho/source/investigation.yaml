@@ -1,7 +1,7 @@
 format_version: 1
 
 narrator:
-  name: "kpt. {{char:jan-horak}}"
+  name: "kpt. Jan Horák"
   role: vedoucí vyšetřování
 
 # Produkční poznámky:
@@ -21,7 +21,7 @@ chapters:
     text: |
       Do služby jsem nastoupil krátce před sedmou. Ještě jsem si
       ani nestihl udělat kávu, když mi kolega oznámil nález těla
-      na koupališti v {{place:kunstat}}.
+      na koupališti v Kunštátě.
 
       Takové telefonáty člověk po letech služby pozná. Na začátku
       nikdo neví skoro nic, ale všichni už mají nějakou představu
@@ -468,7 +468,7 @@ chapters:
 voice_messages:
   - id: hz-a1
     stage: A
-    sender: "nprap. {{char:petr-hala}}"
+    sender: "nprap. Petr Hála"
     role: kriminalista na místě nálezu
     voice: male
     text: |
@@ -480,7 +480,7 @@ voice_messages:
 
   - id: hz-a2
     stage: A
-    sender: "{{char:david-kolar}}"
+    sender: "David Kolář"
     role: kriminalistický technik
     voice: male
     text: |
@@ -493,7 +493,7 @@ voice_messages:
   - id: hz-a3
     stage: A
     after: P1
-    sender: "{{char:klara-vesela}}"
+    sender: "Klára Veselá"
     role: analytička digitálních důkazů
     voice: female
     text: |
@@ -505,7 +505,7 @@ voice_messages:
 
   - id: hz-b1
     stage: B
-    sender: "MUDr. {{char:vera-kalinova}}"
+    sender: "MUDr. Věra Kalinová"
     role: soudní lékařka
     voice: female
     text: |
@@ -518,7 +518,7 @@ voice_messages:
 
   - id: hz-b2
     stage: B
-    sender: "{{char:david-kolar}}"
+    sender: "David Kolář"
     role: kriminalistický technik
     voice: male
     text: |
@@ -531,7 +531,7 @@ voice_messages:
   - id: hz-b3
     stage: B
     after: P3
-    sender: "{{char:klara-vesela}}"
+    sender: "Klára Veselá"
     role: analytička telefonních záznamů
     voice: female
     text: |
@@ -543,7 +543,7 @@ voice_messages:
 
   - id: hz-c1
     stage: C
-    sender: "{{char:klara-vesela}}"
+    sender: "Klára Veselá"
     role: analytička digitálních důkazů
     voice: female
     text: |
@@ -556,7 +556,7 @@ voice_messages:
 
   - id: hz-c2
     stage: C
-    sender: "nprap. {{char:petr-hala}}"
+    sender: "nprap. Petr Hála"
     role: kriminalista
     voice: male
     text: |
@@ -569,7 +569,7 @@ voice_messages:
   - id: hz-c3
     stage: C
     after: P5
-    sender: "{{char:klara-vesela}}"
+    sender: "Klára Veselá"
     role: analytička audiovizuálních záznamů
     voice: female
     text: |
@@ -582,7 +582,7 @@ voice_messages:
 
   - id: hz-d1
     stage: D
-    sender: "{{char:martin-simek}}"
+    sender: "Martin Šimek"
     role: kriminalista hospodářské kriminality
     voice: male
     text: |
@@ -595,7 +595,7 @@ voice_messages:
 
   - id: hz-d2
     stage: D
-    sender: "nprap. {{char:petr-hala}}"
+    sender: "nprap. Petr Hála"
     role: kriminalista
     voice: male
     text: |
@@ -609,7 +609,7 @@ voice_messages:
   - id: hz-d3
     stage: D
     after: P7
-    sender: "{{char:martin-simek}}"
+    sender: "Martin Šimek"
     role: finanční analytik
     voice: male
     text: |
@@ -622,7 +622,7 @@ voice_messages:
 
   - id: hz-e1
     stage: E
-    sender: "{{char:david-kolar}}"
+    sender: "David Kolář"
     role: kriminalistický technik
     voice: male
     text: |
@@ -635,7 +635,7 @@ voice_messages:
 
   - id: hz-e2
     stage: E
-    sender: "MUDr. {{char:vera-kalinova}}"
+    sender: "MUDr. Věra Kalinová"
     role: soudní lékařka
     voice: female
     text: |
@@ -649,7 +649,7 @@ voice_messages:
   - id: hz-e3
     stage: E
     after: P9
-    sender: "nprap. {{char:petr-hala}}"
+    sender: "nprap. Petr Hála"
     role: kriminalista
     voice: male
     text: |

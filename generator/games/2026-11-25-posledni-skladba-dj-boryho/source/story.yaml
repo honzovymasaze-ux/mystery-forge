@@ -1210,7 +1210,7 @@ clues:
 intro: |
   Je pondělí 19. října 2026.
 
-  V okolí {{place:kunstat}} prší už druhý den. Koupaliště
+  V okolí Kunštátu prší už druhý den. Koupaliště
   jsou zavřená, turisté odjeli a v hospodách se pomalu
   začíná topit.
 
@@ -1218,7 +1218,7 @@ intro: |
   místního koupaliště. V technické místnosti našla muže,
   který nereaguje.
 
-  Jmenuje se {{char:borek-vitek}}. Většina lidí ho zná
+  Jmenuje se Bořek Vítek. Většina lidí ho zná
   jako DJ Boryho.
 
   Hrál na svatbách, provozoval hospodu a staral se
@@ -1239,7 +1239,7 @@ intro: |
   Nikdy nepovažujte případ za vyřešený jen proto,
   že jste našli člověka, který měl důvod lhát.
 
-  Jmenuji se {{char:jan-horak}}. Od této chvíle
+  Jmenuji se Jan Horák. Od této chvíle
   jste součástí mého vyšetřovacího týmu.
 
   Otevřete obálku A.
@@ -1249,15 +1249,15 @@ deduction:
 
   questions:
     - id: kdo
-      prompt: Kdo zavraždil {{char:borek-vitek}}?
+      prompt: Kdo zavraždil Bořek Vítek?
       options:
-        - {id: monika, text: "{{char:monika-vitkova}}"}
-        - {id: radim, text: "{{char:radim-koci}}"}
-        - {id: lenka, text: "{{char:lenka-simkova}}"}
-        - {id: tomas, text: "{{char:tomas-pesek}}"}
-        - {id: pavel, text: "{{char:pavel-vitek}}"}
-        - {id: eva, text: "{{char:eva-malikova}}"}
-        - {id: viktor, text: "{{char:viktor-hruby}}"}
+        - {id: monika, text: "Monika Vítková"}
+        - {id: radim, text: "Radim Kočí"}
+        - {id: lenka, text: "Lenka Šimková"}
+        - {id: tomas, text: "Tomáš Pešek"}
+        - {id: pavel, text: "Pavel Vítek"}
+        - {id: eva, text: "Eva Malíková"}
+        - {id: viktor, text: "Viktor Hrubý"}
       correct: lenka
       points: 40
       proven_by:
@@ -1638,7 +1638,7 @@ reveal:
       časového intervalu, finančního motivu a vyloučením
       ostatních podezřelých je možné určit jedinou osobu.
 
-      Pachatelkou je {{char:lenka-simkova}}.
+      Pachatelkou je Lenka Šimková.
     clues:
       - fragment-shoda
       - privesek-vydej
