@@ -67,3 +67,7 @@ hints:
     text: Odečtěte 24 od 32.
 
 canary: canary-p9-pramen
+
+leak_allowlist:
+  - text: "Čas zobrazovaný kamerou K-02 byl o osm minut napřed oproti skutečnému místnímu času."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."

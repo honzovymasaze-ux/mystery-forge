@@ -64,3 +64,9 @@ hints:
     text: Skutečné živé vystoupení začalo devět minut po 21:15.
 
 canary: canary-p6-jantar
+
+leak_allowlist:
+  - text: "Hudební blok od 21:15 do 21:24 byl přehráván ze záznamu."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."
+  - text: "Od 21:24 do 22:30 je účinkující {{char:tomas-pesek}} souvisle zachycen při živém vystoupení v Boskovicích."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."

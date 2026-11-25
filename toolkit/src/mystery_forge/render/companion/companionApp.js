@@ -451,7 +451,68 @@
   }
 
   /** @param {MysteryForgeCompanionCaseEntry} entry */
+  /**
+   * Honza 25. 11.: každá kapitola má video (hlas vypravěče, fotky, hudba). Na TV/přes server se pustí přes celou
+   * obrazovku; když video chybí, přehraje se jen nahrávka.
+   * @param {MysteryForgeCompanionCaseEntry} entry
+   * @returns {boolean}
+   */
+  function playChapterVideo(entry) {
+    if (!String(entry.id).startsWith('kap-') || !window.location.protocol.startsWith('http')) {
+      return false;
+    }
+    stopPlayback();
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:100000;background:#000';
+    const video = document.createElement('video');
+    video.src = `/video/${entry.id}.mp4`;
+    video.autoplay = true;
+    video.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#000';
+    const hint = document.createElement('div');
+    hint.textContent = 'OK = zavřít';
+    hint.style.cssText = 'position:absolute;right:28px;bottom:22px;color:#c9a24a;font:600 16px system-ui;opacity:.7';
+    overlay.append(video, hint);
+    document.body.append(overlay);
+    /** @type {any} */ (window).__mfVideo = true;
+    const close = () => {
+      if (!overlay.isConnected) return;
+      video.pause();
+      overlay.remove();
+      /** @type {any} */ (window).__mfVideo = false;
+      document.removeEventListener('keydown', key, true);
+      render();
+    };
+    /** @param {KeyboardEvent} event */
+    const key = (event) => {
+      if (event.key === 'Enter' || event.key === 'Escape' || event.key === 'Backspace' || event.key === ' ') {
+        event.preventDefault();
+        event.stopPropagation();
+        close();
+      }
+    };
+    document.addEventListener('keydown', key, true);
+    video.addEventListener('ended', close);
+    video.addEventListener('error', () => {
+      close();
+      // Bez videa aspoň nahrávka.
+      if (entry.audio) {
+        const audio = new Audio(entry.audio);
+        playback.id = entry.id;
+        playback.audio = audio;
+        audio.addEventListener('ended', () => { playback.id = null; playback.audio = null; render(); });
+        audio.play().catch(() => {});
+        render();
+      }
+    });
+    video.play().catch(() => {});
+    return true;
+  }
+
+  /** @param {MysteryForgeCompanionCaseEntry} entry */
   function togglePlayback(entry) {
+    if (playback.id !== entry.id && playChapterVideo(entry)) {
+      return;
+    }
     const wasPlaying = playback.id === entry.id;
     stopPlayback();
     if (!wasPlaying) {

@@ -83,3 +83,9 @@ hints:
     text: Označení začíná písmenem F a obsahuje číslo 17.
 
 canary: canary-p10-obsidian
+
+leak_allowlist:
+  - text: "Na přední části oděvu oběti byl zajištěn drobný kovový fragment označený F-17."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."
+  - text: "Lomová plocha fragmentu F-17 je individuálně shodná s lomovou plochou poškozeného přívěsku číslo 706."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."

@@ -70,3 +70,7 @@ hints:
     text: Hledaná částka je vyšší než 180000 Kč a nižší než 190000 Kč.
 
 canary: canary-p7-medenec
+
+leak_allowlist:
+  - text: "Celková hodnota neoprávněných refundací činí 187600 Kč."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."

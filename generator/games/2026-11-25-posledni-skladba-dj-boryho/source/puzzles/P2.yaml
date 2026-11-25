@@ -54,3 +54,7 @@ hints:
     text: Oběť odešla čtvrt hodiny po sedmé večer.
 
 canary: canary-p2-vreteno
+
+leak_allowlist:
+  - text: "Odchod majitele z hospody byl potvrzen v 19:15."
+    reason: "Odpověď hráči najdou přímo v dokumentu – úkol na pozorování/dohledání."

@@ -36,10 +36,13 @@ public class MainActivity extends Activity {
         + "var hint=document.createElement('div');hint.textContent='OK = p\\u0159esko\\u010dit';"
         + "hint.style.cssText='position:absolute;right:28px;bottom:22px;color:#c9a24a;font:600 16px system-ui;opacity:.7';ov.appendChild(hint);"
         + "document.body.appendChild(ov);window.__mfVideo=true;"
-        + "function endVideo(){if(!window.__mfVideo)return;window.__mfVideo=false;v.pause();ov.remove();document.removeEventListener('keydown',vkey,true);startAudio();}"
+        // Po úvodu rovnou video kapitoly A1; teprve když video chybí, přehraje se jen nahrávka.
+        + "var stage=0;"
+        + "function finish(){window.__mfVideo=false;v.pause();ov.remove();document.removeEventListener('keydown',vkey,true);sessionStorage.setItem('mf-intro','1');}"
+        + "function endVideo(){if(!window.__mfVideo)return;if(stage===0){stage=1;v.src='/video/kap-a1.mp4';v.play().catch(function(){});}else finish();}"
         + "function vkey(e){if(e.key==='Enter'||e.keyCode===13||e.key==='Escape'){e.preventDefault();e.stopPropagation();endVideo();}}"
         + "document.addEventListener('keydown',vkey,true);v.onended=endVideo;"
-        + "v.onerror=function(){window.__mfVideo=false;ov.remove();document.removeEventListener('keydown',vkey,true);list.unshift('/audio/intro.mp3');startAudio();};"
+        + "v.onerror=function(){window.__mfVideo=false;ov.remove();document.removeEventListener('keydown',vkey,true);if(stage===0)list.unshift('/audio/intro.mp3');startAudio();};"
         + "v.play().catch(function(){});"
         + "function startAudio(){"
         + "var i=0,a=new Audio();"
@@ -110,7 +113,9 @@ public class MainActivity extends Activity {
         + "var cz=document.createElement('style');cz.textContent="
         + "'.tabs ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs),.topbar ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs){zoom:.8}'"
         // Lišta se záložkami musí zůstat nad posouvaným obsahem (obsah pod ní přejížděl).
-        + "+'.topbar,.tabs{z-index:900 !important;background:#15120e !important}'"
+        // …ale pod otevřeným dokumentem a nabídkami (z 900 utopilo lištu prohlížeče – Honza 25. 11.).
+        + "+'.topbar,.tabs{z-index:15 !important;background:#15120e !important}'"
+        + "+'.viewer,.overlay{z-index:2000 !important}'"
         // Podkresový obrázek Kunštátu za celou hrou (Honza 25. 11.), ztmavený, aby text zůstal čitelný.
         + "+'body{background:#0d0b09 !important}'"
         + "+'body::before{content:\"\";position:fixed;inset:0;z-index:-1;pointer-events:none;'"
