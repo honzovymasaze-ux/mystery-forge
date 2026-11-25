@@ -8,7 +8,7 @@ set -euo pipefail
 companion="$1"
 title="${2:-Detektivka}"
 here="$(cd "$(dirname "$0")/.." && pwd)"
-out="${3:-$here/$title.apk}"
+out="$(realpath -m "${3:-$here/$title.apk}")"
 # One application id per game, so several games can sit on one TV side by side.
 slug="$(python3 -c 'import sys, unicodedata, re; t = unicodedata.normalize("NFKD", sys.argv[1]).encode("ascii", "ignore").decode().lower(); print(re.sub("[^a-z0-9]+", "_", t).strip("_"))' "$title")"
 mkdir -p "$here/tv-app/app/src/main/assets"

@@ -3063,3 +3063,18 @@ body.readable-font .sticky-note {
   text-align: justify;
   hyphens: auto;
 }
+
+/* A photo keeps its proportions inside the frame of its kind: a tall portrait must not push the page longer. */
+.person-photo-picture svg,
+.cctv-picture svg,
+.polaroid-picture svg {
+  display: block;
+  max-width: 100%;
+  max-height: 150mm;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+.cctv-picture svg {
+  max-height: 105mm;
+}

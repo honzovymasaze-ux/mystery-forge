@@ -1,0 +1,343 @@
+{
+  "tone": {
+    "id": "dramatic",
+    "name": "Dramatic",
+    "description": "High stakes and strong feelings. Family secrets, betrayal, and hard choices. Also covers melancholy and thriller stories."
+  },
+  "settings": [
+    {
+      "id": "night-ferry",
+      "name": "Night ferry crossing a fjord",
+      "era_hints": [
+        "nineteen-fifties",
+        "nineteen-eighties",
+        "present-day"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "cozy",
+        "noir",
+        "spooky",
+        "dramatic"
+      ]
+    },
+    {
+      "id": "antarctic-station",
+      "name": "Antarctic research station in the polar night",
+      "era_hints": [
+        "nineteen-fifties",
+        "present-day",
+        "near-future"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "adventure",
+        "spooky",
+        "dramatic"
+      ]
+    },
+    {
+      "id": "tidal-lighthouse",
+      "name": "Lighthouse on a tidal island",
+      "era_hints": [
+        "age-of-sail",
+        "victorian",
+        "nineteen-fifties",
+        "present-day"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ],
+      "tones": [
+        "cozy",
+        "adventure",
+        "spooky",
+        "dramatic"
+      ]
+    }
+  ],
+  "goals": [
+    {
+      "id": "rigged-contest",
+      "name": "Find who rigged a contest",
+      "description": "A prize went to the wrong winner. Find who cheated and how.",
+      "formats": [
+        "envelopes",
+        "case_file"
+      ],
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "reverse-whodunit",
+      "name": "Prove what you already know",
+      "description": "The culprit is known from the start. Find the proof of how they did it before they get away.",
+      "formats": [
+        "case_file"
+      ],
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "twists": [
+    {
+      "id": "code-was-love-letter",
+      "name": "The code was a love letter",
+      "description": "The coded message that looked like a threat is a love letter.",
+      "formats": [
+        "envelopes",
+        "case_file"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "earlier-than-thought",
+      "name": "It happened earlier",
+      "description": "The event happened hours or days before everyone thinks.",
+      "formats": [
+        "case_file"
+      ],
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "unreliable-narrator",
+      "name": "The narrator's document lies",
+      "description": "The document that tells the story to the players is unreliable, and other documents show it.",
+      "formats": [
+        "case_file"
+      ],
+      "audiences": [
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "id": "postal-inspector",
+      "name": "The postal inspector",
+      "description": "You check a bag of mail that was never delivered.",
+      "audiences": [
+        "kids",
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    },
+    {
+      "id": "cold-case-box",
+      "name": "The cold case box",
+      "description": "A box of old case files arrives at your door.",
+      "audiences": [
+        "family",
+        "teens",
+        "adults",
+        "puzzle_fans"
+      ]
+    }
+  ],
+  "motifs": [
+    {
+      "id": "masks",
+      "name": "Masks",
+      "puzzle_skins": "Masks as overlay windows, identity swaps, and costume lists as logic grids."
+    },
+    {
+      "id": "perfume",
+      "name": "Perfume",
+      "puzzle_skins": "Ingredient lists as recipe indexes, bottle shapes as silhouettes, and scent notes as sorting rules."
+    }
+  ],
+  "cliches": {
+    "names": [
+      "Elara",
+      "Silas",
+      "Thorne",
+      "Blackwood",
+      "Voss",
+      "Ravenwood",
+      "Hawthorne",
+      "Whitmore",
+      "Aris",
+      "Kael",
+      "Lyra",
+      "Seraphina",
+      "Vance",
+      "Ashford",
+      "Marlowe",
+      "Evangeline",
+      "Isadora",
+      "Cassius",
+      "Zephyr",
+      "Thaddeus",
+      "Barnaby",
+      "Mortimer",
+      "Lucian",
+      "Ophelia",
+      "Montgomery"
+    ],
+    "phrases": [
+      "a tapestry of",
+      "whispers of",
+      "shadows danced",
+      "little did they know",
+      "testament to",
+      "a chill ran down",
+      "the air was thick with",
+      "delve into",
+      "a symphony of",
+      "palpable tension",
+      "a web of lies",
+      "the plot thickens",
+      "time stood still",
+      "an eerie silence",
+      "the game is afoot",
+      "every shadow held a secret",
+      "hung heavy in the air",
+      "a sense of foreboding",
+      "nestled",
+      "in the dead of night"
+    ],
+    "plots": [
+      "A stormy night in a gothic mansion, with a butler.",
+      "A rich old man poisoned at the reading of his will.",
+      "The butler did it.",
+      "The greedy nephew who inherits.",
+      "Poison in the wine glass at a dinner party.",
+      "The culprit is an evil twin that nobody mentioned.",
+      "It was all a dream.",
+      "The culprit has amnesia and did it without knowing.",
+      "The detective's long-lost relative is the culprit.",
+      "The famous riddle with a changed answer.",
+      "A secret passage that the floor plan never shows."
+    ]
+  },
+  "audience_rule": {
+    "max_words_per_document": 600,
+    "allow_murder": true,
+    "themes_to_avoid": [
+      "gratuitous gore",
+      "sexual violence"
+    ],
+    "decoders_preprinted": false,
+    "notes": "Murder, fraud, and espionage. Easy to expert puzzles. Dense documents are fine. Gore only when the config asks for horror."
+  },
+  "mechanics": [
+    {
+      "id": "recontextualized-document",
+      "name": "Re-Read With New Eyes",
+      "category": "meta",
+      "player_action": "observation",
+      "verification": "panel",
+      "summary": "A document read early gains a new meaning after a later discovery.",
+      "minutes": 18
+    },
+    {
+      "id": "hidden-every-nth",
+      "name": "Every Nth Letter",
+      "category": "wordplay",
+      "player_action": "wordplay",
+      "verification": "verified",
+      "summary": "Every Nth letter of an ordinary text spells the hidden message.",
+      "minutes": 16
+    },
+    {
+      "id": "deduction",
+      "name": "Whodunit Deduction",
+      "category": "deduction",
+      "player_action": "deduction",
+      "verification": "panel",
+      "summary": "Players use all the evidence to name the culprit, the method, and the motive.",
+      "minutes": 25
+    },
+    {
+      "id": "vigenere-cipher",
+      "name": "Vigenere With a Found Key",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "A keyword shifts each letter by a different amount, with a printed table to help.",
+      "minutes": 20
+    },
+    {
+      "id": "nonogram",
+      "name": "Nonogram",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Number clues for each row and column reveal a picture of a digit, letter, or object.",
+      "minutes": 22
+    },
+    {
+      "id": "symbol-substitution",
+      "name": "Invented Symbol Alphabet",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "Theme symbols replace letters, and partial keys on several props complete the alphabet.",
+      "minutes": 18
+    },
+    {
+      "id": "timeline-order",
+      "name": "Timeline Reconstruction",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Order events from several sources, then find the gap or the impossible event.",
+      "minutes": 22
+    },
+    {
+      "id": "cryptogram",
+      "name": "Keyword Substitution Cryptogram",
+      "category": "cipher",
+      "player_action": "decode",
+      "verification": "built",
+      "summary": "Each letter is always replaced by the same other letter, as in a newspaper cryptogram.",
+      "minutes": 22
+    },
+    {
+      "id": "logic-grid",
+      "name": "Logic Grid",
+      "category": "logic",
+      "player_action": "logic",
+      "verification": "built",
+      "summary": "Clue statements fix one unique assignment of people to attributes, such as who wore what.",
+      "minutes": 22
+    }
+  ]
+}
