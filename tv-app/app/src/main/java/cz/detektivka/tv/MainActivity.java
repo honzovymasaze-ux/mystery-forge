@@ -70,8 +70,9 @@ public class MainActivity extends Activity {
         + "function play(){bg.src=list[i];duck();bg.play().then(function(){fails=0;}).catch(function(){if(++fails<list.length)next();});}"
         + "bg.onended=function(){if(!fin)next();};bg.onerror=function(){if(!fin&&++fails<list.length)next();};"
         + "var b=document.createElement('button');b.id='mf-music';"
-        + "b.style.cssText='position:fixed;top:14px;right:230px;z-index:99999;background:rgba(20,16,12,.85);color:#c9a24a;"
-        + "border:1px solid #c9a24a;border-radius:8px;padding:2px 12px;font:600 18px system-ui;cursor:pointer';"
+        // Vlevo dole – nahoře překrývalo nabídky horní lišty (Honza 25. 11.).
+        + "b.style.cssText='position:fixed;left:16px;bottom:16px;z-index:99999;background:rgba(20,16,12,.85);color:#c9a24a;"
+        + "border:1px solid #c9a24a;border-radius:8px;padding:2px 12px;font:600 15px system-ui;cursor:pointer;opacity:.85';"
         + "function label(){b.textContent=on?'\\u266A hudba':'\\u266A vyp.';}label();"
         + "b.onclick=function(){on=!on;try{localStorage.setItem('mf-music',on?'on':'off');}catch(e){}label();duck();if(on&&bg.paused)bg.play().catch(function(){});};"
         + "document.body.appendChild(b);"
@@ -90,7 +91,9 @@ public class MainActivity extends Activity {
         + "h=Math.max(h,e.getBoundingClientRect().bottom);}});return Math.ceil(h);}"
         // Obsah pod lištou ještě o 20 % menší (Honza: „hlavně střed, ne ikony“).
         + "var cz=document.createElement('style');cz.textContent="
-        + "'.tabs ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs),.topbar ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs){zoom:.8}';"
+        + "'.tabs ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs),.topbar ~ *:not(.overlay):not(.viewer):not(.topbar):not(.tabs){zoom:.8}'"
+        // Lišta se záložkami musí zůstat nad posouvaným obsahem (obsah pod ní přejížděl).
+        + "+'.topbar,.tabs{z-index:900 !important;background:#15120e !important}';"
         + "document.head.appendChild(cz);"
         + "var st=document.createElement('style');document.head.appendChild(st);"
         + "function apply(){var h=head()+24;st.textContent='html,body,*{scroll-padding-top:'+h+'px;scroll-padding-bottom:32px}'"
