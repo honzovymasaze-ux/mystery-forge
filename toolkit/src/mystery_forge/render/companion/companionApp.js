@@ -1268,15 +1268,19 @@ html{zoom:${zoom}}body{background:#2b2721;padding:12px 0}.sheet{margin:0 auto 16
       } else {
         const status = board.people[id] ?? '';
         const byId = documentsById();
+        // Honza 25. 11.: oběti nejde dát nálepku podezřelého ani štítky typu „lže“ – role musí sedět.
+        const isVictim = Boolean(/** @type {{victim?: boolean}} */ (person).victim);
         actions = [
-          ...PERSON_STATUSES.map((option) =>
-            toggle(
-              ui(`board_status_${option}`),
-              (next) => logic.withPersonStatus(next, id, status === option ? '' : option, Date.now()),
-              status === option,
-            ),
-          ),
-          button(ui('board_labels'), 'button button-quiet', () => goTo('labels')),
+          ...(isVictim
+            ? []
+            : PERSON_STATUSES.map((option) =>
+                toggle(
+                  ui(`board_status_${option}`),
+                  (next) => logic.withPersonStatus(next, id, status === option ? '' : option, Date.now()),
+                  status === option,
+                ),
+              )),
+          isVictim ? null : button(ui('board_labels'), 'button button-quiet', () => goTo('labels')),
           button(ui('board_note_add'), 'button button-quiet', () => editNote(id, null, '')),
           ...noteButtons,
           ...logic.linkedDocuments(board, id).map((documentId) => {
